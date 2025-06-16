@@ -1,0 +1,12 @@
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Core\bin\Debug\net8.0\SoccerClub.Core.deps.json
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Core\bin\Debug\net8.0\SoccerClub.Core.dll
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Core\bin\Debug\net8.0\SoccerClub.Core.pdb
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Core\obj\Debug\net8.0\SoccerClub.Core.csproj.AssemblyReference.cache
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Core\obj\Debug\net8.0\SoccerClub.Core.GeneratedMSBuildEditorConfig.editorconfig
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Core\obj\Debug\net8.0\SoccerClub.Core.AssemblyInfoInputs.cache
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Core\obj\Debug\net8.0\SoccerClub.Core.AssemblyInfo.cs
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Core\obj\Debug\net8.0\SoccerClub.Core.csproj.CoreCompileInputs.cache
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Core\obj\Debug\net8.0\SoccerClub.Core.dll
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Core\obj\Debug\net8.0\refint\SoccerClub.Core.dll
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Core\obj\Debug\net8.0\SoccerClub.Core.pdb
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Core\obj\Debug\net8.0\ref\SoccerClub.Core.dll

@@ -1,0 +1,676 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.api\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|solutionrelative:controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{062811A6-8853-47B6-BC47-5DB5648A2AD8}|..\\SoccerClub.Core\\SoccerClub.Core.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.core\\entities\\staff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{062811A6-8853-47B6-BC47-5DB5648A2AD8}|..\\SoccerClub.Core\\SoccerClub.Core.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.core\\entities\\team.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{062811A6-8853-47B6-BC47-5DB5648A2AD8}|..\\SoccerClub.Core\\SoccerClub.Core.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.core\\entities\\tryoutregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{062811A6-8853-47B6-BC47-5DB5648A2AD8}|..\\SoccerClub.Core\\SoccerClub.Core.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.core\\entities\\tryout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{062811A6-8853-47B6-BC47-5DB5648A2AD8}|..\\SoccerClub.Core\\SoccerClub.Core.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.core\\entities\\programregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{062811A6-8853-47B6-BC47-5DB5648A2AD8}|..\\SoccerClub.Core\\SoccerClub.Core.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.core\\entities\\teamprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{062811A6-8853-47B6-BC47-5DB5648A2AD8}|..\\SoccerClub.Core\\SoccerClub.Core.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.core\\entities\\news.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{002E0B2C-44AC-4365-8F0E-99A58E83A181}|..\\SoccerClub.Infrastructure\\SoccerClub.Infrastructure.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.infrastructure\\persistence\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.api\\controllers\\tryoutregistrationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|solutionrelative:controllers\\tryoutregistrationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\services\\tryoutregistrationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.api\\controllers\\tryoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|solutionrelative:controllers\\tryoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.api\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|solutionrelative:controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.api\\controllers\\teamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|solutionrelative:controllers\\teamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.api\\controllers\\programregistrationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|solutionrelative:controllers\\programregistrationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.api\\controllers\\programcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|solutionrelative:controllers\\programcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\services\\tryoutservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\services\\teamservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\services\\teamprogramservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BD58C799-41BC-4E85-991A-0F578FBD46A7}|SoccerClub.Api.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{062811A6-8853-47B6-BC47-5DB5648A2AD8}|..\\SoccerClub.Core\\SoccerClub.Core.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.core\\interfaces\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{002E0B2C-44AC-4365-8F0E-99A58E83A181}|..\\SoccerClub.Infrastructure\\SoccerClub.Infrastructure.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.infrastructure\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\services\\newsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\mapping\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\services\\staffservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\services\\programregistrationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\interfaces\\istaff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\interfaces\\iteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\interfaces\\iprogramregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\interfaces\\iteamprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\interfaces\\itryoutregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\interfaces\\itryout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\dtos\\tryoutdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\dtos\\programregistrationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\dtos\\staffdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\dtos\\teamprogramdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\dtos\\teamdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\dtos\\newsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCCF617-338E-4BBD-8CD5-16F3BF83B965}|..\\SoccerClub.Application\\SoccerClub.Application.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.application\\interfaces\\inews.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{002E0B2C-44AC-4365-8F0E-99A58E83A181}|..\\SoccerClub.Infrastructure\\SoccerClub.Infrastructure.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.infrastructure\\repositories\\loggeradapter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{062811A6-8853-47B6-BC47-5DB5648A2AD8}|..\\SoccerClub.Core\\SoccerClub.Core.csproj|j:\\onedrive\\projects\\soccer-club\\backend\\soccerclub.core\\interfaces\\iapplogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Tryout.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Entities\\Tryout.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Core\\Entities\\Tryout.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Entities\\Tryout.cs",
+              "RelativeToolTip": "..\\SoccerClub.Core\\Entities\\Tryout.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T14:39:38.385Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TryoutRegistration.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Entities\\TryoutRegistration.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Core\\Entities\\TryoutRegistration.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Entities\\TryoutRegistration.cs",
+              "RelativeToolTip": "..\\SoccerClub.Core\\Entities\\TryoutRegistration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T14:43:18.383Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Team.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Entities\\Team.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Core\\Entities\\Team.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Entities\\Team.cs",
+              "RelativeToolTip": "..\\SoccerClub.Core\\Entities\\Team.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T14:31:30.52Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Staff.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Entities\\Staff.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Core\\Entities\\Staff.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Entities\\Staff.cs",
+              "RelativeToolTip": "..\\SoccerClub.Core\\Entities\\Staff.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T14:45:55.264Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProgramRegistration.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Entities\\ProgramRegistration.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Core\\Entities\\ProgramRegistration.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Entities\\ProgramRegistration.cs",
+              "RelativeToolTip": "..\\SoccerClub.Core\\Entities\\ProgramRegistration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T14:44:26.198Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TeamProgram.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Entities\\TeamProgram.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Core\\Entities\\TeamProgram.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Entities\\TeamProgram.cs",
+              "RelativeToolTip": "..\\SoccerClub.Core\\Entities\\TeamProgram.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T14:34:30.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NewsController.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Controllers\\NewsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\NewsController.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Controllers\\NewsController.cs",
+              "RelativeToolTip": "Controllers\\NewsController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowCAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T09:05:59.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Program.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAFwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T16:09:15.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ProgramRegistrationController.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Controllers\\ProgramRegistrationController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProgramRegistrationController.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Controllers\\ProgramRegistrationController.cs",
+              "RelativeToolTip": "Controllers\\ProgramRegistrationController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T08:53:42.622Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "TryoutRegistrationService.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Services\\TryoutRegistrationService.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Services\\TryoutRegistrationService.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Services\\TryoutRegistrationService.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Services\\TryoutRegistrationService.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAgwC4AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T15:11:46.603Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "RelativeToolTip": "..\\SoccerClub.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T11:49:48.806Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "News.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Entities\\News.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Core\\Entities\\News.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Entities\\News.cs",
+              "RelativeToolTip": "..\\SoccerClub.Core\\Entities\\News.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T11:41:13.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "TeamController.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Controllers\\TeamController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TeamController.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Controllers\\TeamController.cs",
+              "RelativeToolTip": "Controllers\\TeamController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEEAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T08:59:03.734Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "StaffController.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Controllers\\StaffController.cs",
+              "RelativeDocumentMoniker": "Controllers\\StaffController.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Controllers\\StaffController.cs",
+              "RelativeToolTip": "Controllers\\StaffController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEEAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T09:00:16.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "TryoutController.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Controllers\\TryoutController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TryoutController.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Controllers\\TryoutController.cs",
+              "RelativeToolTip": "Controllers\\TryoutController.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAwwEEAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T09:06:31.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TryoutRegistrationController.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Controllers\\TryoutRegistrationController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TryoutRegistrationController.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Controllers\\TryoutRegistrationController.cs",
+              "RelativeToolTip": "Controllers\\TryoutRegistrationController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T09:07:24.723Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ProgramController.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Controllers\\ProgramController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProgramController.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\Controllers\\ProgramController.cs",
+              "RelativeToolTip": "Controllers\\ProgramController.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAIwFsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T08:48:48.452Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Infrastructure\\Repositories\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Infrastructure\\Repositories\\GenericRepository.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Infrastructure\\Repositories\\GenericRepository.cs",
+              "RelativeToolTip": "..\\SoccerClub.Infrastructure\\Repositories\\GenericRepository.cs",
+              "ViewState": "AgIAAKcAAAAAAAAAAAAMwLwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T16:15:18.185Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "IGenericRepository.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Interfaces\\IGenericRepository.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Core\\Interfaces\\IGenericRepository.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Interfaces\\IGenericRepository.cs",
+              "RelativeToolTip": "..\\SoccerClub.Core\\Interfaces\\IGenericRepository.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAhwDAAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T16:12:54.415Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Api\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-13T16:09:24.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "TeamProgramService.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Services\\TeamProgramService.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Services\\TeamProgramService.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Services\\TeamProgramService.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Services\\TeamProgramService.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAnwEkAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T15:22:25.279Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "TeamService.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Services\\TeamService.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Services\\TeamService.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Services\\TeamService.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Services\\TeamService.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAnwEkAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T15:28:42.247Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "TryoutService.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Services\\TryoutService.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Services\\TryoutService.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Services\\TryoutService.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Services\\TryoutService.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAIA4wC8AAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T15:08:04.669Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "MappingProfile.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Mapping\\MappingProfile.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Mapping\\MappingProfile.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Mapping\\MappingProfile.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Mapping\\MappingProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T15:44:55.728Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "StaffService.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Services\\StaffService.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Services\\StaffService.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Services\\StaffService.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Services\\StaffService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEUAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T15:29:38.242Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "ProgramRegistrationService.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Services\\ProgramRegistrationService.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Services\\ProgramRegistrationService.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Services\\ProgramRegistrationService.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Services\\ProgramRegistrationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T15:25:15.485Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "IStaff.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Interfaces\\IStaff.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Interfaces\\IStaff.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Interfaces\\IStaff.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Interfaces\\IStaff.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T15:21:45.722Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ITeam.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Interfaces\\ITeam.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Interfaces\\ITeam.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Interfaces\\ITeam.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Interfaces\\ITeam.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T15:20:48.108Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "IProgramRegistration.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Interfaces\\IProgramRegistration.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Interfaces\\IProgramRegistration.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Interfaces\\IProgramRegistration.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Interfaces\\IProgramRegistration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T15:20:17.261Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "NewsService.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Services\\NewsService.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Services\\NewsService.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Services\\NewsService.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Services\\NewsService.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAYwGMAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T11:16:37.173Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "ITeamProgram.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Interfaces\\ITeamProgram.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Interfaces\\ITeamProgram.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Interfaces\\ITeamProgram.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Interfaces\\ITeamProgram.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T15:18:58.945Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ITryoutRegistration.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Interfaces\\ITryoutRegistration.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Interfaces\\ITryoutRegistration.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Interfaces\\ITryoutRegistration.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Interfaces\\ITryoutRegistration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T15:06:36.568Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "ITryout.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Interfaces\\ITryout.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Interfaces\\ITryout.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Interfaces\\ITryout.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Interfaces\\ITryout.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T15:05:48.415Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "ProgramRegistrationDTO.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\DTOs\\ProgramRegistrationDTO.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\DTOs\\ProgramRegistrationDTO.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\DTOs\\ProgramRegistrationDTO.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\DTOs\\ProgramRegistrationDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T14:55:51.421Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "StaffDTO.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\DTOs\\StaffDTO.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\DTOs\\StaffDTO.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\DTOs\\StaffDTO.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\DTOs\\StaffDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T14:47:23.177Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "TryoutDTO.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\DTOs\\TryoutDTO.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\DTOs\\TryoutDTO.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\DTOs\\TryoutDTO.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\DTOs\\TryoutDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T14:40:55.763Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "TeamProgramDTO.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\DTOs\\TeamProgramDTO.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\DTOs\\TeamProgramDTO.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\DTOs\\TeamProgramDTO.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\DTOs\\TeamProgramDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T14:38:01.5Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "TeamDTO.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\DTOs\\TeamDTO.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\DTOs\\TeamDTO.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\DTOs\\TeamDTO.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\DTOs\\TeamDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T14:33:38.179Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "NewsDTO.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\DTOs\\NewsDTO.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\DTOs\\NewsDTO.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\DTOs\\NewsDTO.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\DTOs\\NewsDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T11:42:33.293Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "INews.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Interfaces\\INews.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Application\\Interfaces\\INews.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Application\\Interfaces\\INews.cs",
+              "RelativeToolTip": "..\\SoccerClub.Application\\Interfaces\\INews.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T11:32:42.557Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "IAppLogger.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Interfaces\\IAppLogger.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Core\\Interfaces\\IAppLogger.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\Interfaces\\IAppLogger.cs",
+              "RelativeToolTip": "..\\SoccerClub.Core\\Interfaces\\IAppLogger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T11:27:39.442Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "LoggerAdapter.cs",
+              "DocumentMoniker": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Infrastructure\\Repositories\\LoggerAdapter.cs",
+              "RelativeDocumentMoniker": "..\\SoccerClub.Infrastructure\\Repositories\\LoggerAdapter.cs",
+              "ToolTip": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Infrastructure\\Repositories\\LoggerAdapter.cs",
+              "RelativeToolTip": "..\\SoccerClub.Infrastructure\\Repositories\\LoggerAdapter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T11:27:04.321Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

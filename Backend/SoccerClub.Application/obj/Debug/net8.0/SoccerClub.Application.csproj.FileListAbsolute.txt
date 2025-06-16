@@ -1,0 +1,15 @@
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\bin\Debug\net8.0\SoccerClub.Application.deps.json
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\bin\Debug\net8.0\SoccerClub.Application.dll
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\bin\Debug\net8.0\SoccerClub.Application.pdb
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\bin\Debug\net8.0\SoccerClub.Core.dll
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\bin\Debug\net8.0\SoccerClub.Core.pdb
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\obj\Debug\net8.0\SoccerClub.Application.csproj.AssemblyReference.cache
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\obj\Debug\net8.0\SoccerClub.Application.GeneratedMSBuildEditorConfig.editorconfig
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\obj\Debug\net8.0\SoccerClub.Application.AssemblyInfoInputs.cache
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\obj\Debug\net8.0\SoccerClub.Application.AssemblyInfo.cs
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\obj\Debug\net8.0\SoccerClub.Application.csproj.CoreCompileInputs.cache
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\obj\Debug\net8.0\SoccerCl.783F1BE6.Up2Date
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\obj\Debug\net8.0\SoccerClub.Application.dll
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\obj\Debug\net8.0\refint\SoccerClub.Application.dll
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\obj\Debug\net8.0\SoccerClub.Application.pdb
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Application\obj\Debug\net8.0\ref\SoccerClub.Application.dll

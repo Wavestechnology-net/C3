@@ -1,0 +1,15 @@
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\bin\Debug\net8.0\SoccerClub.Infrastructure.deps.json
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\bin\Debug\net8.0\SoccerClub.Infrastructure.dll
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\bin\Debug\net8.0\SoccerClub.Infrastructure.pdb
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\bin\Debug\net8.0\SoccerClub.Core.dll
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\bin\Debug\net8.0\SoccerClub.Core.pdb
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\obj\Debug\net8.0\SoccerClub.Infrastructure.csproj.AssemblyReference.cache
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\obj\Debug\net8.0\SoccerClub.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\obj\Debug\net8.0\SoccerClub.Infrastructure.AssemblyInfoInputs.cache
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\obj\Debug\net8.0\SoccerClub.Infrastructure.AssemblyInfo.cs
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\obj\Debug\net8.0\SoccerClub.Infrastructure.csproj.CoreCompileInputs.cache
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\obj\Debug\net8.0\SoccerCl.272A4616.Up2Date
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\obj\Debug\net8.0\SoccerClub.Infrastructure.dll
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\obj\Debug\net8.0\refint\SoccerClub.Infrastructure.dll
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\obj\Debug\net8.0\SoccerClub.Infrastructure.pdb
+J:\OneDrive\Projects\Soccer-Club\Backend\SoccerClub.Infrastructure\obj\Debug\net8.0\ref\SoccerClub.Infrastructure.dll

@@ -1,4 +1,5 @@
  {
   "schemaVersion": 2,
-  "dockerfilePath": "./Backend/Dockerfile"
+  "dockerfilePath": "./Backend/Dockerfile",
+  "buildContext": "./Backend"
  }

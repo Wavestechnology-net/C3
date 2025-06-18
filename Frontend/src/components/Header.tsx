@@ -3,14 +3,14 @@ import React, { useState } from "react";
 const navItems = [
   { label: "About", hasDropdown: false, href: "/about" },
 
-  { label: "Recreational", hasDropdown: true },
-  { label: "Youth Academy", hasDropdown: true },
+  { label: "Recreational", hasDropdown: false, href: "/recreational" },
+  { label: "Youth Academy", hasDropdown: false, href: "/youth" },
   { label: "Competitive", hasDropdown: true },
   { label: "Elite", hasDropdown: true },
   { label: "Tryouts", hasDropdown: false },
   { label: "Events", hasDropdown: true },
   { label: "News", hasDropdown: false },
-  { label: "Contact Us", hasDropdown: false },
+  { label: "Contact Us", hasDropdown: false, href: "/contact" },
 ];
 
 const Header: React.FC = () => {

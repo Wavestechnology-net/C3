@@ -1,7 +1,7 @@
 # Build stage
 FROM node:20 AS build
 WORKDIR /app
-COPY . .
+COPY ./Frontend .
 RUN npm install
 RUN npm run build
 

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Waves\\C3K\\Backend\\SoccerClub.Infrastructure\\SoccerClub.Infrastructure.csproj": {}
+    "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Infrastructure\\SoccerClub.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\Waves\\C3K\\Backend\\SoccerClub.Core\\SoccerClub.Core.csproj": {
+    "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\SoccerClub.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Waves\\C3K\\Backend\\SoccerClub.Core\\SoccerClub.Core.csproj",
+        "projectUniqueName": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\SoccerClub.Core.csproj",
         "projectName": "SoccerClub.Core",
-        "projectPath": "D:\\Waves\\C3K\\Backend\\SoccerClub.Core\\SoccerClub.Core.csproj",
-        "packagesPath": "C:\\Users\\DELL LATITUDE E 5590\\.nuget\\packages\\",
-        "outputPath": "D:\\Waves\\C3K\\Backend\\SoccerClub.Core\\obj\\",
+        "projectPath": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\SoccerClub.Core.csproj",
+        "packagesPath": "C:\\Users\\zeesh\\.nuget\\packages\\",
+        "outputPath": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\DELL LATITUDE E 5590\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\zeesh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -38,11 +38,23 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.17, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -54,24 +66,29 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.423\\RuntimeIdentifierGraph.json"
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Waves\\C3K\\Backend\\SoccerClub.Infrastructure\\SoccerClub.Infrastructure.csproj": {
+    "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Infrastructure\\SoccerClub.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Waves\\C3K\\Backend\\SoccerClub.Infrastructure\\SoccerClub.Infrastructure.csproj",
+        "projectUniqueName": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Infrastructure\\SoccerClub.Infrastructure.csproj",
         "projectName": "SoccerClub.Infrastructure",
-        "projectPath": "D:\\Waves\\C3K\\Backend\\SoccerClub.Infrastructure\\SoccerClub.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\DELL LATITUDE E 5590\\.nuget\\packages\\",
-        "outputPath": "D:\\Waves\\C3K\\Backend\\SoccerClub.Infrastructure\\obj\\",
+        "projectPath": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Infrastructure\\SoccerClub.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\zeesh\\.nuget\\packages\\",
+        "outputPath": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\DELL LATITUDE E 5590\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\zeesh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -86,8 +103,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Waves\\C3K\\Backend\\SoccerClub.Core\\SoccerClub.Core.csproj": {
-                "projectPath": "D:\\Waves\\C3K\\Backend\\SoccerClub.Core\\SoccerClub.Core.csproj"
+              "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\SoccerClub.Core.csproj": {
+                "projectPath": "J:\\OneDrive\\Projects\\Soccer-Club\\Backend\\SoccerClub.Core\\SoccerClub.Core.csproj"
               }
             }
           }
@@ -96,11 +113,23 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.17, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -112,7 +141,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.423\\RuntimeIdentifierGraph.json"
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

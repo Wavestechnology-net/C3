@@ -1,14 +1,15 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const navItems = [
   { label: "About", hasDropdown: false, href: "/about" },
 
   { label: "Recreational", hasDropdown: false, href: "/recreational" },
   { label: "Youth Academy", hasDropdown: false, href: "/youth" },
-  { label: "Competitive", hasDropdown: true },
-  { label: "Elite", hasDropdown: true },
+  { label: "Competitive", hasDropdown: false, href: "/competitive" },
+  { label: "Elite", hasDropdown: false, href: "/elite" },
   { label: "Tryouts", hasDropdown: false },
-  { label: "Events", hasDropdown: true },
+  { label: "Events", hasDropdown: false },
   { label: "News", hasDropdown: false },
   { label: "Contact Us", hasDropdown: false, href: "/contact" },
 ];
@@ -70,12 +71,12 @@ const Header: React.FC = () => {
                       </span>
                     </button>
                   ) : (
-                    <a
-                      href={item.href}
+                    <Link
+                      to={item.href || "/"}
                       className="py-2 px-2 font-semibold hover:text-pink-600"
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   )}
 
                   {item.hasDropdown && openDropdown === item.label && (

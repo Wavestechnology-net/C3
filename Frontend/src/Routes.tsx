@@ -7,6 +7,8 @@ import About from "./routes/About";
 import YouthAcademy from "./routes/Youth";
 import Recreational from "./routes/Recreational";
 import { ContactPage } from "./routes/Contact";
+import Competitive from "./routes/Competitive";
+import Elite from "./routes/Elite";
 
 
 const App = () => {
@@ -19,6 +21,8 @@ const App = () => {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/youth" element={<YouthAcademy />} />
           <Route path="/recreational" element={<Recreational />} />
+          <Route path="/competitive" element={<Competitive />} />
+          <Route path="/elite" element={<Elite />} />
         </Route>
       </Routes>
     </BrowserRouter>

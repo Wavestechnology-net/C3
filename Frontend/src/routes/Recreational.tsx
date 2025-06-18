@@ -98,7 +98,7 @@ export default function Recreational() {
             </section>
 
             {/* 5. Final Section with Info Blocks and Image */}
-            <section className="bg-[#96cfdc] h-[210vh] py-15 px-4 text-start">
+            <section className="bg-[#96cfdc] h-auto md:h-[210vh] py-15 px-4 text-start">
                 <div className="max-w-5xl mx-auto space-y-8">
                     <h2 className="text-4xl font-bold uppercase">REC Programs</h2>
 

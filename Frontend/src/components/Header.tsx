@@ -2,8 +2,9 @@ import React, { useState } from "react";
 
 const navItems = [
   { label: "About", hasDropdown: false, href: "/about" },
-  { label: "Recreational", hasDropdown: false, href: "/recreational" },
-  { label: "Youth Academy", hasDropdown: false, href: "/youth" },
+
+  { label: "Recreational", hasDropdown: true },
+  { label: "Youth Academy", hasDropdown: true },
   { label: "Competitive", hasDropdown: true },
   { label: "Elite", hasDropdown: true },
   { label: "Tryouts", hasDropdown: false },

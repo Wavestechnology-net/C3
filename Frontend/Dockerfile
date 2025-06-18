@@ -7,4 +7,4 @@ RUN npm run build
 
 # Production stage
 FROM nginx:alpine
-COPY --from=build /app/dist /usr/src/c3k_fronend
+COPY --from=build /app/dist /usr/src/nginx/html

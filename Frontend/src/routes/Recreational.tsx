@@ -98,7 +98,7 @@ export default function Recreational() {
             </section>
 
             {/* 5. Final Section with Info Blocks and Image */}
-            <section className="bg-[#96cfdc] h-[210vh] py-15 px-4 text-start">
+            <section className="bg-[#96cfdc] h-auto md:h-[210vh] py-15 px-4 text-start">
                 <div className="max-w-5xl mx-auto space-y-8">
                     <h2 className="text-4xl font-bold uppercase">REC Programs</h2>
 
@@ -114,9 +114,9 @@ export default function Recreational() {
                                 are new to soccer. While your player is having fun playing in highly interactive training
                                 sessions, they will be learning and improving their fundamental technical skills.
                             </p>
-                            <button className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-gray-800 w-fit">
+                            <Button className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-gray-800 w-fit">
                                 Learn More
-                            </button>
+                            </Button>
                         </div>
                         <div className="space-y-4">
                             <h3 className="text-3xl font-bold text-black uppercase">Rec Grade School</h3>

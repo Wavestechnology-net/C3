@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copy everything and publish
-COPY ..
+COPY ./Backend .
 WORKDIR /src/SoccerClub.Api
 RUN dotnet restore
 RUN dotnet publish -c Release -o /app/publish

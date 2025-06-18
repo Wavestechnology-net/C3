@@ -114,16 +114,148 @@ export default function YouthAcademy() {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </section>
+
+            <section className="bg-white py-5 px-4">
+                <div className="max-w-5xl mx-auto space-y-6">
+                    <h2 className="text-xl font-bold uppercase text-gray-900">
+                        MISSED PLAYER EVALUATIONS?
+                    </h2>
+                    <p className="text-lg text-gray-700">
+                        Contact our Youth Academy Directors to schedule an evaluation!
+                    </p>
+
+                    <div className="space-y-2">
+                        <p className="text-lg text-gray-800 flex items-start">
+                            <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
+                            <span>
+                                <strong className="font-bold">Boys Director:</strong> Jose Sideregts -{' '}
+                                <a href="mailto:jose@risesc.org" className="text-pink-700 font-bold underline">
+                                    JOSE@RISESC.ORG
+                                </a>
+                            </span>
+                        </p>
+                        <p className="text-lg text-gray-800 flex items-start">
+                            <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
+                            <span>
+                                <strong className="font-bold">Girls Director:</strong> Nolverto Rodriguez -{' '}
+                                <a href="mailto:nolverto@risesc.org" className="text-pink-700 font-bold underline">
+                                    NOLVERTO@RISESC.ORG
+                                </a>
+                            </span>
+                        </p>
+                    </div>
+
+                    <button className="bg-yellow-300 hover:bg-yellow-400 text-black font-bold uppercase px-6 py-3 rounded w-fit">
+                        Register Now
+                    </button>
+                </div>
+            </section>
+
+            <section className="bg-white py-12 px-4">
+                <div className="max-w-6xl mx-auto space-y-8">
+                    {/* Heading */}
+                    <h2 className="text-4xl font-extrabold uppercase text-gray-900">
+                        Youth Academy Programming
+                    </h2>
+
+                    {/* Fees Box (still outside table) */}
+                    <div className="bg-[#93d1df] border-4 border-[#1c2e4a] p-6 text-gray-800">
+                        <h3 className="text-pink-600 font-bold text-xl uppercase mb-4">Fees</h3>
+                        <ul className="space-y-2 text-lg">
+                            <li className="flex items-start">
+                                <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
+                                <span>
+                                    <strong>Birth Years 2019 (U7), 2018 (U8), 2017 (U9) & 2016 (U10)</strong><br />
+                                    Seasonal Or Yearly Commitment
+                                </span>
+                            </li>
+                            <li className="flex items-start">
+                                <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
+                                <span>Fees are detailed on the registration page after you login.</span>
+                            </li>
+                            <li className="flex items-start">
+                                <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
+                                <span>Due to league rules, seasonal players will be registered with RISE on a yearly basis even if they don't participate in the Spring season.</span>
+                            </li>
+                            <li className="flex items-start">
+                                <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
+                                <span>RISE does not cover fees for coach travel to games and/or events outside of the greater Houston area, this fee should be divided among parents if applicable.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* Seamless Table */}
+                    <table className="w-full text-left border-collapse">
+                        <tbody>
+                            <tr className="bg-[#93d1df] border-x-4 border-t-4 border-[#1c2e4a]">
+                                <td className="p-6 border-r-2 border-[#1c2e4a] align-top">
+                                    <h3 className="text-pink-600 text-xl font-bold uppercase">
+                                        Fall 2025 Season Length
+                                    </h3>
+                                    <ul className="space-y-2 text-lg">
+                                        <li className="flex items-start">
+                                            <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
+                                            <span>
+                                                <strong>Birth Years 2019 (U7), 2018 (U8), 2017 (U9) & 2016 (U10)</strong><br />
+                                                Seasonal Or Yearly Commitment
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
+                                            <span>Fees are detailed on the registration page after you login.</span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
+                                            <span>Due to league rules, seasonal players will be registered with RISE on a yearly basis even if they don't participate in the Spring season.</span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
+                                            <span>RISE does not cover fees for coach travel to games and/or events outside of the greater Houston area, this fee should be divided among parents if applicable.</span>
+                                        </li>
+                                    </ul>
+                                </td>
+                                {/* <td className="p-6 align-top">
+                                    <h3 className="text-pink-600 text-xl font-bold uppercase">
+                                        Spring 2026 Season Length
+                                    </h3>
+                                    <p className="mt-2 text-gray-800 text-lg">
+                                        February 10 – May 20, 2026 (example)
+                                    </p>
+                                </td> */}
+                            </tr>
+
+                            {/* Add more rows below to extend table */}
+                            <tr className="bg-[#93d1df] border-x-4 border-t border-b-4 border-[#1c2e4a]">
+                                <td className="p-6 border-r-2 border-[#1c2e4a] align-top">
+                                    <h3 className="text-pink-600 text-xl font-bold uppercase">
+                                        Fall 2026 Season Length
+                                    </h3>
+                                    <p className="mt-2 text-gray-800 text-lg">
+                                        August 3 – November 12, 2026 (example)
+                                    </p>
+                                </td>
+                                <td className="p-6 align-top">
+                                    <h3 className="text-pink-600 text-xl font-bold uppercase">
+                                        Spring 2027 Season Length
+                                    </h3>
+                                    <p className="mt-2 text-gray-800 text-lg">
+                                        February 8 – May 22, 2027 (example)
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
 
             <section className="bg-white py-30">
                 <h2 className="text-4xl font-bold text-center text-black uppercase">
                     RISE WITH US
                 </h2>
             </section>
-
         </div>
     );
 }

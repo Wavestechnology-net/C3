@@ -33,9 +33,9 @@ export default function YouthAcademy() {
                         understand game situations. We are invested in helping your player reach their goals and we understand
                         that your player's success is ours.
                     </p>
-                    <button className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-gray-800 w-fit mb-5">
+                    <Button className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-gray-800 w-fit mb-5">
                         Learn More
-                    </button>
+                    </Button>
                 </div>
             </section>
 

@@ -2,20 +2,32 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
-const app = express();
-app.use(cors());
-app.use(bodyParser.json());
 require("dotenv").config();
 
+const app = express();
+
+app.use(
+  cors({
+    origin: "https://c3k-frontend.server.dizainstech.com",
+    methods: ["POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
+
+app.use(bodyParser.json());
+
 app.post("/send-email", async (req, res) => {
+  const timeout = setTimeout(() => {
+    return res
+      .status(504)
+      .json({ success: false, message: "Email server timed out" });
+  }, 10000); // 10 seconds max
   try {
     const data = req.body;
 
-    const nodemailer = require("nodemailer");
-
     const transporter = nodemailer.createTransport({
-      service: "gmail", // automatically sets the right host and port
+      host: "sandbox.smtp.mailtrap.io",
+      port: 2525,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
@@ -24,10 +36,10 @@ app.post("/send-email", async (req, res) => {
 
     const mailOptions = {
       from: '"C3 Soccer Club" <no-reply@c3.com>',
-      to: "nehaw61669@exitbit.com",
+      to: "test@gmail.com", // change to real recipient
       subject: "Tryout Form Submission",
       html: `
-                <h2>Player Information</h2>
+        <h2>Player Information</h2>
         <p><strong>Full Name:</strong> ${data.fullName}</p>
         <p><strong>DOB:</strong> ${data.dob}</p>
         <p><strong>Age:</strong> ${data.age}</p>
@@ -58,17 +70,13 @@ app.post("/send-email", async (req, res) => {
     };
 
     const info = await transporter.sendMail(mailOptions);
+    clearTimeout(timeout); // prevent timeout from firing
+    console.log("Email sent:", info.messageId);
 
-    console.log("Message sent: %s", info.messageId);
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-
-    res.status(200).json({
-      success: true,
-      previewUrl: nodemailer.getTestMessageUrl(info),
-      message: "Email sent (preview only)",
-    });
+    res.status(200).json({ success: true, message: "Email sent" });
   } catch (error) {
-    console.error("Error sending email:", error);
+    clearTimeout(timeout);
+    console.error("Email send error:", error);
     res.status(500).json({ success: false, message: "Failed to send email" });
   }
 });

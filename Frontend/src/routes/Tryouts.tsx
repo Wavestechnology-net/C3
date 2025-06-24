@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 const tryoutSchema = Yup.object().shape({
   fullName: Yup.string().required("Full name is required"),
@@ -35,14 +36,17 @@ const Tryouts = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(tryoutSchema),
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const experience = watch("experience");
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
       const response = await fetch(
         "https://c3-email-service.server.dizainstech.com/send-email",
@@ -56,6 +60,7 @@ const Tryouts = () => {
       const result = await response.json();
       if (result.success) {
         toast.success("Email sent successfully.");
+        reset();
       } else {
         toast.error("Failed to send email.");
       }
@@ -63,6 +68,7 @@ const Tryouts = () => {
       console.error("Email error:", error);
       toast.error("An error occurred while sending the email.");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -250,9 +256,40 @@ const Tryouts = () => {
         <div className="pt-6 text-center">
           <button
             type="submit"
-            className="bg-[#DADF36] text-black font-semibold px-6 py-2 rounded hover:bg-yellow-400 transition cursor-pointer"
+            disabled={isLoading}
+            className={`bg-[#DADF36] text-black font-semibold px-6 py-2 rounded transition cursor-pointer ${
+              isLoading
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-yellow-400"
+            }`}
           >
-            Submit Registration
+            {isLoading ? (
+              <span className="flex items-center gap-2">
+                <svg
+                  className="animate-spin h-5 w-5 text-black"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v8H4z"
+                  ></path>
+                </svg>
+                Submitting...
+              </span>
+            ) : (
+              "Submit Registration"
+            )}
           </button>
         </div>
       </form>

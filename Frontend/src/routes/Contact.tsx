@@ -5,14 +5,13 @@ import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
 import { Textarea } from "../components/ui/textarea";
-import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
+import { Link } from "react-router-dom";
 
 const formSchema = z.object({
   program: z.enum([
     "Recreational",
     "Youth Academy",
     "Competitive",
-    "Elite",
     "Camps",
     "Unsure",
   ]),
@@ -36,8 +35,6 @@ export function ContactPage() {
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
     reset,
-    setValue,
-    watch,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
@@ -135,132 +132,26 @@ export function ContactPage() {
                 <strong>Birth years:</strong> 2013 (U11) - 2005/06 (U18/19)
               </p>
             </div>
-
-            {/* Elite */}
-            <div>
-              <h3 className="text-lg font-bold mb-1">
-                <a
-                  href="https://www.C3 SOCCERSsc.org/elite"
-                  className="text-[#d6226a] hover:underline"
-                >
-                  Elite:
-                </a>
-              </h3>
-              <p className="text-gray-800">
-                For players who have the talent and willingness to compete at
-                the top levels of play offered in the country.
-              </p>
-              <p className="text-gray-800">
-                <strong>Birth years:</strong> 2011 (U13) - 2005/06 (U18/19)
-              </p>
-            </div>
           </div>
 
           {/* Registration CTA */}
-          <div className="text-left">
+          <div className="text-left my-6">
             <p className="text-gray-800">
               <strong>To register, click:</strong>{" "}
-              <a
-                href="https://clubs.bluesombrero.com/Default.aspx?tabid=1433204"
+              <Link
+                to="/tryouts"
                 className="text-[#d6226a] hover:underline font-bold"
               >
-                PLAY FOR C3 SOCCERS
-              </a>
+                PLAY FOR C3 SOCCER CLUB
+              </Link>
             </p>
           </div>
 
           {/* Form Intro */}
-          <div className="mt-8 pt-4 border-t border-gray-300">
-            <p className="text-gray-800">
-              If you cannot find the information you are looking for, fill out
-              the form below with your question and a C3 SOCCERS staff member
-              will get back to you within 48 hours.
-            </p>
-          </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-            {/* Program Selection */}
-            <div>
-              <Label className="font-bold">Program of Interest</Label>
-              <RadioGroup
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4"
-                onValueChange={(value) =>
-                  setValue("program", value as FormData["program"])
-                }
-              >
-                {[
-                  "Recreational",
-                  "Youth Academy",
-                  "Competitive",
-                  "Elite",
-                  "Camps",
-                  "Unsure",
-                ].map((program) => (
-                  <div key={program} className="flex items-center space-x-2">
-                    <RadioGroupItem
-                      value={program}
-                      id={program}
-                      checked={watch("program") === program}
-                    />
-                    <Label htmlFor={program}>{program}</Label>
-                  </div>
-                ))}
-              </RadioGroup>
-              {errors.program && (
-                <p className="text-red-500 text-sm mt-2">Required</p>
-              )}
-            </div>
-
-            {/* Location Selection */}
-            <div>
-              <Label className="font-bold">Preferred Training Location</Label>
-              <RadioGroup
-                className="grid grid-cols-1 gap-4 mt-4"
-                onValueChange={(value) =>
-                  setValue("location", value as FormData["location"])
-                }
-              >
-                <div className="flex items-start space-x-2">
-                  <RadioGroupItem
-                    value="Central"
-                    id="Central"
-                    checked={watch("location") === "Central"}
-                  />
-                  <div>
-                    <Label htmlFor="Central">
-                      <strong>Central Campus:</strong>
-                      <p className="text-gray-700">
-                        (West University Place, Bellaire & River Oaks areas)
-                      </p>
-                    </Label>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-2">
-                  <RadioGroupItem
-                    value="Southwest"
-                    id="Southwest"
-                    checked={watch("location") === "Southwest"}
-                  />
-                  <div>
-                    <Label htmlFor="Southwest">
-                      <strong>Southwest Campus:</strong>
-                      <p className="text-gray-700">
-                        (Sugar Land & Missouri City areas)
-                      </p>
-                    </Label>
-                  </div>
-                </div>
-              </RadioGroup>
-              {errors.location && (
-                <p className="text-red-500 text-sm mt-2">Required</p>
-              )}
-            </div>
-
             {/* Required Info Section */}
-            <div>
-              <Label className="font-bold">Required Information</Label>
-            </div>
 
             {/* Parent Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -363,44 +254,28 @@ export function ContactPage() {
               Follow us for the latest action
             </h2>
             <div className="flex justify-center space-x-6 mb-8">
-              <a
-                href="https://www.facebook.com/C3 SOCCERSSoccerClub/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="#" rel="noopener noreferrer">
                 <img
                   src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/5ef3bd892340e3bac23e1ac0_icon-facebook-navy.svg"
                   alt="Facebook"
                   className="h-6"
                 />
               </a>
-              <a
-                href="https://www.instagram.com/C3 SOCCERSsoccerclub/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="#" rel="noopener noreferrer">
                 <img
                   src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/5ec3f83f2c0e493e867f635a_icon-instagram.svg"
                   alt="Instagram"
                   className="h-6"
                 />
               </a>
-              <a
-                href="https://twitter.com/C3 SOCCERSSoccerClub"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="#" rel="noopener noreferrer">
                 <img
                   src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/5f3edfb9bd14edb0979b03f8_icon-twitter-blue.svg"
                   alt="Twitter"
                   className="h-6"
                 />
               </a>
-              <a
-                href="https://www.youtube.com/channel/UC8iQK9WFVEamu8pzM1WLP8g"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="#" rel="noopener noreferrer">
                 <img
                   src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/5f3edf1fcd1f34f55a689236_icon-youtube-pink.svg"
                   alt="YouTube"

@@ -45,7 +45,7 @@ const Tryouts = () => {
 
   const experience = watch("experience");
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     setIsLoading(true);
     try {
       const response = await fetch(

@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
           </h2>
           <p className="flex items-center gap-2 mb-2 text-white">
             <i className="fas fa-envelope text-yellow-400"></i>
-            <span>info@C3 SOCCERSsc.org</span>
+            <span>info@c3soccerclub.org</span>
           </p>
           <p className="flex items-center gap-2 mb-4 text-white">
             <i className="fas fa-phone-alt text-yellow-400"></i>
@@ -68,11 +68,15 @@ const Footer: React.FC = () => {
       <div className="text-center text-yellow-400 text-sm pt-4">
         <p>
           Brand & Website Created by{" "}
-          <a href="https://designgood.com" className="underline font-semibold">
-            DesignGood
+          <a
+            href="https://wavestechnology.net"
+            target="_blank"
+            className="underline font-semibold"
+          >
+            Wavestechnology
           </a>
         </p>
-        <p className="mt-1">© 2025 C3 SOCCERS SOCCER CLUB</p>
+        <p className="mt-1">© 2025 C3 SOCCER CLUB</p>
       </div>
     </footer>
   );

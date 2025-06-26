@@ -48,23 +48,23 @@ const Events: React.FC = () => {
       {/* Hero Section */}
       <section className="pt-13">
         <img
-          src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03d70b17723a098559f69_C3 SOCCERS-rec-hero.jpg"
+          src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03d70b17723a098559f69_C3 Soccer-rec-hero.jpg"
           alt="Hero Image"
           className="w-full"
         />
       </section>
 
       <div className="px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 py-10 lg:py-15">
-        <h1 className="text-4xl font-bold pb-8">C3 SOCCERS EVENTS</h1>
+        <h1 className="text-4xl font-bold pb-8">C3 Soccer EVENTS</h1>
         <p className="pb-5">
-          C3 SOCCERS hosts 4 annual events that bring together some of the best
+          C3 Soccer hosts 4 annual events that bring together some of the best
           teams and players in our region. Our events range from preseason to
-          postseason, to small sided events. C3 SOCCERS events are played at top
+          postseason, to small sided events. C3 Soccer events are played at top
           tier facilities and we offer levels for play ranging from recreational
           to elite competition. We carefully articulate our brackets to ensure
           meaningful games. Events are a critical part of the playing experience
           for youth players, and we want to do our part to make sure your
-          team(s) have an exciting and memorable experience. C3 SOCCERS events
+          team(s) have an exciting and memorable experience. C3 Soccer events
           regularly have over 250 teams participating and they are a great
           experience for players and spectators.
         </p>
@@ -78,18 +78,18 @@ const Events: React.FC = () => {
           CHECK OUT OUR EVENTS
         </h1>
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center items-center">
-          <button className="bg-yellow-400 text-black font-bold px-6 py-2 mt-2 cursor-pointer hover:bg-pink-600">
-            C3 SOCCERS TOURNAMENTS
+          <button className="bg-yellow-400 text-black font-bold px-6 py-2 mt-2 cursor-pointer hover:bg-blue-700">
+            C3 Soccer TOURNAMENTS
           </button>
-          <button className="bg-yellow-400 text-black font-bold px-6 py-2 mt-2 cursor-pointer hover:bg-pink-600">
-            C3 SOCCERS CAMPS
+          <button className="bg-yellow-400 text-black font-bold px-6 py-2 mt-2 cursor-pointer hover:bg-blue-700">
+            C3 Soccer CAMPS
           </button>
         </div>
       </div>
 
       <div className="px-4 py-1">
         <img
-          src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03d772fc039073556b20b_C3 SOCCERS-rec-2.jpg"
+          src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03d772fc039073556b20b_C3 Soccer-rec-2.jpg"
           alt=""
           className="w-full md:w-2/3 mx-auto shadow-xl rounded"
         />
@@ -104,7 +104,7 @@ const Events: React.FC = () => {
         <h2 className="text-2xl font-bold pb-3 text-gray-700">
           LEARN MORE ABOUT OUR PARTNERS
         </h2>
-        <button className="bg-yellow-400 text-black font-bold px-6 py-2 mt-2 cursor-pointer hover:bg-pink-600">
+        <button className="bg-yellow-400 text-black font-bold px-6 py-2 mt-2 cursor-pointer hover:bg-blue-700">
           LEARN MORE
         </button>
       </div>
@@ -131,9 +131,9 @@ const Events: React.FC = () => {
       </div>
 
       <div className="py-10 text-center">
-        <h1 className="text-4xl font-bold pb-5">C3 SOCCERS WITH US</h1>
-        <button className="bg-yellow-400 text-black font-bold px-6 py-2 mt-2 cursor-pointer hover:bg-pink-600">
-          PLAY FOR C3 SOCCERS
+        <h1 className="text-4xl font-bold pb-5">C3 Soccer WITH US</h1>
+        <button className="bg-yellow-400 text-black font-bold px-6 py-2 mt-2 cursor-pointer hover:bg-blue-700">
+          PLAY FOR C3 Soccer
         </button>
       </div>
     </>

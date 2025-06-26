@@ -123,7 +123,7 @@ export default function YouthAcademy() {
         <div className="max-w-5xl mx-auto flex flex-col gap-10 items-start">
           <div className="relative -mt-5 z-10">
             <img
-              src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03bb1100f793fe406a196_C3 SOCCERS-ya-2.jpg"
+              src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03bb1100f793fe406a196_C3 Soccer-ya-2.jpg"
               alt="Recreational Kids"
               className="w-full md:-mt-28 shadow-xl rounded mb-40"
             />
@@ -132,14 +132,14 @@ export default function YouthAcademy() {
           <div className="space-y-4 md:flex md:items-start md:gap-10">
             <div className="md:w-1/2">
               <img
-                src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03bb80ee175b866e4c5fc_C3 SOCCERS-ya-3.jpg"
+                src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03bb80ee175b866e4c5fc_C3 Soccer-ya-3.jpg"
                 alt="Recreational Kids"
                 className="w-full md:-mt-28 shadow-xl rounded"
               />
             </div>
             <div className="md:w-1/2 space-y-4 ">
               <h2 className="text-3xl font-bold uppercase">
-                C3 SOCCERS with us
+                C3 Soccer with us
               </h2>
               <div className="space-y-2 text-gray-700 text-lg">
                 {[
@@ -149,7 +149,7 @@ export default function YouthAcademy() {
                   "Supportive coaching staff",
                   "End-of-season awards",
                   "Age-appropriate competition",
-                  "Access to C3 SOCCERS resources",
+                  "Access to C3 Soccer resources",
                   "Parent engagement opportunities",
                   "Local match participation",
                   "Development-focused curriculum",
@@ -182,10 +182,10 @@ export default function YouthAcademy() {
                 <strong className="font-bold">Boys Director:</strong> Jose
                 Sideregts -{" "}
                 <a
-                  href="mailto:jose@C3 SOCCERSsc.org"
+                  href="mailto:jose@C3 Soccersc.org"
                   className="text-pink-700 font-bold underline"
                 >
-                  JOSE@C3 SOCCERSSC.ORG
+                  JOSE@C3 SoccerSC.ORG
                 </a>
               </span>
             </p>
@@ -195,10 +195,10 @@ export default function YouthAcademy() {
                 <strong className="font-bold">Girls Director:</strong> Nolverto
                 Rodriguez -{" "}
                 <a
-                  href="mailto:nolverto@C3 SOCCERSsc.org"
+                  href="mailto:nolverto@C3 Soccersc.org"
                   className="text-pink-700 font-bold underline"
                 >
-                  NOLVERTO@C3 SOCCERSSC.ORG
+                  NOLVERTO@C3 SoccerSC.ORG
                 </a>
               </span>
             </p>
@@ -233,11 +233,11 @@ export default function YouthAcademy() {
                             </li>
                             <li className="flex items-start">
                                 <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
-                                <span>Due to league rules, seasonal players will be registered with C3 SOCCERS on a yearly basis even if they don't participate in the Spring season.</span>
+                                <span>Due to league rules, seasonal players will be registered with C3 Soccer on a yearly basis even if they don't participate in the Spring season.</span>
                             </li>
                             <li className="flex items-start">
                                 <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
-                                <span>C3 SOCCERS does not cover fees for coach travel to games and/or events outside of the greater Houston area, this fee should be divided among parents if applicable.</span>
+                                <span>C3 Soccer does not cover fees for coach travel to games and/or events outside of the greater Houston area, this fee should be divided among parents if applicable.</span>
                             </li>
                         </ul>
                     </div> */}
@@ -282,7 +282,7 @@ export default function YouthAcademy() {
                       </span>
                       <span>
                         Due to league rules, seasonal players will be registered
-                        with C3 SOCCERS on a yearly basis even if they don't
+                        with C3 Soccer on a yearly basis even if they don't
                         participate in the Spring season.
                       </span>
                     </li>
@@ -291,7 +291,7 @@ export default function YouthAcademy() {
                         {">"}
                       </span>
                       <span>
-                        C3 SOCCERS does not cover fees for coach travel to games
+                        C3 Soccer does not cover fees for coach travel to games
                         and/or events outside of the greater Houston area, this
                         fee should be divided among parents if applicable.
                       </span>
@@ -357,7 +357,7 @@ export default function YouthAcademy() {
                       </span>
                       <span>
                         Due to league rules, seasonal players will be registered
-                        with C3 SOCCERS on a yearly basis even if they don't
+                        with C3 Soccer on a yearly basis even if they don't
                         participate in the Spring season.
                       </span>
                     </li>
@@ -366,7 +366,7 @@ export default function YouthAcademy() {
                         {">"}
                       </span>
                       <span>
-                        C3 SOCCERS does not cover fees for coach travel to games
+                        C3 Soccer does not cover fees for coach travel to games
                         and/or events outside of the greater Houston area, this
                         fee should be divided among parents if applicable.
                       </span>

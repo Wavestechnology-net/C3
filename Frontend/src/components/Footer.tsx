@@ -6,11 +6,13 @@ const Footer: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 border-b border-yellow-400 pb-10">
         {/* QUESTIONS */}
         <div>
-          <h2 className="text-pink-500 text-lg font-bold mb-4 uppercase tracking-wider">
+          <h2 className="text-royal-blue
+
+ text-lg font-bold mb-4 uppercase tracking-wider">
             Questions?
           </h2>
           <p className="text-gray-200 mb-4">
-            Contact us to see how your child can join the C3 SOCCERS team and
+            Contact us to see how your child can join the C3 Soccer team and
             tap into their ultimate soccer potential.
           </p>
           <button className="bg-yellow-400 text-black font-bold px-6 py-2 mt-2">
@@ -20,7 +22,9 @@ const Footer: React.FC = () => {
 
         {/* STAY IN THE LOOP */}
         <div className="border-l border-r border-yellow-400 px-6">
-          <h2 className="text-pink-500 text-lg font-bold mb-4 uppercase tracking-wider">
+          <h2 className="text-royal-blue
+
+ text-lg font-bold mb-4 uppercase tracking-wider">
             Stay in the Loop
           </h2>
           <div className="flex space-x-4 text-yellow-400 text-xl mb-4">
@@ -44,7 +48,9 @@ const Footer: React.FC = () => {
 
         {/* CONTACT US */}
         <div>
-          <h2 className="text-pink-500 text-lg font-bold mb-4 uppercase tracking-wider">
+          <h2 className="text-royal-blue
+
+ text-lg font-bold mb-4 uppercase tracking-wider">
             Contact Us
           </h2>
           <p className="flex items-center gap-2 mb-2 text-white">

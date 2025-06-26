@@ -7,7 +7,7 @@ import Autoplay from "embla-carousel-autoplay";
 const slides = [
   {
     title: "Join Us For Rec Fall 2025!",
-    text: "C3 SOCCERS REC introduces young players to the beautiful game. Sign up today!",
+    text: "C3 Soccer REC introduces young players to the beautiful game. Sign up today!",
     img: "/s1.jpg",
   },
   {
@@ -47,10 +47,10 @@ export const EmblaCarousel = () => {
                 className="w-120 h-70 rounded ms-20"
               />
               <div className="md:ml-25 mt-4 md:mt-0 text-center md:text-left">
-                <h1 className="text-4xl font-bold mb-2 text-black">
+                <h1 className="text-4xl font-bold mb-2 text-white">
                   {slide.title}
                 </h1>
-                <p className="mb-4 text-xl text-black">{slide.text}</p>
+                <p className="mb-4 text-xl text-white">{slide.text}</p>
                 <button className="bg-white text-black font-bold px-4 py-2 rounded">
                   LEARN MORE
                 </button>

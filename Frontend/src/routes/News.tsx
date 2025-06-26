@@ -4,29 +4,30 @@ const News: React.FC = () => {
   const newsItems = [
     {
       imageUrl:
-        "https://cdn.prod.website-files.com/5ec2ed9690a5ba94fd8cdafb/6633aeda7a30e2733c964aae_rise_college_commits_2024-p-500.jpg",
+        "https://cdn.prod.website-files.com/5ec2ed9690a5ba94fd8cdafb/6633aeda7a30e2733c964aae_C3 SOCCERS_college_commits_2024-p-500.jpg",
       category: "College Commitments",
       title: "2024 College Commitments",
       date: "May 2",
-      description: "Congrats to our 2024 RISE Soccer Club College Commits!",
+      description:
+        "Congrats to our 2024 C3 SOCCERS Soccer Club College Commits!",
     },
     {
       imageUrl:
         "https://cdn.prod.website-files.com/5ec2ed9690a5ba94fd8cdafb/6515b95d2e32c79d2eaab485_RSCxSocParentingnobc-p-500.png",
       category: "Partners",
       title:
-        "RISE Introduces New Partnership with the Soccer Parenting Association",
+        "C3 SOCCERS Introduces New Partnership with the Soccer Parenting Association",
       date: "September 29",
       description: "Youth soccer parents & coaches.",
     },
     {
       imageUrl:
-        "https://cdn.prod.website-files.com/5ec2ed9690a5ba94fd8cdafb/65164b64d615fba83fd50375_Rise-72-p-500.jpg",
+        "https://cdn.prod.website-files.com/5ec2ed9690a5ba94fd8cdafb/65164b64d615fba83fd50375_C3 SOCCERS-72-p-500.jpg",
       category: "",
-      title: "RISE Makes 3 Outstanding New Hires",
+      title: "C3 SOCCERS Makes 3 Outstanding New Hires",
       date: "June 3",
       description:
-        "RISE makes 3 outstanding new hires to enhance the player environment and maximize potential.",
+        "C3 SOCCERS makes 3 outstanding new hires to enhance the player environment and maximize potential.",
     },
     {
       imageUrl:
@@ -41,28 +42,28 @@ const News: React.FC = () => {
       imageUrl:
         "https://cdn.prod.website-files.com/5ec2ed9690a5ba94fd8cdafb/64209dd09c81e847d4dcad3a_2539FF48-E0E1-44DE-BF7A-5C34FA60B98F-p-500.png",
       category: "",
-      title: "RISE Advanced: Player Referral Program",
+      title: "C3 SOCCERS Advanced: Player Referral Program",
       date: "April 2",
       description:
-        "An exciting new Referral Program to help spread the word about your positive RISE experiences.",
+        "An exciting new Referral Program to help spread the word about your positive C3 SOCCERS experiences.",
     },
     {
       imageUrl:
         "https://cdn.prod.website-files.com/5ec2ed9690a5ba94fd8cdafb/64209ad274d27295f995c147_80620B65-CA1F-4156-8E69-BAE5C372C181-p-500.png",
       category: "",
-      title: "RISE Recreational: Player Referral Program",
+      title: "C3 SOCCERS Recreational: Player Referral Program",
       date: "April 2",
       description:
-        "Refer friends to RISE and help grow our community with your positive experiences.",
+        "Refer friends to C3 SOCCERS and help grow our community with your positive experiences.",
     },
     {
       imageUrl:
         "https://cdn.prod.website-files.com/5ec2ed9690a5ba94fd8cdafb/64265e3479729a94657b8ba6_B8742532-0A68-4B7B-A228-F17F3F38920D-p-500.jpg",
       category: "",
-      title: "RISE U17 Boys Reach the Final 4",
+      title: "C3 SOCCERS U17 Boys Reach the Final 4",
       date: "March 30",
       description:
-        "RISE U17 boys reach the final 4 of the National Academy Championships.",
+        "C3 SOCCERS U17 boys reach the final 4 of the National Academy Championships.",
     },
     {
       imageUrl:
@@ -79,7 +80,8 @@ const News: React.FC = () => {
       category: "College Commitments",
       title: "2023 Fall College Commitments",
       date: "October 9",
-      description: "Congrats to our 2023 RISE Soccer Club College Commits!",
+      description:
+        "Congrats to our 2023 C3 SOCCERS Soccer Club College Commits!",
     },
   ];
 
@@ -93,7 +95,7 @@ const News: React.FC = () => {
     <>
       <div className="pt-40 mx-4 sm:mx-10 md:mx-20 lg:mx-32 xl:mx-45">
         <h1 className="text-3xl sm:text-4xl font-bold my-6 px-2 sm:px-10 md:px-20 lg:px-28 xl:px-35">
-          RISE NEWS
+          C3 SOCCERS NEWS
         </h1>
         <img
           src="https://cdn.prod.website-files.com/5ec2ed9690a5ba94fd8cdafb/67be2e3bb706e7084b30fb52_67ba5c6bae476.image-p-1600.jpg"
@@ -117,8 +119,8 @@ const News: React.FC = () => {
           players to improve their skills and learn from one of the most
           decorated figures in U.S. soccer history. This event, part of
           Reliant's ongoing support of local soccer, is a testament to the
-          shared commitment between RISE Soccer Club and Reliant to grow the
-          game and inspire the next generation of players.
+          shared commitment between C3 SOCCERS Soccer Club and Reliant to grow
+          the game and inspire the next generation of players.
         </p>
         <p className="underline my-3 font-bold text-gray-500">READ MORE</p>
       </div>

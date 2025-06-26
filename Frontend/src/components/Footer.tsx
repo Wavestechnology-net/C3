@@ -10,8 +10,8 @@ const Footer: React.FC = () => {
             Questions?
           </h2>
           <p className="text-gray-200 mb-4">
-            Contact us to see how your child can join the RISE team and tap into
-            their ultimate soccer potential.
+            Contact us to see how your child can join the C3 SOCCERS team and
+            tap into their ultimate soccer potential.
           </p>
           <button className="bg-yellow-400 text-black font-bold px-6 py-2 mt-2">
             CONTACT US
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
           </h2>
           <p className="flex items-center gap-2 mb-2 text-white">
             <i className="fas fa-envelope text-yellow-400"></i>
-            <span>info@risesc.org</span>
+            <span>info@c3soccerclub.org</span>
           </p>
           <p className="flex items-center gap-2 mb-4 text-white">
             <i className="fas fa-phone-alt text-yellow-400"></i>
@@ -68,11 +68,15 @@ const Footer: React.FC = () => {
       <div className="text-center text-yellow-400 text-sm pt-4">
         <p>
           Brand & Website Created by{" "}
-          <a href="https://designgood.com" className="underline font-semibold">
-            DesignGood
+          <a
+            href="https://wavestechnology.net"
+            target="_blank"
+            className="underline font-semibold"
+          >
+            Wavestechnology
           </a>
         </p>
-        <p className="mt-1">© 2025 RISE SOCCER CLUB</p>
+        <p className="mt-1">© 2025 C3 SOCCER CLUB</p>
       </div>
     </footer>
   );

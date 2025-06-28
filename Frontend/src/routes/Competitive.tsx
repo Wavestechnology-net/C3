@@ -139,7 +139,7 @@ export default function Competitive() {
       {/* 6. Closing Section */}
       <section className="bg-white py-10">
         <h2 className="text-4xl font-bold text-center text-black uppercase">
-          Join C3 SOCCERS Today
+          Join C3 Soccer Today
         </h2>
       </section>
     </div>

@@ -46,7 +46,7 @@ const Header: React.FC = () => {
             to="/tryouts"
             className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-4 py-2 text-sm rounded"
           >
-            PLAY FOR C3 SOCCERS
+            PLAY FOR C3 Soccer
           </Link>
         </div>
 
@@ -84,7 +84,7 @@ const Header: React.FC = () => {
                   {item.hasDropdown ? (
                     <button
                       onClick={() => toggleDropdown(item.label)}
-                      className="flex items-center justify-between py-2 px-2 text-left font-semibold hover:text-pink-600 w-full"
+                      className="flex items-center justify-between py-2 px-2 text-left font-semibold hover:text-blue-700 w-full"
                     >
                       {item.label}
                       <span className="ml-2 text-sm">
@@ -94,7 +94,7 @@ const Header: React.FC = () => {
                   ) : (
                     <Link
                       to={item.href || "/"}
-                      className="py-2 px-2 font-semibold hover:text-pink-600"
+                      className="py-2 px-2 font-semibold hover:text-blue-700"
                     >
                       {item.label}
                     </Link>
@@ -104,13 +104,17 @@ const Header: React.FC = () => {
                     <div className="ml-4 pl-2 border-l border-gray-200">
                       <a
                         href="#"
-                        className="block py-1 text-sm hover:text-pink-500"
+                        className="block py-1 text-sm hover:text-royal-blue
+
+"
                       >
                         Option 1
                       </a>
                       <a
                         href="#"
-                        className="block py-1 text-sm hover:text-pink-500"
+                        className="block py-1 text-sm hover:text-royal-blue
+
+"
                       >
                         Option 2
                       </a>
@@ -139,7 +143,7 @@ const Header: React.FC = () => {
                 {item.hasDropdown ? (
                   <button
                     onClick={() => toggleDropdown(item.label)}
-                    className="flex items-center justify-between py-2 w-full text-left hover:text-pink-600"
+                    className="flex items-center justify-between py-2 w-full text-left hover:text-blue-700"
                   >
                     {item.label}
                     <span className="ml-2 text-xs">
@@ -147,7 +151,7 @@ const Header: React.FC = () => {
                     </span>
                   </button>
                 ) : (
-                  <Link to={item.href} className="py-2 hover:text-pink-600">
+                  <Link to={item.href} className="py-2 hover:text-blue-700">
                     {item.label}
                   </Link>
                 )}
@@ -156,13 +160,17 @@ const Header: React.FC = () => {
                   <div className="ml-4 pl-2 border-l border-gray-200">
                     <a
                       href="#"
-                      className="block py-1 text-sm hover:text-pink-500"
+                      className="block py-1 text-sm hover:text-royal-blue
+
+"
                     >
                       Option 1
                     </a>
                     <a
                       href="#"
-                      className="block py-1 text-sm hover:text-pink-500"
+                      className="block py-1 text-sm hover:text-royal-blue
+
+"
                     >
                       Option 2
                     </a>

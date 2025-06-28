@@ -70,13 +70,13 @@ export const PartnerCarousel = () => {
         {/* Navigation Arrows */}
         <button
           onClick={scrollPrev}
-          className="absolute top-1/3 left-20 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow"
+          className="absolute top-1/2 left-20 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow"
         >
           ◀
         </button>
         <button
           onClick={scrollNext}
-          className="absolute top-1/3 right-20 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow"
+          className="absolute top-1/2 right-20 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow"
         >
           ▶
         </button>

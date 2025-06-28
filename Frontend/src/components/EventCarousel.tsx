@@ -8,7 +8,7 @@ const slides = [
   {
     date: "June 20, 2025",
     title: "Join Us For Rec Fall 2025!",
-    text: "C3 SOCCERS REC introduces young players to the beautiful game. Sign up today!",
+    text: "C3 Soccer REC introduces young players to the beautiful game. Sign up today!",
     img: "https://cdn.prod.website-files.com/5ec2ed9690a5ba94fd8cdafb/65367f1687e2a681b00a3a8a_Screenshot%202023-10-23%20at%209.10.26%E2%80%AFAM-p-500.jpg",
   },
   {
@@ -34,7 +34,7 @@ export const EventCarousel = () => {
   const scrollNext = () => emblaApi?.scrollNext();
 
   return (
-    <div className="flex flex-col md:flex-row h-[500px] justify-center mt-10 md:mt-16">
+    <div className="flex flex-col md:flex-row h-[500px] justify-center mt-10 md:mt-16 ">
       {/* Left Column - Slider */}
       <div className="w-full md:w-1/2 relative overflow-hidden">
         <div className="embla h-full" ref={emblaRef}>

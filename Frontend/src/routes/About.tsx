@@ -70,9 +70,11 @@ const About: React.FC = () => {
       {/* Club Philosophy */}
       <section className="bg-white py-16 px-3 ">
         <div className="max-w-5xl mx-auto flex flex-col items-start space-y-4">
-          <h1 className="text-4xl font-bold uppercase">About C3 Soccer Club</h1>
+          <h1 className="text-4xl font-bold uppercase">
+            About C3FC Soccer Club
+          </h1>
           <p className="text-base text-gray-700 mb-2">
-            C3 Soccer Club is more than just a soccer team we are a
+            C3FC Soccer Club is more than just a soccer team we are a
             development-focused community committed to shaping well-rounded
             athletes through the power of sport. At the heart of our philosophy
             are three core pillars: Cognition, Competence, and Character.
@@ -117,10 +119,10 @@ const About: React.FC = () => {
               Players of All Levels
             </h2>
             <p className="text-gray-800 text-lg">
-              C3 Soccer is a full service soccer club, our programming serves
+              C3FC Soccer is a full service soccer club, our programming serves
               players of all levels - from recreational to college-bound-in a
               safe, supportive environment. We offer soccer programming to youth
-              athletes regardless of their play-level. At C3 Soccer, we have
+              athletes regardless of their play-level. At C3FC Soccer, we have
               licensed coaches guide our players through the development process
               to ensure that we provide a consistent player environment across
               all genders and age groups.
@@ -129,7 +131,7 @@ const About: React.FC = () => {
 
           <div className="relative -mt-10 md:-mt-20 z-10">
             <img
-              src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c0396e97d22a86ed9cbd6c_C3 Soccer-about-1.jpg"
+              src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c0396e97d22a86ed9cbd6c_C3FC Soccer-about-1.jpg"
               alt="Kids Playing Soccer"
               className="w-full max-w-md mx-auto md:-mt-10 shadow-xl rounded"
             />
@@ -141,7 +143,7 @@ const About: React.FC = () => {
         <div className="max-w-5xl mx-auto flex flex-col gap-10 items-start">
           <div className="relative -mt-5 z-10">
             <img
-              src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03980a60d10542a03dcab_C3 Soccer-about-2.jpg"
+              src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03980a60d10542a03dcab_C3FC Soccer-about-2.jpg"
               alt="Recreational Kids"
               className="w-full md:-mt-28 shadow-xl rounded"
             />
@@ -157,12 +159,12 @@ const About: React.FC = () => {
               been able to develop facilities that we own, in the heart of
               Houston, which are easily accessible to millions of residents. We
               also partner with municipalities who own beautiful facilities and
-              grant C3 Soccer priority usage. Having field freedom and
-              flexibility puts C3 Soccer in a powerful and unique position
+              grant C3FC Soccer priority usage. Having field freedom and
+              flexibility puts C3FC Soccer in a powerful and unique position
               because we always have an element of control over our future.
             </p>
             <Button className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-gray-800 w-fit">
-              C3 Soccer Locations
+              C3FC Soccer Locations
             </Button>
           </div>
         </div>
@@ -175,16 +177,16 @@ const About: React.FC = () => {
               We firmly believe Better Coaches = Better Players
             </h2>
             <p className="text-gray-800 text-lg">
-              Coaches are the key to player development. C3 Soccer boasts one
+              Coaches are the key to player development. C3FC Soccer boasts one
               of the most highly licensed coaching staffs in the nation. Our
               Player Development Coaches are ethnically diverse and can cater to
               the many cultures in our community while always maintaining the
-              highest technical standards. C3 Soccer is committed to developing
+              highest technical standards. C3FC Soccer is committed to developing
               our players by having the most talented and qualified coaches lead
               our players and oversee our program.
             </p>
             <Button className="bg-blue-400 text-white px-4 py-2 rounded hover:bg-gray-800 w-fit uppercase">
-              C3 Soccer Staff
+              C3FC Soccer Staff
             </Button>
           </div>
 
@@ -203,7 +205,7 @@ const About: React.FC = () => {
           <div className="space-y-4 md:flex md:items-start md:gap-20">
             <div className="md:w-1/2">
               <img
-                src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c0398d56146297c7297236_C3 Soccer-about-4.jpg"
+                src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c0398d56146297c7297236_C3FC Soccer-about-4.jpg"
                 alt="Recreational Kids"
                 className="w-full shadow-xl rounded"
               />
@@ -217,7 +219,7 @@ const About: React.FC = () => {
                 development we connect our community, families and players by
                 cultivating a club culture of respect, improvement, success, and
                 empowerment through and for the advancement of soccer. TOGETHER
-                WE C3 Soccer.
+                WE C3FC Soccer.
               </p>
             </div>
           </div>
@@ -276,8 +278,8 @@ const About: React.FC = () => {
           <div className="space-y-4">
             <h2 className="text-3xl font-bold uppercase">Our Mission</h2>
             <p className="text-white text-lg">
-              At C3 Soccer Club, our mission is to develop complete athletes by
-              training the mind, body, and spirit of every player. Through a
+              At C3FC Soccer Club, our mission is to develop complete athletes
+              by training the mind, body, and spirit of every player. Through a
               commitment to Cognition, Competence, and Character, we prepare
               young athletes to excel in the game of soccer and thrive in life —
               as smart decision-makers, skilled performers, and respectful
@@ -320,7 +322,7 @@ const About: React.FC = () => {
 
       {/* <section className="bg-[#96cfdc] h-auto md:h-[265vh] py-15 px-4 text-start">
         <div className="max-w-5xl mx-auto space-y-8">
-          <h2 className="text-4xl font-bold uppercase">C3 Soccer Programs</h2>
+          <h2 className="text-4xl font-bold uppercase">C3FC Soccer Programs</h2>
 
           <div className="grid md:grid-cols-1/3 gap-15">
             <div className="space-y-4">
@@ -350,11 +352,11 @@ const About: React.FC = () => {
                 Birth Years: 2018 (U7) - 2015 (U10)
               </h4>
               <p className="text-gray-700 text-xl w-full ">
-                The C3 Soccer Youth Academy introduces players with their first
+                The C3FC Soccer Youth Academy introduces players with their first
                 experiences in competitive soccer. This program allows players,
                 who excelled at the recreational level, to rapidly advance their
                 technical skills along with like minded players under the
-                watchful eyes of the C3 Soccer Competitive Coaching Staff.
+                watchful eyes of the C3FC Soccer Competitive Coaching Staff.
               </p>
               <button className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-gray-800 w-fit">
                 Learn More
@@ -368,7 +370,7 @@ const About: React.FC = () => {
                 Birth Years: 2014 (U11) - 2007/06 (U18/U19)
               </h4>
               <p className="text-gray-700 text-xl w-full ">
-                Players in the C3 Soccer Competitive Program are committed to
+                Players in the C3FC Soccer Competitive Program are committed to
                 advancing their technical skills and will embrace the high-level
                 of coaching. As your player ages through the program, they will
                 be challenged both physically and mentally with other
@@ -386,7 +388,7 @@ const About: React.FC = () => {
                 Birth Years: 2014 (U11) - 2007/06 (U18/U19)
               </h4>
               <p className="text-gray-700 text-xl w-full ">
-                The Elite program at C3 Soccer consists of 3 leagues that sit
+                The Elite program at C3FC Soccer consists of 3 leagues that sit
                 at the top of the soccer development pyramid for every top club
                 in the United States. The Girls Academy (GA), Boys Elite Clubs
                 National League (ECNL), and the Boys Elite Clubs National League
@@ -405,7 +407,7 @@ const About: React.FC = () => {
           </div>
           <div className="relative">
             <img
-              src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c0399da60d10542a040aa2_C3 Soccer-about-7.jpg"
+              src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c0399da60d10542a040aa2_C3FC Soccer-about-7.jpg"
               alt="Team Spirit"
               className="relative left-1/2 -translate-x-1/2 w-full max-w-5xl shadow-xl rounded"
             />

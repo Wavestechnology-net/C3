@@ -17,7 +17,7 @@ export default function Competitive() {
             Competitive Soccer Program (Ages 12-18)
           </h1>
           <p className="text-lg text-gray-700 text-left">
-            At C3 Soccer Club, our Competitive Soccer Program is designed for
+            At C3FC Soccer Club, our Competitive Soccer Program is designed for
             serious young athletes aged 12 to 18 who are committed to pushing
             their limits and competing at the highest levels.
           </p>
@@ -86,12 +86,12 @@ export default function Competitive() {
         </div>
       </section>
 
-      {/* 5. Why C3 Section */}
+      {/* 5. Why C3FC Section */}
       <section className="bg-[#96cfdc] py-20 px-4 relative overflow-visible">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-6">
             <h2 className="text-3xl font-bold uppercase">
-              Why Choose C3 Competitive Soccer?
+              Why Choose C3FC Competitive Soccer?
             </h2>
             <ul className="list-inside pl-5 text-lg text-gray-800 space-y-2">
               <li>
@@ -122,7 +122,7 @@ export default function Competitive() {
               </li>
             </ul>
             <p>
-              Join C3 Soccer Club’s Competitive Soccer Program and take your
+              Join C3FC Soccer Club’s Competitive Soccer Program and take your
               passion for the game to new heights.
             </p>
           </div>
@@ -139,7 +139,7 @@ export default function Competitive() {
       {/* 6. Closing Section */}
       <section className="bg-white py-10">
         <h2 className="text-4xl font-bold text-center text-black uppercase">
-          Join C3 Soccer Today
+          Join C3FC Soccer Today
         </h2>
       </section>
     </div>

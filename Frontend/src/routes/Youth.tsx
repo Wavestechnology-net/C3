@@ -16,7 +16,7 @@ export default function YouthAcademy() {
             Youth Academy (Ages 6-12)
           </h1>
           <p className="text-lg text-gray-700 text-left mb-5">
-            Welcome to the C3 Soccer Club Youth Academy — where young players
+            Welcome to the C3FC Soccer Club Youth Academy — where young players
             take their first steps toward a lifetime of soccer success.
           </p>
           <h2 className="text-2xl font-bold">
@@ -64,7 +64,7 @@ export default function YouthAcademy() {
             <li>
               <span className="text-yellow-400 font-bold mr-2 mt-1">{">"}</span>
               A chance for young players to experience the thrill of
-              representing C3 Soccer Club
+              representing C3FC Soccer Club
             </li>
           </ul>
         </div>
@@ -82,7 +82,7 @@ export default function YouthAcademy() {
           </div>
           <div className="space-y-4">
             <h2 className="text-3xl font-bold uppercase">
-              Why Join the C3 Youth Academy?
+              Why Join the C3FC Youth Academy?
             </h2>
             <p className="text-gray-800 text-lg">
               <ul className="list-inside space-y-2 my-2 lg:ms-1">
@@ -112,7 +112,7 @@ export default function YouthAcademy() {
                   Access to local competitions that foster growth and fun
                 </li>
               </ul>
-              Start your child’s soccer journey with C3 Soccer Club where
+              Start your child’s soccer journey with C3FC Soccer Club where
               passion meets purpose.
             </p>
           </div>
@@ -123,7 +123,7 @@ export default function YouthAcademy() {
         <div className="max-w-5xl mx-auto flex flex-col gap-10 items-start">
           <div className="relative -mt-5 z-10">
             <img
-              src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03bb1100f793fe406a196_C3 Soccer-ya-2.jpg"
+              src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03bb1100f793fe406a196_C3FC Soccer-ya-2.jpg"
               alt="Recreational Kids"
               className="w-full md:-mt-28 shadow-xl rounded mb-40"
             />
@@ -132,14 +132,14 @@ export default function YouthAcademy() {
           <div className="space-y-4 md:flex md:items-start md:gap-10">
             <div className="md:w-1/2">
               <img
-                src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03bb80ee175b866e4c5fc_C3 Soccer-ya-3.jpg"
+                src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03bb80ee175b866e4c5fc_C3FC Soccer-ya-3.jpg"
                 alt="Recreational Kids"
                 className="w-full md:-mt-28 shadow-xl rounded"
               />
             </div>
             <div className="md:w-1/2 space-y-4 ">
               <h2 className="text-3xl font-bold uppercase">
-                C3 Soccer with us
+                C3FC Soccer with us
               </h2>
               <div className="space-y-2 text-gray-700 text-lg">
                 {[
@@ -149,7 +149,7 @@ export default function YouthAcademy() {
                   "Supportive coaching staff",
                   "End-of-season awards",
                   "Age-appropriate competition",
-                  "Access to C3 Soccer resources",
+                  "Access to C3FC Soccer resources",
                   "Parent engagement opportunities",
                   "Local match participation",
                   "Development-focused curriculum",
@@ -182,10 +182,10 @@ export default function YouthAcademy() {
                 <strong className="font-bold">Boys Director:</strong> Jose
                 Sideregts -{" "}
                 <a
-                  href="mailto:jose@C3 Soccersc.org"
+                  href="mailto:jose@C3FC Soccersc.org"
                   className="text-pink-700 font-bold underline"
                 >
-                  JOSE@C3 SoccerSC.ORG
+                  JOSE@C3FC SoccerSC.ORG
                 </a>
               </span>
             </p>
@@ -195,10 +195,10 @@ export default function YouthAcademy() {
                 <strong className="font-bold">Girls Director:</strong> Nolverto
                 Rodriguez -{" "}
                 <a
-                  href="mailto:nolverto@C3 Soccersc.org"
+                  href="mailto:nolverto@C3FC Soccersc.org"
                   className="text-pink-700 font-bold underline"
                 >
-                  NOLVERTO@C3 SoccerSC.ORG
+                  NOLVERTO@C3FC SoccerSC.ORG
                 </a>
               </span>
             </p>
@@ -233,11 +233,11 @@ export default function YouthAcademy() {
                             </li>
                             <li className="flex items-start">
                                 <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
-                                <span>Due to league rules, seasonal players will be registered with C3 Soccer on a yearly basis even if they don't participate in the Spring season.</span>
+                                <span>Due to league rules, seasonal players will be registered with C3FC Soccer on a yearly basis even if they don't participate in the Spring season.</span>
                             </li>
                             <li className="flex items-start">
                                 <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
-                                <span>C3 Soccer does not cover fees for coach travel to games and/or events outside of the greater Houston area, this fee should be divided among parents if applicable.</span>
+                                <span>C3FC Soccer does not cover fees for coach travel to games and/or events outside of the greater Houston area, this fee should be divided among parents if applicable.</span>
                             </li>
                         </ul>
                     </div> */}
@@ -282,7 +282,7 @@ export default function YouthAcademy() {
                       </span>
                       <span>
                         Due to league rules, seasonal players will be registered
-                        with C3 Soccer on a yearly basis even if they don't
+                        with C3FC Soccer on a yearly basis even if they don't
                         participate in the Spring season.
                       </span>
                     </li>
@@ -291,7 +291,7 @@ export default function YouthAcademy() {
                         {">"}
                       </span>
                       <span>
-                        C3 Soccer does not cover fees for coach travel to games
+                        C3FC Soccer does not cover fees for coach travel to games
                         and/or events outside of the greater Houston area, this
                         fee should be divided among parents if applicable.
                       </span>
@@ -357,7 +357,7 @@ export default function YouthAcademy() {
                       </span>
                       <span>
                         Due to league rules, seasonal players will be registered
-                        with C3 Soccer on a yearly basis even if they don't
+                        with C3FC Soccer on a yearly basis even if they don't
                         participate in the Spring season.
                       </span>
                     </li>
@@ -366,7 +366,7 @@ export default function YouthAcademy() {
                         {">"}
                       </span>
                       <span>
-                        C3 Soccer does not cover fees for coach travel to games
+                        C3FC Soccer does not cover fees for coach travel to games
                         and/or events outside of the greater Houston area, this
                         fee should be divided among parents if applicable.
                       </span>
@@ -399,7 +399,7 @@ export default function YouthAcademy() {
       </section> */}
       <section className="bg-white py-30">
         <h2 className="text-4xl font-bold text-center text-black uppercase">
-          RISE with C3 SOCCER Club
+          RISE with C3FC SOCCER Club
         </h2>
       </section>
     </div>

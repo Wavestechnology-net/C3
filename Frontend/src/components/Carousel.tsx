@@ -7,7 +7,7 @@ import Autoplay from "embla-carousel-autoplay";
 const slides = [
   {
     title: "Join Us For Rec Fall 2025!",
-    text: "C3 Soccer REC introduces young players to the beautiful game. Sign up today!",
+    text: "C3FC Soccer REC introduces young players to the beautiful game. Sign up today!",
     img: "/s1.jpg",
   },
   {

@@ -7,7 +7,7 @@ export default function Elite() {
       {/* 1. Hero Section */}
       <section className="w-full">
         <img
-          src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03c20e7de177d5c3e3d07_C3 Soccer-elite-hero.jpg"
+          src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03c20e7de177d5c3e3d07_C3FC Soccer-elite-hero.jpg"
           alt="Recreational Hero"
           className="w-full h-auto object-cover"
         />
@@ -16,14 +16,14 @@ export default function Elite() {
       {/* 2. Centered Text Section */}
       <section className="bg-white text-center py-16 px-3 ">
         <div className="max-w-5xl mx-auto flex flex-col items-start space-y-4">
-          <h1 className="text-4xl font-bold uppercase">C3 Soccer Elite</h1>
+          <h1 className="text-4xl font-bold uppercase">C3FC Soccer Elite</h1>
           <h2 className="text-lg font-semibold text-red-600">
             Birth Years: 2013 (U13) - 2008/07 (U18/19)
           </h2>
           <p className="text-base text-lg text-gray-700 text-left">
-            C3 Soccer Elite is the highest competitive level of programming we
+            C3FC Soccer Elite is the highest competitive level of programming we
             offer. The Elite Program is incredibly rewarding but tremendously
-            demanding. C3 Soccer Elites must demonstrate the highest level of
+            demanding. C3FC Soccer Elites must demonstrate the highest level of
             commitment to training at all times in order to maintain physical
             and mental readiness for competitions as roster positions and
             playing time are 100% earned on merit and never guaranteed. Elite
@@ -31,7 +31,7 @@ export default function Elite() {
             pool and require a yearly commitment.
           </p>
           <p className="text-base text-lg text-gray-700 text-left">
-            The Elite program at C3 Soccer consists of 3 leagues that sit at
+            The Elite program at C3FC Soccer consists of 3 leagues that sit at
             the top of the soccer development pyramid for every top club in the
             United States. The Girls Academy (GA), the Boys Elite Clubs National
             League (ECNL), and the ECNL Regional League (ECNL-RL) provide top
@@ -39,7 +39,7 @@ export default function Elite() {
             country. The purpose of these platforms is to provide a
             player-centric environment, meaningful games, high standards that
             member clubs are required to adhere to, and most importantly to
-            maximize player opportunity and visibility. C3 Soccer Elite teams
+            maximize player opportunity and visibility. C3FC Soccer Elite teams
             follow a highly challenging and intricately designed curriculum
             aimed at preparing players for top college programs, professional
             trials or opportunities with national teams.
@@ -83,10 +83,10 @@ export default function Elite() {
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-4">
             <h2 className="text-3xl font-bold uppercase">
-              Why C3 Soccer Elite
+              Why C3FC Soccer Elite
             </h2>
             <p className="text-gray-800 text-lg">
-              C3 Soccer will work relentlessly to be recognized as a top youth
+              C3FC Soccer will work relentlessly to be recognized as a top youth
               soccer club in the country by developing impact players and
               outstanding citizens who will flourish in an environment that
               seeks to provide the highest technical standards in youth
@@ -94,7 +94,7 @@ export default function Elite() {
               structure.
             </p>
             <p className="text-gray-800 text-lg">
-              C3 Soccer dedicates significant resources to ensure that we
+              C3FC Soccer dedicates significant resources to ensure that we
               provide your player with an environment that includes: elite
               national competition platforms, excellent facilities, top-caliber
               coaches, cutting-edge technology, carefully curated talent
@@ -105,7 +105,7 @@ export default function Elite() {
 
           <div className="relative -mt-10 md:-mt-10 z-10">
             <img
-              src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03c25e7de177d5c3e419e_C3 Soccer-elite-1.jpg"
+              src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03c25e7de177d5c3e419e_C3FC Soccer-elite-1.jpg"
               alt="Kids Playing Soccer"
               className="w-full max-w-md mx-auto md:-mt-20 shadow-xl rounded"
             />
@@ -118,7 +118,7 @@ export default function Elite() {
         <div className="max-w-5xl mx-auto flex flex-col gap-10 items-start">
           {/* <div className="relative -mt-5 z-10">
                         <img
-                            src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03bf9e7de177d5c3df82f_C3 Soccer-competitive-2.jpg"
+                            src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03bf9e7de177d5c3df82f_C3FC Soccer-competitive-2.jpg"
                             alt="Recreational Kids"
                             className="w-full md:-mt-28 shadow-xl rounded"
                         />
@@ -126,12 +126,12 @@ export default function Elite() {
 
           <div className="space-y-4">
             <h2 className="text-3xl font-bold uppercase">
-              Elite Players C3 Soccer with us
+              Elite Players C3FC Soccer with us
             </h2>
             <div className="space-y-2 text-gray-700 text-lg">
               {[
                 "Funded, U13 & U18/19 top boys ECNL teams and top Girls Academy teams ($0 Club Fee)",
-                "50+ Professional and National Team players produced by C3 Soccer legacy clubs",
+                "50+ Professional and National Team players produced by C3FC Soccer legacy clubs",
                 "800+ College Placements",
                 "1 DA National Championship (Texans SC - 2017)",
                 "3 National Championships",
@@ -151,13 +151,13 @@ export default function Elite() {
       <section className="bg-white">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 py-10 items-start">
           <img
-            src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03cc43338f522fad758e1_C3 Soccer-elite-1-2.jpg"
+            src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03cc43338f522fad758e1_C3FC Soccer-elite-1-2.jpg"
             alt="Training"
             className="rounded-lg"
           />
           <div>
             <h1 className="text-3xl font-bold mb-4 uppercase">
-              C3 Soccer offers Elite Program Players
+              C3FC Soccer offers Elite Program Players
             </h1>
             <div className="space-y-2 text-gray-700 text-lg">
               {[
@@ -257,7 +257,7 @@ export default function Elite() {
           </div>
           <div className="relative">
             <img
-              src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03cca3338f522fad7638f_C3 Soccer-elite-6.jpg"
+              src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03cca3338f522fad7638f_C3FC Soccer-elite-6.jpg"
               alt="Team Spirit"
               className="relative left-1/2 -translate-x-1/2 w-full max-w-5xl shadow-xl rounded"
             />
@@ -267,7 +267,7 @@ export default function Elite() {
 
       <section className="bg-white py-30">
         <h2 className="text-4xl font-bold text-center text-black uppercase">
-          C3 Soccer WITH US
+          C3FC Soccer WITH US
         </h2>
       </section>
     </div>

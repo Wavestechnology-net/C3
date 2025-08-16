@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SoccerClub.Core.Entities;
 
 namespace SoccerClub.Infrastructure.Persistence
@@ -21,6 +15,12 @@ namespace SoccerClub.Infrastructure.Persistence
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamProgram> TeamPrograms { get; set; }
         public DbSet<ProgramRegistration> ProgramRegistrations { get; set; }
+
+        public DbSet<Page> Pages { get; set; }
+        public DbSet<Section> Sections { get; set; }
+        public DbSet<Content> Contents { get; set; }
+        public DbSet<Media> Media { get; set; }
+        public DbSet<ContentMedia> ContentMedia { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

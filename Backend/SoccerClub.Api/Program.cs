@@ -1,4 +1,3 @@
-using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using SoccerClub.Application.Interfaces;
@@ -49,6 +48,7 @@ try
     builder.Services.AddScoped<ITeam, TeamService>();
     builder.Services.AddScoped<ITeamProgram, TeamProgramService>();
     builder.Services.AddScoped<IProgramRegistration, ProgramRegistrationService>();
+    builder.Services.AddScoped<IPageService, PageService>();
 
 
     builder.Services.AddControllers();

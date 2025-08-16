@@ -18,7 +18,7 @@ namespace SoccerClub.Infrastructure.Persistence
 
         public DbSet<Page> Pages { get; set; }
         public DbSet<Section> Sections { get; set; }
-        public DbSet<Content> Contents { get; set; }
+        public DbSet<Content> Content { get; set; }
         public DbSet<Media> Media { get; set; }
         public DbSet<ContentMedia> ContentMedia { get; set; }
 

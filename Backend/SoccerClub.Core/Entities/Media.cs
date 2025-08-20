@@ -8,7 +8,7 @@
         public string MediaType { get; set; }
         public string AltText { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string CreatedBy { get; set; }
+        //public int CreatedBy { get; set; }
 
         public ICollection<Section> Sections { get; set; }
         public ICollection<ContentMedia> ContentMedias { get; set; }

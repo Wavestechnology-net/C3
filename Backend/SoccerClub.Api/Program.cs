@@ -49,6 +49,7 @@ try
     builder.Services.AddScoped<ITeamProgram, TeamProgramService>();
     builder.Services.AddScoped<IProgramRegistration, ProgramRegistrationService>();
     builder.Services.AddScoped<IPageService, PageService>();
+    builder.Services.AddScoped<IMediaService, MediaService>();
 
 
     builder.Services.AddControllers();

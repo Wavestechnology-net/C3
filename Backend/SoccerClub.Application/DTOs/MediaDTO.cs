@@ -1,4 +1,6 @@
-﻿namespace SoccerClub.Application.DTOs
+﻿using Microsoft.AspNetCore.Http;
+
+namespace SoccerClub.Application.DTOs
 {
     public class MediaDTO
     {
@@ -6,6 +8,16 @@
         public string FileName { get; set; }
         public string MediaUrl { get; set; }
         public string MediaType { get; set; }
-        public string? AltText { get; set; }
+        public string AltText { get; set; }
+        public DateTime CreatedAt { get; set; }
+        //public int CreatedBy { get; set; }
+    }
+
+    // For uploads
+    public class MediaUploadDTO
+    {
+        public IFormFile File { get; set; }
+        public string AltText { get; set; }
+        //public int CreatedBy { get; set; }
     }
 }

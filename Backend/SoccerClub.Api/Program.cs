@@ -56,6 +56,8 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    builder.Services.AddHttpContextAccessor();
+
     // Register AutoMapper
     builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -72,6 +74,7 @@ try
     app.UseCors("AllowOrigins");
     app.UseStaticFiles();
     app.UseHttpsRedirection();
+
 
     app.UseAuthorization();
 

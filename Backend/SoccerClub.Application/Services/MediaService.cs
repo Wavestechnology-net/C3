@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using SoccerClub.Application.DTOs;
 using SoccerClub.Application.Interfaces;
@@ -13,16 +14,19 @@ namespace SoccerClub.Application.Services
         private readonly IMapper _mapper;
         private readonly IAppLogger<MediaService> _logger;
         private readonly string _uploadsRoot;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public MediaService(
             IGenericRepository<Media> mediaRepository,
             IMapper mapper,
             IAppLogger<MediaService> logger,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IHttpContextAccessor httpContextAccessor)
         {
             _mediaRepository = mediaRepository;
             _mapper = mapper;
             _logger = logger;
+            _httpContextAccessor = httpContextAccessor;
 
             // Path: appsettings.json -> "Media:UploadsPath": "wwwroot/media"
             _uploadsRoot = configuration["Media:UploadsPath"]
@@ -43,29 +47,37 @@ namespace SoccerClub.Application.Services
             if (uploadDto.File == null || uploadDto.File.Length == 0)
                 throw new ArgumentException("Invalid file upload");
 
-            // Save file with unique name
-            string fileName = $"{Guid.NewGuid()}{Path.GetExtension(uploadDto.File.FileName)}";
-            string filePath = Path.Combine(_uploadsRoot, fileName);
+            // Keep original name
+            string originalFileName = Path.GetFileName(uploadDto.File.FileName);
+
+            // Generate unique file name to avoid overwrite
+            string uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(uploadDto.File.FileName)}";
+            string filePath = Path.Combine(_uploadsRoot, uniqueFileName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await uploadDto.File.CopyToAsync(stream);
             }
 
+            // Build full URL using HttpContext
+            var request = _httpContextAccessor.HttpContext?.Request;
+            string baseUrl = $"{request?.Scheme}://{request?.Host}";
+            string fullUrl = $"{baseUrl}/media/{uniqueFileName}";
+
             // Create entity
             var media = new Media
             {
-                FileName = fileName,
-                MediaUrl = $"/media/{fileName}", // relative path
+                FileName = originalFileName,   // Save original filename in DB
+                MediaUrl = fullUrl,            // Save full URL
                 MediaType = uploadDto.File.ContentType,
                 AltText = uploadDto.AltText,
                 CreatedAt = DateTime.UtcNow,
-                //CreatedBy = uploadDto.CreatedBy
+
             };
 
             await _mediaRepository.AddAsync(media);
 
-            _logger.LogInformation("Media uploaded successfully: {FileName}", fileName);
+            _logger.LogInformation("Media uploaded successfully: {FileName}", originalFileName);
 
             return _mapper.Map<MediaDTO>(media);
         }
@@ -75,8 +87,10 @@ namespace SoccerClub.Application.Services
             var media = await _mediaRepository.GetByIdAsync(id);
             if (media == null) return;
 
-            // delete physical file
-            var filePath = Path.Combine(_uploadsRoot, media.FileName);
+            // Extract unique filename from URL
+            string fileName = Path.GetFileName(media.MediaUrl);
+            var filePath = Path.Combine(_uploadsRoot, fileName);
+
             if (File.Exists(filePath))
                 File.Delete(filePath);
 

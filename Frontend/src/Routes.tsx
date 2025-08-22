@@ -9,9 +9,10 @@ import Recreational from "./routes/Recreational";
 import { ContactPage } from "./routes/Contact";
 import Competitive from "./routes/Competitive";
 import Tryouts from "./routes/Tryouts";
-// import Elite from "./routes/Elite";
-// import News from "./routes/News";
-// import Events from "./routes/Events";
+import News from "./routes/News";
+import Events from "./routes/Events";
+import { Media} from "./routes/Media";
+
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/recreational" element={<Recreational />} />
           <Route path="/competitive" element={<Competitive />} />
         </Route>
+          <Route path="/media" element={<Media />} />
       </Routes>
     </BrowserRouter>
   );

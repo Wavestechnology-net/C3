@@ -17,6 +17,20 @@ namespace SoccerClub.Api.Controllers
         }
 
         [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllMedia()
+        {
+            try
+            {
+                var list = await _mediaService.GetAllMedia();
+                return Ok(ApiResponse<List<MediaDTO>>.SuccessResponse(list, "Media list retrieved successfully"));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ApiResponse<List<MediaDTO>>.ErrorResponse("An error occurred", new List<string> { ex.Message }));
+            }
+        }
+
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetMediaById(int id)
         {
             try

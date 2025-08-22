@@ -4,6 +4,7 @@ namespace SoccerClub.Application.Interfaces
 {
     public interface IMediaService
     {
+        Task<List<MediaDTO>> GetAllMedia();
         Task<MediaDTO?> GetMediaByIdAsync(int id);
         Task<MediaDTO> UploadMediaAsync(MediaUploadDTO uploadDto);
         Task DeleteMediaAsync(int id);

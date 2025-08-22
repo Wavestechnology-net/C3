@@ -27,9 +27,10 @@ try
     {
         options.AddPolicy("AllowOrigins", policyBuilder =>
         {
-            policyBuilder.WithOrigins("http://localhost:3000")
+            policyBuilder.WithOrigins("http://localhost:5173")
                          .AllowAnyMethod()
-                         .AllowAnyHeader();
+                         .AllowAnyHeader()
+                         .AllowCredentials();
         });
     });
 

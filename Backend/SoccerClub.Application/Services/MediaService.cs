@@ -36,6 +36,13 @@ namespace SoccerClub.Application.Services
                 Directory.CreateDirectory(_uploadsRoot);
         }
 
+        public async Task<List<MediaDTO>> GetAllMedia()
+        {
+            var list = await _mediaRepository.GetAllAsync();
+            return _mapper.Map<List<MediaDTO>>(list);
+
+        }
+
         public async Task<MediaDTO?> GetMediaByIdAsync(int id)
         {
             var media = await _mediaRepository.GetByIdAsync(id);

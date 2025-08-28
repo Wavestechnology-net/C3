@@ -77,7 +77,7 @@ const Tryouts = () => {
         <div className="h-2 w-230 bg-[#DADF36]"></div>
       </div>
       <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mt-10">
-        C3 Soccer Club Tryout Registration
+        C3FC Soccer Club Tryout Registration
       </h1>{" "}
       <div className="flex justify-center mt-10">
         <div className="h-2 w-230 bg-[#DADF36]"></div>

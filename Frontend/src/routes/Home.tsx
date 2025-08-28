@@ -32,7 +32,7 @@ const Home: React.FC = () => {
         {/* Floating Tag */}
         <div className="absolute top-0 left-30 bg-yellow-400 text-black px-12 py-10 font-bold shadow-lg skew-x-[-15deg]">
           <span className="block skew-x-[15deg]">
-            WHAT'S NEW WITH C3 Soccer
+            WHAT'S NEW WITH C3FC Soccer
           </span>
         </div>
 
@@ -49,11 +49,11 @@ const Home: React.FC = () => {
           </h2>
           <p>
             A full-service soccer club, our programming serves players from the
-            recreational to elite level. With community at its core, C3 Soccer
+            recreational to elite level. With community at its core, C3FC Soccer
             focuses on growth, learning, and high-level player development.
           </p>
           <button className="mt-4 bg-yellow-300 text-black font-bold px-6 py-2">
-            ABOUT C3 Soccer
+            ABOUT C3FC Soccer
           </button>
         </div>
         <img src="/img1.jpg" alt="Youth Player" className="rounded-lg" />
@@ -67,7 +67,7 @@ const Home: React.FC = () => {
             Developing Players At Every Level
           </h2>
           <p className="mb-4">
-            C3 Soccer develops youth soccer players through professional
+            C3FC Soccer develops youth soccer players through professional
             coaching and inspiring environments. Learn about our programs:
           </p>
           <ul className="list-none list-inside space-y-1">
@@ -91,7 +91,7 @@ const Home: React.FC = () => {
       {/* <section className="bg-blue-100 py-10 px-6 h-[350px]">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 p-6 items-start">
           <div className="flex flex-col">
-            <h2 className="text-4xl font-bold mb-4">C3 Soccer NEWS</h2>
+            <h2 className="text-4xl font-bold mb-4">C3FC Soccer NEWS</h2>
             <h3 className="font-bold text-red-600">
               Dempsey leads Reliant Youth Clinic In Honor of World Cup 26™
             </h3>

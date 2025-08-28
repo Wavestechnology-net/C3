@@ -17,7 +17,7 @@ export default function Recreational() {
             Recreational Soccer Program (Ages 4-12)
           </h1>
           <p className="text-lg text-gray-700 text-left">
-            At C3 Soccer Club, our Recreational Soccer Program is all about
+            At C3FC Soccer Club, our Recreational Soccer Program is all about
             having fun, staying active, and enjoying the game no matter your
             skill level or experience.
           </p>
@@ -84,12 +84,12 @@ export default function Recreational() {
         </div>
       </section>
 
-      {/* 5. Why C3 Section */}
+      {/* 5. Why C3FC Section */}
       <section className="bg-[#96cfdc] py-20 px-4 relative overflow-visible">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-6">
             <h2 className="text-3xl font-bold uppercase">
-              Why Join the C3 Recreational Program?
+              Why Join the C3FC Recreational Program?
             </h2>
             <ul className="list-inside pl-5 text-lg text-gray-800 space-y-2">
               <li>
@@ -118,7 +118,7 @@ export default function Recreational() {
               </li>
             </ul>
             <p>
-              Whether you’re playing for fun or fitness, the C3 Recreational
+              Whether you’re playing for fun or fitness, the C3FC Recreational
               Soccer Program is the perfect place to kick back, stay healthy,
               and be part of a great soccer community.
             </p>

@@ -1,4 +1,3 @@
-using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using SoccerClub.Application.Interfaces;
@@ -28,9 +27,10 @@ try
     {
         options.AddPolicy("AllowOrigins", policyBuilder =>
         {
-            policyBuilder.WithOrigins("http://localhost:3000")
+            policyBuilder.WithOrigins("http://localhost:5173")
                          .AllowAnyMethod()
-                         .AllowAnyHeader();
+                         .AllowAnyHeader()
+                         .AllowCredentials();
         });
     });
 
@@ -49,11 +49,15 @@ try
     builder.Services.AddScoped<ITeam, TeamService>();
     builder.Services.AddScoped<ITeamProgram, TeamProgramService>();
     builder.Services.AddScoped<IProgramRegistration, ProgramRegistrationService>();
+    builder.Services.AddScoped<IPageService, PageService>();
+    builder.Services.AddScoped<IMediaService, MediaService>();
 
 
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+
+    builder.Services.AddHttpContextAccessor();
 
     // Register AutoMapper
     builder.Services.AddAutoMapper(typeof(MappingProfile));
@@ -71,6 +75,7 @@ try
     app.UseCors("AllowOrigins");
     app.UseStaticFiles();
     app.UseHttpsRedirection();
+
 
     app.UseAuthorization();
 

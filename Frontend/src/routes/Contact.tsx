@@ -50,7 +50,7 @@ export function ContactPage() {
       <div className="relative h-96 w-full overflow-hidden">
         <img
           src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/64c03e731a2734b5d19cdf6b_contact-hero.jpg"
-          alt="C3 Soccer SC Players"
+          alt="C3FC Soccer SC Players"
           className="w-full h-full object-cover"
         />
       </div>
@@ -80,7 +80,7 @@ export function ContactPage() {
             <div>
               <h3 className="text-lg font-bold mb-1">
                 <a
-                  href="https://www.C3 Soccersc.org/recreational"
+                  href="https://www.C3FC Soccersc.org/recreational"
                   className="text-[#d6226a] hover:underline"
                 >
                   Recreational:
@@ -99,7 +99,7 @@ export function ContactPage() {
             <div>
               <h3 className="text-lg font-bold mb-1">
                 <a
-                  href="https://C3 Soccersc.org/youth-academy"
+                  href="https://C3FC Soccersc.org/youth-academy"
                   className="text-[#d6226a] hover:underline"
                 >
                   Youth Academy:
@@ -118,7 +118,7 @@ export function ContactPage() {
             <div>
               <h3 className="text-lg font-bold mb-1">
                 <a
-                  href="https://www.C3 Soccersc.org/competitive"
+                  href="https://www.C3FC Soccersc.org/competitive"
                   className="text-[#d6226a] hover:underline"
                 >
                   Competitive:
@@ -142,7 +142,7 @@ export function ContactPage() {
                 to="/tryouts"
                 className="text-[#d6226a] hover:underline font-bold"
               >
-                PLAY FOR C3 SOCCER CLUB
+                PLAY FOR C3FC SOCCER CLUB
               </Link>
             </p>
           </div>
@@ -243,7 +243,7 @@ export function ContactPage() {
         {isSubmitSuccessful && (
           <div className="mt-6 p-4 bg-green-100 text-green-800 border border-green-200 rounded">
             <strong>Thank you!</strong> Your submission has been received, and a
-            C3 Soccer staff member will get back to you within 48 hours.
+            C3FC Soccer staff member will get back to you within 48 hours.
           </div>
         )}
 

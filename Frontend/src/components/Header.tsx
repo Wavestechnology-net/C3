@@ -46,7 +46,7 @@ const Header: React.FC = () => {
             to="/tryouts"
             className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-4 py-2 text-sm rounded"
           >
-            PLAY FOR C3 Soccer
+            PLAY FOR C3FC Soccer
           </Link>
         </div>
 
@@ -57,19 +57,19 @@ const Header: React.FC = () => {
             <div className="absolute top-[35px] left-0 z-50">
               <Link to="/">
                 <img
-                  src="/C3k.png"
+                  src="/C3.png"
                   alt="C3K Soccer Club"
                   className="h-20 md:h-24 lg:h-45"
                 />
               </Link>
             </div>
           ) : (
-            <div className="absolute top-[-18px] left-8 z-50">
+            <div className="absolute top-[-1px] left-8 z-50">
               <Link to="/">
                 <img
-                  src="/C3k.png"
+                  src="/C3.png"
                   alt="C3K Soccer Club"
-                  className="h-20 md:h-24 lg:h-45"
+                  className="h-15 md:h-20 lg:h-35"
                 />
               </Link>
             </div>

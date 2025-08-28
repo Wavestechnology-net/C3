@@ -8,7 +8,7 @@ const slides = [
   {
     date: "June 20, 2025",
     title: "Join Us For Rec Fall 2025!",
-    text: "C3 SOCCERS REC introduces young players to the beautiful game. Sign up today!",
+    text: "C3FC SOCCERS REC introduces young players to the beautiful game. Sign up today!",
     img: "/img4.jpg",
   },
   {

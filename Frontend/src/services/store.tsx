@@ -14,6 +14,7 @@ import { staffApi } from "./apis/staffApi";
 
 import authSlice from "./authSlice";
 import permissionSlice from "./userPermissionSlice";
+import { mediaApi } from "./apis/mediaApi";
 
 // Persist config for slices
 const authPersistConfig = {
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   [programRegistrationApi.reducerPath]: programRegistrationApi.reducer,
   [teamApi.reducerPath]: teamApi.reducer,
   [staffApi.reducerPath]: staffApi.reducer,
+  [mediaApi.reducerPath]: mediaApi.reducer,
 });
 
 // Store configuration
@@ -55,6 +57,7 @@ const store = configureStore({
       programRegistrationApi.middleware,
       teamApi.middleware,
       staffApi.middleware,
+      mediaApi.middleware
     ),
 });
 

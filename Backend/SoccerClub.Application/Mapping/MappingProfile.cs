@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using SoccerClub.Application.DTOs;
 using SoccerClub.Core.Entities;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SoccerClub.Application.Mapping
 {
@@ -21,6 +15,11 @@ namespace SoccerClub.Application.Mapping
             CreateMap<ProgramRegistration, ProgramRegistrationDTO>().ReverseMap();
             CreateMap<Staff, StaffDTO>().ReverseMap();
             CreateMap<Team, TeamDTO>().ReverseMap();
+            CreateMap<Media, MediaDTO>().ReverseMap()
+     .ForMember(dest => dest.Sections, opt => opt.Ignore())
+     .ForMember(dest => dest.ContentMedias, opt => opt.Ignore());
+
+
         }
     }
 }

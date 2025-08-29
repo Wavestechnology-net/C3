@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SoccerClub.Core\SoccerClub.Core.csproj" />
+    <ProjectReference Include="..\SoccerClub.Infrastructure\SoccerClub.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

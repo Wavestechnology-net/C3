@@ -9,9 +9,7 @@ import Recreational from "./routes/Recreational";
 import { ContactPage } from "./routes/Contact";
 import Competitive from "./routes/Competitive";
 import Tryouts from "./routes/Tryouts";
-import News from "./routes/News";
-import Events from "./routes/Events";
-import { Media} from "./routes/Media";
+import PageNotFound from "./routes/PageNotFound";
 
 
 const App = () => {
@@ -30,7 +28,7 @@ const App = () => {
           <Route path="/recreational" element={<Recreational />} />
           <Route path="/competitive" element={<Competitive />} />
         </Route>
-          <Route path="/media" element={<Media />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

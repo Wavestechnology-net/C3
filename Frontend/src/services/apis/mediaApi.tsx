@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { ApiResponse } from "./apiResponse";
+import { baseQuery } from "../baseQuery";
 
 // DTOs
 export interface MediaDTO {
@@ -18,16 +19,14 @@ export interface MediaUploadDTO {
 
 export const mediaApi = createApi({
   reducerPath: "mediaApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${import.meta.env.VITE_BASE_API_URL}api/Media/`,
-  }),
+  baseQuery,
   endpoints: (builder) => ({
       getAllMedia: builder.query<ApiResponse<MediaDTO[]>, void>({
-        query: () => "GetAllMedia",
+        query: () => "/api/media/GetAllMedia",
       }),
 
     getMediaById: builder.query<ApiResponse<MediaDTO>, number>({
-      query: (id) => `GetMediaById?id=${id}`,
+      query: (id) => `/api/media/GetMediaById?id=${id}`,
     }),
 
     uploadMedia: builder.mutation<ApiResponse<MediaDTO>, MediaUploadDTO>({
@@ -37,7 +36,7 @@ export const mediaApi = createApi({
         if (altText) formData.append("AltText", altText);
 
         return {
-          url: "UploadMedia",
+          url: "/api/media/UploadMedia",
           method: "POST",
           body: formData,
         };
@@ -46,7 +45,7 @@ export const mediaApi = createApi({
 
     deleteMedia: builder.mutation<ApiResponse<void>, number>({
       query: (id) => ({
-        url: `DeleteMedia?id=${id}`,
+        url: `/api/media/DeleteMedia?id=${id}`,
         method: "DELETE",
       }),
     }),

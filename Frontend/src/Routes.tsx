@@ -9,6 +9,7 @@ import Recreational from "./routes/Recreational";
 import { ContactPage } from "./routes/Contact";
 import Competitive from "./routes/Competitive";
 import Tryouts from "./routes/Tryouts";
+import Media from "./routes/admin/Media";
 import PageNotFound from "./routes/PageNotFound";
 import Login from "./routes/Login";
 
@@ -30,6 +31,9 @@ const App = () => {
           <Route path="/competitive" element={<Competitive />} />
         </Route>
         <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<ProtectedAdminRoute />}>
+          <Route path="media" element={<Media />} />
+        </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

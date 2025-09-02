@@ -1,28 +1,28 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Label } from "../components/ui/label";
-import { Input } from "../components/ui/input";
-import { Button } from "../components/ui/button";
+import { Label } from "../../components/ui/label";
+import { Input } from "../../components/ui/input";
+import { Button } from "../../components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "../components/ui/dialog";
+} from "../../components/ui/dialog";
 import { X, Eye, UploadCloud, Trash2 } from "lucide-react";
 import {
   useUploadMediaMutation,
   useDeleteMediaMutation,
   useGetAllMediaQuery,
-} from "../services/apis/mediaApi";
+} from "../../services/apis/mediaApi";
 import { toast } from "react-toastify";
 
 type MediaFormData = {
   files: FileList;
 };
 
-export function Media() {
+export default function Media() {
   const [previews, setPreviews] = useState<
     { file: File; url: string; type: "image" | "video"; name: string; altText: string }[]
   >([]);
@@ -48,7 +48,7 @@ export function Media() {
       url: URL.createObjectURL(file),
       type: file.type.startsWith("video") ? "video" : "image",
       name: file.name,
-      altText: file.name,
+      altText: file.name.split(".")[0],
     }));
 
     setPreviews(newPreviews);
@@ -200,15 +200,19 @@ export function Media() {
                   </video>
                 ) : (
                   <img
-                    src={media.mediaUrl}
+                    src={import.meta.env.VITE_BASE_API_URL + media.mediaUrl}
                     alt={media.altText}
                     className="w-full h-32 object-cover"
                   />
                 )}
-
-                <p className="text-center text-xs text-gray-600 p-1 truncate">
-                  {media.altText}
-                </p>
+                <div className="p-2 border-t">
+                  <p className="text-xs text-gray-600 p-1">
+                    <span className="font-semibold">Name</span>: {media.fileName} 
+                  </p>
+                  <p className="text-xs text-gray-600 p-1 truncate">
+                    <span className="font-semibold">AltText</span>: {media.altText}
+                  </p>
+                </div>
 
                 <button
                   onClick={() => handleDeleteMedia(media.id)}

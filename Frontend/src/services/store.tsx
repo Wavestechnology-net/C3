@@ -58,6 +58,7 @@ const store = configureStore({
       programRegistrationApi.middleware,
       teamApi.middleware,
       staffApi.middleware,
+      mediaApi.middleware,
       autoLogoutMiddleware
     ),
 });

@@ -10,7 +10,7 @@ namespace SoccerClub.Infrastructure.Persistence
         //DbSets for your entities can be defined here
         public DbSet<User> Users { get; set; }
         public DbSet<News> News { get; set; }
-        public DbSet<Staff> Staffs { get; set; }
+		public DbSet<Staff> Staffs { get; set; }
         public DbSet<Tryout> Tryouts { get; set; }
         public DbSet<TryoutRegistration> TryoutRegistrations { get; set; }
         public DbSet<Team> Teams { get; set; }

@@ -89,6 +89,7 @@ try
     builder.Services.AddScoped<IPageService, PageService>();
     builder.Services.AddScoped<IMediaService, MediaService>();
     builder.Services.AddScoped<IJwtService, JwtService>();
+    builder.Services.AddScoped<ISectionService, SectionService>();
 
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();

@@ -15,6 +15,7 @@ import { staffApi } from "./apis/staffApi";
 import authSlice from "./authSlice";
 import permissionSlice from "./userPermissionSlice";
 import { mediaApi } from "./apis/mediaApi";
+import { pageApi } from "./apis/pageApi";
 import { autoLogoutMiddleware } from "./autoLogoutMiddleware";
 
 // Persist config for slices
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   permission: persistReducer(permissionPersistConfig, permissionSlice),
   auth: persistReducer(authPersistConfig, authSlice),
   [authApi.reducerPath]: authApi.reducer,
+  [pageApi.reducerPath]: pageApi.reducer,
   [newsApi.reducerPath]: newsApi.reducer,
   [tryoutApi.reducerPath]: tryoutApi.reducer,
   [tryoutRegistrationApi.reducerPath]: tryoutRegistrationApi.reducer,
@@ -51,6 +53,7 @@ const store = configureStore({
       serializableCheck: false,
     }).concat(
       authApi.middleware,
+      pageApi.middleware,
       newsApi.middleware,
       tryoutApi.middleware,
       tryoutRegistrationApi.middleware,

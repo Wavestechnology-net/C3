@@ -16,7 +16,11 @@ namespace SoccerClub.Application.Mapping
             CreateMap<Staff, StaffDTO>().ReverseMap();
             CreateMap<Team, TeamDTO>().ReverseMap();
 
+            CreateMap<Page, PageDTO>().ReverseMap();
+            CreateMap<Section, SectionDTO>().ReverseMap();
+            CreateMap<Content, ContentDTO>().ReverseMap();
             CreateMap<Media, MediaDTO>().ReverseMap();
+            CreateMap<ContentMedia, ContentMediaDTO>().ReverseMap();
 
         }
     }

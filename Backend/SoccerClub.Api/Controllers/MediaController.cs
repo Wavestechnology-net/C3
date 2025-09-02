@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SoccerClub.Api.Models;
 using SoccerClub.Application.DTOs;
 using SoccerClub.Application.Interfaces;
 
 namespace SoccerClub.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class MediaController : ControllerBase

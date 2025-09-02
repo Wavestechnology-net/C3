@@ -5,6 +5,7 @@ using SoccerClub.Application.DTOs;
 using SoccerClub.Application.Interfaces;
 using SoccerClub.Core.Entities;
 using SoccerClub.Core.Interfaces;
+using System.Security.Claims;
 
 namespace SoccerClub.Application.Services
 {
@@ -30,7 +31,7 @@ namespace SoccerClub.Application.Services
 
             // Path: appsettings.json -> "Media:UploadsPath": "wwwroot/media"
             _uploadsRoot = configuration["Media:UploadsPath"]
-                           ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "media");
+                           ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
 
             if (!Directory.Exists(_uploadsRoot))
                 Directory.CreateDirectory(_uploadsRoot);
@@ -55,36 +56,37 @@ namespace SoccerClub.Application.Services
                 throw new ArgumentException("Invalid file upload");
 
             // Keep original name
-            string originalFileName = Path.GetFileName(uploadDto.File.FileName);
+            string fileName = Path.GetFileName(uploadDto.File.FileName);
 
             // Generate unique file name to avoid overwrite
-            string uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(uploadDto.File.FileName)}";
-            string filePath = Path.Combine(_uploadsRoot, uniqueFileName);
+            // string uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(uploadDto.File.FileName)}";
+            string filePath = Path.Combine(_uploadsRoot, fileName);
+
+            if (Directory.Exists(filePath))
+                throw new Exception("File already exists.");
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await uploadDto.File.CopyToAsync(stream);
             }
 
-            // Build full URL using HttpContext
-            var request = _httpContextAccessor.HttpContext?.Request;
-            string baseUrl = $"{request?.Scheme}://{request?.Host}";
-            string fullUrl = $"{baseUrl}/media/{uniqueFileName}";
+            int.TryParse(_httpContextAccessor?.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value, out int currentUserId);
 
-            // Create entity
-            var media = new Media
+			// Create entity
+			var media = new Media
             {
-                FileName = originalFileName,   // Save original filename in DB
-                MediaUrl = fullUrl,            // Save full URL
+                FileName = fileName,   // Save original filename in DB
+                MediaUrl = $"/uploads/{fileName}",
                 MediaType = uploadDto.File.ContentType,
                 AltText = uploadDto.AltText,
+                IsActive = true,
                 CreatedAt = DateTime.UtcNow,
-
-            };
+                CreatedBy = currentUserId
+			};
 
             await _mediaRepository.AddAsync(media);
 
-            _logger.LogInformation("Media uploaded successfully: {FileName}", originalFileName);
+            _logger.LogInformation("Media uploaded successfully: {FileName}", fileName);
 
             return _mapper.Map<MediaDTO>(media);
         }

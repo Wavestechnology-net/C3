@@ -6,6 +6,6 @@ namespace SoccerClub.Application.Interfaces
     {
         Task<PageDTO> GetPageBySlugAsync(string slug);
         Task<PageDTO?> UpdatePageAsync(string slug, PageDTO request);
-
+        Task<List<PageDTO>> GetAllPagesAsync();
     }
 }

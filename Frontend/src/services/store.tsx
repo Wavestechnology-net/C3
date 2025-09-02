@@ -15,6 +15,7 @@ import { staffApi } from "./apis/staffApi";
 import authSlice from "./authSlice";
 import permissionSlice from "./userPermissionSlice";
 import { mediaApi } from "./apis/mediaApi";
+import { autoLogoutMiddleware } from "./autoLogoutMiddleware";
 
 // Persist config for slices
 const authPersistConfig = {
@@ -57,7 +58,7 @@ const store = configureStore({
       programRegistrationApi.middleware,
       teamApi.middleware,
       staffApi.middleware,
-      mediaApi.middleware
+      autoLogoutMiddleware
     ),
 });
 

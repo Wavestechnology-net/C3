@@ -1,35 +1,21 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import type { ApiResponse } from "./apiResponse";
-import { baseQuery } from "../baseQuery";
-
-// DTOs
-export interface MediaDTO {
-  id?: number;
-  fileName?: string;
-  mediaUrl?: string;
-  mediaType?: string;
-  altText?: string;
-  createdAt?: string;
-}
-
-export interface MediaUploadDTO {
-  file: File;
-  altText: string;
-}
+import { baseQueryWithAuth } from "../baseQueryWithAuth";
+import type { MediaDto, MediaUploadDto } from "../../types";
 
 export const mediaApi = createApi({
   reducerPath: "mediaApi",
-  baseQuery,
+  baseQuery: baseQueryWithAuth,
   endpoints: (builder) => ({
-      getAllMedia: builder.query<ApiResponse<MediaDTO[]>, void>({
+      getAllMedia: builder.query<ApiResponse<MediaDto[]>, void>({
         query: () => "/api/media/GetAllMedia",
       }),
 
-    getMediaById: builder.query<ApiResponse<MediaDTO>, number>({
+    getMediaById: builder.query<ApiResponse<MediaDto>, number>({
       query: (id) => `/api/media/GetMediaById?id=${id}`,
     }),
 
-    uploadMedia: builder.mutation<ApiResponse<MediaDTO>, MediaUploadDTO>({
+    uploadMedia: builder.mutation<ApiResponse<MediaDto>, MediaUploadDto>({
       query: ({ file, altText }) => {
         const formData = new FormData();
         formData.append("File", file);

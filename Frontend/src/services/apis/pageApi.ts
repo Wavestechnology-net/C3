@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseQuery } from '../baseQuery';
+import { baseQueryWithAuth } from '../baseQueryWithAuth';
+import type { ContentBlock } from '../../types';
 
 export interface PageType {
   id: number;
@@ -37,13 +39,21 @@ export interface ContentType {
 
 export const pageApi = createApi({
   reducerPath: 'pageApi',
-  baseQuery, // Adjust base URL as needed
-  tagTypes: ['Pages', 'Sections', 'Content'],
+  baseQuery: baseQueryWithAuth,
+  tagTypes: ['Pages', 'Sections', 'Content', 'Page'],
   endpoints: (builder) => ({
     getPages: builder.query<PageType[], void>({
       query: () => '/api/pages',
       transformResponse: (response) => response?.data,
       providesTags: ['Pages'],
+    }),
+    getPageBySlug: builder.query<PageType, string>({
+      query: (slug) => `/api/pages/${slug}`,
+      transformResponse: (response) => response?.data,
+      providesTags: (result, error, slug) => 
+        result 
+          ? [{ type: 'Page' as const, id: slug }]
+          : [{ type: 'Page' as const, id: 'LIST' }], 
     }),
     getSectionsByPageId: builder.query<SectionType[], number>({
       query: (pageId) => `/api/pages/${pageId}/sections`,
@@ -83,5 +93,6 @@ export const {
   useGetPagesQuery, 
   useGetSectionsByPageIdQuery, 
   useGetContentBySectionIdQuery,
-  useUpdateSectionMutation
+  useUpdateSectionMutation,
+  useGetPageBySlugQuery
 } = pageApi;

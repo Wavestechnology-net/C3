@@ -16,7 +16,7 @@ using SoccerClub.Infrastructure.Repositories;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddHealthChecks();
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)  // Read configuration from appsettings.json
@@ -171,6 +171,8 @@ try
     app.UseAuthorization();
 
     app.MapControllers();
+
+    app.MapHealthChecks("/health");
 
     app.Run();
 }

@@ -35,7 +35,9 @@ try
     {
         options.AddPolicy("AllowOrigins", policyBuilder =>
         {
-            policyBuilder.WithOrigins("http://localhost:5173")
+            var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
+
+			policyBuilder.WithOrigins(allowedOrigins ?? [])
                          .AllowAnyMethod()
                          .AllowAnyHeader()
                          .AllowCredentials();

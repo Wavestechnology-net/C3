@@ -1,41 +1,13 @@
 import { useEffect, useState } from "react";
 import { useGetSectionsByPageIdQuery, useUpdateSectionMutation } from "../../services/apis/pageApi";
-import { useGetAllMediaQuery } from "../../services/apis/mediaApi";
-
-interface ContentBlock {
-  id: number;
-  contentKey: string;
-  contentType: string;
-  value: string | null;
-  sortOrder: number;
-  // Add other fields as needed
-}
-
-interface Section {
-  id: number;
-  pageId: number;
-  name: string;
-  sectionType: string;
-  sortOrder: number;
-  backgroundMediaId?: number;
-  contents?: ContentBlock[];
-}
-
-// interface MediaItem {
-//   id: number;
-//   fileName: string;
-//   mediaUrl: string;
-//   mediaType: string;
-//   altText?: string;
-// }
-
+import ContentEditor from "../../components/ContentEditor";
+import type { Section } from "../../types";
 
 function PageSection({ page }: { page: number }) {
   const [activeTab, setActiveTab] = useState<number | null>(null);
   const [localSections, setLocalSections] = useState<Section[]>([]);
 
   const { data: sections = [], isLoading: sectionsLoading, isError: sectionsError } = useGetSectionsByPageIdQuery(page);
-  const { data: media = [], isLoading: mediaLoading, isError: mediaError } = useGetAllMediaQuery();
   const [updateSection, { isLoading: isUpdating }] = useUpdateSectionMutation();
 
   useEffect(() => {
@@ -67,13 +39,12 @@ function PageSection({ page }: { page: number }) {
     );
   };
 
-
   const saveSection = async (sectionId: number) => {
     const section = localSections.find(s => s.id === sectionId);
-    if (!section?.content) return;
+    if (!section?.contents) return;
 
     try {
-      await updateSection({ sectionId, content: section.content }).unwrap();
+      await updateSection({ sectionId, content: section.contents }).unwrap();
       alert("Section updated!");
     } catch (error) {
       alert("Error updating section!");
@@ -83,87 +54,23 @@ function PageSection({ page }: { page: number }) {
   const renderContent = () => {
       const section = localSections.find(s => s.id === activeTab);
       if (!section) return <div className="p-4">No content available for this section.</div>;
-    console.log(section);
     
       const sortedContent = [...(section.contents || [])].sort((a, b) => 
         (a.sortOrder ?? 0) - (b.sortOrder ?? 0)
       );
       
       return (
-        <div className="p-4">
-          <h2 className="text-xl font-semibold mb-4">{section.name}</h2>
+        <div className="p-4 space-y-4">
+          <h2 className="text-xl font-semibold">{section.name}</h2>
 
           {sortedContent.map((item) => {
-            // const label = item.contentType.charAt(0).toUpperCase() + item.contentType.slice(1);
-            const label = item.contentKey.split("-").map(si => si.charAt(0).toUpperCase() + si.slice(1));
-            console.log(item);
 
-            return (
-              <div key={item.id} className="mb-4">
-                <h3 className="text-lg font-medium">
-                  {label}
-                </h3>
-
-                {/* Heading */}
-                {item.contentType === "text" && (
-                  <input
-                    type="text"
-                    value={item.value || ""}
-                    onChange={(e) =>
-                      handleContentChange(section.id, item.id, e.target.value, "value")
-                    }
-                    className="w-full p-2 border rounded-md"
-                  />
-                )}
-
-                {/* Paragraph */}
-                {item.contentType === "html" && (
-                  <textarea
-                    value={item.value || ""}
-                    onChange={(e) =>
-                      handleContentChange(section.id, item.id, e.target.value, "value")
-                    }
-                    className="w-full p-2 border rounded-md"
-                    rows={4}
-                  />
-                )}
-
-                {/* Image */}
-                {item.contentType === "image" && (
-                  <>
-                    {/* Preview */}
-                    {item.value && (
-                      <img
-                        src={
-                          media.find((m) => m.id === Number(item.value))?.mediaUrl ||
-                          item.value
-                        }
-                        alt={
-                          media.find((m) => m.id === Number(item.value))?.altText || `Image ${item.id}`
-                        }
-                        className="w-25 h-25 rounded-md mb-2 border"
-                      />
-                    )}
-
-                    {/* Dropdown */}
-                    <select
-                      value={item.value || ""}
-                      onChange={(e) =>
-                        handleContentChange(section.id, item.id, e.target.value, "value")
-                      }
-                      className="w-100 p-2 border rounded-md"
-                    >
-                      <option value="">-- Select an image --</option>
-                      {media.map((m) => (
-                        <option key={m.id} value={m.id}>
-                          {m.altText || m.fileName || `Image ${m.id}`}
-                        </option>
-                      ))}
-                    </select>
-                  </>
-                )}
-              </div>
-            );
+            return <ContentEditor
+              key={item.id}
+              content={item}
+              sectionId={section.id}
+              onChange={handleContentChange}
+            />
           })}
 
           <button
@@ -177,8 +84,8 @@ function PageSection({ page }: { page: number }) {
       );
   };
   
-  if (sectionsLoading || mediaLoading) return <div>Loading...</div>;
-  if (sectionsError || mediaError) return <div>Error loading data</div>;
+  if (sectionsLoading) return <div>Loading...</div>;
+  if (sectionsError) return <div>Error loading data</div>;
     
   return (
     <div>

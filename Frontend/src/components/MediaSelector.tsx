@@ -10,7 +10,7 @@ import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter } from "./ui/card";
 import { ScrollArea } from "./ui/scroll-area";
 import { Search, Image as ImageIcon } from "lucide-react";
-import { useGetAllMediaQuery } from "../services/apis/mediaApi";
+import { useMedia } from "../../hooks/useMedia";
 import { Input } from "./ui/input";
 
 interface ImageSelectorProps {
@@ -19,12 +19,11 @@ interface ImageSelectorProps {
 }
 
 export default function ImageSelector({ selectedImageId, onSelect }: ImageSelectorProps){
-  const { data: mediaResponse, isLoading, isError } = useGetAllMediaQuery();
-  const media = mediaResponse?.data || [];
+  const { media, isLoading, isError } = useMedia();
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const selectedMedia = media.find(m => m.id === Number(selectedImageId));
+  const selectedMedia = media.find(m => m.id.toString() === selectedImageId);
 
   const filteredMedia = media.filter(m => 
     m.fileName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -57,8 +56,8 @@ export default function ImageSelector({ selectedImageId, onSelect }: ImageSelect
             <div className="flex items-center gap-3">
               <div className="relative">
                 <img
-                  src={import.meta.env.VITE_STATIC_FILE_SERVER + selectedMedia?.mediaUrl}
-                  alt={selectedMedia?.altText || `Image ${selectedMedia.id}`}
+                  src={selectedMedia?.mediaUrl}
+                  alt={selectedMedia?.altText || `Image ${'"'}selectedMedia.id`}
                   className="w-16 h-16 object-cover rounded-md border"
                 />
                 {selectedMedia?.mediaType !== "image" && (
@@ -71,7 +70,7 @@ export default function ImageSelector({ selectedImageId, onSelect }: ImageSelect
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-medium text-sm truncate">
-                  {selectedMedia?.altText || selectedMedia?.fileName || `Image ${selectedMedia?.id}`}
+                  {selectedMedia?.altText || selectedMedia?.fileName || `Image ${'"'}selectedMedia?.id`}
                 </p>
                 <p className="text-xs text-muted-foreground">
                   ID: {selectedMedia?.id}
@@ -134,22 +133,20 @@ export default function ImageSelector({ selectedImageId, onSelect }: ImageSelect
                       <CardContent className="p-0">
                         <div className="aspect-square">
                           <img
-                            src={import.meta.env.VITE_STATIC_FILE_SERVER + m.mediaUrl}
-                            alt={m.altText || `Image ${m.id}`}
+                            src={m.mediaUrl}
+                            alt={m.altText || `Image ${'"'}m.id`}
                             className="w-full h-full object-cover"
                           />
                         </div>
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
                       </CardContent>
                       <CardFooter className="px-2 pb-2 flex flex-col items-start gap-1">
-                        {/* <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2 opacity-0 group-hover:opacity-100 transition-opacity"> */}
                           <p className="text-xs text-gray-600">
                             <span className="font-semibold">Name</span>: {m.fileName} 
                           </p>
                           <p className="text-xs text-gray-600">
                             <span className="font-semibold">AltText</span>: {m.altText}
                           </p>
-                        {/* </div> */}
                       </CardFooter>
                     </Card>
                   ))}
@@ -169,7 +166,7 @@ export default function ImageSelector({ selectedImageId, onSelect }: ImageSelect
               <SelectItem value="">-- Select an image --</SelectItem>
               {media.map((m) => (
                 <SelectItem key={m.id} value={m.id.toString()}>
-                  {m.altText || m.fileName || `Image ${m.id}`}
+                  {m.altText || m.fileName || `Image ${'"'}m.id`}
                 </SelectItem>
               ))}
             </SelectContent>

@@ -2,38 +2,40 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../services/apis/authApi';
-import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../services/authSlice';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Label } from '../components/ui/label';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase.config';
+import { toast } from 'react-toastify';
 
 const schema = yup.object({
-  username: yup.string().required('Username is required'),
+  email: yup.string().email('Invalid email format').required('Email is required'),
   password: yup.string().required('Password is required'),
 }).required();
 
 export default function Login() {
-const [showPassword, setShowPassword] = useState(false);
-const dispatch = useDispatch()
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const [login, {isLoading, error}] = useLoginMutation();
-  const navigate = useNavigate();
-
-  const onSubmit = async (data: { username: string; password: string }) => {
+  const onSubmit = async (data: { email: string; password: string }) => {
+    setIsLoading(true);
     try {
-      const result = await login(data).unwrap();
-      dispatch(loginSuccess(result?.data));
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      // The onAuthStateChanged listener will handle setting user state
       navigate('/admin');
-    } catch (err) {
-      alert('Login failed');
+    } catch (err: any) {
+      toast.error(err.message || 'Login failed');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -48,16 +50,16 @@ const dispatch = useDispatch()
             <CardContent>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div className="grid gap-2">
-                        <Label htmlFor="username">Username</Label>
+                        <Label htmlFor="email">Email</Label>
                         <Input
-                            id="username"
-                            type="text"
-                            placeholder="admin"
-                            {...register('username')}
-                            aria-invalid={errors.username ? 'true' : 'false'}
+                            id="email"
+                            type="email"
+                            placeholder="admin@example.com"
+                            {...register('email')}
+                            aria-invalid={errors.email ? 'true' : 'false'}
                         />
-                        {errors.username && (
-                            <p className="text-sm text-red-500">{errors.username.message}</p>
+                        {errors.email && (
+                            <p className="text-sm text-red-500">{errors.email.message}</p>
                         )}
                     </div>
 

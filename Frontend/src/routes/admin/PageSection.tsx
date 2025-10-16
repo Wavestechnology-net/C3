@@ -1,27 +1,39 @@
 import { useEffect, useState } from "react";
-import { useGetSectionsByPageIdQuery, useUpdateSectionMutation } from "../../services/apis/pageApi";
+import * as pageService from "../../services/pageService";
 import ContentEditor from "../../components/ContentEditor";
-import type { Section } from "../../types";
+import type { SectionDto } from "../../types";
 
-function PageSection({ page }: { page: number }) {
-  const [activeTab, setActiveTab] = useState<number | null>(null);
-  const [localSections, setLocalSections] = useState<Section[]>([]);
-
-  const { data: sections = [], isLoading: sectionsLoading, isError: sectionsError } = useGetSectionsByPageIdQuery(page);
-  const [updateSection, { isLoading: isUpdating }] = useUpdateSectionMutation();
+function PageSection({ pageId }: { pageId: string }) {
+  const [activeTab, setActiveTab] = useState<string | null>(null);
+  const [localSections, setLocalSections] = useState<SectionDto[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
-    if (sections.length > 0) {
-      setLocalSections(sections as Section[]);
-      if (activeTab === null) {
-        setActiveTab(sections[0].id);
+    const fetchSections = async () => {
+      if (!pageId) return;
+      setIsLoading(true);
+      setIsError(false);
+      try {
+        const sectionsData = await pageService.getSectionsByPageId(pageId);
+        setLocalSections(sectionsData);
+        if (sectionsData.length > 0 && !activeTab) {
+          setActiveTab(sectionsData[0].id);
+        }
+      } catch (error) {
+        setIsError(true);
+        console.error("Failed to fetch sections:", error);
+      } finally {
+        setIsLoading(false);
       }
-    }
-  }, [sections, activeTab]);
+    };
+    fetchSections();
+  }, [pageId, activeTab]);
 
   const handleContentChange = (
-    sectionId: number,
-    contentId: number,
+    sectionId: string,
+    contentId: string,
     newValue: string,
     field: string = "value"
   ) => {
@@ -39,15 +51,19 @@ function PageSection({ page }: { page: number }) {
     );
   };
 
-  const saveSection = async (sectionId: number) => {
+  const saveSection = async (sectionId: string) => {
     const section = localSections.find(s => s.id === sectionId);
     if (!section?.contents) return;
 
+    setIsUpdating(true);
     try {
-      await updateSection({ sectionId, content: section.contents }).unwrap();
+      await pageService.updateSection(pageId, sectionId, section.contents);
       alert("Section updated!");
     } catch (error) {
       alert("Error updating section!");
+      console.error(error);
+    } finally {
+      setIsUpdating(false);
     }
   };
 
@@ -63,15 +79,14 @@ function PageSection({ page }: { page: number }) {
         <div className="p-4 space-y-4">
           <h2 className="text-xl font-semibold">{section.name}</h2>
 
-          {sortedContent.map((item) => {
-
-            return <ContentEditor
+          {sortedContent.map((item) => (
+            <ContentEditor
               key={item.id}
               content={item}
               sectionId={section.id}
               onChange={handleContentChange}
             />
-          })}
+          ))}
 
           <button
             onClick={() => saveSection(section.id)}
@@ -84,18 +99,19 @@ function PageSection({ page }: { page: number }) {
       );
   };
   
-  if (sectionsLoading) return <div>Loading...</div>;
-  if (sectionsError) return <div>Error loading data</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error loading data</div>;
     
   return (
     <div>
       {/* Section Tabs */}
       <nav className="flex border-b border-gray-300 mb-4">
-        {sections.map((section) => (
+        {localSections.map((section) => (
           <button
             key={section.id}
             onClick={() => setActiveTab(section.id)}
-            className={`py-2 px-4 -mb-px border-b-2 font-medium text-sm ${activeTab === section.id
+            className={`py-2 px-4 -mb-px border-b-2 font-medium text-sm ${
+              activeTab === section.id
               ? "border-blue-600 text-blue-600"
               : "border-transparent text-gray-600 hover:text-blue-600 hover:border-blue-300"
               }`}

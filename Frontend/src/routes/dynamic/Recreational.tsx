@@ -1,24 +1,36 @@
-import { useMemo } from "react";
-import { useGetPageBySlugQuery } from "../../services/apis/publicApi";
+import { useState, useEffect, useMemo } from "react";
+import * as pageService from "../../services/pageService";
 import HeroSection from "../../components/sections/HeroSection";
 import CarouselSection from "../../components/sections/CarouselSection";
 import ContentImageSection from "../../components/sections/ContentImageSection";
 import PartnerCarouselSection from "../../components/sections/PartnerCarouselSection";
-import type { SectionDto } from "../../types";
+import type { PageDto, SectionDto } from "../../types";
 import PageDataErrorFallback from "../../components/PageDataErrorFallback";
 import ContentSection from "../../components/sections/ContentSection";
 import WhyJoinSection from "../../components/sections/WhyJoinSection";
 
 export default function Recreational(){
-  const { 
-     data: pageData,
-     isLoading,
-     isError 
-  } = useGetPageBySlugQuery('recreational', {
-    refetchOnMountOrArgChange: false,
-    refetchOnReconnect: false,
-    refetchOnFocus: false,
-  });
+  const [pageData, setPageData] = useState<PageDto | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    const fetchPage = async () => {
+      setIsLoading(true);
+      setIsError(false);
+      try {
+        const data = await pageService.getPageBySlug('recreational');
+        setPageData(data);
+      } catch (error) {
+        setIsError(true);
+        console.error("Failed to fetch page:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPage();
+  }, []);
 
   const sortedSections = useMemo(() => {
     if (!pageData?.sections) return [];

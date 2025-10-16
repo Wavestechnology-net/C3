@@ -9,8 +9,11 @@ import {
   FaUser,
   FaSignOutAlt,
 } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { loggedUser, logout, selectIsAuthenticated } from "../../services/authSlice";
+import { useSelector } from "react-redux";
+import { loggedUser, selectIsAuthenticated } from "../../services/authSlice";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase.config";
+import { toast } from "react-toastify";
 
 type NavItem = {
   label: string;
@@ -71,10 +74,14 @@ const Topbar: React.FC<{ onToggleSidebar: () => void }> = ({ onToggleSidebar }) 
   const isAuthenticated = useSelector(selectIsAuthenticated)
   const user = useSelector(loggedUser)
 
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      // The onAuthStateChanged listener will handle clearing the redux state.
+      toast.success("You have been logged out.");
+    } catch (error) {
+      toast.error("Logout failed.");
+    }
   };
 
   return (
@@ -95,7 +102,7 @@ const Topbar: React.FC<{ onToggleSidebar: () => void }> = ({ onToggleSidebar }) 
             {/* User Avatar / Icon */}
             <div className="flex items-center gap-2">
               <span className="text-sm font-medium text-gray-700">
-                Hello, <span className="font-semibold">{user.username || user.email}</span>
+                Hello, <span className="font-semibold">{user.displayName || user.email}</span>
               </span>
               <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center border">
                 <FaUser className="text-gray-600" size={16} />

@@ -6,6 +6,10 @@ import { Provider } from "react-redux";
 import store from "./services/store.tsx";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { ToastContainer } from "react-toastify";
+import { listenToAuthChanges } from "./services/authService.ts";
+
+// Initialize the auth state listener
+listenToAuthChanges();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

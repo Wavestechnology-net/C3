@@ -10,8 +10,8 @@ import CarouselJsonManager from "./CarouselJsonManager";
 
 interface ContentEditorProps {
   content: ContentDto;
-  sectionId: number;
-  onChange: (sectionId: number, contentId: number, newValue: string, field?: string) => void;
+  sectionId: string;
+  onChange: (sectionId: string, contentId: string, newValue: string, field?: string) => void;
 }
 
 export default function ContentEditor ({ content, sectionId, onChange }: ContentEditorProps){
@@ -25,7 +25,6 @@ export default function ContentEditor ({ content, sectionId, onChange }: Content
   const label = formatLabel(content.contentKey);
   const contentType = content.contentType;
 
-  // Get appropriate icon for content type
   const getContentTypeIcon = () => {
     switch (contentType) {
       case 'text': return 'T';

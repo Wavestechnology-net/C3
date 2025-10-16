@@ -1,53 +1,39 @@
-import { useMemo } from "react";
-import { useGetPageBySlugQuery } from "../../services/apis/publicApi";
+import { useState, useEffect, useMemo } from "react";
+import * as pageService from "../../services/pageService";
 import HeroSection from "../../components/sections/HeroSection";
 import CarouselSection from "../../components/sections/CarouselSection";
 import ContentImageSection from "../../components/sections/ContentImageSection";
 import PartnerCarouselSection from "../../components/sections/PartnerCarouselSection";
-// import { useGetAllMediaQuery } from "../../services/apis/mediaApi";
-import PageNotFound from "../PageNotFound";
-import type { SectionDto } from "../../types";
+import type { PageDto, SectionDto } from "../../types";
 import PageDataErrorFallback from "../../components/PageDataErrorFallback";
 
 export default function Home(){
-  const { 
-     data: pageData,
-     isLoading,
-     isError 
-    // isLoading: pageLoading, 
-    // isError: isPageError, 
-    // error 
-  } = useGetPageBySlugQuery('home', {
-    refetchOnMountOrArgChange: false,
-    refetchOnReconnect: false,
-    refetchOnFocus: false,
-  });
+  const [pageData, setPageData] = useState<PageDto | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
-  // const { 
-  //    data: mediaData, 
-    // isLoading: mediaLoading, 
-    // isError: isMediaError 
-  // } = useGetAllMediaQuery();
+  useEffect(() => {
+    const fetchPage = async () => {
+      setIsLoading(true);
+      setIsError(false);
+      try {
+        const data = await pageService.getPageBySlug('home');
+        setPageData(data);
+      } catch (error) {
+        setIsError(true);
+        console.error("Failed to fetch page:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  // Create media URL lookup map
-  // const mediaUrls = useMemo(() => {
-  //   if (!mediaData?.data) return {};
-  //   return mediaData.data.reduce((acc, media: MediaDto) => {
-  //     acc[media.id] = import.meta.env.VITE_STATIC_FILE_SERVER + media.mediaUrl;
-  //     return acc;
-  //   }, {} as Record<number, string>);
-  // }, [mediaData]);
+    fetchPage();
+  }, []);
 
-  // Memoize sorted sections for performance
   const sortedSections = useMemo(() => {
     if (!pageData?.sections) return [];
     return [...pageData.sections].sort((a, b) => a.sortOrder - b.sortOrder);
   }, [pageData?.sections]);
-
-  // Combined loading state
-  // const isLoading = pageLoading || mediaLoading;
-  // const isError = isPageError || isMediaError;
-
 
   if (isLoading) {
     return (

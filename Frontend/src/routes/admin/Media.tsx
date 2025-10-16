@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Label } from "../../components/ui/label";
 import { Input } from "../../components/ui/input";
@@ -11,12 +11,9 @@ import {
   DialogTitle,
 } from "../../components/ui/dialog";
 import { X, Eye, UploadCloud, Trash2 } from "lucide-react";
-import {
-  useUploadMediaMutation,
-  useDeleteMediaMutation,
-  useGetAllMediaQuery,
-} from "../../services/apis/mediaApi";
 import { toast } from "react-toastify";
+import * as mediaService from "../../services/mediaService";
+import type { MediaDto } from "../../types";
 
 type MediaFormData = {
   files: FileList;
@@ -27,17 +24,27 @@ export default function Media() {
     { file: File; url: string; type: "image" | "video"; name: string; altText: string }[]
   >([]);
   const [previewMode, setPreviewMode] = useState(false);
+  const [media, setMedia] = useState<MediaDto[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
-  const { data: mediaResponse, refetch } = useGetAllMediaQuery();
-  const [uploadMedia, { isLoading }] = useUploadMediaMutation();
-  const [deleteMedia] = useDeleteMediaMutation();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<MediaFormData>();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<MediaFormData>();
+  const fetchMedia = async () => {
+    setIsLoading(true);
+    try {
+      const mediaList = await mediaService.getAllMedia();
+      setMedia(mediaList);
+    } catch (error) {
+      toast.error("Failed to fetch media.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchMedia();
+  }, []);
 
   const onPreview = (data: MediaFormData) => {
     const files = data.files;
@@ -63,35 +70,35 @@ export default function Media() {
 
   const onSubmit = async () => {
     if (previews.length === 0) return;
-
+    setIsUploading(true);
     try {
       for (const media of previews) {
-        await uploadMedia({ file: media.file, altText: media.altText }).unwrap();
+        await mediaService.uploadMedia({ file: media.file, altText: media.altText });
       }
 
       toast.success("✅ Upload successful!");
       setPreviews([]);
       setPreviewMode(false);
       reset();
-      refetch();
+      fetchMedia(); // Refetch media list
     } catch (error) {
       console.error("Upload failed", error);
       toast.error("❌ Upload failed!");
+    } finally {
+      setIsUploading(false);
     }
   };
 
-  const handleDeleteMedia = async (id?: number) => {
-    if (!id) return;
+  const handleDeleteMedia = async (mediaItem: MediaDto) => {
+    if (!mediaItem.id) return;
     if (!confirm("Are you sure you want to delete this media?")) return;
 
     try {
-      await deleteMedia(id).unwrap();
-      toast.done("🗑️ Deleted successfully");
-      refetch();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      await mediaService.deleteMedia(mediaItem);
+      toast.success("🗑️ Deleted successfully");
+      fetchMedia(); // Refetch media list
     } catch (error) {
       toast.error("❌ Delete failed!");
-      // alert("❌ Delete failed!");
     }
   };
 
@@ -99,7 +106,7 @@ export default function Media() {
     <div className="max-w-6xl mx-auto py-12 space-y-12">
       <h1 className="text-3xl font-extrabold mb-8 text-center">📤 Media Manager</h1>
 
-      {/* Upload Section (moved on top) */}
+      {/* Upload Section */}
       <div>
         <h2 className="text-xl font-semibold mb-4">⬆️ Upload New Media</h2>
         <form onSubmit={handleSubmit(onPreview)} className="space-y-6">
@@ -129,7 +136,6 @@ export default function Media() {
             )}
           </div>
 
-          {/* Preview before upload */}
           {previews.length > 0 && (
             <div className="mt-6 bg-gray-100 rounded-lg p-4">
               <h2 className="font-semibold mb-2">📂 Chosen Files</h2>
@@ -175,47 +181,49 @@ export default function Media() {
             <Button
               type="button"
               onClick={onSubmit}
-              disabled={isLoading}
+              disabled={isUploading}
               className="flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold px-6 py-2 rounded-lg"
             >
-              {isLoading ? "Uploading..." : "Upload"}
+              {isUploading ? "Uploading..." : "Upload"}
             </Button>
           </div>
         </form>
       </div>
 
-      {/* Existing Media from Database */}
+      {/* Existing Media */}
       <div>
         <h2 className="text-xl font-semibold mb-4">📚 Your Uploaded Media</h2>
-        {mediaResponse?.data && mediaResponse.data.length > 0 ? (
+        {isLoading ? (
+          <p>Loading media...</p>
+        ) : media.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {mediaResponse.data.map((media) => (
+            {media.map((mediaItem) => (
               <div
-                key={media.id}
+                key={mediaItem.id}
                 className="relative rounded-lg shadow-sm overflow-hidden border"
               >
-                {media.mediaType === "video" ? (
+                {mediaItem.mediaType?.startsWith("video") ? (
                   <video controls className="w-full h-32 object-cover">
-                    <source src={media.mediaUrl} />
+                    <source src={mediaItem.mediaUrl} />
                   </video>
                 ) : (
                   <img
-                    src={import.meta.env.VITE_BASE_API_URL + media.mediaUrl}
-                    alt={media.altText}
+                    src={mediaItem.mediaUrl}
+                    alt={mediaItem.altText}
                     className="w-full h-32 object-cover"
                   />
                 )}
                 <div className="p-2 border-t">
-                  <p className="text-xs text-gray-600 p-1">
-                    <span className="font-semibold">Name</span>: {media.fileName} 
+                  <p className="text-xs text-gray-600 p-1 truncate">
+                    <span className="font-semibold">Name</span>: {mediaItem.fileName} 
                   </p>
                   <p className="text-xs text-gray-600 p-1 truncate">
-                    <span className="font-semibold">AltText</span>: {media.altText}
+                    <span className="font-semibold">AltText</span>: {mediaItem.altText}
                   </p>
                 </div>
 
                 <button
-                  onClick={() => handleDeleteMedia(media.id)}
+                  onClick={() => handleDeleteMedia(mediaItem)}
                   className="absolute top-2 right-2 bg-white/80 hover:bg-red-500 hover:text-white rounded-full p-1 shadow"
                 >
                   <Trash2 size={16} />

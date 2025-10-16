@@ -1,83 +1,39 @@
-import { useMemo } from "react";
-import { useGetPageBySlugQuery } from "../../services/apis/publicApi";
+import { useState, useEffect, useMemo } from "react";
+import * as pageService from "../../services/pageService";
 import HeroSection from "../../components/sections/HeroSection";
 import ContentSection from "../../components/sections/ContentSection";
 import ContentImageSection from "../../components/sections/ContentImageSection";
-// import { useGetAllMediaQuery } from "../../services/apis/mediaApi";
-import type { SectionDto } from "../../types";
-import PageNotFound from "../PageNotFound";
+import type { PageDto, SectionDto } from "../../types";
 import PageDataErrorFallback from "../../components/PageDataErrorFallback";
 import MissionSection from "../../components/sections/MissionSection";
-import WhyJoinSection from "../../components/sections/WhyJoinSection";
 
 export default function About(){
-  const { 
-     data: pageData, 
-     isLoading,
-     isError
-    // isLoading: pageLoading, 
-    // isError: pageError
-  } = useGetPageBySlugQuery('about', {
-    refetchOnMountOrArgChange: false,
-    refetchOnReconnect: false,
-    refetchOnFocus: false,
-  });
+  const [pageData, setPageData] = useState<PageDto | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
-  // const { 
-  //    data: mediaData, 
-  //   isLoading: mediaLoading, 
-  //   isError: mediaError 
-  // } = useGetAllMediaQuery();
+  useEffect(() => {
+    const fetchPage = async () => {
+      setIsLoading(true);
+      setIsError(false);
+      try {
+        const data = await pageService.getPageBySlug('about');
+        setPageData(data);
+      } catch (error) {
+        setIsError(true);
+        console.error("Failed to fetch page:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-//   const [showFallback, setShowFallback] = useState(false);
-
-  // Create media URL lookup map
-  // const mediaUrls = useMemo(() => {
-  //   if (!mediaData?.data) return {};
-  //   return mediaData.data.reduce((acc, media) => {
-  //     acc[media.id] = media.mediaUrl;
-  //     return acc;
-  //   }, {} as Record<number, string>);
-  // }, [mediaData]);
+    fetchPage();
+  }, []);
 
   const sortedSections = useMemo(() => {
     if (!pageData?.sections) return [];
     return [...pageData.sections].sort((a, b) => a.sortOrder - b.sortOrder);
   }, [pageData?.sections]);
-
-  // Check for backend down scenario
-//   useEffect(() => {
-//     if ((pageError || mediaError) && !pageData) {
-//       const isNetworkError = 
-//         (pageErrorDetails as any)?.error?.includes('Network Error') ||
-//         (pageErrorDetails as any)?.status === 'FETCH_ERROR';
-      
-//       if (isNetworkError) {
-//         const timer = setTimeout(() => {
-//           setShowFallback(true);
-//         }, 1000);
-        
-//         return () => clearTimeout(timer);
-//       }
-//     }
-//   }, [pageError, mediaError, pageErrorDetails, pageData]);
-
-  // const isLoading = pageLoading || mediaLoading;
-  // const isError = pageError || mediaError;
-
-  // Show fallback when backend is down
-//   if (showFallback) {
-//     return (
-//       <div className="w-full">
-//         <iframe 
-//           src="/fallback/about.html" 
-//           className="w-full h-screen border-0"
-//           title="Fallback About Page"
-//         />
-//       </div>
-//     );
-//   }
-
 
   if (isLoading) {
     return (
@@ -106,8 +62,6 @@ export default function About(){
         return <ContentImageSection key={section.id} section={section} />;
       case 'image-content':
         return <ContentImageSection key={section.id} section={section} reverse={true} />;
-    //   case 'cta':
-    //     return <CtaSection key={section.id} section={section} />;
       default:
         return <ContentSection key={section.id} section={section} />;
     }

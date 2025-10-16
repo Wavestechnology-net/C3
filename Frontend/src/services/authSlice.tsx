@@ -1,23 +1,22 @@
-// src/core/data/redux/slices/authSlice.ts
+// src/services/authSlice.ts
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 
+// A simplified user interface for Firebase Auth
 interface User {
-  id: number;
-  username: string;
-  email: string;
-  role: string;
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  // We will need to fetch the role from Firestore separately
+  role?: string; 
 }
 
 interface AuthState {
-  token: string | null;
   user: User | null;
-  expiresAt?: string;
   isAuthenticated: boolean;
 }
 
 const initialState: AuthState = {
-  token: null,
   user: null,
   isAuthenticated: false,
 };
@@ -26,32 +25,31 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    loginSuccess: (
-      state,
-      action: PayloadAction<{
-        token: string;
-        user: User;
-        expiresAt: string;
-      }>
-    ) => {
-      state.token = action.payload.token;
-      state.user = action.payload.user;
-      state.expiresAt = action.payload.expiresAt;
-      state.isAuthenticated = true;
+    // Set the user on login/state change
+    setUser: (state, action: PayloadAction<User | null>) => {
+      state.user = action.payload;
+      state.isAuthenticated = !!action.payload;
     },
+    // We can add a reducer to update the user's role after fetching it
+    setUserRole: (state, action: PayloadAction<string>) => {
+        if (state.user) {
+            state.user.role = action.payload;
+        }
+    },
+    // The logout action will just clear the user
     logout: (state) => {
-      state.token = null;
       state.user = null;
-      state.expiresAt = undefined;
       state.isAuthenticated = false;
     },
   },
 });
 
 export const {
-  loginSuccess,
+  setUser,
+  setUserRole,
   logout,
 } = authSlice.actions;
+
 export const selectIsAuthenticated = (state: RootState) =>
   state.auth.isAuthenticated;
 

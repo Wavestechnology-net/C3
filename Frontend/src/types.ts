@@ -1,31 +1,13 @@
-export interface Content {
-  id: number;
+export interface ContentDto {
+  id: string;
   contentKey: string;
   contentType: string;
   value: string | null;
   sortOrder: number;
-  // Add other fields as needed
-}
-
-export interface Section {
-  id: number;
-  pageId: number;
-  name: string;
-  sectionType: string;
-  sortOrder: number;
-  backgroundMediaId?: number;
-  contents?: Content[];
-}
-
-export interface PageDto {
-  id: number;
-  slug: string;
-  title: string | null;
-  sections: SectionDto[];
 }
 
 export interface SectionDto {
-  id: number;
+  id: string;
   name: string;
   sectionType: string;
   sortOrder: number;
@@ -33,17 +15,18 @@ export interface SectionDto {
   backgroundMediaId?: number;
 }
 
-export interface ContentDto {
-  id: number;
-  contentKey: string;
-  contentType: string;
-  value: string | null;
+export interface PageDto {
+  id: string;
+  slug: string;
+  title: string | null;
+  sections: SectionDto[];
 }
 
 export interface MediaDto {
-  id: number;
+  id: string;
   fileName?: string;
   mediaUrl: string;
+  storagePath: string;
   mediaType?: string;
   altText?: string;
   createdAt: string;

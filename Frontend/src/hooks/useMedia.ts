@@ -1,76 +1,59 @@
-import { useMemo } from 'react';
-import { useGetAllMediaQuery } from '../services/apis/mediaApi';
+import { useState, useEffect, useMemo, useCallback } from 'react';
+import * as mediaService from '../services/mediaService';
 import type { MediaDto } from '../types';
 
 interface UseMediaReturn {
-  mediaUrls: Record<number, string>;
+  media: MediaDto[];
   isLoading: boolean;
   isError: boolean;
   getMediaUrl: (mediaId: number) => string | null;
   getMedia: (mediaId: number) => MediaDto | null;
-  preloadAllMedia: () => void;
+  refetch: () => void;
 }
 
 export const useMedia = (): UseMediaReturn => {
-  const { 
-    data: mediaData, 
-    isLoading, 
-    isError,
-    refetch 
-  } = useGetAllMediaQuery();
+  const [media, setMedia] = useState<MediaDto[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
-  // Create media URL lookup map
-  const mediaUrls = useMemo(() => {
-    if (!mediaData?.data) return {};
-    
-    return mediaData.data.reduce((acc, media) => {
-      acc[media.id] = media.mediaUrl;
-      return acc;
-    }, {} as Record<number, string>);
-  }, [mediaData]);
-
-  const media = useMemo(() => {
-    if (!mediaData?.data) return {};
-    
-    return mediaData.data.reduce((acc, media) => {
-      acc[media.id] = {
-        ...media,
-        mediaUrl: import.meta.env.VITE_STATIC_FILE_SERVER + media.mediaUrl
-      };
-      return acc;
-    }, {} as Record<number, MediaDto>);
-  }, [mediaData]);
-
-  // Get media URL by ID
-  const getMediaUrl = (mediaId: number): string | null => {
-    if (mediaUrls[mediaId]) {
-      return import.meta.env.VITE_STATIC_FILE_SERVER + mediaUrls[mediaId];
+  const fetchMedia = useCallback(async () => {
+    setIsLoading(true);
+    setIsError(false);
+    try {
+      const mediaList = await mediaService.getAllMedia();
+      setMedia(mediaList);
+    } catch (error) {
+      setIsError(true);
+      console.error("Failed to fetch media:", error);
+    } finally {
+      setIsLoading(false);
     }
-    
-    return null;
-  };
+  }, []);
 
-  function getMedia(mediaId: number): MediaDto | null{
-    if (media[mediaId]) {
-      return media[mediaId];
-    }
-    
-    return null;
-  }
+  useEffect(() => {
+    fetchMedia();
+  }, [fetchMedia]);
 
-  // Preload all media (useful for warming up the cache)
-  const preloadAllMedia = () => {
-    if (!mediaData && !isLoading) {
-      refetch();
-    }
-  };
+  const mediaMap = useMemo(() => {
+    if (!media) return new Map<number, MediaDto>();
+    return new Map(media.map(m => [Number(m.id), m]));
+  }, [media]);
+
+  const getMediaUrl = useCallback((mediaId: number): string | null => {
+    const mediaItem = mediaMap.get(mediaId);
+    return mediaItem?.mediaUrl || null;
+  }, [mediaMap]);
+
+  const getMedia = useCallback((mediaId: number): MediaDto | null => {
+    return mediaMap.get(mediaId) || null;
+  }, [mediaMap]);
 
   return {
-    mediaUrls,
+    media,
     isLoading,
     isError,
     getMediaUrl,
     getMedia,
-    preloadAllMedia
+    refetch: fetchMedia,
   };
 };

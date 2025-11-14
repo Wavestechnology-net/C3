@@ -1,86 +1,95 @@
-import { useMemo } from "react";
-import { useGetPageBySlugQuery } from "../../services/apis/publicApi";
+import { useCallback } from "react";
 import HeroSection from "../../components/sections/HeroSection";
 import CarouselSection from "../../components/sections/CarouselSection";
 import ContentImageSection from "../../components/sections/ContentImageSection";
 import PartnerCarouselSection from "../../components/sections/PartnerCarouselSection";
-// import { useGetAllMediaQuery } from "../../services/apis/mediaApi";
-import PageNotFound from "../PageNotFound";
-import type { SectionDto } from "../../types";
 import PageDataErrorFallback from "../../components/PageDataErrorFallback";
+import { usePublicPage } from "@/hooks/usePublicPage";
+import type { Section } from "@/types/database";
+import { useMedia } from "@/hooks/cached/useMedia";
 
-export default function Home(){
-  const { 
-     data: pageData,
-     isLoading,
-     isError 
-    // isLoading: pageLoading, 
-    // isError: isPageError, 
-    // error 
-  } = useGetPageBySlugQuery('home', {
-    refetchOnMountOrArgChange: false,
-    refetchOnReconnect: false,
-    refetchOnFocus: false,
-  });
+export default function Home() {
+  const { data: pageData, loading: pageDataLoading, error } = usePublicPage('home');
+  const {loading: imagesLoading} = useMedia()
+  // Memoize sorted sections
+  // const sortedSections = useMemo(() => {
+  //   console.log("Sorted sections memoized...");
+    
+  //   if (!pageData?.sections) return [];
+  //   return [...pageData.sections].sort((a, b) => 
+  //     (a.sortOrder ?? 0) - (b.sortOrder ?? 0)
+  //   );
+  // }, []);
 
-  // const { 
-  //    data: mediaData, 
-    // isLoading: mediaLoading, 
-    // isError: isMediaError 
-  // } = useGetAllMediaQuery();
+  // Memoize section renderer
+  const renderSection = useCallback((section: Section) => {
+    const baseProps = {
+      sectionId: section.id,
+      pageData: pageData
+    };
 
-  // Create media URL lookup map
-  // const mediaUrls = useMemo(() => {
-  //   if (!mediaData?.data) return {};
-  //   return mediaData.data.reduce((acc, media: MediaDto) => {
-  //     acc[media.id] = import.meta.env.VITE_STATIC_FILE_SERVER + media.mediaUrl;
-  //     return acc;
-  //   }, {} as Record<number, string>);
-  // }, [mediaData]);
+    switch (section.section_type) {
+      case 'hero':
+        return <HeroSection key={section.id} {...baseProps} />;
+      
+      case 'carousel':
+        return <CarouselSection key={section.id} {...baseProps} />;
+      
+      case 'content-image':
+        return <ContentImageSection key={section.id} {...baseProps} />;
+      
+      case 'image-content':
+        return <ContentImageSection key={section.id} reverse={true} {...baseProps} />;
+      
+      case 'partner-carousel':
+        return <PartnerCarouselSection key={section.id} {...baseProps} />;
+      
+      default:
+        console.warn(`Unknown section type: ${section.section_type}`);
+        return <ContentImageSection key={section.id} {...baseProps} />;
+    }
+  }, [pageData]);
 
-  // Memoize sorted sections for performance
-  const sortedSections = useMemo(() => {
-    if (!pageData?.sections) return [];
-    return [...pageData.sections].sort((a, b) => a.sortOrder - b.sortOrder);
-  }, [pageData?.sections]);
-
-  // Combined loading state
-  // const isLoading = pageLoading || mediaLoading;
-  // const isError = isPageError || isMediaError;
-
-
-  if (isLoading) {
+  // Show loading state while fetching critical data
+  if (pageDataLoading || imagesLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600" 
+             role="status" 
+             aria-label="Loading page content">
+        </div>
       </div>
     );
   }
 
-  if (isError && !pageData) {
-    return <PageDataErrorFallback />
+  // Show error state
+  if (error) {
+    return <PageDataErrorFallback />;
   }
 
-  const renderSection = (section: SectionDto) => {
-    switch (section.sectionType) {
-      case 'hero':
-        return <HeroSection key={section.id} section={section} />;
-      case 'carousel':
-        return <CarouselSection key={section.id} section={section} />;
-      case 'content-image':
-        return <ContentImageSection key={section.id} section={section} />;
-      case 'image-content':
-        return <ContentImageSection key={section.id} section={section} reverse={true} />;
-      case 'partner-carousel':
-        return <PartnerCarouselSection key={section.id} section={section} />;
-      default:
-        return <ContentImageSection key={section.id} section={section} />;
-    }
-  };
-
   return (
-    <div className="font-sans text-[#1d2033]">
-      {sortedSections.map(renderSection)}
-    </div>
+    <>
+      {/* SEO Metadata */}
+      {/* {pageData.page.title && (
+        <title>{pageData.page.title}</title>
+      )}
+      {pageData.page.metaDescription && (
+        <meta name="description" content={pageData.page.metaDescription} />
+      )} */}
+
+      {/* Page Content */}
+      <div className="font-sans text-[#1d2033]">
+        {pageDataLoading || imagesLoading && (
+          <div className="fixed top-4 right-4 z-50">
+            <div className="bg-white shadow-lg rounded-lg px-4 py-2 flex items-center gap-2">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+              <span className="text-sm text-gray-600">Loading content...</span>
+            </div>
+          </div>
+        )}
+        
+        {pageData.sections.map(renderSection)}
+      </div>
+    </>
   );
-};
+}

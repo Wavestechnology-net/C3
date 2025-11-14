@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { baseQuery } from "./baseQuery";
-import { logout } from "./authSlice";
+// import { logout } from "./authSlice";
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 
 export const baseQueryWithAuth: BaseQueryFn<
@@ -14,7 +14,7 @@ export const baseQueryWithAuth: BaseQueryFn<
     const status = result.error.status;
 
     if (status === 401) {
-      api.dispatch(logout());
+      // api.dispatch(logout());
 
       toast.error('Your session has ended. Please log in again.');
     }

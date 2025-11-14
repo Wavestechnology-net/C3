@@ -1,0 +1,103 @@
+id,section_id,content_key,content_type,value,locale,is_active,created_at,created_by,updated_at,updated_by
+1,1,headline,text,Train the Brain. Play Insane. Own the Game,,1,2025-09-01 17:32:30.2945644,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-08 11:56:57.9895202,
+2,1,subhead,text,Your success is ours,,1,2025-09-01 17:32:30.2945644,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-08 11:56:57.9897639,
+3,1,cta-text,text,LEARN MORE,,1,2025-09-01 17:32:30.2945644,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-08 11:56:57.9897722,
+4,1,background-image,image,23,,1,2025-09-01 17:32:30.2945644,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-08 11:56:57.9897771,
+5,2,section-title,text,WHAT'S NEW WITH C3FC Soccer,,1,2025-09-01 17:33:25.2613599,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-08 13:16:26.1106065,
+6,2,carousel-slides,carousel,"[
+  {
+    ""imageId"": 7,
+    ""title"": ""Join Us For Rec Fall 2025!"",
+    ""text"": ""C3FC Soccer REC introduces young players to the beautiful game. Sign up today!"",
+    ""ctaText"": ""LEARN MORE""
+  },
+  {
+    ""imageId"": 5,
+    ""title"": ""Elite Training Sessions Open"",
+    ""text"": ""Elite players can now register for exclusive sessions."",
+    ""ctaText"": ""LEARN MORE""
+  },
+  {
+    ""imageId"": 6,
+    ""title"": ""Upcoming Tournament Info"",
+    ""text"": ""Prepare for the summer tournament with our training camps."",
+    ""ctaText"": ""LEARN MORE""
+  }
+]",,1,2025-09-01 17:33:25.2613599,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-08 13:16:26.1106082,
+7,3,headline,text,Redefining the Youth Soccer Experience in Houston,,1,2025-09-01 17:34:28.3149404,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-08 13:20:09.4924691,
+8,3,content,html,"<p>A full-service soccer club, our programming serves players from the recreational to elite level. With community at its core, C3FC Soccer focuses on growth, learning, and high-level player development.</p>",,1,2025-09-01 17:34:28.3149404,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-08 13:20:09.4924720,
+9,3,cta-text,text,ABOUT C3FC Soccer,,1,2025-09-01 17:34:28.3149404,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-08 13:20:09.4924730,
+10,3,cta-link,text,/about,,1,2025-09-01 17:34:28.3149404,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-08 13:20:09.4924739,
+11,3,image,image,5,,1,2025-09-01 17:34:28.3149404,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-08 13:20:09.4924747,
+12,4,headline,text,Developing Players At Every Level,,1,2025-09-01 17:35:32.0870856,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-09 14:22:18.7199612,
+13,4,content,html,"<p>C3FC Soccer develops youth soccer players through professional coaching and inspiring environments. Learn about our programs:</p><p></p><ul class=""list-disc ml-6""><li><p>Recreational</p></li><li><p>Youth Academy</p></li><li><p>Competitive</p></li></ul><p></p>",,1,2025-09-01 17:35:32.0870856,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-09 14:22:18.7199637,
+15,4,image,image,6,,1,2025-09-01 17:35:32.0870856,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-09 14:22:18.7199650,
+16,5,section-title,text,We're proud of the support of our partners,,1,2025-09-01 17:39:10.7072914,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-09 14:31:12.6776310,
+17,5,cta-text,text,Become a Partner,,1,2025-09-01 17:39:10.7072914,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-09 14:31:12.6776343,
+18,5,cta-link,text,,,1,2025-09-01 17:39:10.7072914,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-09 14:31:12.6776358,
+19,5,carousel-slides,carousel,"[
+  {
+    ""imageId"": 7,
+    ""date"": ""June 20, 2025"",
+    ""title"": ""Join Us For Rec Fall 2025!"",
+    ""text"": ""C3FC SOCCERS REC introduces young players to the beautiful game. Sign up today!"",
+    ""ctaText"": ""LEARN MORE"",
+    ""ctaLink"": ""/rec-fall-2025""
+  },
+  {
+    ""imageId"": 8,
+    ""date"": ""July 10, 2025"",
+    ""title"": ""Elite Training Sessions Open"",
+    ""text"": ""Elite players can now register for exclusive sessions."",
+    ""ctaText"": ""LEARN MORE"",
+    ""ctaLink"": ""/elite-training""
+  },
+  {
+    ""imageId"": 9,
+    ""date"": ""August 1, 2025"",
+    ""title"": ""Upcoming Tournament Info"",
+    ""text"": ""Prepare for the summer tournament with our training camps."",
+    ""ctaText"": ""LEARN MORE"",
+    ""ctaLink"": ""/tournament-info""
+  }
+]",,1,2025-09-01 17:39:10.7072914,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-09 14:31:12.6776371,
+20,6,headline,text,WHO WE ARE,,1,2025-09-02 17:28:09.4412458,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 05:33:59.7952023,
+
+21,6,subhead,text,Our mission is to develop youth through soccer. Learn more about our culture and commitment to community.,,1,2025-09-02 17:28:09.4412458,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 05:33:59.7952055,
+22,6,background-image,image,6,,1,2025-09-02 17:28:09.4412458,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 05:33:59.7952071,
+23,7,headline,text,About C3FC Soccer Club,,1,2025-09-02 17:28:41.9287870,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 05:38:39.8098410,
+24,7,intro-text,html,"<p>C3FC Soccer Club is more than just a soccer team we are a development-focused community committed to shaping well-rounded athletes through the power of sport. At the heart of our philosophy are three core pillars: Cognition, Competence, and Character.</p><p></p><ul class=""list-disc ml-6""><li><p><strong>Cognition:</strong> We train the mind as much as the body. Our programs emphasize decision-making, game intelligence, and mental agility, helping players think faster, adapt smarter, and elevate their understanding of the game.</p></li><li><p><strong>Competence:</strong>&nbsp;We build strong fundamentals and advanced technical skills through purposeful training. Whether a player is new to the sport or striving for elite levels, our coaching fosters continuous growth in ability and performance.</p></li><li><p><strong>Character:</strong>&nbsp;We believe who you are off the field matters just as much as what you do on it. Through leadership development, teamwork, and sportsmanship, we cultivate values that prepare players for success in soccer and in life.</p></li></ul><p></p><p>At C3, we develop complete players strong in mind, skilled in play, and grounded in values.</p><p></p><p>Join us in building the future of the game, one player at a time.</p>",,1,2025-09-02 17:28:41.9287870,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 05:38:39.8098434,
+28,8,headline,text,Our Mission,,1,2025-09-02 17:28:54.3328177,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-02 17:28:54.3328177,
+29,8,content,html,"<p>At C3FC Soccer Club, our mission is to develop complete athletes by training the mind, body, and spirit of every player. Through a commitment to Cognition, Competence, and Character, we prepare young athletes to excel in the game of soccer and thrive in life — as smart decision-makers, skilled performers, and respectful leaders.</p>",,1,2025-09-02 17:28:54.3328177,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-02 17:28:54.3328177,
+30,8,image,image,11,,1,2025-09-02 17:28:54.3328177,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-02 17:28:54.3328177,
+31,9,headline,text,Our Vision,,1,2025-09-02 17:28:57.4174279,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-02 17:28:57.4174279,
+32,9,content,html,"<p>To create a new standard in youth soccer by developing smart, skilled, and strong-hearted players and to become Houston's leading soccer club, known not just for winning, but for shaping athletes who lead with purpose on and off the field</p>",,1,2025-09-02 17:28:57.4174279,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-02 17:28:57.4174279,
+33,9,image,image,12,,1,2025-09-02 17:28:57.4174279,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-02 17:28:57.4174279,
+37,11,background-image,image,10,,1,2025-09-04 14:42:07.2348285,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 07:45:46.3915797,
+38,12,headline,text,Recreational Soccer Program (Ages 4-12),,1,2025-09-04 14:42:14.4564903,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-04 14:42:14.4564903,
+39,12,intro-text,html,"<p>At C3FC Soccer Club, our Recreational Soccer Program is all about having fun, staying active, and enjoying the game no matter your skill level or experience.</p>",,1,2025-09-04 14:42:14.4564903,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-04 14:42:14.4564903,
+40,17,background-image,image,9,,1,2025-09-04 17:27:54.8507611,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 08:03:46.1444098,
+
+42,18,content,html,"<h1 class=""wysiwyg-heading"">Youth Academy (Ages 6-12)</h1><p></p><p>Welcome to the C3FC Soccer Club Youth Academy — where young players take their first steps toward a lifetime of soccer success.</p><p></p><h2 class=""wysiwyg-heading"">Developing Tomorrow's Stars Today</h2><p></p><p>Our Youth Academy is designed specifically for boys and girls ages 6 to 12 who are passionate about learning the game and having fun. We focus on building a strong foundation in:</p><p></p><ul class=""list-disc ml-6""><li><p><strong>Cognition:</strong> Teaching players how to read the game, make smart decisions, and think ahead on the field.</p></li><li><p><strong>Competence:</strong>&nbsp;Developing essential technical skills like dribbling, passing, shooting, and ball control through fun, age-appropriate drills.</p></li><li><p><strong>Character:</strong>&nbsp;Instilling values of teamwork, respect, discipline, and sportsmanship from the very start.</p></li></ul><p></p><h2 class=""wysiwyg-heading"">Playing Local Competitions</h2><p></p><p>To give players real-game experience and build confidence, our Youth Academy teams participate in local leagues and tournaments around the Houston area. These competitions offer:</p><p></p><ul class=""list-disc ml-6""><li><p>Friendly but competitive environments to apply skills learned in training</p></li><li><p>Opportunities to develop teamwork and communication on the field</p></li><li><p>A chance for young players to experience the thrill of representing C3FC Soccer Club</p></li></ul><p></p>",,1,2025-09-04 17:28:05.2745719,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 06:35:30.4824416,
+49,19,headline,text,Why Join the C3FC Youth Academy?,,1,2025-09-04 17:28:33.6882492,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 08:06:00.6434620,
+50,19,content,html,"<ul class=""list-disc ml-6""><li><p>Expert coaching tailored for young athletes</p></li><li><p>A supportive and inclusive club culture</p></li><li><p>Focus on holistic player development mind, skill, and character</p></li><li><p>Access to local competitions that foster growth and fun</p></li></ul><p></p><p>Start your child's soccer journey with C3FC Soccer Club where passion meets purpose.</p>",,1,2025-09-04 17:28:33.6882492,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 08:06:00.6434635,
+52,19,image,image,20,,1,2025-09-04 17:28:33.6882492,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 08:06:00.6434641,
+53,13,headline,text,"Play, Learn, and Grow",,1,2025-09-04 17:34:32.4341057,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 05:52:55.0412364,
+54,13,intro-text,html,"<p>Designed for boys and girls ages 4 to 12 who want to enjoy soccer in a relaxed, supportive environment, this program focuses on:</p><p></p><ul class=""list-disc ml-6""><li><p><strong>Fun First:</strong>&nbsp;Encouraging a love for the game through engaging drills and friendly play</p></li><li><p><strong>Health and Fitness:</strong>&nbsp;Helping players stay active and build overall fitness</p></li><li><p><strong>Skill Development:</strong>&nbsp;Basic fundamentals taught through age-appropriate training, emphasizing teamwork and sportsmanship</p></li></ul><p></p>",,1,2025-09-04 17:34:32.4341057,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 05:52:55.0412387,
+56,14,headline,text,In-House Matches,,1,2025-09-04 17:35:44.8864494,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 06:00:24.1161026,
+57,14,intro-text,html,"<p>Our Recreational Program features regular in-house matches where players get to put their skills to work in a low-pressure, community-focused setting. These games provide:</p><p></p><ul class=""list-disc ml-6""><li><p>A safe, supportive environment for players to enjoy friendly competition</p></li><li><p>Opportunities to make new friends and strengthen team spirit</p></li><li><p>A chance to experience game day excitement without the pressure of travel or intense tournaments</p></li></ul><p></p>",,1,2025-09-04 17:35:44.8864494,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 06:00:24.1161055,
+59,15,headline,text,Why Join the C3FC Recreational Program?,,1,2025-09-04 17:35:59.1504457,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 06:06:25.7776151,
+60,15,content,html,"<ul class=""list-disc ml-6""><li><p>Welcoming atmosphere for beginners and casual players</p></li><li><p>Flexible schedules to fit busy lifestyles</p></li><li><p>Emphasis on fun, fitness, and personal growth</p></li><li><p>Strong community focus with coaches who care</p></li></ul><p></p><p>Whether you're playing for fun or fitness, the C3FC Recreational Soccer Program is the perfect place to kick back, stay healthy, and be part of a great soccer community.</p><p></p>",,1,2025-09-04 17:35:59.1504457,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 06:06:25.7776202,
+62,15,image,image,14,,1,2025-09-04 17:35:59.1504457,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 06:06:25.7776266,
+63,21,background-image,image,21,,1,2025-09-04 17:41:50.1440620,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 08:07:51.9873610,
+64,22,headline,text,Competitive Soccer Program (Ages 12-18),,1,2025-09-04 17:41:55.4332236,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-04 17:41:55.4332236,
+65,22,intro-text,html,"<p>At C3FC Soccer Club, our Competitive Soccer Program is designed for serious young athletes aged 12 to 18 who are committed to pushing their limits and competing at the highest levels.</p>",,1,2025-09-04 17:41:55.4332236,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-04 17:41:55.4332236,
+
+66,23,headline,text,Elevate Your Game,,1,2025-09-04 17:41:59.0180688,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 08:10:01.7642237,
+67,23,intro-text,html,"<p>This program focuses on advanced training that sharpens all three pillars: Cognition, Competence, and Character. Players receive expert coaching to develop:</p><p></p><ul class=""list-disc ml-6""><li><p><strong>Cognitive Skills:</strong> Tactical awareness, decision-making speed, and game intelligence to outthink the competition</p></li><li><p>  <strong>Technical Ability:</strong> Enhanced ball control, precision passing, shooting, and physical conditioning</p></li><li><p><strong>Character Development:</strong> Leadership, discipline, resilience, and sportsmanship essential for success on and off the field</p></li></ul><p></p>",,1,2025-09-04 17:41:59.0180688,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 08:10:01.7642245,
+69,24,headline,text,Competitive Opportunities,,1,2025-09-04 17:42:03.6359165,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 08:12:35.6686749,
+70,24,intro-text,html,"<p>Our teams compete in both local leagues and regional tournaments, offering players exposure to a wide range of opponents and styles of play. This level of competition:</p><p></p><ul class=""list-disc ml-6""><li><p>Challenges players to perform under pressure</p></li><li><p>Builds experience and confidence in high-stakes matches</p></li><li><p>Creates pathways for college recruitment and elite soccer opportunities</p></li></ul><p></p>",,1,2025-09-04 17:42:03.6359165,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 08:12:35.6686787,
+72,25,headline,text,Why Choose C3FC Competitive Soccer?,,1,2025-09-04 17:42:07.8066619,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 08:16:52.2612522,
+73,25,content,html,"<ul class=""list-disc ml-6""><li><p>Professional coaching tailored for advanced youth athletes</p></li><li><p>Comprehensive training schedules balancing skill development and competition</p></li><li><p>Access to local and regional events that prepare players for the next level</p></li><li><p>A culture that demands hard work, teamwork, and respect</p></li></ul><p></p><p>Join C3FC Soccer Club's Competitive Soccer Program and take your passion for the game to new heights.</p>",,1,2025-09-04 17:42:07.8066619,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 08:16:52.2612533,
+74,25,closing-text,html,<p>Join C3FC Soccer Club's Competitive Soccer Program and take your passion for the game to new heights.</p>,,1,2025-09-04 17:42:07.8066619,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 08:16:52.2612539,
+75,25,image,image,18,,1,2025-09-04 17:42:07.8066619,3874ceb6-099b-4c38-99c1-ba17c6a975b0,2025-09-10 08:16:52.2612543,

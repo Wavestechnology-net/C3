@@ -1,4 +1,3 @@
-// /src/admin/components/AdminLayout.tsx
 import React, { useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import {
@@ -9,8 +8,7 @@ import {
   FaUser,
   FaSignOutAlt,
 } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { loggedUser, logout, selectIsAuthenticated } from "../../services/authSlice";
+import { useAuth } from "../../contexts/auth-context";
 
 type NavItem = {
   label: string;
@@ -68,13 +66,10 @@ const Sidebar: React.FC<{ open: boolean; onClose?: () => void }> = ({ open, onCl
 };
 
 const Topbar: React.FC<{ onToggleSidebar: () => void }> = ({ onToggleSidebar }) => {
-  const isAuthenticated = useSelector(selectIsAuthenticated)
-  const user = useSelector(loggedUser)
+  const {isAuthenticated, user, logout} = useAuth()
 
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    await logout()
   };
 
   return (
@@ -95,7 +90,7 @@ const Topbar: React.FC<{ onToggleSidebar: () => void }> = ({ onToggleSidebar }) 
             {/* User Avatar / Icon */}
             <div className="flex items-center gap-2">
               <span className="text-sm font-medium text-gray-700">
-                Hello, <span className="font-semibold">{user.username || user.email}</span>
+                Hello, <span className="font-semibold">{user?.username || user?.email}</span>
               </span>
               <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center border">
                 <FaUser className="text-gray-600" size={16} />

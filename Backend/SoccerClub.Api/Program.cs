@@ -44,34 +44,34 @@ try
         });
     });
 
-	var jwtSettings = builder.Configuration.GetSection("JwtSettings");
-	var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
+    var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+    var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
 
-	builder.Services.AddAuthentication(options =>
+    builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     })
     .AddJwtBearer(options =>
     {
-		options.TokenValidationParameters = new TokenValidationParameters
-		{
-			ValidateIssuer = true,
-			ValidateAudience = true,
-			ValidateLifetime = true,
-			ValidateIssuerSigningKey = true,
-			ValidIssuer = jwtSettings["Issuer"],
-			ValidAudience = jwtSettings["Audience"],
-			IssuerSigningKey = new SymmetricSecurityKey(key),
-			ClockSkew = TimeSpan.Zero
-		};
-	});
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtSettings["Issuer"],
+            ValidAudience = jwtSettings["Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ClockSkew = TimeSpan.Zero
+        };
+    });
 
     builder.Services.AddAuthorization();
 
     // Add services to the container.
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
     builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
     builder.Services.AddTransient(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
@@ -139,25 +139,25 @@ try
 
     var app = builder.Build();
 
-	using var scope = app.Services.CreateScope();
-	var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-	var userRepository = scope.ServiceProvider.GetRequiredService<IGenericRepository<User>>();
-	var passwordHasher = new PasswordHasher<User>();
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    var userRepository = scope.ServiceProvider.GetRequiredService<IGenericRepository<User>>();
+    var passwordHasher = new PasswordHasher<User>();
 
-	if (!context.Users.Any())
-	{
-		var admin = new User
-		{
-			Username = "admin",
-			Email = "admin@soccerclub.com",
-			Role = "Admin",
-			PasswordHash = passwordHasher.HashPassword(null, "Admin@123")
-		};
-		await userRepository.AddAsync(admin);
-	}
+    if (!context.Users.Any())
+    {
+        var admin = new User
+        {
+            Username = "admin",
+            Email = "admin@soccerclub.com",
+            Role = "Admin",
+            PasswordHash = passwordHasher.HashPassword(null, "Admin@123")
+        };
+        await userRepository.AddAsync(admin);
+    }
 
-	// Configure the HTTP request pipeline.
-	if (app.Environment.IsDevelopment())
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
         app.UseSwaggerUI();

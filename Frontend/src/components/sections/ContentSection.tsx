@@ -1,8 +1,12 @@
-import type { ContentDto, SectionDto } from "../../types";
+import type { Content, Section } from "@/types/database";
+import { useSectionContent, type PageData } from "@/hooks/usePublicPage";
 
-export default function ContentSection({ section }: { section: SectionDto }){
-  const getContentByType = (content: ContentDto) => {
-    switch (content.contentType) {
+export default function ContentSection({ section, pageData }: { section: Section, pageData: PageData }){
+  const sectionId = section.id
+  const {content, hasContent} = useSectionContent(pageData, sectionId)
+  
+  const getContentByType = (content: Content) => {
+    switch (content.content_type) {
       case 'html':
         return <div dangerouslySetInnerHTML={{ __html: content.value || '' }} />;
       case 'text':
@@ -32,37 +36,39 @@ export default function ContentSection({ section }: { section: SectionDto }){
     }
   };
 
+  if(!hasContent) return;
+
   return (
-    <section className={`py-16 px-4 ${section.sortOrder === 3 ? 'bg-[#f3f3f3]' : 'bg-white'}`}>
+    <section className={`py-16 px-4 ${section.sort_order === 3 ? 'bg-[#f3f3f3]' : 'bg-white'}`}>
       <div className="max-w-5xl mx-auto">
-        {section.contents?.map((content: ContentDto) => (
+        {content?.map((content) => (
           <div key={content.id} className="mb-6">
-            {content.contentKey === 'headline' && (
+            {content.content_key === 'headline' && (
               <h2 className="text-3xl font-bold uppercase mb-4 text-center">
                 {content.value}
               </h2>
             )}
-            {content.contentKey === 'subheading-1' && (
+            {content.content_key === 'subheading-1' && (
               <h3 className="text-2xl font-bold mb-3">
                 {content.value}
               </h3>
             )}
-            {(content.contentKey.includes('text') || 
-              content.contentKey.includes('description') ||
-              content.contentKey.includes('content') ||
-              content.contentKey === 'intro-text'
+            {(content.content_key.includes('text') || 
+              content.content_key.includes('description') ||
+              content.content_key.includes('content') ||
+              content.content_key === 'intro-text'
             ) && 
-             content.contentKey !== 'headline' && 
-             content.contentKey !== 'subheading-1' && (
+             content.content_key !== 'headline' && 
+             content.content_key !== 'subheading-1' && (
               <div className="text-lg text-gray-700 mb-4 wysiwyg">
                 {getContentByType(content)}
               </div>
             )}
-            {content.contentKey.includes('benefits') || 
-             content.contentKey.includes('reasons') || 
-             content.contentKey.includes('pillars') || 
-             content.contentKey.includes('areas') || 
-             content.contentKey.includes('opportunities') && (
+            {content.content_key.includes('benefits') || 
+             content.content_key.includes('reasons') || 
+             content.content_key.includes('pillars') || 
+             content.content_key.includes('areas') || 
+             content.content_key.includes('opportunities') && (
               <div className="text-lg mb-4">
                 {getContentByType(content)}
               </div>

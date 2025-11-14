@@ -1,24 +1,26 @@
-import { useState } from "react";
-import Layout from "./Layout";
+import { useEffect, useState } from "react";
 import PageSection from "./PageSection";
-import { useGetPagesQuery } from "../../services/apis/pageApi";
+import { usePage } from "../../hooks/usePage";
 
 const Page = () => {
-  const { data: pages = [], isLoading, isError, error } = useGetPagesQuery();
+  const { pages = [], getPages, loading, error } = usePage();
   const [activeTab, setActiveTab] = useState<number>();
 
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>Error: {error?.toString()}</p>;
+  useEffect(() => {
+    getPages()
+  }, [])
+
+  if (loading.pages) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
-    // <Layout title="Admin Tabs Page">
       <div>
         {/* Tabs Navigation */}
         <nav className="flex border-b border-gray-300 mb-4">
-          {pages.length === 0 ? (
+          {pages?.length === 0 ? (
             <p>No pages found</p>
           ) : (
-            pages.map((page) => (
+            pages?.map((page) => (
               <button
                 key={page.id}
                 onClick={() => setActiveTab(page.id)}
@@ -35,7 +37,6 @@ const Page = () => {
         {/* Tab Content */}
         {activeTab && <PageSection page={activeTab} />}
       </div>
-    // </Layout>
   );
 };
 

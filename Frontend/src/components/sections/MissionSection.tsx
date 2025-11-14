@@ -1,25 +1,32 @@
+import { useContentByKey, useSectionContent, type PageData } from "@/hooks/usePublicPage";
 import { useMedia } from "../../hooks/useMedia";
-import type { ContentDto, MediaDto, SectionDto } from "../../types";
+import type { Section } from "@/types/database";
 
 interface MissionSectionProps {
-  section: SectionDto;
+  section: Section;
+  pageData: PageData
 }
 
-export default function MissionSection({ section }: MissionSectionProps) {
-  const imageContent = section.contents?.find((c: ContentDto) => c.contentKey === 'image');
+export default function MissionSection({ section, pageData }: MissionSectionProps) {
+  // const imageContent = section.contents?.find((c: ContentDto) => c.contentKey === 'image');
+  const {content, hasContent} = useSectionContent(pageData, section.id)
+  const imageContent = useContentByKey(content || [], 'image');
   const imageMediaId = imageContent?.value ? parseInt(imageContent.value) : null;
-  const { getMediaUrl, getMedia } = useMedia();
+  const { getMediaUrl } = useMedia();
 
-  const media = imageMediaId ? getMedia(imageMediaId) : {mediaUrl: "/placeholder-image.jpg" } as MediaDto
+  const imageUrl = imageMediaId ? getMediaUrl(imageMediaId) : "/placeholder-image.jpg"
 
 //   const imageUrl = imageMediaId 
 //     ? (getMediaUrl(imageMediaId) as string)
 //     : '/placeholder-image.jpg';
 
-  const headline = section.contents?.find((c: ContentDto) => c.contentKey === 'headline');
-  const content = section.contents?.find((c: ContentDto) => 
-    c.contentKey.includes('content') || c.contentKey === 'intro-text'
+  const headline = useContentByKey(content || [], 'headline');
+  const sectionContent = content?.find((c) => 
+    c.content_key.includes('content') || c.content_key === 'intro-text'
   );
+  console.log("sectionContent: ", sectionContent);
+  
+  if(!hasContent) return;
 
   return (
     <section className="bg-[#dadf26] py-10 px-4 relative overflow-visible">
@@ -30,15 +37,15 @@ export default function MissionSection({ section }: MissionSectionProps) {
               {headline.value}
             </h2>
           )}
-          {content && (
+          {sectionContent && (
             <div className="text-white text-lg">
-              {content.contentType === 'html' ? (
+              {sectionContent.content_type === 'html' ? (
                 <div 
-                  dangerouslySetInnerHTML={{ __html: content.value || '' }} 
+                  dangerouslySetInnerHTML={{ __html: sectionContent.value || '' }} 
                   className="leading-relaxed"
                 />
               ) : (
-                <p className="leading-relaxed">{content.value}</p>
+                <p className="leading-relaxed">{sectionContent.value}</p>
               )}
             </div>
           )}
@@ -46,8 +53,8 @@ export default function MissionSection({ section }: MissionSectionProps) {
 
         <div className="relative -mt-10 md:-mt-20 z-10">
           <img
-            src={media?.mediaUrl}
-            alt={media?.altText || "Mission section image"}
+            src={imageUrl}
+            alt={"Mission section image"}
             className="w-full max-w-md mx-auto shadow-xl rounded"
             loading="lazy"
             onError={(e) => {

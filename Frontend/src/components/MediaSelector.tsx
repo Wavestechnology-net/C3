@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,7 @@ import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter } from "./ui/card";
 import { ScrollArea } from "./ui/scroll-area";
 import { Search, Image as ImageIcon } from "lucide-react";
-import { useGetAllMediaQuery } from "../services/apis/mediaApi";
+import { useMedia } from "../hooks/useMedia";
 import { Input } from "./ui/input";
 
 interface ImageSelectorProps {
@@ -19,19 +19,26 @@ interface ImageSelectorProps {
 }
 
 export default function ImageSelector({ selectedImageId, onSelect }: ImageSelectorProps){
-  const { data: mediaResponse, isLoading, isError } = useGetAllMediaQuery();
-  const media = mediaResponse?.data || [];
+  const { getAllMedia, media, loading, error } = useMedia();
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const selectedMedia = media.find(m => m.id === Number(selectedImageId));
+  // useEffect(() => {
+  //   if (!media) {
+  //     getAllMedia().catch(err => {
+  //       console.error('Failed to load media:', err);
+  //     });
+  //   }
+  // }, [getAllMedia, media]);
 
-  const filteredMedia = media.filter(m => 
+  const selectedMedia = media?.find(m => m.id === Number(selectedImageId)) || null;
+
+  const filteredMedia = media?.filter(m => 
     m.fileName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
     m.altText?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  ) || [];
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center p-4">
         <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
@@ -40,10 +47,10 @@ export default function ImageSelector({ selectedImageId, onSelect }: ImageSelect
     );
   }
 
-  if (isError) {
+  if (error) {
     return (
       <div className="p-4 bg-destructive/10 text-destructive rounded-md">
-        <p className="text-sm">Failed to load images</p>
+        <p className="text-sm">Failed to load images: {error}</p>
       </div>
     );
   }
@@ -57,7 +64,7 @@ export default function ImageSelector({ selectedImageId, onSelect }: ImageSelect
             <div className="flex items-center gap-3">
               <div className="relative">
                 <img
-                  src={import.meta.env.VITE_STATIC_FILE_SERVER + selectedMedia?.mediaUrl}
+                  src={selectedMedia?.mediaUrl}
                   alt={selectedMedia?.altText || `Image ${selectedMedia.id}`}
                   className="w-16 h-16 object-cover rounded-md border"
                 />
@@ -134,7 +141,7 @@ export default function ImageSelector({ selectedImageId, onSelect }: ImageSelect
                       <CardContent className="p-0">
                         <div className="aspect-square">
                           <img
-                            src={import.meta.env.VITE_STATIC_FILE_SERVER + m.mediaUrl}
+                            src={m.mediaUrl}
                             alt={m.altText || `Image ${m.id}`}
                             className="w-full h-full object-cover"
                           />

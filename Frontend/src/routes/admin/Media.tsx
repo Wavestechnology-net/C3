@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Label } from "../../components/ui/label";
 import { Input } from "../../components/ui/input";
@@ -11,12 +11,8 @@ import {
   DialogTitle,
 } from "../../components/ui/dialog";
 import { X, Eye, UploadCloud, Trash2 } from "lucide-react";
-import {
-  useUploadMediaMutation,
-  useDeleteMediaMutation,
-  useGetAllMediaQuery,
-} from "../../services/apis/mediaApi";
 import { toast } from "react-toastify";
+import { useMedia } from "../../hooks/useMedia";
 
 type MediaFormData = {
   files: FileList;
@@ -28,9 +24,9 @@ export default function Media() {
   >([]);
   const [previewMode, setPreviewMode] = useState(false);
 
-  const { data: mediaResponse, refetch } = useGetAllMediaQuery();
-  const [uploadMedia, { isLoading }] = useUploadMediaMutation();
-  const [deleteMedia] = useDeleteMediaMutation();
+  const {media, getAllMedia, deleteMedia, uploadMedia, loading: isLoading, error} = useMedia()
+
+  useEffect(() => {getAllMedia()}, [getAllMedia])
 
   const {
     register,
@@ -46,7 +42,7 @@ export default function Media() {
     const newPreviews = Array.from(files).map((file) => ({
       file,
       url: URL.createObjectURL(file),
-      type: file.type.startsWith("video") ? "video" : "image",
+      type: file.type.startsWith("video") ? "video" : "image" as "image" | "video",
       name: file.name,
       altText: file.name.split(".")[0],
     }));
@@ -66,14 +62,13 @@ export default function Media() {
 
     try {
       for (const media of previews) {
-        await uploadMedia({ file: media.file, altText: media.altText }).unwrap();
+        await uploadMedia({ file: media.file, altText: media.altText });
       }
 
       toast.success("✅ Upload successful!");
       setPreviews([]);
       setPreviewMode(false);
       reset();
-      refetch();
     } catch (error) {
       console.error("Upload failed", error);
       toast.error("❌ Upload failed!");
@@ -85,9 +80,8 @@ export default function Media() {
     if (!confirm("Are you sure you want to delete this media?")) return;
 
     try {
-      await deleteMedia(id).unwrap();
+      await deleteMedia(id);
       toast.done("🗑️ Deleted successfully");
-      refetch();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("❌ Delete failed!");
@@ -187,35 +181,35 @@ export default function Media() {
       {/* Existing Media from Database */}
       <div>
         <h2 className="text-xl font-semibold mb-4">📚 Your Uploaded Media</h2>
-        {mediaResponse?.data && mediaResponse.data.length > 0 ? (
+        { media && media?.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {mediaResponse.data.map((media) => (
+            {media.map((m) => (
               <div
-                key={media.id}
+                key={m.id}
                 className="relative rounded-lg shadow-sm overflow-hidden border"
               >
-                {media.mediaType === "video" ? (
+                {m.mediaType === "video" ? (
                   <video controls className="w-full h-32 object-cover">
-                    <source src={media.mediaUrl} />
+                    <source src={m.mediaUrl} />
                   </video>
                 ) : (
                   <img
-                    src={import.meta.env.VITE_BASE_API_URL + media.mediaUrl}
-                    alt={media.altText}
+                    src={m.mediaUrl}
+                    alt={m.altText}
                     className="w-full h-32 object-cover"
                   />
                 )}
                 <div className="p-2 border-t">
                   <p className="text-xs text-gray-600 p-1">
-                    <span className="font-semibold">Name</span>: {media.fileName} 
+                    <span className="font-semibold">Name</span>: {m.fileName} 
                   </p>
                   <p className="text-xs text-gray-600 p-1 truncate">
-                    <span className="font-semibold">AltText</span>: {media.altText}
+                    <span className="font-semibold">AltText</span>: {m.altText}
                   </p>
                 </div>
 
                 <button
-                  onClick={() => handleDeleteMedia(media.id)}
+                  onClick={() => handleDeleteMedia(m.id)}
                   className="absolute top-2 right-2 bg-white/80 hover:bg-red-500 hover:text-white rounded-full p-1 shadow"
                 >
                   <Trash2 size={16} />

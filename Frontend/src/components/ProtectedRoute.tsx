@@ -1,15 +1,15 @@
-import type { JSX } from 'react';
-import { useSelector } from 'react-redux';
+import { type JSX } from 'react';
 import { Navigate } from 'react-router-dom';
-import { loggedUser, selectIsAuthenticated } from '../services/authSlice';
+import { useAuth } from '../contexts/auth-context';
 
-export default function ProtectedRoute({ children, roles }: { children: JSX.Element, roles?: string[] }) {
-  const isAuthenticated = useSelector(selectIsAuthenticated);
-  const user = useSelector(loggedUser);
+export default function ProtectedRoute({ children }: { children: JSX.Element, roles?: string[] }) {
+  const {isAuthenticated, isAdmin, user, loading} = useAuth()
 
-  if (!isAuthenticated) return <Navigate to="/login" />;
+  if (loading) return <div>Loading...</div>;
 
-  if (roles && user && !roles.includes(user?.role)) return <Navigate to="/unauthorized" />;
+  if (!loading && !isAuthenticated) return <Navigate to="/login" />;
+
+  if (user && !isAdmin) return <Navigate to="/unauthorized" />;
 
   return children;
 }

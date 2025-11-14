@@ -1,85 +1,44 @@
-import { useMemo } from "react";
-import { useGetPageBySlugQuery } from "../../services/apis/publicApi";
+import { useCallback } from "react";
 import HeroSection from "../../components/sections/HeroSection";
 import ContentSection from "../../components/sections/ContentSection";
 import ContentImageSection from "../../components/sections/ContentImageSection";
-// import { useGetAllMediaQuery } from "../../services/apis/mediaApi";
-import type { SectionDto } from "../../types";
-import PageNotFound from "../PageNotFound";
 import PageDataErrorFallback from "../../components/PageDataErrorFallback";
 import MissionSection from "../../components/sections/MissionSection";
-import WhyJoinSection from "../../components/sections/WhyJoinSection";
+import { usePublicPage } from "@/hooks/usePublicPage";
+import { useMedia } from "@/hooks/useMedia";
+import type { Section } from "@/types/database";
 
 export default function About(){
-  const { 
-     data: pageData, 
-     isLoading,
-     isError
-    // isLoading: pageLoading, 
-    // isError: pageError
-  } = useGetPageBySlugQuery('about', {
-    refetchOnMountOrArgChange: false,
-    refetchOnReconnect: false,
-    refetchOnFocus: false,
-  });
+  const { data: pageData, loading: pageDataLoading, error } = usePublicPage('about');
+  const {loading: imagesLoading} = useMedia()
+  
+  const renderSection = useCallback((section: Section) => {
+    const baseProps = {
+      sectionId: section.id,
+      pageData: pageData
+    };
+    const isMissionSection = section.name?.toLowerCase().includes('mission');
 
-  // const { 
-  //    data: mediaData, 
-  //   isLoading: mediaLoading, 
-  //   isError: mediaError 
-  // } = useGetAllMediaQuery();
+    switch (section.section_type) {
+      case 'hero':
+        return <HeroSection key={section.id} {...baseProps} />;
+      case 'content':
+        return <ContentSection key={section.id} section={section} {...baseProps} />;
+      case 'content-image':
+        if(isMissionSection){
+          return <MissionSection key={section.id} section={section} {...baseProps} />
+        }
+        return <ContentImageSection key={section.id} {...baseProps} />;
+      case 'image-content':
+        return <ContentImageSection key={section.id} {...baseProps} reverse={true} />;
+    //   case 'cta':
+    //     return <CtaSection key={section.id} {...baseProps} />;
+      default:
+        return <ContentSection key={section.id} section={section} {...baseProps} />;
+    }
+  }, [pageData]);
 
-//   const [showFallback, setShowFallback] = useState(false);
-
-  // Create media URL lookup map
-  // const mediaUrls = useMemo(() => {
-  //   if (!mediaData?.data) return {};
-  //   return mediaData.data.reduce((acc, media) => {
-  //     acc[media.id] = media.mediaUrl;
-  //     return acc;
-  //   }, {} as Record<number, string>);
-  // }, [mediaData]);
-
-  const sortedSections = useMemo(() => {
-    if (!pageData?.sections) return [];
-    return [...pageData.sections].sort((a, b) => a.sortOrder - b.sortOrder);
-  }, [pageData?.sections]);
-
-  // Check for backend down scenario
-//   useEffect(() => {
-//     if ((pageError || mediaError) && !pageData) {
-//       const isNetworkError = 
-//         (pageErrorDetails as any)?.error?.includes('Network Error') ||
-//         (pageErrorDetails as any)?.status === 'FETCH_ERROR';
-      
-//       if (isNetworkError) {
-//         const timer = setTimeout(() => {
-//           setShowFallback(true);
-//         }, 1000);
-        
-//         return () => clearTimeout(timer);
-//       }
-//     }
-//   }, [pageError, mediaError, pageErrorDetails, pageData]);
-
-  // const isLoading = pageLoading || mediaLoading;
-  // const isError = pageError || mediaError;
-
-  // Show fallback when backend is down
-//   if (showFallback) {
-//     return (
-//       <div className="w-full">
-//         <iframe 
-//           src="/fallback/about.html" 
-//           className="w-full h-screen border-0"
-//           title="Fallback About Page"
-//         />
-//       </div>
-//     );
-//   }
-
-
-  if (isLoading) {
+  if (pageDataLoading || imagesLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
@@ -87,35 +46,13 @@ export default function About(){
     );
   }
 
-  if (isError && !pageData) {
+  if (error && !pageData) {
     return <PageDataErrorFallback />
   }
 
-  const renderSection = (section: SectionDto) => {
-    const isMissionSection = section.name?.toLowerCase().includes('mission');
-
-    switch (section.sectionType) {
-      case 'hero':
-        return <HeroSection key={section.id} section={section} />;
-      case 'content':
-        return <ContentSection key={section.id} section={section} />;
-      case 'content-image':
-        if(isMissionSection){
-          return <MissionSection key={section.id} section={section} />
-        }
-        return <ContentImageSection key={section.id} section={section} />;
-      case 'image-content':
-        return <ContentImageSection key={section.id} section={section} reverse={true} />;
-    //   case 'cta':
-    //     return <CtaSection key={section.id} section={section} />;
-      default:
-        return <ContentSection key={section.id} section={section} />;
-    }
-  };
-
   return (
     <div className="font-sans text-[#1d2033]">
-      {sortedSections.map(renderSection)}
+      {pageData.sections.map(renderSection)}
 
       <section className="bg-white py-30">
         <h2 className="text-4xl font-bold text-center text-black uppercase font-serif">

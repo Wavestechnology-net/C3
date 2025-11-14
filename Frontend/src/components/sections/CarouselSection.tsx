@@ -1,22 +1,29 @@
 // components/sections/CarouselSection.tsx
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import type { ContentDto, SectionDto } from "../../types";
 import { useMedia } from "../../hooks/useMedia";
+import { useContentByKey, useSectionContent, type PageData } from "@/hooks/usePublicPage";
 
 interface CarouselSectionProps {
-  section: SectionDto;
+    sectionId: number;
+    pageData: PageData;
+  // section: SectionDto;
   // mediaUrls?: Record<number, string>;
 }
 
-export default function CarouselSection({ section }: CarouselSectionProps){
+export default function CarouselSection({ sectionId, pageData }: CarouselSectionProps){
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 4000, stopOnInteraction: false })
   ]);
 
+  const { content } = useSectionContent(pageData, sectionId);
+
+  const carouselContent = useContentByKey(content || [], 'carousel-slides');
+  const sectionTitle = useContentByKey(content || [], 'section-title');
+
   const {getMediaUrl} = useMedia()
   
-  const carouselContent = section.contents?.find((c: ContentDto) => c.contentKey === 'carousel-slides');
+  // const carouselContent = section.contents?.find((c: ContentDto) => c.contentKey === 'carousel-slides');
   
   const slides = carouselContent?.value ? JSON.parse(carouselContent.value) : [];
 
@@ -27,9 +34,11 @@ export default function CarouselSection({ section }: CarouselSectionProps){
     return (
       <section className="relative bg-blue-700 text-white py-10">
         <div className="absolute top-0 left-30 bg-yellow-400 text-black px-12 py-10 font-bold shadow-lg skew-x-[-15deg]">
-          <span className="block skew-x-[15deg]">
-            {section.contents?.find((c: ContentDto) => c.contentKey === 'section-title')?.value || "WHAT'S NEW"}
+          {sectionTitle && (
+            <span className="block skew-x-[15deg]">
+            {/* {content?.find((c: ContentDto) => c.contentKey === 'section-title')?.value || "WHAT'S NEW"} */}
           </span>
+          )}
         </div>
         <div className="w-full h-[500px] flex items-center justify-center">
           <p className="text-xl">No carousel content available</p>
@@ -42,9 +51,11 @@ export default function CarouselSection({ section }: CarouselSectionProps){
     <section className="relative bg-blue-700 text-white py-10">
       {/* Floating Tag */}
       <div className="absolute top-0 left-30 bg-yellow-400 text-black px-12 py-10 font-bold shadow-lg skew-x-[-15deg] z-10">
+          {sectionTitle && (
         <span className="block skew-x-[15deg]">
-          {section.contents?.find((c: ContentDto) => c.contentKey === 'section-title')?.value || "WHAT'S NEW"}
+          {/* {section.contents?.find((c: ContentDto) => c.contentKey === 'section-title')?.value || "WHAT'S NEW"} */}
         </span>
+          )}
       </div>
 
       <div className="w-full h-[500px] relative">

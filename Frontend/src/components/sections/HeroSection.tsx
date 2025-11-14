@@ -1,19 +1,32 @@
-import { useMedia } from "../../hooks/useMedia";
-import type { ContentDto, SectionDto } from "../../types";
+import { useContentByKey, useSectionContent, type PageData } from "@/hooks/usePublicPage";
+import { useMedia } from '@/hooks/useMedia';
 
 interface HeroSectionProps {
-  section: SectionDto;
+  sectionId: number;
+  pageData: PageData;
 }
 
-export default function HeroSection ({ section }: HeroSectionProps){
-    const backgroundImageContent = section.contents?.find((c: ContentDto) => c.contentKey === 'background-image');
-    const backgroundMediaId = backgroundImageContent?.value ? parseInt(backgroundImageContent.value) : null;
-    const {mediaUrls, getMediaUrl} = useMedia()
+export default function HeroSection({ sectionId, pageData }: HeroSectionProps) {
+  const { content, hasContent } = useSectionContent(pageData, sectionId);  
+  const backgroundImageContent = useContentByKey(content || [], "background-image");
+  const {getMediaUrl} = useMedia()
 
-    const backgroundImageUrl = backgroundMediaId && mediaUrls
-        ? getMediaUrl(backgroundMediaId)
-        : '/placeholder-hero.jpg';
-        
+  const backgroundImageUrl = backgroundImageContent?.value 
+    ? getMediaUrl(parseInt(backgroundImageContent?.value))
+    : '/placeholder-hero.jpg'
+
+  const headline = useContentByKey(content || [], "headline");
+  const subhead = useContentByKey(content || [], "subhead");
+  const ctaText = useContentByKey(content || [], "cta-text");
+
+  if (!hasContent) {
+    return (
+      <section className="relative bg-cover bg-center h-[100vh] flex items-center justify-center flex-col text-center">
+        <p>No content found</p>
+      </section>
+    );
+  }
+
   return (
     <section
       className="relative bg-cover bg-center h-[100vh] text-white flex items-center justify-center flex-col text-center"
@@ -23,34 +36,26 @@ export default function HeroSection ({ section }: HeroSectionProps){
     >
       <div className="absolute inset-0 bg-black opacity-30"></div>
       <div className="relative z-10 px-4 max-w-4xl">
-        {section.contents?.map((content: ContentDto) => {
-          if (content.contentKey === 'headline') {
-            return (
-              <h1 key={content.id} className="text-4xl md:text-6xl font-bold mb-4">
-                {content.value}
-              </h1>
-            );
-          }
-          if (content.contentKey === 'subhead') {
-            return (
-              <p key={content.id} className="text-xl md:text-2xl mt-2">
-                {content.value}
-              </p>
-            );
-          }
-          if (content.contentKey === 'cta-text') {
-            return (
-              <button 
-                key={content.id} 
-                className="bg-yellow-300 hover:bg-yellow-400 px-6 py-3 font-bold text-black uppercase w-full sm:w-auto mt-6 transition-colors"
-              >
-                {content.value}
-              </button>
-            );
-          }
-          return null;
-        })}
+        {headline && (
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            {headline.value}
+          </h1>
+        )}
+        
+        {subhead && (
+          <p className="text-xl md:text-2xl mt-2">
+            {subhead.value}
+          </p>
+        )}
+        
+        {ctaText && (
+          <button 
+            className="bg-yellow-300 hover:bg-yellow-400 px-6 py-3 font-bold text-black uppercase w-full sm:w-auto mt-6 transition-colors"
+          >
+            {ctaText.value}
+          </button>
+        )}
       </div>
     </section>
   );
-};
+}

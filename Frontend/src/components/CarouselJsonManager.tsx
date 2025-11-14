@@ -19,7 +19,7 @@ import {
   Calendar
 } from "lucide-react";
 import MediaSelector from "./MediaSelector";
-import { useGetAllMediaQuery } from "../services/apis/mediaApi";
+import { useMedia } from "../hooks/useMedia";
 
 interface CarouselSlide {
   id?: string; // Temporary ID for new slides
@@ -40,9 +40,7 @@ export default function CarouselJsonManager({ jsonContent, onChange }: CarouselJ
   const [slides, setSlides] = useState<CarouselSlide[]>([]);
   const [editingSlide, setEditingSlide] = useState<string | null>(null);
   const [editData, setEditData] = useState<CarouselSlide | null>(null);
-  const {data: mediaReponse} = useGetAllMediaQuery()
-
-  const media = mediaReponse?.data || []
+  const { media, loading, error } = useMedia();
 
   // Parse JSON on mount and when content changes
   useEffect(() => {
@@ -60,7 +58,7 @@ export default function CarouselJsonManager({ jsonContent, onChange }: CarouselJ
   }, [jsonContent]);
 
   const getMediaById = (id: number) => {
-    return media.find(m => m.id === id);
+    return media?.find(m => m.id === id) || null;
   }
 
   // Save changes back to JSON
@@ -146,6 +144,23 @@ export default function CarouselJsonManager({ jsonContent, onChange }: CarouselJ
       setEditData({ ...editData, [field]: value });
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-4">
+        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+        <span className="ml-2 text-sm text-muted-foreground">Loading carousel slides...</span>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-4 bg-destructive/10 text-destructive rounded-md">
+        <p className="text-sm">Failed to load media: {error}</p>
+      </div>
+    );
+  }
 
   return (
     <Card>
@@ -315,7 +330,7 @@ export default function CarouselJsonManager({ jsonContent, onChange }: CarouselJ
                               <div className="mt-3 flex items-center gap-3">
                                 <div className="w-16 h-16 rounded border overflow-hidden">
                                   <img
-                                    src={import.meta.env.VITE_STATIC_FILE_SERVER + currentSlideMedia?.mediaUrl} // You'll need to implement this endpoint
+                                    src={currentSlideMedia?.mediaUrl} // You'll need to implement this endpoint
                                     alt={currentSlideMedia?.altText || currentSlideMedia?.fileName}
                                     className="w-full h-full object-cover"
                                     onError={(e) => {

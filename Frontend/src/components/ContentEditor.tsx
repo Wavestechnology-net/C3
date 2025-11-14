@@ -17,7 +17,7 @@ interface ContentEditorProps {
 export default function ContentEditor ({ content, sectionId, onChange }: ContentEditorProps){
   const formatLabel = (key: string) => {
     return key
-      .split("-")
+      ?.split("-")
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };

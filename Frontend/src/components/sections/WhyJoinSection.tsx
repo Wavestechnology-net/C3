@@ -1,20 +1,25 @@
+import { useContentByKey, useSectionContent, type PageData } from "@/hooks/usePublicPage";
 import { useMedia } from "../../hooks/useMedia";
-import type { ContentDto, MediaDto, SectionDto } from "../../types";
+import type { Section } from "@/types/database";
 
 interface WhyJoinSectionProps {
-  section: SectionDto;
+  section: Section;
+  pageData: PageData
 }
 
-export default function WhyJoinSection({ section }: WhyJoinSectionProps) {
-  const imageContent = section.contents?.find((c: ContentDto) => c.contentKey === 'image');
+export default function WhyJoinSection({ section, pageData }: WhyJoinSectionProps) {
+  // const imageContent = section.contents?.find((c: ContentDto) => c.contentKey === 'image');
+  const {content, hasContent} = useSectionContent(pageData, section.id);
+  const imageContent = useContentByKey(content || [], 'image');
+
   const imageMediaId = imageContent?.value ? parseInt(imageContent.value) : null;
-  const { getMedia } = useMedia();
+  const { getMediaUrl } = useMedia();
 
-  const media = imageMediaId ? getMedia(imageMediaId) : {mediaUrl: "/placeholder-image.jpg"} as MediaDto
+  const imageUrl = imageMediaId ? getMediaUrl(imageMediaId) : "/placeholder-image.jpg"
 
-  const headline = section.contents?.find((c: ContentDto) => c.contentKey === 'headline');
-  const content = section.contents?.find((c: ContentDto) => c.contentKey === 'content' || c.contentKey === 'closing-text');
-  const reasons = section.contents?.find((c: ContentDto) => c.contentKey === 'reasons' || c.contentKey.includes('benefits'));
+  const headline = useContentByKey(content || [], 'headline');
+  const sectionContent = content?.find((c) => c.content_key === 'content' || c.content_key === 'closing-text');
+  const reasons = content?.find((c) => c.content_key === 'reasons' || c.content_key.includes('benefits'));
 
   // Parse reasons/benefits from JSON or use as array
   let reasonsList: string[] = [];
@@ -37,6 +42,8 @@ export default function WhyJoinSection({ section }: WhyJoinSectionProps) {
       reasonsList = [reasons.value || ''];
     }
   }
+
+  if(!hasContent) return;
 
   return (
     <section className="bg-[#96cfdc] py-20 px-4 relative overflow-visible">
@@ -61,15 +68,15 @@ export default function WhyJoinSection({ section }: WhyJoinSectionProps) {
             </ul>
           )}
           
-          {content && (
+          {sectionContent && (
             <div className="text-gray-800">
-              {content.contentType === 'html' ? (
+              {sectionContent.content_type === 'html' ? (
                 <div 
-                  dangerouslySetInnerHTML={{ __html: content.value || '' }} 
+                  dangerouslySetInnerHTML={{ __html: sectionContent.value || '' }} 
                   className="wysiwyg leading-relaxed"
                 />
               ) : (
-                <p className="leading-relaxed">{content.value}</p>
+                <p className="leading-relaxed">{sectionContent.value}</p>
               )}
             </div>
           )}
@@ -77,8 +84,8 @@ export default function WhyJoinSection({ section }: WhyJoinSectionProps) {
         
         <div className="relative lg:mt-10 md:-mt-1 z-10">
           <img
-            src={media?.mediaUrl}
-            alt={media?.altText || "Why join section image"}
+            src={imageUrl}
+            alt={"Why join section image"}
             className="w-full max-w-md mx-auto md:-mt-1 shadow-xl rounded"
             loading="lazy"
             onError={(e) => {

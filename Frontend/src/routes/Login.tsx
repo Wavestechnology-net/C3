@@ -2,15 +2,13 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../services/apis/authApi';
-import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../services/authSlice';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Label } from '../components/ui/label';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import { useAuth } from '../contexts/auth-context';
 
 const schema = yup.object({
   username: yup.string().required('Username is required'),
@@ -18,22 +16,24 @@ const schema = yup.object({
 }).required();
 
 export default function Login() {
-const [showPassword, setShowPassword] = useState(false);
-const dispatch = useDispatch()
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const { login, loading: isLoading, error: authError } = useAuth();
+  
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const [login, {isLoading, error}] = useLoginMutation();
-  const navigate = useNavigate();
-
   const onSubmit = async (data: { username: string; password: string }) => {
     try {
-      const result = await login(data).unwrap();
-      dispatch(loginSuccess(result?.data));
+      await login({
+        email: data.username,
+        password: data.password
+      });
       navigate('/admin');
     } catch (err) {
-      alert('Login failed');
+      console.error('Login failed:', err);
+      // Error is already handled by the hook
     }
   };
 
@@ -43,10 +43,12 @@ const dispatch = useDispatch()
             <CardHeader>
                 <CardTitle className="text-2xl">Login</CardTitle>
                 <CardDescription>Enter your credentials to access the CMS.</CardDescription>
+                {authError && <small className='text-red-500'>{authError}</small>}
             </CardHeader>
 
             <CardContent>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+
                     <div className="grid gap-2">
                         <Label htmlFor="username">Username</Label>
                         <Input
@@ -60,7 +62,7 @@ const dispatch = useDispatch()
                             <p className="text-sm text-red-500">{errors.username.message}</p>
                         )}
                     </div>
-
+                    
                     <div className="grid gap-2">
                         <Label htmlFor="password">Password</Label>
                         <div className="flex items-center gap-1">

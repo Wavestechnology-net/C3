@@ -15,11 +15,14 @@ import Login from "./routes/Login";
 import ProtectedAdminRoute from "./routes/admin/ProtectedAdminRoute";
 import Page from "./routes/admin/Page";
 import AdminDashboard from "./routes/admin/AdminDashboard";
+import ScrollToTop from "./components/ScrollToTop";
 
 
 const App = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
+
       <Routes>
         <Route path="/" element={<Wrapper />}>
           <Route index element={<Home />} />

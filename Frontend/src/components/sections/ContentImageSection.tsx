@@ -1,35 +1,38 @@
+import { useContentByKey, useSectionContent, type PageData } from "@/hooks/usePublicPage";
 import { useMedia } from "../../hooks/useMedia";
-import type { ContentDto, SectionDto } from "../../types";
 
 interface ContentImageSectionProps {
-  section: SectionDto;
-  // mediaUrls?: Record<number, string>;
+  sectionId: number;
+  pageData: PageData
   reverse?: boolean;
 }
 
-export default function ContentImageSection({ section, reverse = false }: ContentImageSectionProps){
-  const imageContent = section.contents?.find((c: ContentDto) => c.contentKey === 'image');
+export default function ContentImageSection({ sectionId, pageData, reverse = false }: ContentImageSectionProps){
+  const {content, hasContent} = useSectionContent(pageData, sectionId)
+  const imageContent = useContentByKey(content || [], 'image')
   const imageMediaId = imageContent?.value ? parseInt(imageContent.value) : null;
   const {getMediaUrl} = useMedia()
 
   const imageUrl = imageMediaId 
-    ? getMediaUrl(imageMediaId) as string
+    ? getMediaUrl(imageMediaId)
     : '/placeholder-image.jpg';
+
+  
 
   const renderContent = () => (
     <div className="space-y-6">
-      {section.contents?.map((content: ContentDto) => {
-        if (content.contentKey === 'headline') {
+      {content?.map((content) => {
+        if (content.content_key === 'headline') {
           return (
             <h2 key={content.id} className="text-3xl font-bold mb-4 uppercase">
               {content.value}
             </h2>
           );
         }
-        if (content.contentKey.includes('content') || content.contentKey === 'intro-text') {
+        if (content.content_key.includes('content') || content.content_key === 'intro-text') {
           return (
             <div key={content.id} className="text-gray-700">
-              {content.contentType === 'html' ? (
+              {content.content_type === 'html' ? (
                 <>
                 <div className="wysiwyg max-w-none" dangerouslySetInnerHTML={{ __html: content.value || '' }} />
                 </>
@@ -58,7 +61,7 @@ export default function ContentImageSection({ section, reverse = false }: Conten
         //     );
         //   }
         // }
-        if (content.contentKey === 'cta-text') {
+        if (content.content_key === 'cta-text') {
           return (
             <button 
               key={content.id} 
@@ -130,6 +133,8 @@ export default function ContentImageSection({ section, reverse = false }: Conten
   //     </section>
   //   );
   // }
+
+  if (!hasContent) return;
 
   return (
     <section className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 py-16 px-8 items-start">

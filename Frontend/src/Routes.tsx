@@ -1,17 +1,20 @@
 // import React from "react";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./routes/Home";
+import Home from "./routes/dynamic/Home";
 import Wrapper from "./components/Wrapper";
-import About from "./routes/About";
-import YouthAcademy from "./routes/Youth";
-import Recreational from "./routes/Recreational";
+import About from "./routes/dynamic/About";
+import YouthAcademy from "./routes/dynamic/Youth";
+import Recreational from "./routes/dynamic/Recreational";
 import { ContactPage } from "./routes/Contact";
-import Competitive from "./routes/Competitive";
+import Competitive from "./routes/dynamic/Competitive";
 import Tryouts from "./routes/Tryouts";
-import News from "./routes/News";
-import Events from "./routes/Events";
-import { Media} from "./routes/Media";
+import Media from "./routes/admin/Media";
+import PageNotFound from "./routes/PageNotFound";
+import Login from "./routes/Login";
+import ProtectedAdminRoute from "./routes/admin/ProtectedAdminRoute";
+import Page from "./routes/admin/Page";
+import AdminDashboard from "./routes/admin/AdminDashboard";
 
 
 const App = () => {
@@ -30,7 +33,13 @@ const App = () => {
           <Route path="/recreational" element={<Recreational />} />
           <Route path="/competitive" element={<Competitive />} />
         </Route>
-          <Route path="/media" element={<Media />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<ProtectedAdminRoute />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="pages" element={<Page />} />
+          <Route path="media" element={<Media />} />
+        </Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

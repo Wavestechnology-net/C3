@@ -15,6 +15,9 @@ import { staffApi } from "./apis/staffApi";
 import authSlice from "./authSlice";
 import permissionSlice from "./userPermissionSlice";
 import { mediaApi } from "./apis/mediaApi";
+import { pageApi } from "./apis/pageApi";
+import { autoLogoutMiddleware } from "./autoLogoutMiddleware";
+import { publicApi } from "./apis/publicApi";
 
 // Persist config for slices
 const authPersistConfig = {
@@ -32,6 +35,7 @@ const rootReducer = combineReducers({
   permission: persistReducer(permissionPersistConfig, permissionSlice),
   auth: persistReducer(authPersistConfig, authSlice),
   [authApi.reducerPath]: authApi.reducer,
+  [pageApi.reducerPath]: pageApi.reducer,
   [newsApi.reducerPath]: newsApi.reducer,
   [tryoutApi.reducerPath]: tryoutApi.reducer,
   [tryoutRegistrationApi.reducerPath]: tryoutRegistrationApi.reducer,
@@ -40,6 +44,7 @@ const rootReducer = combineReducers({
   [teamApi.reducerPath]: teamApi.reducer,
   [staffApi.reducerPath]: staffApi.reducer,
   [mediaApi.reducerPath]: mediaApi.reducer,
+  [publicApi.reducerPath]: publicApi.reducer,
 });
 
 // Store configuration
@@ -50,6 +55,7 @@ const store = configureStore({
       serializableCheck: false,
     }).concat(
       authApi.middleware,
+      pageApi.middleware,
       newsApi.middleware,
       tryoutApi.middleware,
       tryoutRegistrationApi.middleware,
@@ -57,7 +63,9 @@ const store = configureStore({
       programRegistrationApi.middleware,
       teamApi.middleware,
       staffApi.middleware,
-      mediaApi.middleware
+      mediaApi.middleware,
+      publicApi.middleware,
+      autoLogoutMiddleware
     ),
 });
 

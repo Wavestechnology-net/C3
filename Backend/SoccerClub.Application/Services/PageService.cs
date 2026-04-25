@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SoccerClub.Application.DTOs;
 using SoccerClub.Application.Interfaces;
 using SoccerClub.Core.Entities;
@@ -11,11 +12,13 @@ namespace SoccerClub.Application.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly IAppLogger<PageService> _logger;
+        private readonly IMapper _mapper;
 
-        public PageService(ApplicationDbContext context, IAppLogger<PageService> logger)
+        public PageService(ApplicationDbContext context, IAppLogger<PageService> logger, IMapper mapper)
         {
             _context = context;
             _logger = logger;
+            _mapper = mapper;
         }
 
         public async Task<PageDTO> GetPageBySlugAsync(string slug)
@@ -39,58 +42,58 @@ namespace SoccerClub.Application.Services
             }
 
             // Manual mapping
-            var pageDto = new PageDTO
-            {
-                Id = page.Id,
-                Slug = page.Slug,
-                Title = page.Title,
-                Sections = page.Sections
-                    .OrderBy(s => s.SortOrder)
-                    .Select(s => new SectionDTO
-                    {
-                        Id = s.Id,
-                        Name = s.Name,
-                        SectionType = s.SectionType,
-                        SortOrder = s.SortOrder,
-                        BackgroundMedia = s.BackgroundMedia != null
-                            ? new MediaDTO
-                            {
-                                Id = s.BackgroundMedia.Id,
-                                FileName = s.BackgroundMedia.FileName,
-                                MediaUrl = s.BackgroundMedia.MediaUrl,
-                                MediaType = s.BackgroundMedia.MediaType,
-                                AltText = s.BackgroundMedia.AltText
-                            }
-                            : null,
-                        Contents = s.Contents
-                            .Where(c => c.IsPublished)
-                            .Select(c => new ContentDTO
-                            {
-                                Id = c.Id,
-                                ContentKey = c.ContentKey,
-                                ContentType = c.ContentType,
-                                Value = c.Value,
-                                Locale = c.Locale,
-                                IsPublished = c.IsPublished,
-                                Metadata = c.Metadata,
-                                Media = c.ContentMedias
-                                    .OrderBy(cm => cm.SortOrder)
-                                    .Select(cm => new MediaDTO
-                                    {
-                                        Id = cm.Media.Id,
-                                        FileName = cm.Media.FileName,
-                                        MediaUrl = cm.Media.MediaUrl,
-                                        MediaType = cm.Media.MediaType,
-                                        AltText = cm.Media.AltText
-                                    })
-                                    .ToList()
-                            })
-                            .ToList()
-                    })
-                    .ToList()
-            };
+            // var pageDto = new PageDTO
+            // {
+            //     Id = page.Id,
+            //     Slug = page.Slug,
+            //     Title = page.Title,
+            //     Sections = page.Sections
+            //         .OrderBy(s => s.SortOrder)
+            //         .Select(s => new SectionDTO
+            //         {
+            //             Id = s.Id,
+            //             Name = s.Name,
+            //             SectionType = s.SectionType,
+            //             SortOrder = s.SortOrder,
+            //             BackgroundMedia = s.BackgroundMedia != null
+            //                 ? new MediaDTO
+            //                 {
+            //                     Id = s.BackgroundMedia.Id,
+            //                     FileName = s.BackgroundMedia.FileName,
+            //                     MediaUrl = s.BackgroundMedia.MediaUrl,
+            //                     MediaType = s.BackgroundMedia.MediaType,
+            //                     AltText = s.BackgroundMedia.AltText
+            //                 }
+            //                 : null,
+            //             Contents = s.Contents
+            //                 .Where(c => c.IsPublished)
+            //                 .Select(c => new ContentDTO
+            //                 {
+            //                     Id = c.Id,
+            //                     ContentKey = c.ContentKey,
+            //                     ContentType = c.ContentType,
+            //                     Value = c.Value,
+            //                     Locale = c.Locale,
+            //                     IsPublished = c.IsPublished,
+            //                     Metadata = c.Metadata,
+            //                     Media = c.ContentMedias
+            //                         .OrderBy(cm => cm.SortOrder)
+            //                         .Select(cm => new MediaDTO
+            //                         {
+            //                             Id = cm.Media.Id,
+            //                             FileName = cm.Media.FileName,
+            //                             MediaUrl = cm.Media.MediaUrl,
+            //                             MediaType = cm.Media.MediaType,
+            //                             AltText = cm.Media.AltText
+            //                         })
+            //                         .ToList()
+            //                 })
+            //                 .ToList()
+            //         })
+            //         .ToList()
+            // };
 
-            return pageDto;
+            return _mapper.Map<PageDTO>(page);
         }
 
         public async Task<PageDTO?> UpdatePageAsync(string slug, PageDTO request)
@@ -108,7 +111,7 @@ namespace SoccerClub.Application.Services
                 return null;
 
             // Update Page properties
-            page.Title = request.Title;
+            page.Title = request.Title ?? "";
             page.Slug = request.Slug ?? page.Slug;
             page.UpdatedAt = DateTime.UtcNow;
 
@@ -123,28 +126,41 @@ namespace SoccerClub.Application.Services
                     section.SortOrder = sectionDto.SortOrder;
 
                     // Handle Background Media
+                    // if (sectionDto.BackgroundMedia != null)
+                    // {
+                    //     if (section.BackgroundMedia == null)
+                    //     {
+                    //         // create new Media
+                    //         section.BackgroundMedia = new Media
+                    //         {
+                    //             FileName = sectionDto.BackgroundMedia.FileName,
+                    //             MediaUrl = sectionDto.BackgroundMedia.MediaUrl,
+                    //             MediaType = sectionDto.BackgroundMedia.MediaType,
+                    //             AltText = sectionDto.BackgroundMedia.AltText
+                    //         };
+                    //     }
+                    //     else
+                    //     {
+                    //         // update existing Media
+                    //         section.BackgroundMedia.FileName = sectionDto.BackgroundMedia.FileName;
+                    //         section.BackgroundMedia.MediaUrl = sectionDto.BackgroundMedia.MediaUrl;
+                    //         section.BackgroundMedia.MediaType = sectionDto.BackgroundMedia.MediaType;
+                    //         section.BackgroundMedia.AltText = sectionDto.BackgroundMedia.AltText;
+                    //     }
+                    // }
+
                     if (sectionDto.BackgroundMedia != null)
                     {
                         if (section.BackgroundMedia == null)
                         {
-                            // create new Media
-                            section.BackgroundMedia = new Media
-                            {
-                                FileName = sectionDto.BackgroundMedia.FileName,
-                                MediaUrl = sectionDto.BackgroundMedia.MediaUrl,
-                                MediaType = sectionDto.BackgroundMedia.MediaType,
-                                AltText = sectionDto.BackgroundMedia.AltText
-                            };
+                            section.BackgroundMedia = _mapper.Map<Media>(sectionDto.BackgroundMedia);
                         }
                         else
                         {
-                            // update existing Media
-                            section.BackgroundMedia.FileName = sectionDto.BackgroundMedia.FileName;
-                            section.BackgroundMedia.MediaUrl = sectionDto.BackgroundMedia.MediaUrl;
-                            section.BackgroundMedia.MediaType = sectionDto.BackgroundMedia.MediaType;
-                            section.BackgroundMedia.AltText = sectionDto.BackgroundMedia.AltText;
+                            _mapper.Map(sectionDto.BackgroundMedia, section.BackgroundMedia);
                         }
                     }
+
 
                     // Handle Contents
                     foreach (var contentDto in sectionDto.Contents)
@@ -152,12 +168,14 @@ namespace SoccerClub.Application.Services
                         var content = section.Contents.FirstOrDefault(c => c.Id == contentDto.Id);
                         if (content != null)
                         {
-                            content.ContentKey = contentDto.ContentKey;
-                            content.ContentType = contentDto.ContentType;
-                            content.Value = contentDto.Value;
-                            content.Locale = contentDto.Locale;
-                            content.IsPublished = contentDto.IsPublished;
-                            content.Metadata = contentDto.Metadata;
+                            // content.ContentKey = contentDto.ContentKey;
+                            // content.ContentType = contentDto.ContentType;
+                            // content.Value = contentDto.Value;
+                            // content.Locale = contentDto.Locale;
+                            // content.IsPublished = contentDto.IsPublished;
+                            // content.Metadata = contentDto.Metadata;
+
+                            _mapper.Map(contentDto, content);
 
                             // Update Media inside Content
                             foreach (var mediaDto in contentDto.Media)
@@ -167,21 +185,24 @@ namespace SoccerClub.Application.Services
 
                                 if (existingMedia != null)
                                 {
-                                    existingMedia.FileName = mediaDto.FileName;
-                                    existingMedia.MediaUrl = mediaDto.MediaUrl;
-                                    existingMedia.MediaType = mediaDto.MediaType;
-                                    existingMedia.AltText = mediaDto.AltText;
+                                    // existingMedia.FileName = mediaDto.FileName;
+                                    // existingMedia.MediaUrl = mediaDto.MediaUrl;
+                                    // existingMedia.MediaType = mediaDto.MediaType;
+                                    // existingMedia.AltText = mediaDto.AltText;
+
+                                    _mapper.Map(existingMedia, mediaDto);
                                 }
                                 else
                                 {
                                     // add new media
-                                    var newMedia = new Media
-                                    {
-                                        FileName = mediaDto.FileName,
-                                        MediaUrl = mediaDto.MediaUrl,
-                                        MediaType = mediaDto.MediaType,
-                                        AltText = mediaDto.AltText
-                                    };
+                                    // var newMedia = new Media
+                                    // {
+                                    //     FileName = mediaDto.FileName,
+                                    //     MediaUrl = mediaDto.MediaUrl,
+                                    //     MediaType = mediaDto.MediaType,
+                                    //     AltText = mediaDto.AltText
+                                    // };
+                                    var newMedia = _mapper.Map<Media>(mediaDto);
 
                                     content.ContentMedias.Add(new ContentMedia
                                     {
@@ -201,5 +222,23 @@ namespace SoccerClub.Application.Services
             return await GetPageBySlugAsync(page.Slug);
         }
 
+        public async Task<List<PageDTO>> GetAllPagesAsync()
+        {
+            _logger.LogInformation("Fetching all pages");
+
+            var pages = await _context.Pages
+                .AsNoTracking()
+                .OrderBy(p => p.Title)
+                .ToListAsync();
+
+            // var pageDtos = pages.Select(page => new PageDTO
+            // {
+            //     Id = page.Id,
+            //     Slug = page.Slug,
+            //     Title = page.Title
+            // }).ToList();
+
+            return _mapper.Map<List<PageDTO>>(pages);
+        }
     }
 }

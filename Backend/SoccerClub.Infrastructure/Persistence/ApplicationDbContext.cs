@@ -8,8 +8,9 @@ namespace SoccerClub.Infrastructure.Persistence
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         //DbSets for your entities can be defined here
+        public DbSet<User> Users { get; set; }
         public DbSet<News> News { get; set; }
-        public DbSet<Staff> Staffs { get; set; }
+		public DbSet<Staff> Staffs { get; set; }
         public DbSet<Tryout> Tryouts { get; set; }
         public DbSet<TryoutRegistration> TryoutRegistrations { get; set; }
         public DbSet<Team> Teams { get; set; }
@@ -25,6 +26,9 @@ namespace SoccerClub.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>().HasIndex(u => u.Username).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
         }
     }
 }

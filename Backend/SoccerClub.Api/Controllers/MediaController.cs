@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SoccerClub.Api.Models;
 using SoccerClub.Application.DTOs;
 using SoccerClub.Application.Interfaces;
@@ -47,8 +48,9 @@ namespace SoccerClub.Api.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost("[action]")]
-        public async Task<IActionResult> UploadMedia([FromForm] MediaUploadDTO uploadDto)
+		public async Task<IActionResult> UploadMedia([FromForm] MediaUploadDTO uploadDto)
         {
             try
             {
@@ -61,8 +63,9 @@ namespace SoccerClub.Api.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("[action]")]
-        public async Task<IActionResult> DeleteMedia(int id)
+		public async Task<IActionResult> DeleteMedia(int id)
         {
             try
             {

@@ -3,14 +3,16 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 
 interface User {
-  userId: number | null;
-  userFullName: string | null;
-  userRoleName: string | null;
+  id: number;
+  username: string;
+  email: string;
+  role: string;
 }
 
 interface AuthState {
   token: string | null;
   user: User | null;
+  expiresAt?: string;
   isAuthenticated: boolean;
 }
 
@@ -27,37 +29,21 @@ const authSlice = createSlice({
     loginSuccess: (
       state,
       action: PayloadAction<{
-        authtoken: string;
+        token: string;
         user: User;
+        expiresAt: string;
       }>
     ) => {
-      state.token = action.payload.authtoken;
+      state.token = action.payload.token;
       state.user = action.payload.user;
+      state.expiresAt = action.payload.expiresAt;
       state.isAuthenticated = true;
-      localStorage.setItem("authToken", action.payload.authtoken);
-      localStorage.setItem(
-        "userId",
-        action.payload.user.userId?.toString() || ""
-      );
     },
     logout: (state) => {
       state.token = null;
       state.user = null;
+      state.expiresAt = undefined;
       state.isAuthenticated = false;
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("userId");
-    },
-    setTokenFromStorage: (state) => {
-      const token = localStorage.getItem("authToken");
-      if (token) {
-        state.token = token;
-        state.isAuthenticated = true;
-      }
-    },
-    refreshTokenSuccess: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
-      state.isAuthenticated = true;
-      localStorage.setItem("authToken", action.payload);
     },
   },
 });
@@ -65,14 +51,10 @@ const authSlice = createSlice({
 export const {
   loginSuccess,
   logout,
-  setTokenFromStorage,
-  refreshTokenSuccess,
 } = authSlice.actions;
 export const selectIsAuthenticated = (state: RootState) =>
   state.auth.isAuthenticated;
 
-export const loggedUser = {
-  user: (state: RootState) => state.auth.user,
-};
+export const loggedUser = (state: RootState) => state.auth.user
 
 export default authSlice.reducer;

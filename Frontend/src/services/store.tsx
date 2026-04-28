@@ -17,6 +17,7 @@ import permissionSlice from "./userPermissionSlice";
 import { mediaApi } from "./apis/mediaApi";
 import { pageApi } from "./apis/pageApi";
 import { autoLogoutMiddleware } from "./autoLogoutMiddleware";
+import { publicApi } from "./apis/publicApi";
 
 // Persist config for slices
 const authPersistConfig = {
@@ -43,6 +44,7 @@ const rootReducer = combineReducers({
   [teamApi.reducerPath]: teamApi.reducer,
   [staffApi.reducerPath]: staffApi.reducer,
   [mediaApi.reducerPath]: mediaApi.reducer,
+  [publicApi.reducerPath]: publicApi.reducer,
 });
 
 // Store configuration
@@ -62,6 +64,7 @@ const store = configureStore({
       teamApi.middleware,
       staffApi.middleware,
       mediaApi.middleware,
+      publicApi.middleware,
       autoLogoutMiddleware
     ),
 });

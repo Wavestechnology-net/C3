@@ -16,7 +16,7 @@ using SoccerClub.Infrastructure.Repositories;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddHealthChecks();
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)  // Read configuration from appsettings.json
@@ -35,7 +35,9 @@ try
     {
         options.AddPolicy("AllowOrigins", policyBuilder =>
         {
-            policyBuilder.WithOrigins("http://localhost:5173")
+            var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
+
+			policyBuilder.WithOrigins(allowedOrigins ?? [])
                          .AllowAnyMethod()
                          .AllowAnyHeader()
                          .AllowCredentials();
@@ -171,6 +173,8 @@ try
     app.UseAuthorization();
 
     app.MapControllers();
+
+    app.MapHealthChecks("/health");
 
     app.Run();
 }

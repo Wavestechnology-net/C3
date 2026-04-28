@@ -1,13 +1,13 @@
 // import React from "react";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./routes/Home";
+import Home from "./routes/dynamic/Home";
 import Wrapper from "./components/Wrapper";
-import About from "./routes/About";
-import YouthAcademy from "./routes/Youth";
-import Recreational from "./routes/Recreational";
+import About from "./routes/dynamic/About";
+import YouthAcademy from "./routes/dynamic/Youth";
+import Recreational from "./routes/dynamic/Recreational";
 import { ContactPage } from "./routes/Contact";
-import Competitive from "./routes/Competitive";
+import Competitive from "./routes/dynamic/Competitive";
 import Tryouts from "./routes/Tryouts";
 import Media from "./routes/admin/Media";
 import PageNotFound from "./routes/PageNotFound";

@@ -1,7 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseQuery } from '../baseQuery';
+import { createApi } from '@reduxjs/toolkit/query/react';
+// import { baseQuery } from '../baseQuery';
 import { baseQueryWithAuth } from '../baseQueryWithAuth';
-import type { ContentBlock } from '../../types';
+import type { Content } from '../../types';
+// import type { ContentBlock } from '../types';
 
 export interface PageType {
   id: number;
@@ -50,33 +51,33 @@ export const pageApi = createApi({
     getPageBySlug: builder.query<PageType, string>({
       query: (slug) => `/api/pages/${slug}`,
       transformResponse: (response) => response?.data,
-      providesTags: (result, error, slug) => 
-        result 
+      providesTags: (result, error, slug) =>
+        result
           ? [{ type: 'Page' as const, id: slug }]
-          : [{ type: 'Page' as const, id: 'LIST' }], 
+          : [{ type: 'Page' as const, id: 'LIST' }],
     }),
     getSectionsByPageId: builder.query<SectionType[], number>({
       query: (pageId) => `/api/pages/${pageId}/sections`,
       transformResponse: (response) => response?.data,
-      providesTags: (result) => 
-        result 
+      providesTags: (result) =>
+        result
           ? [
-              ...result.map(({ id }) => ({ type: 'Sections' as const, id })),
-              { type: 'Sections', id: 'LIST' },
-            ]
+            ...result.map(({ id }) => ({ type: 'Sections' as const, id })),
+            { type: 'Sections', id: 'LIST' },
+          ]
           : [{ type: 'Sections', id: 'LIST' }],
     }),
     getContentBySectionId: builder.query<ContentType[], number>({
       query: (sectionId) => `/api/sections/${sectionId}/content`,
-      providesTags: (result) => 
-        result 
+      providesTags: (result) =>
+        result
           ? [
-              ...result.map(({ id }) => ({ type: 'Content' as const, id })),
-              { type: 'Content', id: 'LIST' },
-            ]
+            ...result.map(({ id }) => ({ type: 'Content' as const, id })),
+            { type: 'Content', id: 'LIST' },
+          ]
           : [{ type: 'Content', id: 'LIST' }],
     }),
-    updateSection: builder.mutation<void, { sectionId: number; content: ContentBlock[] }>({
+    updateSection: builder.mutation<void, { sectionId: number; content: Content[] }>({
       query: ({ sectionId, content }) => ({
         url: `/api/sections/${sectionId}`,
         method: 'PUT',
@@ -89,9 +90,14 @@ export const pageApi = createApi({
   }),
 });
 
-export const { 
-  useGetPagesQuery, 
-  useGetSectionsByPageIdQuery, 
+export const {
+  // useGetPagesQuery,
+  // useGetSectionsByPageIdQuery,
+  // useGetContentBySectionIdQuery,
+  // useUpdateSectionMutation,
+  // useGetPageBySlugQuery
+  useGetPagesQuery,
+  useGetSectionsByPageIdQuery,
   useGetContentBySectionIdQuery,
   useUpdateSectionMutation,
   useGetPageBySlugQuery

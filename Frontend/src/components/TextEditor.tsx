@@ -4,12 +4,12 @@ import Link from '@tiptap/extension-link';
 import BulletList from '@tiptap/extension-bullet-list';
 import OrderedList from '@tiptap/extension-ordered-list';
 import TextAlign from "@tiptap/extension-text-align"
-import { 
-  Bold, 
-  Italic, 
-  Heading1, 
-  Heading2, 
-  List, 
+import {
+  Bold,
+  Italic,
+  Heading1,
+  Heading2,
+  List,
   ListOrdered,
   Link as LinkIcon,
   Heading3,
@@ -17,7 +17,8 @@ import {
   AlignLeft,
   AlignCenter,
   AlignRight,
-  AlignJustify} from "lucide-react";
+  AlignJustify
+} from "lucide-react";
 import { Toggle } from "./ui/toggle";
 import Heading from '@tiptap/extension-heading';
 import { useEffect } from 'react';
@@ -27,7 +28,7 @@ interface TextEditorProps {
   onChange: (content: string) => void;
 }
 
-export default function TextEditor({ content, onChange }: TextEditorProps){
+export default function TextEditor({ content, onChange }: TextEditorProps) {
 
   const editor = useEditor({
     extensions: [
@@ -38,7 +39,7 @@ export default function TextEditor({ content, onChange }: TextEditorProps){
         heading: false
       }),
       Heading.configure({
-        levels: [1,2,3,4],
+        levels: [1, 2, 3, 4],
         HTMLAttributes: {
           class: "wysiwyg-heading"
         }
@@ -46,7 +47,7 @@ export default function TextEditor({ content, onChange }: TextEditorProps){
       Link.configure({
         openOnClick: "whenNotEditable",
         HTMLAttributes: {
-            class: 'text-blue-600 hover:text-blue-800 underline hover:underline cursor-pointer'
+          class: 'text-blue-600 hover:text-blue-800 underline hover:underline cursor-pointer'
         }
       }),
       BulletList.configure({
@@ -67,13 +68,13 @@ export default function TextEditor({ content, onChange }: TextEditorProps){
     },
   });
 
-useEffect(() => {
-  if (editor) {
-    setTimeout(() => {
-      editor.commands.focus();
-    }, 0);
-  }
-}, [editor]);
+  useEffect(() => {
+    if (editor) {
+      setTimeout(() => {
+        editor.commands.focus();
+      }, 0);
+    }
+  }, [editor]);
 
   if (!editor) {
     return null;
@@ -83,17 +84,17 @@ useEffect(() => {
     <div className="border border-input rounded-md">
       {/* Toolbar */}
       <Toolbar editor={editor} />
-      
+
       {/* Editor Content */}
-      <EditorContent 
-        editor={editor} 
-        className="max-w-none min-h-[200px] max-h-80 overflow-y-scroll p-4 focus:outline-none" 
+      <EditorContent
+        editor={editor}
+        className="max-w-none min-h-[200px] max-h-80 overflow-y-scroll p-4 focus:outline-none"
       />
     </div>
   );
 };
 
-function Toolbar({editor}: {editor: Editor}){
+function Toolbar({ editor }: { editor: Editor }) {
 
   const {
     isBold,
@@ -113,7 +114,7 @@ function Toolbar({editor}: {editor: Editor}){
     isAlignJustify,
   } = useEditorState({
     editor,
-    selector: snapshot => ({ 
+    selector: snapshot => ({
       currentSelection: snapshot.editor.state.selection,
       isBold: snapshot.editor.isActive('bold') ?? false,
       canBold: snapshot.editor.can().toggleBold(),
@@ -135,123 +136,123 @@ function Toolbar({editor}: {editor: Editor}){
 
   return (
     <div className="flex flex-wrap items-center gap-1 p-2 border-b border-input bg-muted list">
-        <Toggle
-          size="sm"
-          variant={isBold ? "outline" : "default"}
-          disabled={!canBold}
-          onPressedChange={() => editor.chain().focus().toggleBold().run()}
-        >
-          <Bold className="h-4 w-4" />
-        </Toggle>
-        <Toggle
-          size="sm"
-          variant={isItalic ? "outline" : "default"}
-          disabled={!canItalic}
-          onPressedChange={() => editor.chain().focus().toggleItalic().run()}
-        >
-          <Italic className="h-4 w-4" />
-        </Toggle>
-        <Toggle
-          size="sm"
-          variant={isHeading1 ? "outline" : "default"}
-          onPressedChange={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        >
-          <Heading1 className="h-4 w-4" />
-        </Toggle>
-        <Toggle
-          size="sm"
-          variant={isHeading2 ? "outline" : "default"}
-          onPressedChange={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        >
-          <Heading2 className="h-4 w-4" />
-        </Toggle>
-        <Toggle
-          size="sm"
-          variant={isHeading3 ? "outline" : "default"}
-          onPressedChange={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        >
-          <Heading3 className="h-4 w-4" />
-        </Toggle>
-        <Toggle
-          size="sm"
-          variant={isHeading4 ? "outline" : "default"}
-          onPressedChange={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-        >
-          <Heading4 className="h-4 w-4" />
-        </Toggle>
-        <Toggle
-          size="sm"
-          variant={isBulletList ? "outline" : "default"}
-          onPressedChange={() => editor.chain().focus().toggleBulletList().run()}
-        >
-          <List className="h-4 w-4" />
-        </Toggle>
-        <Toggle
-          size="sm"
-          variant={isOrderedList ? "outline" : "default"}
-          onPressedChange={() => editor.chain().focus().toggleOrderedList().run()}
-        >
-          <ListOrdered className="h-4 w-4" />
-        </Toggle>
-        <Toggle
-          size="sm"
-          variant={isLink ? "outline" : "default"}
-          onPressedChange={() => {
-            if (editor.isActive('link')) {
-              editor.chain().focus().unsetLink().run();
-              return;
-            }
-            const url = window.prompt('Enter URL:');
-            if (url) {
-              editor.chain().focus().setLink({ href: url }).run();
-            }
-          }}
-        >
-          <LinkIcon className="h-4 w-4" />
-        </Toggle>
-
-        <Toggle
-          size="sm"
-          variant={isAlignLeft ? "outline" : "default"}
-          onPressedChange={() =>
-            editor.chain().focus().setTextAlign('left').run()
+      <Toggle
+        size="sm"
+        variant={isBold ? "outline" : "default"}
+        disabled={!canBold}
+        onPressedChange={() => editor.chain().focus().toggleBold().run()}
+      >
+        <Bold className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        variant={isItalic ? "outline" : "default"}
+        disabled={!canItalic}
+        onPressedChange={() => editor.chain().focus().toggleItalic().run()}
+      >
+        <Italic className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        variant={isHeading1 ? "outline" : "default"}
+        onPressedChange={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+      >
+        <Heading1 className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        variant={isHeading2 ? "outline" : "default"}
+        onPressedChange={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+      >
+        <Heading2 className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        variant={isHeading3 ? "outline" : "default"}
+        onPressedChange={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+      >
+        <Heading3 className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        variant={isHeading4 ? "outline" : "default"}
+        onPressedChange={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
+      >
+        <Heading4 className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        variant={isBulletList ? "outline" : "default"}
+        onPressedChange={() => editor.chain().focus().toggleBulletList().run()}
+      >
+        <List className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        variant={isOrderedList ? "outline" : "default"}
+        onPressedChange={() => editor.chain().focus().toggleOrderedList().run()}
+      >
+        <ListOrdered className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        variant={isLink ? "outline" : "default"}
+        onPressedChange={() => {
+          if (editor.isActive('link')) {
+            editor.chain().focus().unsetLink().run();
+            return;
           }
-        >
-          <AlignLeft className="h-4 w-4" />
-        </Toggle>
-
-        <Toggle
-          size="sm"
-          variant={isAlignCenter ? "outline" : "default"}
-          onPressedChange={() =>
-            editor.chain().focus().setTextAlign('center').run()
+          const url = window.prompt('Enter URL:');
+          if (url) {
+            editor.chain().focus().setLink({ href: url }).run();
           }
-        >
-          <AlignCenter className="h-4 w-4" />
-        </Toggle>
+        }}
+      >
+        <LinkIcon className="h-4 w-4" />
+      </Toggle>
 
-        <Toggle
-          size="sm"
-          variant={isAlignRight ? "outline" : "default"}
-          onPressedChange={() =>
-            editor.chain().focus().setTextAlign('right').run()
-          }
-        >
-          <AlignRight className="h-4 w-4" />
-        </Toggle>
+      <Toggle
+        size="sm"
+        variant={isAlignLeft ? "outline" : "default"}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign('left').run()
+        }
+      >
+        <AlignLeft className="h-4 w-4" />
+      </Toggle>
 
-        <Toggle
-          size="sm"
-          variant={isAlignJustify ? "outline" : "default"}
-          onPressedChange={() =>
-            editor.chain().focus().setTextAlign('justify').run()
-          }
-        >
-          <AlignJustify className="h-4 w-4" />
-        </Toggle>
-        
-        {/* Image Insert Button */}
-        {/* <Dialog open={isImageDialogOpen} onOpenChange={setIsImageDialogOpen}>
+      <Toggle
+        size="sm"
+        variant={isAlignCenter ? "outline" : "default"}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign('center').run()
+        }
+      >
+        <AlignCenter className="h-4 w-4" />
+      </Toggle>
+
+      <Toggle
+        size="sm"
+        variant={isAlignRight ? "outline" : "default"}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign('right').run()
+        }
+      >
+        <AlignRight className="h-4 w-4" />
+      </Toggle>
+
+      <Toggle
+        size="sm"
+        variant={isAlignJustify ? "outline" : "default"}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign('justify').run()
+        }
+      >
+        <AlignJustify className="h-4 w-4" />
+      </Toggle>
+
+      {/* Image Insert Button */}
+      {/* <Dialog open={isImageDialogOpen} onOpenChange={setIsImageDialogOpen}>
           <DialogTrigger asChild>
             <Toggle size="sm">
               <ImageIcon className="h-4 w-4" />
@@ -306,6 +307,6 @@ function Toolbar({editor}: {editor: Editor}){
             </ScrollArea>
           </DialogContent>
         </Dialog> */}
-      </div>
+    </div>
   )
 }

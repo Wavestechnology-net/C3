@@ -53,3 +53,29 @@ export interface MediaUploadDto {
   file: File;
   altText: string;
 }
+
+export interface ProductDto {
+  productId: number;
+  name: string;
+  price: number;
+  category: "tshirt" | "shorts" | "shoes";
+  imageUrl?: string;
+}
+
+export interface CartItem {
+  productId: number;
+  name: string;
+  price: number;
+  quantity: number;
+  imageUrl?: string;
+}
+
+export interface OrderItemDto {
+  productId: number;
+  quantity: number;
+}
+
+export interface CheckoutRequestDto {
+  userEmail: string;
+  items: OrderItemDto[];
+}

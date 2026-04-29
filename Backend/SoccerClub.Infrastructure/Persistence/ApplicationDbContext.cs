@@ -23,6 +23,12 @@ namespace SoccerClub.Infrastructure.Persistence
         public DbSet<Media> Media { get; set; }
         public DbSet<ContentMedia> ContentMedia { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<OrderItem> OrderItems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -5,16 +5,16 @@ import ContentSection from "../../components/sections/ContentSection";
 import ContentImageSection from "../../components/sections/ContentImageSection";
 // import { useGetAllMediaQuery } from "../../services/apis/mediaApi";
 import type { SectionDto } from "../../types";
-import PageNotFound from "../PageNotFound";
+// import PageNotFound from "../PageNotFound";
 import PageDataErrorFallback from "../../components/PageDataErrorFallback";
 import MissionSection from "../../components/sections/MissionSection";
-import WhyJoinSection from "../../components/sections/WhyJoinSection";
+// import WhyJoinSection from "../../components/sections/WhyJoinSection";
 
-export default function About(){
-  const { 
-     data: pageData, 
-     isLoading,
-     isError
+export default function About() {
+  const {
+    data: pageData,
+    isLoading,
+    isError
     // isLoading: pageLoading, 
     // isError: pageError
   } = useGetPageBySlugQuery('about', {
@@ -29,7 +29,7 @@ export default function About(){
   //   isError: mediaError 
   // } = useGetAllMediaQuery();
 
-//   const [showFallback, setShowFallback] = useState(false);
+  //   const [showFallback, setShowFallback] = useState(false);
 
   // Create media URL lookup map
   // const mediaUrls = useMemo(() => {
@@ -46,37 +46,37 @@ export default function About(){
   }, [pageData?.sections]);
 
   // Check for backend down scenario
-//   useEffect(() => {
-//     if ((pageError || mediaError) && !pageData) {
-//       const isNetworkError = 
-//         (pageErrorDetails as any)?.error?.includes('Network Error') ||
-//         (pageErrorDetails as any)?.status === 'FETCH_ERROR';
-      
-//       if (isNetworkError) {
-//         const timer = setTimeout(() => {
-//           setShowFallback(true);
-//         }, 1000);
-        
-//         return () => clearTimeout(timer);
-//       }
-//     }
-//   }, [pageError, mediaError, pageErrorDetails, pageData]);
+  //   useEffect(() => {
+  //     if ((pageError || mediaError) && !pageData) {
+  //       const isNetworkError = 
+  //         (pageErrorDetails as any)?.error?.includes('Network Error') ||
+  //         (pageErrorDetails as any)?.status === 'FETCH_ERROR';
+
+  //       if (isNetworkError) {
+  //         const timer = setTimeout(() => {
+  //           setShowFallback(true);
+  //         }, 1000);
+
+  //         return () => clearTimeout(timer);
+  //       }
+  //     }
+  //   }, [pageError, mediaError, pageErrorDetails, pageData]);
 
   // const isLoading = pageLoading || mediaLoading;
   // const isError = pageError || mediaError;
 
   // Show fallback when backend is down
-//   if (showFallback) {
-//     return (
-//       <div className="w-full">
-//         <iframe 
-//           src="/fallback/about.html" 
-//           className="w-full h-screen border-0"
-//           title="Fallback About Page"
-//         />
-//       </div>
-//     );
-//   }
+  //   if (showFallback) {
+  //     return (
+  //       <div className="w-full">
+  //         <iframe 
+  //           src="/fallback/about.html" 
+  //           className="w-full h-screen border-0"
+  //           title="Fallback About Page"
+  //         />
+  //       </div>
+  //     );
+  //   }
 
 
   if (isLoading) {
@@ -100,14 +100,14 @@ export default function About(){
       case 'content':
         return <ContentSection key={section.id} section={section} />;
       case 'content-image':
-        if(isMissionSection){
+        if (isMissionSection) {
           return <MissionSection key={section.id} section={section} />
         }
         return <ContentImageSection key={section.id} section={section} />;
       case 'image-content':
         return <ContentImageSection key={section.id} section={section} reverse={true} />;
-    //   case 'cta':
-    //     return <CtaSection key={section.id} section={section} />;
+      //   case 'cta':
+      //     return <CtaSection key={section.id} section={section} />;
       default:
         return <ContentSection key={section.id} section={section} />;
     }

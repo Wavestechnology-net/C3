@@ -15,6 +15,8 @@ import Login from "./routes/Login";
 import ProtectedAdminRoute from "./routes/admin/ProtectedAdminRoute";
 import Page from "./routes/admin/Page";
 import AdminDashboard from "./routes/admin/AdminDashboard";
+import { Shop } from "./routes/cart/shop";
+import { Cart } from "./routes/cart/cart";
 
 
 const App = () => {
@@ -32,6 +34,8 @@ const App = () => {
           <Route path="/youth" element={<YouthAcademy />} />
           <Route path="/recreational" element={<Recreational />} />
           <Route path="/competitive" element={<Competitive />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/cart" element={<Cart />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<ProtectedAdminRoute />}>

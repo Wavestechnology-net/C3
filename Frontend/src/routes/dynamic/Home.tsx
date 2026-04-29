@@ -5,15 +5,15 @@ import CarouselSection from "../../components/sections/CarouselSection";
 import ContentImageSection from "../../components/sections/ContentImageSection";
 import PartnerCarouselSection from "../../components/sections/PartnerCarouselSection";
 // import { useGetAllMediaQuery } from "../../services/apis/mediaApi";
-import PageNotFound from "../PageNotFound";
+// import PageNotFound from "../PageNotFound";
 import type { SectionDto } from "../../types";
 import PageDataErrorFallback from "../../components/PageDataErrorFallback";
 
-export default function Home(){
-  const { 
-     data: pageData,
-     isLoading,
-     isError 
+export default function Home() {
+  const {
+    data: pageData,
+    isLoading,
+    isError
     // isLoading: pageLoading, 
     // isError: isPageError, 
     // error 
@@ -25,8 +25,8 @@ export default function Home(){
 
   // const { 
   //    data: mediaData, 
-    // isLoading: mediaLoading, 
-    // isError: isMediaError 
+  // isLoading: mediaLoading, 
+  // isError: isMediaError 
   // } = useGetAllMediaQuery();
 
   // Create media URL lookup map

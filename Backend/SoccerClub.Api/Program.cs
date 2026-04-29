@@ -92,6 +92,8 @@ try
     builder.Services.AddScoped<IMediaService, MediaService>();
     builder.Services.AddScoped<IJwtService, JwtService>();
     builder.Services.AddScoped<ISectionService, SectionService>();
+    builder.Services.AddScoped<IProductService, ProductService>();
+    builder.Services.AddScoped<IOrderService, OrderService>();
 
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();

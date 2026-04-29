@@ -13,11 +13,15 @@ import { teamApi } from "./apis/teamApi";
 import { staffApi } from "./apis/staffApi";
 
 import authSlice from "./authSlice";
+import cartSlice from "./cartSlice";
 import permissionSlice from "./userPermissionSlice";
 import { mediaApi } from "./apis/mediaApi";
 import { pageApi } from "./apis/pageApi";
 import { autoLogoutMiddleware } from "./autoLogoutMiddleware";
 import { publicApi } from "./apis/publicApi";
+import { productApi } from "./apis/productApi";
+import { orderApi } from "./apis/orderApi";
+// import { useDispatch, useSelector, type TypedUseSelectorHook } from "react-redux";
 
 // Persist config for slices
 const authPersistConfig = {
@@ -30,10 +34,16 @@ const permissionPersistConfig = {
   storage,
 };
 
+const cartPersistConfig = {
+  key: "cart",
+  storage,
+};
+
 // Root reducer
 const rootReducer = combineReducers({
   permission: persistReducer(permissionPersistConfig, permissionSlice),
   auth: persistReducer(authPersistConfig, authSlice),
+  cart: persistReducer(cartPersistConfig, cartSlice),
   [authApi.reducerPath]: authApi.reducer,
   [pageApi.reducerPath]: pageApi.reducer,
   [newsApi.reducerPath]: newsApi.reducer,
@@ -45,6 +55,8 @@ const rootReducer = combineReducers({
   [staffApi.reducerPath]: staffApi.reducer,
   [mediaApi.reducerPath]: mediaApi.reducer,
   [publicApi.reducerPath]: publicApi.reducer,
+  [productApi.reducerPath]: productApi.reducer,
+  [orderApi.reducerPath]: orderApi.reducer,
 });
 
 // Store configuration
@@ -65,6 +77,8 @@ const store = configureStore({
       staffApi.middleware,
       mediaApi.middleware,
       publicApi.middleware,
+      productApi.middleware,
+      orderApi.middleware,
       autoLogoutMiddleware
     ),
 });
@@ -72,4 +86,5 @@ const store = configureStore({
 // Persistor
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 export default store;

@@ -8,11 +8,11 @@ import PageDataErrorFallback from "../../components/PageDataErrorFallback";
 import type { SectionDto } from "../../types";
 import WhyJoinSection from "../../components/sections/WhyJoinSection";
 
-export default function Competitive(){
-  const { 
-    data: pageData, 
-    isLoading: pageLoading, 
-    isError: pageError, 
+export default function Competitive() {
+  const {
+    data: pageData,
+    isLoading: pageLoading,
+    isError: pageError,
     // error: pageErrorDetails,
   } = useGetPageBySlugQuery('competitive', {
     refetchOnMountOrArgChange: false,
@@ -35,12 +35,12 @@ export default function Competitive(){
   //     const isNetworkError = 
   //       (pageErrorDetails as any)?.error?.includes('Network Error') ||
   //       (pageErrorDetails as any)?.status === 'FETCH_ERROR';
-      
+
   //     if (isNetworkError) {
   //       const timer = setTimeout(() => {
   //         setShowFallback(true);
   //       }, 1000);
-        
+
   //       return () => clearTimeout(timer);
   //     }
   //   }
@@ -77,21 +77,21 @@ export default function Competitive(){
   }
 
   const renderSection = (section: SectionDto) => {
-    const isWhyJoinSection = section.name?.toLowerCase().includes('why') || 
-                      section.name?.toLowerCase().includes('join');
+    const isWhyJoinSection = section.name?.toLowerCase().includes('why') ||
+      section.name?.toLowerCase().includes('join');
 
     switch (section.sectionType) {
       case 'hero':
-        return <HeroSection key={section.id} section={section}/>;
+        return <HeroSection key={section.id} section={section} />;
       case 'content':
         return <ContentSection key={section.id} section={section} />;
       case 'content-image':
-        if(isWhyJoinSection){
+        if (isWhyJoinSection) {
           return <WhyJoinSection key={section.id} section={section} />
         }
-        return <ContentImageSection key={section.id} section={section}/>;
+        return <ContentImageSection key={section.id} section={section} />;
       case 'image-content':
-        return <ContentImageSection key={section.id} section={section}reverse={true} />;
+        return <ContentImageSection key={section.id} section={section} reverse={true} />;
       // case 'cta':
       //   return <CtaSection key={section.id} section={section} />;
       default:

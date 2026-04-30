@@ -12,17 +12,17 @@ interface UseMediaReturn {
 }
 
 export const useMedia = (): UseMediaReturn => {
-  const { 
-    data: mediaData, 
-    isLoading, 
+  const {
+    data: mediaData,
+    isLoading,
     isError,
-    refetch 
+    refetch
   } = useGetAllMediaQuery();
 
   // Create media URL lookup map
   const mediaUrls = useMemo(() => {
     if (!mediaData?.data) return {};
-    
+
     return mediaData.data.reduce((acc, media) => {
       acc[media.id] = media.mediaUrl;
       return acc;
@@ -31,11 +31,11 @@ export const useMedia = (): UseMediaReturn => {
 
   const media = useMemo(() => {
     if (!mediaData?.data) return {};
-    
+
     return mediaData.data.reduce((acc, media) => {
       acc[media.id] = {
         ...media,
-        mediaUrl: import.meta.env.VITE_STATIC_FILE_SERVER + media.mediaUrl
+        mediaUrl: import.meta.env.VITE_BASE_API_URL + media.mediaUrl
       };
       return acc;
     }, {} as Record<number, MediaDto>);
@@ -44,17 +44,17 @@ export const useMedia = (): UseMediaReturn => {
   // Get media URL by ID
   const getMediaUrl = (mediaId: number): string | null => {
     if (mediaUrls[mediaId]) {
-      return import.meta.env.VITE_STATIC_FILE_SERVER + mediaUrls[mediaId];
+      return import.meta.env.VITE_BASE_API_URL + mediaUrls[mediaId];
     }
-    
+
     return null;
   };
 
-  function getMedia(mediaId: number): MediaDto | null{
+  function getMedia(mediaId: number): MediaDto | null {
     if (media[mediaId]) {
       return media[mediaId];
     }
-    
+
     return null;
   }
 

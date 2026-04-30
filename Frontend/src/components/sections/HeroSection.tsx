@@ -5,15 +5,17 @@ interface HeroSectionProps {
   section: SectionDto;
 }
 
-export default function HeroSection ({ section }: HeroSectionProps){
-    const backgroundImageContent = section.contents?.find((c: ContentDto) => c.contentKey === 'background-image');
-    const backgroundMediaId = backgroundImageContent?.value ? parseInt(backgroundImageContent.value) : null;
-    const {mediaUrls, getMediaUrl} = useMedia()
+export default function HeroSection({ section }: HeroSectionProps) {
+  const backgroundImageContent = section.contents?.find((c: ContentDto) => c.contentKey === 'background-image');
+  const backgroundMediaId = backgroundImageContent?.value ? parseInt(backgroundImageContent.value) : null;
+  const { mediaUrls, getMediaUrl } = useMedia()
 
-    const backgroundImageUrl = backgroundMediaId && mediaUrls
-        ? getMediaUrl(backgroundMediaId)
-        : '/placeholder-hero.jpg';
-        
+  const backgroundImageUrl = backgroundMediaId && mediaUrls
+    ? getMediaUrl(backgroundMediaId)
+    : '/placeholder-hero.jpg';
+
+  console.log(backgroundImageUrl);
+
   return (
     <section
       className="relative bg-cover bg-center h-[100vh] text-white flex items-center justify-center flex-col text-center"
@@ -40,8 +42,8 @@ export default function HeroSection ({ section }: HeroSectionProps){
           }
           if (content.contentKey === 'cta-text') {
             return (
-              <button 
-                key={content.id} 
+              <button
+                key={content.id}
                 className="bg-yellow-300 hover:bg-yellow-400 px-6 py-3 font-bold text-black uppercase w-full sm:w-auto mt-6 transition-colors"
               >
                 {content.value}

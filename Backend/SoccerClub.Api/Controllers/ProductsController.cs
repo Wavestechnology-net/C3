@@ -19,7 +19,7 @@ namespace SoccerClub.Api.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetAllProducts()
         {
             try
@@ -37,7 +37,7 @@ namespace SoccerClub.Api.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetProductById(int id)
         {
             try
@@ -61,8 +61,8 @@ namespace SoccerClub.Api.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateProduct(ProductDTO dto)
+        [HttpPost("[action]")]
+        public async Task<IActionResult> CreateProduct([FromBody]ProductDTO dto)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace SoccerClub.Api.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("[action]")]
         public async Task<IActionResult> UpdateProduct(int id, ProductDTO dto)
         {
             try
@@ -97,7 +97,7 @@ namespace SoccerClub.Api.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("[action]")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             try

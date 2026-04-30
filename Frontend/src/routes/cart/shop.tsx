@@ -1,68 +1,139 @@
-import { useAppDispatch } from "../../hooks/cart";
+import { useEffect, useState } from "react";
 import { useGetProductsQuery } from "../../services/apis/productApi";
+import { useAppDispatch } from "../../hooks/cart";
 import { addToCart } from "../../services/cartSlice";
+import { toast } from "react-toastify";
 
 export function Shop() {
-    const { data, isLoading, isError } = useGetProductsQuery();
+    const BASE_URL = "http://localhost:5073";
+    const { data, isLoading, isError, error } = useGetProductsQuery();
     const dispatch = useAppDispatch();
 
-    const products = data?.data || []; // adjust if your ApiResponse wrapper differs
+    const [category, setCategory] = useState("");
 
-    if (isLoading) {
-        return <div className="p-10 text-center">Loading products...</div>;
-    }
+    const products = data || [];
 
-    if (isError) {
-        return <div className="p-10 text-center text-red-500">Error loading products</div>;
-    }
+    const filteredProducts = category
+        ? products.filter((p: any) => p.category === category)
+        : products;
+
+    useEffect(() => {
+        if (!isLoading && filteredProducts.length === 0) {
+            toast("No products found");
+        }
+    }, [isLoading, filteredProducts]);
 
     return (
-        <div className="bg-white min-h-screen px-4 md:px-16 py-10">
-            <h1 className="text-4xl font-bold text-black mb-8">Shop</h1>
+        <div className="bg-white min-h-screen">
+            {/* HERO */}
+            <div className="relative h-[300px] w-full">
+                <img
+                    src="/home-bg-hero.jpg"
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <h1 className="text-4xl md:text-5xl mt-10 font-bold text-white">
+                        Club Shop
+                    </h1>
+                </div>
+            </div>
 
-            {/* GRID */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                {products.map((product: any) => (
-                    <div
-                        key={product.productId}
-                        className="border rounded-lg shadow-sm overflow-hidden hover:shadow-md transition"
+            {/* CONTENT */}
+            <div className="px-4 md:px-16 py-10">
+                {/* HEADER */}
+                <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+                    <h2 className="text-2xl font-bold text-black">
+                        Shop Products
+                    </h2>
+
+                    {/* FILTER */}
+                    <select
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        className="border px-4 py-2 rounded"
                     >
-                        {/* IMAGE */}
-                        <img
-                            src={product.imageUrl}
-                            alt={product.name}
-                            className="w-full h-64 object-cover"
-                        />
+                        <option value="">All</option>
+                        <option value="tshirt">T-Shirts</option>
+                        <option value="shorts">Shorts</option>
+                        <option value="shoes">Shoes</option>
+                    </select>
+                </div>
 
-                        {/* CONTENT */}
-                        <div className="p-4">
-                            <h2 className="text-lg font-bold text-black">
-                                {product.name}
-                            </h2>
-
-                            <p className="text-[#dc3973] font-semibold mt-1">
-                                ${product.price}
-                            </p>
-
-                            {/* ADD TO CART */}
-                            <button
-                                onClick={() =>
-                                    dispatch(
-                                        addToCart({
-                                            productId: product.productId,
-                                            name: product.name,
-                                            price: product.price,
-                                            imageUrl: product.imageUrl,
-                                        })
-                                    )
-                                }
-                                className="bg-[#fdc700] hover:bg-yellow-400 w-full mt-4 py-2 font-bold text-black"
-                            >
-                                Add to Cart
-                            </button>
-                        </div>
+                {/* LOADING STATE */}
+                {isLoading && (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {[1, 2, 3].map((_, i) => (
+                            <div
+                                key={i}
+                                className="h-64 bg-gray-200 animate-pulse rounded"
+                            />
+                        ))}
                     </div>
-                ))}
+                )}
+
+                {/* EMPTY STATE */}
+                {!isLoading && filteredProducts.length === 0 && (
+                    <div className="text-center py-20">
+                        <h3 className="text-2xl font-semibold text-black">
+                            No products available
+                        </h3>
+                        <p className="text-[#dc3973] mt-2">
+                            Please check back later
+                        </p>
+                    </div>
+                )}
+
+                {/* PRODUCT GRID */}
+                {!isLoading && filteredProducts.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                        {filteredProducts.map((product: any) => (
+                            <div
+                                key={product.productId}
+                                className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition"
+                            >
+                                {/* IMAGE */}
+                                <img
+                                    src={`${BASE_URL}${product.imageUrl}`}
+                                    alt={product.name}
+                                    onError={(e) => {
+                                        (e.target as HTMLImageElement).src = "/placeholder.png";
+                                    }}
+                                    className="w-full h-64 object-cover"
+                                />
+
+                                {/* DETAILS */}
+                                <div className="p-4">
+                                    <h3 className="text-lg font-bold text-black">
+                                        {product.name}
+                                    </h3>
+
+                                    <p className="text-[#dc3973] font-semibold mt-1">
+                                        ${product.price}
+                                    </p>
+
+                                    {/* BUTTON */}
+                                    <button
+                                        onClick={() => {
+                                            dispatch(
+                                                addToCart({
+                                                    productId: product.productId,
+                                                    name: product.name,
+                                                    price: product.price,
+                                                    imageUrl: product.imageUrl,
+                                                })
+                                            );
+
+                                            toast.success(`${product.name} added to cart 🛒`);
+                                        }}
+                                        className="bg-[#fdc700] hover:bg-yellow-400 w-full mt-4 py-2 font-bold text-black"
+                                    >
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

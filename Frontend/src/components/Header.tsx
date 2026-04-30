@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { NavbarCart } from "./NavbarCart";
 
 const navItems = [
   { label: "About", hasDropdown: false, href: "/about" },
@@ -12,7 +13,9 @@ const navItems = [
   { label: "Tryouts", hasDropdown: false, href: "/tryouts" },
   // { label: "Events", hasDropdown: false, href: "/events" },
   // { label: "News", hasDropdown: false, href: "/news" },
+  // { label: "Shop", hasDropdown: false, href: "/shop" },
   { label: "Contact Us", hasDropdown: false, href: "/contact" },
+
 ];
 
 const Header: React.FC = () => {
@@ -42,6 +45,13 @@ const Header: React.FC = () => {
           <a href="#">
             <i className="fab fa-youtube"></i>
           </a>
+          <Link
+            to="/shop"
+            className="bg-[#dc3973] hover:bg-yellow-500 text-black font-bold px-4 py-2 text-sm rounded"
+          >
+            Shop
+          </Link>
+          <NavbarCart />
           <Link
             to="/tryouts"
             className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-4 py-2 text-sm rounded"

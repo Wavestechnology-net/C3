@@ -21,6 +21,8 @@ namespace SoccerClub.Application.Mapping
             CreateMap<Content, ContentDTO>().ReverseMap();
             CreateMap<Media, MediaDTO>().ReverseMap();
             CreateMap<ContentMedia, ContentMediaDTO>().ReverseMap();
+            CreateMap<Product, ProductDTO>().ReverseMap();
+            CreateMap<Order, OrderDTO>().ReverseMap();
 
         }
     }

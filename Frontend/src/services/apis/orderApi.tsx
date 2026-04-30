@@ -15,7 +15,7 @@ export const orderApi = createApi({
     }),
 
     getOrders: builder.query<any[], void>({
-      query: () => "/api/orders",
+      query: () => "/api/orders/GetAllOrders",
     }),
   }),
 });

@@ -20,7 +20,7 @@ namespace SoccerClub.Api.Controllers
         }
 
         // 🛒 CHECKOUT
-        [HttpPost("checkout")]
+        [HttpPost("[action]")]
         public async Task<IActionResult> Checkout(CheckoutRequestDTO request)
         {
             try
@@ -41,7 +41,7 @@ namespace SoccerClub.Api.Controllers
         }
 
         // 📦 GET ALL ORDERS
-        [HttpGet]
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetAllOrders()
         {
             try
@@ -60,7 +60,7 @@ namespace SoccerClub.Api.Controllers
         }
 
         // 📦 GET ORDER BY ID
-        [HttpGet("{id}")]
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetOrderById(int id)
         {
             try
@@ -85,7 +85,7 @@ namespace SoccerClub.Api.Controllers
         }
 
         // 🔄 UPDATE STATUS
-        [HttpPut("{id}/status")]
+        [HttpPut("[action]")]
         public async Task<IActionResult> UpdateOrderStatus(int id, [FromBody] string status)
         {
             try

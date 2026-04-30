@@ -7,16 +7,16 @@ export const productApi = createApi({
   baseQuery: baseQueryWithAuth,
   endpoints: (builder) => ({
     getProducts: builder.query<ProductDto[], void>({
-      query: () => "/api/products",
+      query: () => "/api/products/GetAllProducts",
     }),
 
     getProductById: builder.query<ProductDto, number>({
-      query: (id) => `/api/products/${id}`,
+      query: (id) => `/api/products/GetProductById?id=${id}`,
     }),
 
     createProduct: builder.mutation<any, ProductDto>({
       query: (body) => ({
-        url: "/api/products",
+        url: "/api/products/CreateProduct",
         method: "POST",
         body,
       }),
@@ -24,7 +24,7 @@ export const productApi = createApi({
 
     updateProduct: builder.mutation<any, { id: number; data: ProductDto }>({
       query: ({ id, data }) => ({
-        url: `/api/products/${id}`,
+        url: `/api/products/UpdateProduct?id=${id}`,
         method: "PUT",
         body: data,
       }),
@@ -32,7 +32,7 @@ export const productApi = createApi({
 
     deleteProduct: builder.mutation<any, number>({
       query: (id) => ({
-        url: `/api/products/${id}`,
+        url: `/api/products/DeleteProduct?id=${id}`,
         method: "DELETE",
       }),
     }),

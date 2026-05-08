@@ -28,6 +28,7 @@ export function Cart() {
                 items: cartItems.map((i) => ({
                     productId: i.productId,
                     quantity: i.quantity,
+                    size: i.size,
                 })),
             };
 
@@ -88,6 +89,9 @@ export function Cart() {
                                         <h2 className="text-xl font-bold text-black">
                                             {item.name}
                                         </h2>
+                                        <p className="text-sm text-gray-500 mt-1">
+                                            Size: {item.size}
+                                        </p>
 
                                         <p className="text-[#dc3973] font-semibold mt-1">
                                             ${item.price}
@@ -101,6 +105,7 @@ export function Cart() {
                                                     dispatch(
                                                         updateQuantity({
                                                             productId: item.productId,
+                                                            size: item.size,
                                                             quantity: Math.max(1, item.quantity - 1),
                                                         })
                                                     )
@@ -119,6 +124,7 @@ export function Cart() {
                                                     dispatch(
                                                         updateQuantity({
                                                             productId: item.productId,
+                                                            size: item.size,
                                                             quantity: item.quantity + 1,
                                                         })
                                                     )
@@ -131,7 +137,12 @@ export function Cart() {
 
                                     <button
                                         onClick={() =>
-                                            dispatch(removeFromCart(item.productId))
+                                            dispatch(
+                                                removeFromCart({
+                                                    productId: item.productId,
+                                                    size: item.size,
+                                                })
+                                            )
                                         }
                                         className="text-red-500 font-semibold"
                                     >

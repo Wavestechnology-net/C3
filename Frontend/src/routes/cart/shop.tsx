@@ -8,6 +8,7 @@ export function Shop() {
     const BASE_URL = "http://localhost:5073";
     const { data, isLoading, isError, error } = useGetProductsQuery();
     const dispatch = useAppDispatch();
+    const [selectedSizes, setSelectedSizes] = useState<Record<number, string>>({});
 
     const [category, setCategory] = useState("");
 
@@ -110,20 +111,63 @@ export function Shop() {
                                     <p className="text-[#dc3973] font-semibold mt-1">
                                         ${product.price}
                                     </p>
+                                    <div className="mt-3">
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                                            Select Size
+                                        </label>
 
+                                        <select
+                                            value={selectedSizes[product.productId] || ""}
+                                            onChange={(e) =>
+                                                setSelectedSizes((prev) => ({
+                                                    ...prev,
+                                                    [product.productId]: e.target.value,
+                                                }))
+                                            }
+                                            className="w-full border px-3 py-2 rounded"
+                                        >
+                                            <option value="">Choose Size</option>
+                                            <option value="S">Small</option>
+                                            <option value="M">Medium</option>
+                                            <option value="L">Large</option>
+                                            <option value="XL">XL</option>
+                                        </select>
+                                    </div>
                                     {/* BUTTON */}
                                     <button
+                                        // onClick={() => {
+                                        //     dispatch(
+                                        //         addToCart({
+                                        //             productId: product.productId,
+                                        //             name: product.name,
+                                        //             price: product.price,
+                                        //             imageUrl: product.imageUrl,
+                                        //         })
+                                        //     );
+
+                                        //     toast.success(`${product.name} added to cart 🛒`);
+                                        // }}
                                         onClick={() => {
+                                            const selectedSize = selectedSizes[product.productId];
+
+                                            if (!selectedSize) {
+                                                toast.error("Please select a size");
+                                                return;
+                                            }
+
                                             dispatch(
                                                 addToCart({
                                                     productId: product.productId,
                                                     name: product.name,
                                                     price: product.price,
                                                     imageUrl: product.imageUrl,
+                                                    size: selectedSize,
                                                 })
                                             );
 
-                                            toast.success(`${product.name} added to cart 🛒`);
+                                            toast.success(
+                                                `${product.name} (${selectedSize}) added to cart 🛒`
+                                            );
                                         }}
                                         className="bg-[#fdc700] hover:bg-yellow-400 w-full mt-4 py-2 font-bold text-black"
                                     >

@@ -68,6 +68,7 @@ export interface CartItem {
   price: number;
   quantity: number;
   imageUrl?: string;
+  size: string;
 }
 
 export interface OrderItemDto {

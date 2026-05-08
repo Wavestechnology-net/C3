@@ -17,6 +17,8 @@ import Page from "./routes/admin/Page";
 import AdminDashboard from "./routes/admin/AdminDashboard";
 import { Shop } from "./routes/cart/shop";
 import { Cart } from "./routes/cart/cart";
+import { Success } from "./routes/cart/success";
+import { CancelPage } from "./routes/cart/cancel";
 
 
 const App = () => {
@@ -36,6 +38,8 @@ const App = () => {
           <Route path="/competitive" element={<Competitive />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/success" element={<Success />} />
+          <Route path="/cancel" element={<CancelPage />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<ProtectedAdminRoute />}>

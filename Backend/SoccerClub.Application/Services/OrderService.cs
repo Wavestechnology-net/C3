@@ -13,6 +13,7 @@ namespace SoccerClub.Application.Services
     public class OrderService : IOrderService
     {
         private readonly IGenericRepository<Order> _orderRepo;
+        private readonly IGenericRepository<OrderItem> _orderItemRepo;
         private readonly IGenericRepository<Core.Entities.Product> _productRepo;
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
@@ -20,12 +21,14 @@ namespace SoccerClub.Application.Services
 
         public OrderService(
             IGenericRepository<Order> orderRepo,
+            IGenericRepository<OrderItem> orderItemRepo,
             IGenericRepository<Core.Entities.Product> productRepo,
             IMapper mapper,
             IConfiguration config,
             ILogger<OrderService> logger)
         {
             _orderRepo = orderRepo;
+            _orderItemRepo = orderItemRepo;
             _productRepo = productRepo;
             _mapper = mapper;
             _config = config;
@@ -73,8 +76,10 @@ namespace SoccerClub.Application.Services
                     PaymentMethodTypes = new List<string> { "card" },
                     LineItems = lineItems,
                     Mode = "payment",
-                    SuccessUrl = "https://c3fcsoccer.com/success",
-                    CancelUrl = "https://c3fcsoccer.com/cancel"
+                    //SuccessUrl = "https://c3fcsoccer.com/success",
+                    //CancelUrl = "https://c3fcsoccer.com/cancel"
+                    SuccessUrl = "http://localhost:5173/success",
+                    CancelUrl = "http://localhost:5173/cancel"
                 };
 
                 var service = new SessionService();
@@ -90,6 +95,30 @@ namespace SoccerClub.Application.Services
                 };
 
                 await _orderRepo.AddAsync(order);
+
+                Console.WriteLine(order.OrderId);
+
+                foreach (var item in request.Items)
+                {
+                    var product = await _productRepo.GetByIdAsync(item.ProductId);
+
+                    if (product == null)
+                        continue;
+
+                    var orderItem = new OrderItem
+                    {
+                        OrderId = order.OrderId,
+                        ProductId = product.ProductId,
+                        Quantity = item.Quantity,
+                        Size = item.Size,
+                        Price = product.Price,
+
+                        IsActive = true,
+                        CreatedAt = DateTime.UtcNow
+                    };
+
+                    await _orderItemRepo.AddAsync(orderItem);
+                }
 
                 _logger.LogInformation("Order created: {SessionId}", session.Id);
 

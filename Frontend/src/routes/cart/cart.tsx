@@ -8,7 +8,8 @@ export function Cart() {
     const BASE_URL = "http://localhost:5073";
     const cartItems = useAppSelector((state) => state.cart.items);
     const dispatch = useAppDispatch();
-    const [checkout, { isLoading }] = useCheckoutMutation();
+    const [checkout, { isLoading, isSuccess }] = useCheckoutMutation();
+    const [isProcessing, setIsProcessing] = useState(false);
     const [email, setEmail] = useState("");
 
     const total = cartItems.reduce(
@@ -17,10 +18,14 @@ export function Cart() {
     );
 
     const handleCheckout = async () => {
+        if (isProcessing) return; // 🚨 block double calls immediately
+
         if (!email) {
             toast.error("Please enter email");
             return;
         }
+
+        setIsProcessing(true); // 🚨 lock instantly
 
         try {
             const payload = {
@@ -34,9 +39,11 @@ export function Cart() {
 
             const res = await checkout(payload).unwrap();
             window.location.href = res.checkoutUrl;
+
         } catch (err) {
             console.error(err);
             toast.error("Checkout failed");
+            setIsProcessing(false); // unlock only on failure
         }
     };
 
@@ -48,7 +55,7 @@ export function Cart() {
                     src="/home-bg-hero.jpg"
                     className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                <div className="absolute mt-25 inset-0 bg-black/50 flex items-center justify-center">
                     <h1 className="text-4xl font-bold text-white">Your Cart</h1>
                 </div>
             </div>
@@ -190,10 +197,10 @@ export function Cart() {
                             {/* CHECKOUT */}
                             <button
                                 onClick={handleCheckout}
-                                disabled={isLoading}
+                                disabled={isLoading || isProcessing}
                                 className="bg-[#fdc700] hover:bg-yellow-400 w-full py-3 mt-6 font-bold text-black rounded"
                             >
-                                {isLoading ? "Processing..." : "Proceed to Checkout"}
+                                {(isLoading || isProcessing) ? "Processing..." : "Proceed to Checkout"}
                             </button>
 
                             <button

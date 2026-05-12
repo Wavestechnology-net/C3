@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SoccerClub.Application.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using SoccerClub.Application.Interfaces;
 
 namespace SoccerClub.Api.Controllers
@@ -104,15 +105,18 @@ namespace SoccerClub.Api.Controllers
         }
 
         // 🔔 STRIPE WEBHOOK
+        [AllowAnonymous]
         [HttpPost("webhook")]
         public async Task<IActionResult> StripeWebhook()
         {
+            _logger.LogWarning("🔥 WEBHOOK HIT at {Time}", DateTime.UtcNow);
+
             try
             {
                 var json = await new StreamReader(Request.Body).ReadToEndAsync();
                 var signature = Request.Headers["Stripe-Signature"];
 
-                _logger.LogInformation("Stripe webhook received");
+                _logger.LogWarning("SIGNATURE: {sig}", signature.ToString());
 
                 await _service.HandleStripeWebhookAsync(json, signature);
 

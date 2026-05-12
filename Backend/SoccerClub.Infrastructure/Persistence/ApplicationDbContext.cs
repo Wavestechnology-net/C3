@@ -35,6 +35,22 @@ namespace SoccerClub.Infrastructure.Persistence
 
             modelBuilder.Entity<User>().HasIndex(u => u.Username).IsUnique();
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+
+            modelBuilder.Entity<Order>()
+                .Property(x => x.TotalAmount)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<OrderItem>()
+                .Property(x => x.Price)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Product>()
+                .Property(x => x.Price)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<TeamProgram>()
+                .Property(x => x.Fee)
+                .HasPrecision(18, 2);
         }
     }
 }

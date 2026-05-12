@@ -120,13 +120,28 @@ namespace SoccerClub.Infrastructure.Repositories
         }
 
         // Update an existing entity
+        //public async Task<object> UpdateAsync(T entity)
+        //{
+        //    try
+        //    {
+        //        _dbSet.Attach(entity);
+        //        _context.Entry(entity).State = EntityState.Modified;
+        //        await _context.SaveChangesAsync();
+        //        return GetPrimaryKeyValue(entity);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"Error occurred while updating entity: {ex.Message}", ex);
+        //    }
+        //}
         public async Task<object> UpdateAsync(T entity)
         {
             try
             {
-                _dbSet.Attach(entity);
-                _context.Entry(entity).State = EntityState.Modified;
+                _context.Update(entity);
+
                 await _context.SaveChangesAsync();
+
                 return GetPrimaryKeyValue(entity);
             }
             catch (Exception ex)

@@ -5,8 +5,10 @@ using SoccerClub.Core.Entities;
 using SoccerClub.Core.Interfaces;
 using SoccerClub.Application.DTOs;
 using SoccerClub.Application.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Stripe;
 using Stripe.Checkout;
+using System.Security.Claims;
 
 namespace SoccerClub.Application.Services
 {
@@ -15,6 +17,7 @@ namespace SoccerClub.Application.Services
         private readonly IGenericRepository<Order> _orderRepo;
         private readonly IGenericRepository<OrderItem> _orderItemRepo;
         private readonly IGenericRepository<Core.Entities.Product> _productRepo;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
         private readonly ILogger<OrderService> _logger;
@@ -23,6 +26,7 @@ namespace SoccerClub.Application.Services
             IGenericRepository<Order> orderRepo,
             IGenericRepository<OrderItem> orderItemRepo,
             IGenericRepository<Core.Entities.Product> productRepo,
+            IHttpContextAccessor httpContextAccessor,
             IMapper mapper,
             IConfiguration config,
             ILogger<OrderService> logger)
@@ -30,6 +34,7 @@ namespace SoccerClub.Application.Services
             _orderRepo = orderRepo;
             _orderItemRepo = orderItemRepo;
             _productRepo = productRepo;
+            _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
             _config = config;
             _logger = logger;
@@ -85,13 +90,22 @@ namespace SoccerClub.Application.Services
                 var service = new SessionService();
                 var session = service.Create(options);
 
+                var userEmail = request.UserEmail;
+
+                // OR from JWT claims:
+                var createdBy = _httpContextAccessor.HttpContext?
+                    .User?
+                    .FindFirst(ClaimTypes.Email)?
+                    .Value ?? request.UserEmail;
+
                 var order = new Order
                 {
                     UserEmail = request.UserEmail,
                     TotalAmount = total,
                     StripeSessionId = session.Id,
                     Status = "Pending",
-                    CreatedAt = DateTime.UtcNow
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedBy = request.UserEmail
                 };
 
                 await _orderRepo.AddAsync(order);
@@ -114,7 +128,8 @@ namespace SoccerClub.Application.Services
                         Price = product.Price,
 
                         IsActive = true,
-                        CreatedAt = DateTime.UtcNow
+                        CreatedAt = DateTime.UtcNow,
+                        CreatedBy = request.UserEmail
                     };
 
                     await _orderItemRepo.AddAsync(orderItem);
@@ -168,40 +183,61 @@ namespace SoccerClub.Application.Services
             };
         }
 
-        // 🔔 WEBHOOK (STRIPE)
-        public async Task HandleStripeWebhookAsync(string json, string signature)
+       public async Task HandleStripeWebhookAsync(string json, string signature)
         {
             try
             {
+
                 var stripeEvent = EventUtility.ConstructEvent(
                     json,
                     signature,
                     _config["Stripe:WebhookSecret"]
                 );
 
+
                 if (stripeEvent.Type == "checkout.session.completed")
                 {
                     var session = stripeEvent.Data.Object as Session;
 
-                    var orders = await _orderRepo.FindAsync(o =>
-                        o.StripeSessionId == session.Id
-                    );
-
-                    var order = orders.FirstOrDefault();
-
-                    if (order != null)
+                    if (session == null)
                     {
-                        order.Status = "Paid";
-
-                        await _orderRepo.UpdateAsync(order);
-
-                        _logger.LogInformation("Order marked Paid: {Id}", order.OrderId);
+                        _logger.LogError("❌ Session is NULL");
+                        return; 
                     }
+
+                    var order = (await _orderRepo.FindAsync(o =>
+                        o.StripeSessionId == session.Id
+                    )).FirstOrDefault();
+
+                    if (order == null)
+                    {
+                        _logger.LogError("❌ Order NOT FOUND");
+                        return;
+                    }
+
+
+                    if (order.Status == "Paid" &&
+                         !string.IsNullOrEmpty(order.StripePaymentIntentId))
+                    {
+                        return;
+                    }
+
+                    order.Status = "Paid";
+
+                    order.StripePaymentIntentId = session.PaymentIntentId;
+
+                    await _orderRepo.UpdateAsync(order);
+
+                    _logger.LogInformation(
+                        "✅ Order marked Paid: {OrderId}, PaymentIntent: {PaymentIntentId}",
+                        order.OrderId,
+                        session.PaymentIntentId
+            );
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Webhook error");
+                _logger.LogError(ex, "❌ WEBHOOK CRASHED");
                 throw;
             }
         }

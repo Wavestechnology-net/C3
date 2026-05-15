@@ -77,6 +77,6 @@ export interface OrderItemDto {
 }
 
 export interface CheckoutRequestDto {
-  userEmail: string;
+  // userEmail: string;
   items: OrderItemDto[];
 }

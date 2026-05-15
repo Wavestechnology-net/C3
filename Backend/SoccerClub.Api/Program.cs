@@ -44,10 +44,14 @@ try
         });
     });
 
-	var jwtSettings = builder.Configuration.GetSection("JwtSettings");
-	var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
+    //var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+    //var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
+    var jwtConfig = builder.Configuration.GetSection("JwtSettings");
+    var key = Encoding.UTF8.GetBytes(
+    builder.Configuration["JwtSettings:Key"]
+);
 
-	builder.Services.AddAuthentication(options =>
+    builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -60,8 +64,8 @@ try
 			ValidateAudience = true,
 			ValidateLifetime = true,
 			ValidateIssuerSigningKey = true,
-			ValidIssuer = jwtSettings["Issuer"],
-			ValidAudience = jwtSettings["Audience"],
+			ValidIssuer = jwtConfig["Issuer"],
+			ValidAudience = jwtConfig["Audience"],
 			IssuerSigningKey = new SymmetricSecurityKey(key),
 			ClockSkew = TimeSpan.Zero
 		};
@@ -77,8 +81,8 @@ try
     builder.Services.AddTransient(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
 
     builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
-    builder.Services.AddSingleton(sp =>
-        sp.GetRequiredService<IOptions<JwtSettings>>().Value);
+    //builder.Services.AddSingleton(sp =>
+    //    sp.GetRequiredService<IOptions<JwtSettings>>().Value);
 
     // Add other services as needed
     builder.Services.AddScoped<INews, NewsService>();
@@ -94,6 +98,7 @@ try
     builder.Services.AddScoped<ISectionService, SectionService>();
     builder.Services.AddScoped<IProductService, ProductService>();
     builder.Services.AddScoped<IOrderService, OrderService>();
+    builder.Services.AddScoped<IAuthService, AuthService>();
 
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();

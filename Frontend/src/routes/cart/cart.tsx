@@ -10,7 +10,7 @@ export function Cart() {
     const dispatch = useAppDispatch();
     const [checkout, { isLoading, isSuccess }] = useCheckoutMutation();
     const [isProcessing, setIsProcessing] = useState(false);
-    const [email, setEmail] = useState("");
+    // const [email, setEmail] = useState("");
 
     const total = cartItems.reduce(
         (acc, item) => acc + item.price * item.quantity,
@@ -20,16 +20,16 @@ export function Cart() {
     const handleCheckout = async () => {
         if (isProcessing) return; // 🚨 block double calls immediately
 
-        if (!email) {
-            toast.error("Please enter email");
-            return;
-        }
+        // if (!email) {
+        //     toast.error("Please enter email");
+        //     return;
+        // }
 
         setIsProcessing(true); // 🚨 lock instantly
 
         try {
             const payload = {
-                userEmail: email,
+                // userEmail: email,
                 items: cartItems.map((i) => ({
                     productId: i.productId,
                     quantity: i.quantity,
@@ -181,7 +181,7 @@ export function Cart() {
                             </div>
 
                             {/* EMAIL */}
-                            <div className="mt-6">
+                            {/* <div className="mt-6">
                                 <label className="block text-sm font-medium mb-1">
                                     Email Address
                                 </label>
@@ -192,7 +192,7 @@ export function Cart() {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
-                            </div>
+                            </div> */}
 
                             {/* CHECKOUT */}
                             <button

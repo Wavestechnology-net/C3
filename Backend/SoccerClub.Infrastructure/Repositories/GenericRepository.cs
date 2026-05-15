@@ -108,7 +108,9 @@ namespace SoccerClub.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error occurred while adding entity: {ex.Message}", ex);
+                throw new Exception(
+                    $"Error occurred while adding entity: {ex.InnerException?.Message ?? ex.Message}"
+                );
             }
         }
 

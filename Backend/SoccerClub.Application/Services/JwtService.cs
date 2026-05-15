@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SoccerClub.Application.Interfaces;
 using SoccerClub.Application.Settings;
@@ -12,15 +13,25 @@ public class JwtService : IJwtService
 {
     private readonly JwtSettings _jwtSettings;
 
-    public JwtService(JwtSettings jwtSettings)
+    public JwtService(IOptions<JwtSettings> jwtSettings)
     {
-        _jwtSettings = jwtSettings;
+        if (jwtSettings == null)
+            throw new Exception("JwtSettings IOptions is NULL");
 
-		if (string.IsNullOrEmpty(_jwtSettings.Key) || Encoding.UTF8.GetByteCount(_jwtSettings.Key) < 16)
-		{
-			throw new ArgumentException("JWT Key must be at least 16 characters long for HS256", nameof(_jwtSettings.Key));
-		}
-	}
+        if (jwtSettings.Value == null)
+            throw new Exception("JwtSettings VALUE is NULL");
+
+        _jwtSettings = jwtSettings.Value;
+
+        if (string.IsNullOrWhiteSpace(_jwtSettings.Key))
+            throw new Exception("JWT Key is NULL or EMPTY");
+
+        if (string.IsNullOrWhiteSpace(_jwtSettings.Issuer))
+            throw new Exception("JWT Issuer is NULL or EMPTY");
+
+        if (string.IsNullOrWhiteSpace(_jwtSettings.Audience))
+            throw new Exception("JWT Audience is NULL or EMPTY");
+    }
 
     public string GenerateToken(User user)
     {
@@ -29,8 +40,10 @@ public class JwtService : IJwtService
         {
             new Claim(ClaimTypes.Name, user.Username),
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, user.Role)
         };
+
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {

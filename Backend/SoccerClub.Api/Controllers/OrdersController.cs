@@ -2,6 +2,7 @@
 using SoccerClub.Application.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using SoccerClub.Application.Interfaces;
+using System.Security.Claims;
 
 namespace SoccerClub.Api.Controllers
 {
@@ -21,22 +22,25 @@ namespace SoccerClub.Api.Controllers
         }
 
         // 🛒 CHECKOUT
+        [Authorize]
         [HttpPost("[action]")]
         public async Task<IActionResult> Checkout(CheckoutRequestDTO request)
         {
             try
             {
-                _logger.LogInformation("Checkout started for {Email}", request.UserEmail);
+                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+                _logger.LogInformation("Checkout started for {Email}", userEmail);
 
                 var url = await _service.CreateCheckoutSessionAsync(request);
 
-                _logger.LogInformation("Checkout session created for {Email}", request.UserEmail);
+                _logger.LogInformation("Checkout session created for {Email}", userEmail);
 
                 return Ok(new { checkoutUrl = url });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Checkout failed for {Email}", request.UserEmail);
+                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+                _logger.LogError(ex, "Checkout failed for {Email}", userEmail);
                 return StatusCode(500, new { message = "Checkout failed" });
             }
         }
@@ -58,6 +62,15 @@ namespace SoccerClub.Api.Controllers
                 _logger.LogError(ex, "Error fetching orders");
                 return StatusCode(500, new { message = "Something went wrong" });
             }
+        }
+
+        [Authorize]
+        [HttpGet("my-orders")]
+        public async Task<IActionResult> GetMyOrders()
+        {
+            var orders = await _service.GetMyOrdersAsync();
+
+            return Ok(orders);
         }
 
         // 📦 GET ORDER BY ID

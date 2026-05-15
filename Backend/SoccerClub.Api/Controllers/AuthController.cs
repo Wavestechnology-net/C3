@@ -1,81 +1,67 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SoccerClub.Api.Models;
 using SoccerClub.Application.DTOs.Auth;
 using SoccerClub.Application.Interfaces;
-using SoccerClub.Core.Entities;
-using SoccerClub.Core.Interfaces;
 
-namespace SoccerClub.Api.Controllers
+namespace SoccerClub.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly IGenericRepository<User> _userRepository;
-        private readonly IJwtService _jwtService;
-        private readonly PasswordHasher<User> _passwordHasher = new();
+        private readonly IAuthService _authService;
 
-        public AuthController(IGenericRepository<User> userRepository, IJwtService jwtService)
+        public AuthController(IAuthService authService)
         {
-            _userRepository = userRepository;
-            _jwtService = jwtService;
+            _authService = authService;
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+        // REGISTER
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(
+            RegisterDTO request)
         {
-            if (await _userRepository.FindAsync(u => u.Username == dto.Username) != null)
-                return BadRequest("Username already exists");
-
-            var user = new User
+            try
             {
-                Username = dto.Username,
-                Email = dto.Email,
-                Role = dto.Role,
-                PasswordHash = _passwordHasher.HashPassword(null, dto.Password)
-            };
+                var result =
+                    await _authService.RegisterAsync(request);
 
-            await _userRepository.AddAsync(user);
-
-            return Ok("User registered successfully");
-        }
-
-        [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginDto dto)
-        {
-            var foundUsers = await _userRepository.FindAsync(u => u.Username == dto.Username);
-            var user = foundUsers.FirstOrDefault();
-
-            if (user == null) return Unauthorized();
-
-            var result = _passwordHasher.VerifyHashedPassword(null, user.PasswordHash, dto.Password);
-            if (result == PasswordVerificationResult.Failed)
-                return Unauthorized();
-
-            var token = _jwtService.GenerateToken(user);
-
-            var response = new AuthResponseDto
+                return Ok(result);
+            }
+            catch (Exception ex)
             {
-                Token = token,
-                ExpiresAt = DateTime.UtcNow.AddMinutes(60),
-                User = new UserDto
+                return BadRequest(new
                 {
-                    Id = user.Id,
-                    Username = dto.Username,
-                    Email = user.Email,
-                    Role = user.Role,
-                },
-            };
+                    message = ex.Message
+                });
+            }
+        }
 
-            return Ok(new ApiResponse<AuthResponseDto>
-			{
-				Data = response,
-				Success = true
-			});
+        // LOGIN
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(
+            LoginDTO request)
+        {
+            try
+            {
+                var result =
+                    await _authService.LoginAsync(request);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+        }
+
+        [HttpPost("google-login")]
+        public async Task<IActionResult> GoogleLogin(GoogleLoginRequest request)
+        {
+            var token = await _authService.GoogleLoginAsync(request.IdToken);
+            return Ok(new { token });
         }
     }
 }

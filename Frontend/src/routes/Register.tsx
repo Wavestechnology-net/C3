@@ -1,25 +1,27 @@
-import { useState } from "react";
+import { startTransition, useState } from "react";
 import { useDispatch } from "react-redux";
-import * as Yup from "yup";
-import { useGoogleLoginMutation, useLoginMutation } from "../services/apis/authApi";
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import { useGoogleLoginMutation, useRegisterMutation } from "../services/apis/authApi";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSuccess } from "../services/authSlice";
-import { GoogleLogin } from "@react-oauth/google";
 import { Eye, EyeOff } from "lucide-react";
+import { GoogleLogin } from "@react-oauth/google";
 
 const schema = Yup.object({
     username: Yup.string().required("Username is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().min(6).required("Password is required"),
 });
 
-export default function Login() {
+export default function Register() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const [showPassword, setShowPassword] = useState(false);
-    const [login] = useLoginMutation();
+
+    const [registerApi] = useRegisterMutation();
     const [googleLogin] = useGoogleLoginMutation();
 
     const {
@@ -28,20 +30,21 @@ export default function Login() {
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
 
+    // 🧠 REGISTER HANDLER
     const onSubmit = async (data: any) => {
         try {
-            const res = await login(data).unwrap();
+            const res = await registerApi(data).unwrap();
 
             dispatch(
                 loginSuccess({
-                    token: res.data.token,
+                    token: res.token,
                     user: {
-                        id: res.data.user.id,
-                        username: res.data.user.username,
-                        email: res.data.user.email,
-                        role: res.data.user.role,
+                        id: res.user.id,
+                        username: res.user.username,
+                        email: res.user.email,
+                        role: res.user.role,
                     },
-                    expiresAt: res.data.expiresAt,
+                    expiresAt: res.expiresAt,
                 })
             );
 
@@ -51,6 +54,7 @@ export default function Login() {
         }
     };
 
+    // 🌐 GOOGLE LOGIN
     const handleGoogle = async (credentialResponse: any) => {
         try {
             const res = await googleLogin({
@@ -85,7 +89,7 @@ export default function Login() {
 
         imageSide: {
             flex: 1,
-            backgroundImage: "url('/images/login-bg.jpg')",
+            backgroundImage: "url('/img3.jpg')",
             backgroundSize: "cover",
             position: "relative",
             display: "flex",
@@ -94,15 +98,15 @@ export default function Login() {
         overlay: {
             position: "absolute",
             inset: 0,
-            background: "rgba(0,0,0,0.5)",
+            background: "rgba(0,0,0,0.4)",
         },
 
         imageText: {
             position: "relative",
             color: "#fff",
             margin: "auto",
-            textAlign: "left",
-            padding: 40,
+            // padding: 40,
+            textAlign: "left"
         },
 
         logo: {
@@ -111,12 +115,12 @@ export default function Login() {
         },
 
         title: {
-            fontSize: 32,
+            fontSize: 52,
             fontWeight: 700,
         },
 
         subtitle: {
-            fontSize: 14,
+            fontSize: 20,
             opacity: 0.8,
         },
 
@@ -183,11 +187,14 @@ export default function Login() {
             <div style={styles.imageSide}>
                 <div style={styles.overlay}></div>
 
-                <div style={styles.imageText}>
-                    <img src="/logo.jpeg" style={styles.logo} />
-                    <h1 style={styles.title}>Welcome Back</h1>
+                <div
+                    style={{
+                        ...styles.imageText
+                    }}
+                >
+                    <h1 style={styles.title}>Create Account</h1>
                     <p style={styles.subtitle}>
-                        Secure access to your dashboard and orders system
+                        Join us and start managing your dashboard securely
                     </p>
                 </div>
             </div>
@@ -195,7 +202,7 @@ export default function Login() {
             {/* RIGHT SIDE */}
             <div style={styles.formSide}>
                 <div style={styles.card}>
-                    <h2 style={styles.heading}>Login</h2>
+                    <h2 style={styles.heading}>Register</h2>
 
                     <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -204,8 +211,20 @@ export default function Login() {
                             {...register("username")}
                             style={styles.input}
                         />
-                        {errors.username && <p style={styles.error}>{errors.username.message}</p>}
+                        {errors.username && (
+                            <p style={styles.error}>{errors.username.message}</p>
+                        )}
 
+                        <input
+                            placeholder="Email"
+                            {...register("email")}
+                            style={styles.input}
+                        />
+                        {errors.email && (
+                            <p style={styles.error}>{errors.email.message}</p>
+                        )}
+
+                        {/* PASSWORD */}
                         <div style={{ position: "relative" }}>
                             <input
                                 type={showPassword ? "text" : "password"}
@@ -222,9 +241,11 @@ export default function Login() {
                             </span>
                         </div>
 
-                        {errors.password && <p style={styles.error}>{errors.password.message}</p>}
+                        {errors.password && (
+                            <p style={styles.error}>{errors.password.message}</p>
+                        )}
 
-                        <button style={styles.button}>Login</button>
+                        <button style={styles.button}>Create Account</button>
                     </form>
 
                     {/* GOOGLE LOGIN */}

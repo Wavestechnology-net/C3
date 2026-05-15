@@ -1,9 +1,13 @@
 ﻿
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
 namespace SoccerClub.Core.Entities
 {
     public class Order
     {
         public int OrderId { get; set; }
+
+        public int UserId { get; set; }
         public string? UserEmail { get; set; }
         public decimal TotalAmount { get; set; }
 
@@ -19,5 +23,8 @@ namespace SoccerClub.Core.Entities
         public string? UpdatedBy { get; set; }
 
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+
+        //Navigation Property
+        public User User { get; set; }
     }
 }

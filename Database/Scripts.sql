@@ -87,6 +87,21 @@ CREATE TABLE ContentMedia (
     UpdatedBy INT NULL FOREIGN KEY REFERENCES Users(Id)
 );
 
+
+------------- Query 14 May 2026 ------------------
+
+ALTER TABLE Users
+ADD GoogleId NVARCHAR(255) NULL;
+
+ALTER TABLE Users
+ADD IsActive BIT NOT NULL DEFAULT 1;
+
+ALTER TABLE Users
+ALTER COLUMN UpdatedAt DATETIME NULL;
+
+ALTER TABLE Orders
+ADD UserId INT NULL;
+
 -- -- News Table
 -- CREATE TABLE News (
 --     NewsId INT PRIMARY KEY IDENTITY(1,1),

@@ -9,6 +9,8 @@ namespace SoccerClub.Application.Interfaces
         Task<IEnumerable<OrderDTO>> GetAllOrdersAsync();
         Task<OrderDTO?> GetOrderByIdAsync(int id);
 
+        Task<IEnumerable<MyOrderResponseDTO>> GetMyOrdersAsync();
+
         Task<object> UpdateOrderStatusAsync(int id, string status);
 
         Task HandleStripeWebhookAsync(string json, string signature);

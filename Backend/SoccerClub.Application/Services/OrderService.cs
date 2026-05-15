@@ -45,7 +45,12 @@ namespace SoccerClub.Application.Services
         // 🛒 CREATE CHECKOUT
         public async Task<string> CreateCheckoutSessionAsync(CheckoutRequestDTO request)
         {
-            _logger.LogInformation("Checkout started for {Email}", request.UserEmail);
+            var userClaimId = _httpContextAccessor.HttpContext?
+                    .User?
+                    .FindFirst(ClaimTypes.NameIdentifier)?
+                    .Value;
+
+            _logger.LogInformation("Checkout started for {UserId}", userClaimId);
 
             try
             {
@@ -90,22 +95,40 @@ namespace SoccerClub.Application.Services
                 var service = new SessionService();
                 var session = service.Create(options);
 
-                var userEmail = request.UserEmail;
+                //var userEmail = request.UserEmail;
+                var userEmail = _httpContextAccessor.HttpContext?
+                    .User?
+                    .FindFirst(ClaimTypes.Email)?
+                    .Value;
+
+                var userIdClaim = _httpContextAccessor.HttpContext?
+                    .User?
+                    .FindFirst(ClaimTypes.NameIdentifier)?
+                    .Value;
+
+                if (string.IsNullOrEmpty(userIdClaim))
+                    throw new Exception("Unauthorized");
+
+                var userId = int.Parse(userIdClaim);
 
                 // OR from JWT claims:
                 var createdBy = _httpContextAccessor.HttpContext?
                     .User?
                     .FindFirst(ClaimTypes.Email)?
-                    .Value ?? request.UserEmail;
+                    .Value;
 
                 var order = new Order
                 {
-                    UserEmail = request.UserEmail,
+                    UserId = userId,
+                    UserEmail = userEmail,
+
                     TotalAmount = total,
                     StripeSessionId = session.Id,
                     Status = "Pending",
+
+                    IsActive = true,
                     CreatedAt = DateTime.UtcNow,
-                    CreatedBy = request.UserEmail
+                    CreatedBy = userEmail
                 };
 
                 await _orderRepo.AddAsync(order);
@@ -129,7 +152,7 @@ namespace SoccerClub.Application.Services
 
                         IsActive = true,
                         CreatedAt = DateTime.UtcNow,
-                        CreatedBy = request.UserEmail
+                        CreatedBy = userId.ToString()
                     };
 
                     await _orderItemRepo.AddAsync(orderItem);
@@ -152,6 +175,56 @@ namespace SoccerClub.Application.Services
             var orders = await _orderRepo.GetAllAsync();
 
             return _mapper.Map<IEnumerable<OrderDTO>>(orders);
+        }
+
+        public async Task<IEnumerable<MyOrderResponseDTO>> GetMyOrdersAsync()
+        {
+            var userIdClaim = _httpContextAccessor.HttpContext?
+                .User?
+                .FindFirst(ClaimTypes.NameIdentifier)?
+                .Value;
+
+            if (string.IsNullOrEmpty(userIdClaim))
+                throw new Exception("Unauthorized");
+
+            var userId = int.Parse(userIdClaim);
+
+            var orders = await _orderRepo.FindAsync(x => x.UserId == userId);
+
+            var result = new List<MyOrderResponseDTO>();
+
+            foreach (var order in orders)
+            {
+                var orderItems = await _orderItemRepo.FindAsync(x => x.OrderId == order.OrderId);
+
+                var items = new List<OrderItemResponseDTO>();
+
+                foreach (var item in orderItems)
+                {
+                    var product = await _productRepo.GetByIdAsync(item.ProductId);
+
+                    items.Add(new OrderItemResponseDTO
+                    {
+                        ProductId = item.ProductId,
+                        ProductName = product?.Name ?? "Product",
+                        Quantity = item.Quantity,
+                        Size = item.Size,
+                        Price = item.Price
+                    });
+                }
+
+                result.Add(new MyOrderResponseDTO
+                {
+                    OrderId = order.OrderId,
+                    TotalAmount = order.TotalAmount,
+                    Status = order.Status,
+                    CreatedAt = order.CreatedAt,
+                    Items = items
+                });
+            }
+
+            return result
+                .OrderByDescending(x => x.CreatedAt);
         }
 
         // 📦 GET BY ID

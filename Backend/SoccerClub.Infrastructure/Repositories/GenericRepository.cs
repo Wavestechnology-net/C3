@@ -58,20 +58,18 @@ namespace SoccerClub.Infrastructure.Repositories
         }
 
         // Get single entity by condition
-        public async Task<T> GetByConditionAsync(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null)
-        {
+        public async Task<T> GetByConditionAsync(
+            Expression<Func<T, bool>> predicate,
+            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null)
+                {
             try
             {
                 IQueryable<T> query = _dbSet;
 
-                // Apply includes if any
                 if (include != null)
-                {
                     query = include(query);
-                }
 
-                // Apply the condition (filter) with an OrderBy to ensure predictability
-                return await query.OrderBy(x => EF.Property<object>(x, GetPrimaryKeyName())).FirstOrDefaultAsync(predicate);
+                return await query.FirstOrDefaultAsync(predicate);
             }
             catch (Exception ex)
             {

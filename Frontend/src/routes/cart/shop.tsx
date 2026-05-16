@@ -38,16 +38,24 @@ export function Shop() {
     return (
         <div className="bg-[#f8f8f8] min-h-screen">
 
-            {/* HERO */}
-            <div className="relative h-[240px] md:h-[300px] overflow-hidden">
+            {/* HERO SECTION */}
+            <div className="relative h-[420px] w-full overflow-hidden">
                 <img
                     src="/home-bg-hero.jpg"
-                    className="w-full h-full object-cover scale-105"
+                    alt="Login Hero"
+                    className="w-full h-full object-cover"
                 />
-                <div className="absolute mt-20 inset-0 bg-black/50 flex items-center justify-center">
-                    <h1 className="text-3xl md:text-5xl font-bold text-white tracking-wide">
-                        Club Shop
-                    </h1>
+                <div className="absolute inset-0 bg-black/30" />
+
+                <div className="absolute inset-0 flex items-center px-6 md:px-24">
+                    <div className="text-white max-w-2xl">
+                        <h1 className="text-4xl md:text-5xl mt-20 font-bold mb-4">
+                            WELCOME TO CLUB SHOP
+                        </h1>
+                        {/* <p className="text-lg md:text-2xl text-gray-200">
+                            Secure access to your dashboard, orders, and account.
+                        </p> */}
+                    </div>
                 </div>
             </div>
 
@@ -199,6 +207,49 @@ export function Shop() {
 
                     </div>
                 )}
+            </div>
+
+            {/* SOCIAL SECTION */}
+            <div className="bg-gray-100 py-12 px-4 md:px-8">
+                <div className="max-w-3xl mx-auto text-center">
+                    <h2 className="text-2xl font-bold mb-6">
+                        Stay connected with us
+                    </h2>
+
+                    <div className="flex justify-center space-x-6 mb-8">
+                        <a href="#" rel="noopener noreferrer">
+                            <img
+                                src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/5ef3bd892340e3bac23e1ac0_icon-facebook-navy.svg"
+                                alt="Facebook"
+                                className="h-6"
+                            />
+                        </a>
+
+                        <a href="#" rel="noopener noreferrer">
+                            <img
+                                src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/5ec3f83f2c0e493e867f635a_icon-instagram.svg"
+                                alt="Instagram"
+                                className="h-6"
+                            />
+                        </a>
+
+                        <a href="#" rel="noopener noreferrer">
+                            <img
+                                src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/5f3edfb9bd14edb0979b03f8_icon-twitter-blue.svg"
+                                alt="Twitter"
+                                className="h-6"
+                            />
+                        </a>
+
+                        <a href="#" rel="noopener noreferrer">
+                            <img
+                                src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/5f3edf1fcd1f34f55a689236_icon-youtube-pink.svg"
+                                alt="YouTube"
+                                className="h-6"
+                            />
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     );

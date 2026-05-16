@@ -127,7 +127,7 @@ namespace SoccerClub.Application.Services
                     Username = name,
                     Email = email,
                     GoogleId = googleId,
-                    Role = "Student", // default role
+                    Role = "User", // default role
                     IsActive = true,
                     CreatedAt = DateTime.UtcNow
                 };

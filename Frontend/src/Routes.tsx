@@ -20,6 +20,7 @@ import { Cart } from "./routes/cart/cart";
 import { Success } from "./routes/cart/success";
 import { CancelPage } from "./routes/cart/cancel";
 import Register from "./routes/Register";
+import UserDashboard from "./routes/admin/UserDashboard";
 
 
 const App = () => {
@@ -41,9 +42,12 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<CancelPage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/user-dashboard" element={<UserDashboard />} />
         </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+
+
         <Route path="/admin" element={<ProtectedAdminRoute />}>
           <Route index element={<AdminDashboard />} />
           <Route path="pages" element={<Page />} />

@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { useGoogleLoginMutation, useLoginMutation } from "../services/apis/authApi";
+import {
+    useGoogleLoginMutation,
+    useLoginMutation
+} from "../services/apis/authApi";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,7 +13,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { Eye, EyeOff } from "lucide-react";
 
 const schema = Yup.object({
-    username: Yup.string().required("Username is required"),
+    email: Yup.string().email().required("Email is required"),
     password: Yup.string().min(6).required("Password is required"),
 });
 
@@ -34,14 +37,14 @@ export default function Login() {
 
             dispatch(
                 loginSuccess({
-                    token: res.data.token,
+                    token: res.token,
                     user: {
-                        id: res.data.user.id,
-                        username: res.data.user.username,
-                        email: res.data.user.email,
-                        role: res.data.user.role,
+                        id: 0,
+                        username: res.username,
+                        email: res.email,
+                        role: res.role,
                     },
-                    expiresAt: res.data.expiresAt,
+                    expiresAt: new Date().toISOString(),
                 })
             );
 
@@ -61,12 +64,12 @@ export default function Login() {
                 loginSuccess({
                     token: res.token,
                     user: {
-                        id: res.user.id,
-                        username: res.user.username,
-                        email: res.user.email,
-                        role: res.user.role,
+                        id: 0,
+                        username: res.username,
+                        email: res.email,
+                        role: res.role,
                     },
-                    expiresAt: res.expiresAt,
+                    expiresAt: new Date().toISOString(),
                 })
             );
 
@@ -76,163 +79,190 @@ export default function Login() {
         }
     };
 
-    const styles: Record<string, React.CSSProperties> = {
-        page: {
-            display: "flex",
-            minHeight: "100vh",
-            fontFamily: "Inter",
-        },
-
-        imageSide: {
-            flex: 1,
-            backgroundImage: "url('/images/login-bg.jpg')",
-            backgroundSize: "cover",
-            position: "relative",
-            display: "flex",
-        },
-
-        overlay: {
-            position: "absolute",
-            inset: 0,
-            background: "rgba(0,0,0,0.5)",
-        },
-
-        imageText: {
-            position: "relative",
-            color: "#fff",
-            margin: "auto",
-            textAlign: "left",
-            padding: 40,
-        },
-
-        logo: {
-            width: 80,
-            marginBottom: 20,
-        },
-
-        title: {
-            fontSize: 32,
-            fontWeight: 700,
-        },
-
-        subtitle: {
-            fontSize: 14,
-            opacity: 0.8,
-        },
-
-        formSide: {
-            flex: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "#f8fafc",
-        },
-
-        card: {
-            width: "100%",
-            maxWidth: 420,
-            background: "#fff",
-            padding: 30,
-            borderRadius: 16,
-            boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-        },
-
-        heading: {
-            fontSize: 24,
-            fontWeight: 700,
-            marginBottom: 20,
-        },
-
-        input: {
-            width: "100%",
-            padding: 12,
-            marginBottom: 10,
-            border: "1px solid #ddd",
-            borderRadius: 8,
-        },
-
-        button: {
-            width: "100%",
-            padding: 12,
-            background: "#006911",
-            color: "#fff",
-            border: "none",
-            borderRadius: 8,
-            marginTop: 10,
-            cursor: "pointer",
-        },
-
-        eye: {
-            position: "absolute",
-            right: 10,
-            top: 12,
-            cursor: "pointer",
-        },
-
-        error: {
-            color: "red",
-            fontSize: 12,
-            marginBottom: 5,
-        },
-    };
-
     return (
-        <div style={styles.page}>
+        <div className="max-w-8xl mx-auto">
 
-            {/* LEFT SIDE */}
-            <div style={styles.imageSide}>
-                <div style={styles.overlay}></div>
+            {/* HERO SECTION */}
+            <div className="relative h-[420px] w-full overflow-hidden">
+                <img
+                    src="/img6.jpg"
+                    alt="Login Hero"
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/30" />
 
-                <div style={styles.imageText}>
-                    <img src="/logo.jpeg" style={styles.logo} />
-                    <h1 style={styles.title}>Welcome Back</h1>
-                    <p style={styles.subtitle}>
-                        Secure access to your dashboard and orders system
-                    </p>
+                <div className="absolute inset-0 flex items-center px-6 md:px-24">
+                    <div className="text-white max-w-2xl">
+                        <h1 className="text-4xl md:text-6xl mt-20 font-bold mb-4">
+                            WELCOME BACK
+                        </h1>
+                        <p className="text-lg md:text-2xl text-gray-200">
+                            Secure access to your dashboard, orders, and account.
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            {/* RIGHT SIDE */}
-            <div style={styles.formSide}>
-                <div style={styles.card}>
-                    <h2 style={styles.heading}>Login</h2>
+            {/* CONTENT */}
+            <div className="px-4 py-14 md:px-32 bg-white">
+                <div className="max-w-5xl mx-auto">
 
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    {/* HEADER */}
+                    <div className="mb-10">
+                        <h2 className="text-4xl font-bold mb-2">
+                            LOGIN TO YOUR ACCOUNT
+                        </h2>
 
-                        <input
-                            placeholder="Username"
-                            {...register("username")}
-                            style={styles.input}
-                        />
-                        {errors.username && <p style={styles.error}>{errors.username.message}</p>}
+                        <h3 className="text-3xl text-[#d6226a] font-semibold mb-4">
+                            LET’S GET YOU BACK IN.
+                        </h3>
 
-                        <div style={{ position: "relative" }}>
-                            <input
-                                type={showPassword ? "text" : "password"}
-                                placeholder="Password"
-                                {...register("password")}
-                                style={styles.input}
-                            />
+                        <p className="text-gray-700 leading-7">
+                            Access your personalized dashboard, view your orders,
+                            and continue where you left off.
+                        </p>
+                    </div>
 
-                            <span
-                                style={styles.eye}
-                                onClick={() => setShowPassword(!showPassword)}
+                    {/* LOGIN CARD */}
+                    <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-6 md:p-10">
+
+                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+
+                            {/* EMAIL */}
+                            <div>
+                                <label className="block mb-2 font-medium">
+                                    Email Address
+                                </label>
+
+                                <input
+                                    {...register("email")}
+                                    placeholder="Enter email"
+                                    className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-[#d6226a]"
+                                />
+
+                                {errors.email && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.email.message}
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* PASSWORD */}
+                            <div>
+                                <label className="block mb-2 font-medium">
+                                    Password
+                                </label>
+
+                                <div className="relative">
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        {...register("password")}
+                                        placeholder="Enter password"
+                                        className="w-full border rounded-lg px-4 py-3 pr-12 outline-none focus:ring-2 focus:ring-[#d6226a]"
+                                    />
+
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                                    >
+                                        {showPassword ? (
+                                            <EyeOff size={18} />
+                                        ) : (
+                                            <Eye size={18} />
+                                        )}
+                                    </button>
+                                </div>
+
+                                {errors.password && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.password.message}
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* BUTTON */}
+                            <button
+                                type="submit"
+                                className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-4 rounded-lg"
                             >
-                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                LOGIN
+                            </button>
+                        </form>
+
+                        {/* DIVIDER */}
+                        <div className="flex items-center gap-4 my-8">
+                            <div className="flex-1 h-px bg-gray-300"></div>
+                            <span className="text-sm text-gray-500">
+                                OR CONTINUE WITH
                             </span>
+                            <div className="flex-1 h-px bg-gray-300"></div>
                         </div>
 
-                        {errors.password && <p style={styles.error}>{errors.password.message}</p>}
+                        {/* GOOGLE */}
+                        <div className="flex justify-center">
+                            <GoogleLogin
+                                onSuccess={handleGoogle}
+                                onError={() => console.log("Google login failed")}
+                            />
+                        </div>
 
-                        <button style={styles.button}>Login</button>
-                    </form>
+                        {/* FOOTER */}
+                        <div className="mt-8 text-center">
+                            <p className="text-gray-700">
+                                Don’t have an account?{" "}
+                                <a
+                                    href="/register"
+                                    className="text-[#d6226a] font-semibold hover:underline"
+                                >
+                                    Create Account
+                                </a>
+                            </p>
+                        </div>
 
-                    {/* GOOGLE LOGIN */}
-                    <div style={{ marginTop: 15 }}>
-                        <GoogleLogin
-                            onSuccess={handleGoogle}
-                            onError={() => console.log("Google login failed")}
-                        />
+                    </div>
+                </div>
+            </div>
+
+            {/* SOCIAL SECTION */}
+            <div className="bg-gray-100 py-12 px-4 md:px-8">
+                <div className="max-w-3xl mx-auto text-center">
+                    <h2 className="text-2xl font-bold mb-6">
+                        Stay connected with us
+                    </h2>
+
+                    <div className="flex justify-center space-x-6 mb-8">
+                        <a href="#" rel="noopener noreferrer">
+                            <img
+                                src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/5ef3bd892340e3bac23e1ac0_icon-facebook-navy.svg"
+                                alt="Facebook"
+                                className="h-6"
+                            />
+                        </a>
+
+                        <a href="#" rel="noopener noreferrer">
+                            <img
+                                src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/5ec3f83f2c0e493e867f635a_icon-instagram.svg"
+                                alt="Instagram"
+                                className="h-6"
+                            />
+                        </a>
+
+                        <a href="#" rel="noopener noreferrer">
+                            <img
+                                src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/5f3edfb9bd14edb0979b03f8_icon-twitter-blue.svg"
+                                alt="Twitter"
+                                className="h-6"
+                            />
+                        </a>
+
+                        <a href="#" rel="noopener noreferrer">
+                            <img
+                                src="https://cdn.prod.website-files.com/5eb043b98cf9c48746832cbb/5f3edf1fcd1f34f55a689236_icon-youtube-pink.svg"
+                                alt="YouTube"
+                                className="h-6"
+                            />
+                        </a>
                     </div>
                 </div>
             </div>

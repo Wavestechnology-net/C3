@@ -17,10 +17,19 @@ export const orderApi = createApi({
     getOrders: builder.query<any[], void>({
       query: () => "/api/orders/GetAllOrders",
     }),
+
+    getMyOrders: builder.query<any, void>({
+      query: () => ({
+        url: "/api/orders/my-orders",
+        method: "GET",
+      }),
+    }),
+
   }),
 });
 
 export const {
   useCheckoutMutation,
   useGetOrdersQuery,
+  useGetMyOrdersQuery,
 } = orderApi;

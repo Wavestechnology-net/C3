@@ -3,6 +3,7 @@ import { useGetProductsQuery } from "../../services/apis/productApi";
 import { useAppDispatch } from "../../hooks/cart";
 import { addToCart } from "../../services/cartSlice";
 import { toast } from "react-toastify";
+import { NavbarCart } from "../../components/NavbarCart";
 
 export function Shop() {
     const BASE_URL = "http://localhost:5073";
@@ -65,9 +66,17 @@ export function Shop() {
                 {/* HEADER */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-5 mb-8">
 
-                    <h2 className="text-2xl font-bold text-black">
-                        Explore Products
-                    </h2>
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-5 mb-8">
+
+                        <h2 className="text-2xl font-bold text-black">
+                            Explore Products
+                        </h2>
+
+                        <div className="flex items-center gap-3">
+                            <NavbarCart />
+                        </div>
+
+                    </div>
 
                     {/* CATEGORY PILLS */}
                     <div className="flex flex-wrap gap-3">

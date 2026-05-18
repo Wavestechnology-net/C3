@@ -102,6 +102,28 @@ ALTER COLUMN UpdatedAt DATETIME NULL;
 ALTER TABLE Orders
 ADD UserId INT NULL;
 
+ALTER TABLE Users
+ADD
+    -- RESET PASSWORD
+    PasswordResetToken NVARCHAR(500) NULL,
+    PasswordResetTokenExpiry DATETIME NULL,
+
+    -- REFRESH TOKEN
+    RefreshToken NVARCHAR(500) NULL,
+    RefreshTokenExpiry DATETIME NULL,
+
+    -- EMAIL VERIFICATION
+    EmailVerificationToken NVARCHAR(500) NULL,
+    IsEmailVerified BIT NOT NULL DEFAULT 0,
+
+    -- LOGIN SECURITY
+    FailedLoginAttempts INT NOT NULL DEFAULT 0,
+    LockoutEnd DATETIME NULL;
+
+
+
+
+
 -- -- News Table
 -- CREATE TABLE News (
 --     NewsId INT PRIMARY KEY IDENTITY(1,1),

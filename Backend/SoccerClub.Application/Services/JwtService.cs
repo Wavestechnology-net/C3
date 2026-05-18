@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using SoccerClub.Application.Interfaces;
 using SoccerClub.Application.Settings;
 using SoccerClub.Core.Entities;
+using System.Security.Cryptography;
 
 namespace SoccerClub.Application.Services;
 
@@ -95,4 +96,15 @@ public class JwtService : IJwtService
 			return new ClaimsPrincipal(new ClaimsIdentity());
 		}
 	}
+
+    public string GenerateRefreshToken()
+    {
+        var randomNumber = new byte[64];
+
+        using var rng = RandomNumberGenerator.Create();
+
+        rng.GetBytes(randomNumber);
+
+        return Convert.ToBase64String(randomNumber);
+    }
 }

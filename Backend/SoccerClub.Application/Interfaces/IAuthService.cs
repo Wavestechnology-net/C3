@@ -10,5 +10,13 @@ namespace SoccerClub.Application.Interfaces
 
         Task<AuthResponseDTO> GoogleLoginAsync(string idToken);
 
+        Task ForgotPasswordAsync(ForgotPasswordDTO request);
+
+        Task ResetPasswordAsync(ResetPasswordDTO request);
+
+        Task<AuthResponseDTO> RefreshTokenAsync(RefreshTokenRequestDTO request);
+
+        Task LogoutAsync(int userId);
+
     }
 }

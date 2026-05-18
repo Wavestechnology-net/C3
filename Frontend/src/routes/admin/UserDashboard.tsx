@@ -33,7 +33,7 @@ export default function UserDashboard() {
         <div className="absolute inset-0 flex items-center px-6 md:px-24">
           <div className="text-white mt-20 max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-extrabold uppercase leading-tight mb-5">
-              MY ACCOUNT
+              Welcome Back, {user?.username}
             </h1>
 
             <p className="text-lg md:text-2xl text-gray-200 leading-relaxed">

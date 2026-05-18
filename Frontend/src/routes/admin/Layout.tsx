@@ -9,8 +9,9 @@ import {
   FaUser,
   FaSignOutAlt,
 } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { loggedUser, logout, selectIsAuthenticated } from "../../services/authSlice";
+import { useAppDispatch } from "../../hooks/cart";
 
 type NavItem = {
   label: string;
@@ -28,9 +29,8 @@ const NAV_ITEMS: NavItem[] = [
 const Sidebar: React.FC<{ open: boolean; onClose?: () => void }> = ({ open, onClose }) => {
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-40 w-64 bg-white border-r transform transition-transform duration-200 ${
-        open ? "translate-x-0" : "-translate-x-full"
-      } md:translate-x-0`}
+      className={`fixed inset-y-0 left-0 z-40 w-64 bg-white border-r transform transition-transform duration-200 ${open ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0`}
     >
       <div className="h-full flex flex-col">
         <div className="flex items-center justify-between px-6 py-4 border-b">
@@ -51,8 +51,7 @@ const Sidebar: React.FC<{ open: boolean; onClose?: () => void }> = ({ open, onCl
                 to={item.to}
                 end
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-4 py-2 my-1 rounded-md text-sm font-medium ${
-                    isActive ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-gray-50"
+                  `flex items-center gap-3 px-4 py-2 my-1 rounded-md text-sm font-medium ${isActive ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-gray-50"
                   }`
                 }
               >
@@ -71,7 +70,7 @@ const Topbar: React.FC<{ onToggleSidebar: () => void }> = ({ onToggleSidebar }) 
   const isAuthenticated = useSelector(selectIsAuthenticated)
   const user = useSelector(loggedUser)
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -90,7 +89,7 @@ const Topbar: React.FC<{ onToggleSidebar: () => void }> = ({ onToggleSidebar }) 
         <Link to="/" className="hidden sm:inline-block bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700 text-sm">
           View Site
         </Link>
-         {isAuthenticated && user ? (
+        {isAuthenticated && user ? (
           <div className="flex items-center gap-3">
             {/* User Avatar / Icon */}
             <div className="flex items-center gap-2">

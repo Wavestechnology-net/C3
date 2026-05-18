@@ -5,7 +5,9 @@ import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import type { RootState } from "../services/store";
-import { NavbarCart } from "./NavbarCart";
+import { useAppDispatch } from "../hooks/cart";
+import { useLogoutMutation } from "../services/apis/authApi";
+import { logout } from "../services/authSlice";
 
 const navItems = [
   { label: "About", href: "/about" },
@@ -22,12 +24,17 @@ const Header: React.FC = () => {
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const location = useLocation();
+  const [logoutApi] = useLogoutMutation();
 
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
 
+  const user = useSelector(
+    (state: RootState) => state.auth.user
+  );
   const toggleDropdown = (label: string) => {
     setOpenDropdown(openDropdown === label ? null : label);
   };
@@ -46,6 +53,18 @@ const Header: React.FC = () => {
     setOpenDropdown(null);
   };
 
+  const handleLogout = async () => {
+    try {
+      await logoutApi().unwrap();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch(logout());
+
+      navigate("/login");
+    }
+  };
+
   return (
     <div className="relative z-50">
       <header className="w-full fixed top-0 left-0 z-50 shadow-md bg-white">
@@ -58,14 +77,14 @@ const Header: React.FC = () => {
           <a href="#"><i className="fab fa-youtube"></i></a>
 
           {/* SHOP BUTTON (AUTH LOGIC) */}
-          <button
+          {/* <button
             onClick={handleShopClick}
             className="bg-[#dc3973] hover:bg-yellow-500 text-black font-bold px-4 py-2 text-sm rounded"
           >
             Shop
-          </button>
+          </button> */}
 
-          <NavbarCart />
+          {/* <NavbarCart /> */}
 
           <Link
             to="/tryouts"
@@ -76,15 +95,23 @@ const Header: React.FC = () => {
         </div>
 
         {/* MAIN HEADER */}
-        <div className="w-full bg-white px-4 py-5 flex items-center justify-between">
+        {/* <div className="w-full bg-white px-4 flex items-center justify-between"> */}
+        <div className="w-full bg-white px-6 md:px-8 h-20 flex items-center justify-between">
 
           {/* LOGO */}
-          <Link to="/" className="z-50">
+          {/* <Link to="/" className="z-50">
             <img src="/C3.png" alt="logo" className="h-16 md:h-20" />
+          </Link> */}
+          <Link to="/" className="flex items-center">
+            <img
+              src="/C3.png"
+              alt="logo"
+              className="h-14 md:h-36 object-contain -translate-y-6"
+            />
           </Link>
 
           {/* DESKTOP NAV */}
-          <div className="hidden md:flex items-center space-x-6 text-sm font-semibold text-gray-800">
+          {/* <div className="hidden md:flex items-center space-x-6 text-sm font-semibold text-gray-800">
             {navItems.map((item) => (
               <Link
                 key={item.label}
@@ -95,6 +122,51 @@ const Header: React.FC = () => {
                 {item.label}
               </Link>
             ))}
+          </div> */}
+
+          {/* DESKTOP NAV */}
+          {/* <div className="hidden md:flex items-center space-x-6 text-sm font-semibold text-gray-800"> */}
+          <div className="hidden md:flex items-center h-full space-x-6 text-sm font-semibold text-gray-800">
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                to={item.href}
+                className={`hover:text-blue-700 ${location.pathname === item.href
+                  ? "text-blue-700"
+                  : ""
+                  }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            {/* AUTH SECTION */}
+            {isAuthenticated ? (
+              <div className="flex items-center gap-4">
+
+                <button
+                  onClick={() => navigate("/user-dashboard")}
+                  className="font-semibold hover:text-blue-700"
+                >
+                  Dashboard
+                </button>
+
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-500 text-white px-4 py-2 rounded-lg"
+                >
+                  Logout
+                </button>
+
+              </div>
+            ) : (
+              <button
+                onClick={() => navigate("/login")}
+                className="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded-lg font-bold"
+              >
+                Sign In
+              </button>
+            )}
           </div>
 
           {/* MOBILE BUTTON */}
@@ -120,9 +192,16 @@ const Header: React.FC = () => {
           <div className="fixed top-0 left-0 h-full w-[280px] bg-white shadow-xl z-50 transition-transform duration-300">
 
             {/* HEADER */}
-            <div className="flex items-center justify-between px-4 py-4 border-b">
-              <img src="/C3.png" className="h-10" />
-              <button onClick={closeMobileMenu} className="text-xl">
+            {/* <div className="flex items-center justify-between px-4 py-4 border-b"> */}
+            <div className="flex items-center justify-between px-4 h-16 border-b">
+              <img
+                src="/C3.png"
+                className="h-12 object-contain -translate-y-0.5"
+              />
+              <button
+                onClick={closeMobileMenu}
+                className="text-2xl leading-none"
+              >
                 ✕
               </button>
             </div>
@@ -144,8 +223,51 @@ const Header: React.FC = () => {
                 </Link>
               ))}
 
+              {/* AUTH SECTION */}
+              {isAuthenticated ? (
+                <>
+                  <button
+                    onClick={() => {
+                      closeMobileMenu();
+                      navigate("/user-dashboard");
+                    }}
+                    className="text-left py-2 text-gray-800"
+                  >
+                    Dashboard
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      closeMobileMenu();
+                      handleLogout();
+                    }}
+                    className="text-left py-2 text-red-500"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    onClick={closeMobileMenu}
+                    className="py-2 text-gray-800"
+                  >
+                    Login
+                  </Link>
+
+                  {/* <Link
+                    to="/register"
+                    onClick={closeMobileMenu}
+                    className="py-2 text-gray-800"
+                  >
+                    Register
+                  </Link> */}
+                </>
+              )}
+
               {/* SHOP CTA */}
-              <button
+              {/* <button
                 onClick={() => {
                   closeMobileMenu();
                   handleShopClick();
@@ -153,7 +275,7 @@ const Header: React.FC = () => {
                 className="mt-4 bg-pink-500 text-white py-2 rounded"
               >
                 Shop
-              </button>
+              </button> */}
 
             </nav>
           </div>

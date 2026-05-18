@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import {
     useGoogleLoginMutation,
@@ -15,6 +14,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
+import { useAppDispatch, useAuth } from "../hooks/cart";
 
 const schema = Yup.object({
     username: Yup.string().required("Username is required"),
@@ -28,12 +28,15 @@ const schema = Yup.object({
 
 export default function Register() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-
+    const dispatch = useAppDispatch();
     const [showPassword, setShowPassword] = useState(false);
-
+    const { isAuthenticated } = useAuth();
     const [registerApi] = useRegisterMutation();
     const [googleLogin] = useGoogleLoginMutation();
+
+    if (isAuthenticated) {
+        return <Navigate to="/user-dashboard" />;
+    }
 
     const {
         register,
@@ -52,46 +55,40 @@ export default function Register() {
             dispatch(
                 loginSuccess({
                     token: res.token,
-                    user: {
-                        id: res.user.id,
-                        username: res.user.username,
-                        email: res.user.email,
-                        role: res.user.role,
-                    },
+                    refreshToken: res.refreshToken,
+                    user: res.user,
                     expiresAt: res.expiresAt,
                 })
             );
 
             reset();
-            navigate("/");
+
+            navigate("/user-dashboard");
+
         } catch (err) {
             console.log(err);
         }
     };
 
     // GOOGLE LOGIN
-    const handleGoogle = async (credentialResponse: any) => {
+    const handleGoogle = async (
+        credentialResponse: any
+    ) => {
         try {
             const res = await googleLogin({
                 idToken: credentialResponse.credential,
             }).unwrap();
 
-            const data = res.token; // 👈 IMPORTANT FIX
-
             dispatch(
                 loginSuccess({
-                    token: data.token,
-                    user: {
-                        id: 0, // Google login does NOT return DB id
-                        username: data.username,
-                        email: data.email,
-                        role: data.role,
-                    },
-                    expiresAt: new Date().toISOString(), // fallback
+                    token: res.token,
+                    refreshToken: res.refreshToken,
+                    user: res.user,
+                    expiresAt: res.expiresAt,
                 })
             );
 
-            navigate("/shop");
+            navigate("/user-dashboard");
         } catch (err) {
             console.log(err);
         }

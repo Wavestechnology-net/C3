@@ -1,9 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import type { ApiResponse } from "./apiResponse";
 import { baseQuery } from "../baseQuery";
 
 export interface LoginRequestDto {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -19,10 +19,10 @@ export interface UserData {
   role: string;
 }
 
-export interface LoginRequestDto { username: string; password: string }
 export interface AuthResponseDto {
   token: string;
-  expiresAt: Date;
+  refreshToken: string;
+  expiresAt: string;
   user: UserData;
 }
 
@@ -54,6 +54,54 @@ export const authApi = createApi({
         body,
       }),
     }),
+
+    forgotPassword: builder.mutation<
+      { message: string },
+      { email: string }
+    >({
+      query: (body) => ({
+        url: "/api/Auth/forgot-password",
+        method: "POST",
+        body,
+      }),
+    }),
+
+    resetPassword: builder.mutation<
+      { message: string },
+      {
+        email: string;
+        token: string;
+        newPassword: string;
+      }
+    >({
+      query: (body) => ({
+        url: "/api/Auth/reset-password",
+        method: "POST",
+        body,
+      }),
+    }),
+
+    refreshToken: builder.mutation<
+      AuthResponseDto,
+      { refreshToken: string }
+    >({
+      query: (body) => ({
+        url: "/api/Auth/refresh-token",
+        method: "POST",
+        body,
+      }),
+    }),
+
+    logout: builder.mutation<
+      { message: string },
+      void
+    >({
+      query: () => ({
+        url: "/api/Auth/logout",
+        method: "POST",
+      }),
+    }),
+
   })
 })
 
@@ -61,4 +109,8 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useGoogleLoginMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
+  useRefreshTokenMutation,
+  useLogoutMutation,
 } = authApi;

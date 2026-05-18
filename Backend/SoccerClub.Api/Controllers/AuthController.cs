@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SoccerClub.Application.DTOs.Auth;
 using SoccerClub.Application.Interfaces;
+using System.Security.Claims;
 
 namespace SoccerClub.API.Controllers
 {
@@ -58,10 +60,60 @@ namespace SoccerClub.API.Controllers
         }
 
         [HttpPost("google-login")]
-        public async Task<IActionResult> GoogleLogin(GoogleLoginRequest request)
+        public async Task<IActionResult> GoogleLogin(GoogleLoginRequestDTO request)
         {
             var token = await _authService.GoogleLoginAsync(request.IdToken);
             return Ok(new { token });
+        }
+
+
+
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> RefreshToken(RefreshTokenRequestDTO request)
+        {
+            var response =
+                await _authService.RefreshTokenAsync(request);
+
+            return Ok(response);
+        }
+
+        [Authorize]
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var userId =
+                User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            await _authService.LogoutAsync(
+                int.Parse(userId));
+
+            return Ok(new
+            {
+                message = "Logged out successfully"
+            });
+        }
+
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordDTO request)
+        {
+            await _authService.ForgotPasswordAsync(request);
+
+            return Ok(new
+            {
+                message =
+                    "If the email exists, a reset link has been sent."
+            });
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDTO request)
+        {
+            await _authService.ResetPasswordAsync(request);
+
+            return Ok(new
+            {
+                message = "Password reset successful"
+            });
         }
     }
 }

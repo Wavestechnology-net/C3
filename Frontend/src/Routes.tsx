@@ -1,5 +1,3 @@
-// import React from "react";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./routes/dynamic/Home";
 import Wrapper from "./components/Wrapper";
@@ -21,9 +19,31 @@ import { Success } from "./routes/cart/success";
 import { CancelPage } from "./routes/cart/cancel";
 import Register from "./routes/Register";
 import UserDashboard from "./routes/admin/UserDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Unauthorized from "./components/Unauthorized";
+import { useSelector } from "react-redux";
+import type { RootState } from "./services/store";
+import { useEffect } from "react";
+import { isTokenExpired } from "./services/token";
+import { logout } from "./services/authSlice";
+import ForgotPassword from "./routes/ForgotPassword";
+import ResetPassword from "./routes/ResetPassword";
+import { useAppDispatch } from "./hooks/cart";
 
 
 const App = () => {
+  const dispatch = useAppDispatch();
+
+  const token = useSelector(
+    (state: RootState) => state.auth.token
+  );
+
+  useEffect(() => {
+    if (token && isTokenExpired(token)) {
+      dispatch(logout());
+    }
+  }, [token]);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -32,19 +52,19 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/tryouts" element={<Tryouts />} />
-          {/* <Route path="/news" element={<News/>} /> */}
-          {/* <Route path="/events" element={<Events/>} /> */}
-          {/* <Route path="/elite" element={<Elite />} /> */}
           <Route path="/youth" element={<YouthAcademy />} />
           <Route path="/recreational" element={<Recreational />} />
           <Route path="/competitive" element={<Competitive />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/shop" element={<ProtectedRoute><Shop /></ProtectedRoute>} />
+          <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<CancelPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/user-dashboard" element={<UserDashboard />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route path="/user-dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
         </Route>
 
 

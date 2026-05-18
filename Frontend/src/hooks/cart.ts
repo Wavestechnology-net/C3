@@ -3,3 +3,4 @@ import type { AppDispatch, RootState } from "../services/store";
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useAuth = () => { return useSelector((state: RootState) => state.auth); };

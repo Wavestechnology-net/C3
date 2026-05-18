@@ -60,12 +60,26 @@ namespace SoccerClub.Application.Services
             // Generate JWT
             var token = _jwtService.GenerateToken(user);
 
+            var refreshToken = _jwtService.GenerateRefreshToken();
+
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(7);
+
+            await _userRepo.SaveChangesAsync();
+
             return new AuthResponseDTO
             {
                 Token = token,
-                Email = user.Email,
-                Username = user.Username,
-                Role = user.Role
+                RefreshToken = refreshToken,
+                ExpiresAt = DateTime.UtcNow.AddMinutes(60),
+
+                User = new UserDTO
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    Email = user.Email,
+                    Role = user.Role
+                }
             };
         }
 
@@ -101,12 +115,26 @@ namespace SoccerClub.Application.Services
             // Generate JWT
             var token = _jwtService.GenerateToken(user);
 
+            var refreshToken = _jwtService.GenerateRefreshToken();
+
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(7);
+
+            await _userRepo.SaveChangesAsync();
+
             return new AuthResponseDTO
             {
                 Token = token,
-                Email = user.Email,
-                Username = user.Username,
-                Role = user.Role
+                RefreshToken = refreshToken,
+                ExpiresAt = DateTime.UtcNow.AddMinutes(60),
+
+                User = new UserDTO
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    Email = user.Email,
+                    Role = user.Role
+                }
             };
         }
 
@@ -138,13 +166,140 @@ namespace SoccerClub.Application.Services
 
             var token = _jwtService.GenerateToken(user);
 
+            var refreshToken = _jwtService.GenerateRefreshToken();
+
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(7);
+
+            await _userRepo.SaveChangesAsync();
+
             return new AuthResponseDTO
             {
                 Token = token,
-                Email = user.Email,
-                Username = user.Username,
-                Role = user.Role
+                ExpiresAt = DateTime.UtcNow.AddMinutes(60),
+                RefreshToken = refreshToken,
+
+                User = new UserDTO
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    Email = user.Email,
+                    Role = user.Role
+                }
             };
+        }
+
+        public async Task<AuthResponseDTO> RefreshTokenAsync(RefreshTokenRequestDTO request)
+        {
+            var user = (await _userRepo.FindAsync(
+                x => x.RefreshToken == request.RefreshToken
+            )).FirstOrDefault();
+
+            if (user == null)
+            {
+                throw new Exception("Invalid refresh token");
+            }
+
+            if (user.RefreshTokenExpiry <= DateTime.UtcNow)
+            {
+                throw new Exception("Refresh token expired");
+            }
+
+            var newAccessToken =
+                _jwtService.GenerateToken(user);
+
+            var newRefreshToken =
+                _jwtService.GenerateRefreshToken();
+
+            user.RefreshToken = newRefreshToken;
+            user.RefreshTokenExpiry =
+                DateTime.UtcNow.AddDays(7);
+
+            await _userRepo.SaveChangesAsync();
+
+            return new AuthResponseDTO
+            {
+                Token = newAccessToken,
+                RefreshToken = newRefreshToken,
+                ExpiresAt = DateTime.UtcNow.AddMinutes(60),
+
+                User = new UserDTO
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    Email = user.Email,
+                    Role = user.Role
+                }
+            };
+        }
+
+        public async Task LogoutAsync(int userId)
+        {
+            var user = await _userRepo.GetByIdAsync(userId);
+
+            if (user == null)
+                throw new Exception("User not found");
+
+            user.RefreshToken = null;
+            user.RefreshTokenExpiry = null;
+
+            await _userRepo.SaveChangesAsync();
+        }
+
+        public async Task ForgotPasswordAsync(ForgotPasswordDTO request)
+        {
+            var user = (await _userRepo.FindAsync(
+                x => x.Email == request.Email
+            )).FirstOrDefault();
+
+            if (user == null)
+            {
+                return;
+            }
+
+            var token = GeneratePasswordResetToken();
+
+            user.PasswordResetToken = token;
+
+            user.PasswordResetTokenExpiry =
+                DateTime.UtcNow.AddHours(1);
+
+            await _userRepo.SaveChangesAsync();
+
+            // SEND EMAIL HERE
+        }
+
+        public async Task ResetPasswordAsync(ResetPasswordDTO request)
+        {
+            var user = (await _userRepo.FindAsync(
+                x =>
+                    x.Email == request.Email &&
+                    x.PasswordResetToken == request.Token
+            )).FirstOrDefault();
+
+            if (user == null)
+            {
+                throw new Exception("Invalid token");
+            }
+
+            if (user.PasswordResetTokenExpiry < DateTime.UtcNow)
+            {
+                throw new Exception("Token expired");
+            }
+
+            user.PasswordHash =
+                BCrypt.Net.BCrypt.HashPassword(
+                    request.NewPassword);
+
+            user.PasswordResetToken = null;
+            user.PasswordResetTokenExpiry = null;
+
+            await _userRepo.SaveChangesAsync();
+        }
+
+        private string GeneratePasswordResetToken()
+        {
+            return Guid.NewGuid().ToString();
         }
     }
 }

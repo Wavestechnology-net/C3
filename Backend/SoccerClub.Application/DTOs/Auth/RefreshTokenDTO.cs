@@ -2,7 +2,7 @@ using SoccerClub.Core.Entities;
 
 namespace SoccerClub.Application.DTOs.Auth;
 
-public class GoogleLoginRequest
+public class RefreshTokenRequestDTO
 {
-    public string IdToken { get; set; }
+    public string RefreshToken { get; set; }
 }

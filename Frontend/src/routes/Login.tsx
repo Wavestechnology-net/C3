@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import {
     useGoogleLoginMutation,
     useLoginMutation
 } from "../services/apis/authApi";
-import { useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSuccess } from "../services/authSlice";
 import { GoogleLogin } from "@react-oauth/google";
 import { Eye, EyeOff } from "lucide-react";
+import { useAppDispatch, useAuth } from "../hooks/cart";
 
 const schema = Yup.object({
     email: Yup.string().email().required("Email is required"),
@@ -19,17 +19,23 @@ const schema = Yup.object({
 
 export default function Login() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const [showPassword, setShowPassword] = useState(false);
     const [login] = useLoginMutation();
     const [googleLogin] = useGoogleLoginMutation();
+    const { isAuthenticated } = useAuth();
+
 
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
+
+    if (isAuthenticated) {
+        return <Navigate to="/user-dashboard" />;
+    }
 
     const onSubmit = async (data: any) => {
         try {
@@ -38,17 +44,13 @@ export default function Login() {
             dispatch(
                 loginSuccess({
                     token: res.token,
-                    user: {
-                        id: 0,
-                        username: res.username,
-                        email: res.email,
-                        role: res.role,
-                    },
-                    expiresAt: new Date().toISOString(),
+                    refreshToken: res.refreshToken,
+                    user: res.user,
+                    expiresAt: res.expiresAt,
                 })
             );
 
-            navigate("/");
+            navigate("/user-dashboard");
         } catch (err) {
             console.log(err);
         }
@@ -63,17 +65,13 @@ export default function Login() {
             dispatch(
                 loginSuccess({
                     token: res.token,
-                    user: {
-                        id: 0,
-                        username: res.username,
-                        email: res.email,
-                        role: res.role,
-                    },
-                    expiresAt: new Date().toISOString(),
+                    refreshToken: res.refreshToken,
+                    user: res.user,
+                    expiresAt: res.expiresAt,
                 })
             );
 
-            navigate("/");
+            navigate("/user-dashboard");
         } catch (err) {
             console.log(err);
         }
@@ -161,6 +159,15 @@ export default function Login() {
                                         className="w-full border rounded-lg px-4 py-3 pr-12 outline-none focus:ring-2 focus:ring-[#d6226a]"
                                     />
 
+                                    <div className="text-right mt-2">
+                                        <Link
+                                            to="/forgot-password"
+                                            className="text-sm text-[#d6226a] hover:underline"
+                                        >
+                                            Forgot Password?
+                                        </Link>
+                                    </div>
+
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
@@ -211,12 +218,12 @@ export default function Login() {
                         <div className="mt-8 text-center">
                             <p className="text-gray-700">
                                 Don’t have an account?{" "}
-                                <a
-                                    href="/register"
+                                <Link
+                                    to="/register"
                                     className="text-[#d6226a] font-semibold hover:underline"
                                 >
                                     Create Account
-                                </a>
+                                </Link>
                             </p>
                         </div>
 

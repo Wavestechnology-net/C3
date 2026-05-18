@@ -1,11 +1,11 @@
 import { GoogleLogin } from "@react-oauth/google";
-import { useDispatch } from "react-redux";
 import { useGoogleLoginMutation } from "../services/apis/authApi";
 import { loginSuccess } from "../services/authSlice";
+import { useAppDispatch } from "../hooks/cart";
 
 export default function GoogleLoginButton() {
   const [googleLogin] = useGoogleLoginMutation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <GoogleLogin
@@ -18,6 +18,7 @@ export default function GoogleLoginButton() {
           dispatch(
             loginSuccess({
               token: res.token,
+              refreshToken: res.refreshToken,
               user: res.user,
               expiresAt: res.expiresAt,
             })

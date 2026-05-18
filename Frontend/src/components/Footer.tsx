@@ -7,9 +7,7 @@ const Footer: React.FC = () => {
         {/* QUESTIONS */}
         <div>
           <h2
-            className="text-royal-blue
-
- text-lg font-bold mb-4 uppercase tracking-wider"
+            className="text-royal-blue text-lg font-bold mb-4 uppercase tracking-wider"
           >
             Questions?
           </h2>

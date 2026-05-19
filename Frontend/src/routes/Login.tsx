@@ -11,6 +11,7 @@ import { loginSuccess } from "../services/authSlice";
 import { GoogleLogin } from "@react-oauth/google";
 import { Eye, EyeOff } from "lucide-react";
 import { useAppDispatch, useAuth } from "../hooks/cart";
+import { toast } from "react-toastify";
 
 const schema = Yup.object({
     email: Yup.string().email().required("Email is required"),
@@ -49,10 +50,11 @@ export default function Login() {
                     expiresAt: res.expiresAt,
                 })
             );
-
+            toast.success("Successful login.")
             navigate("/user-dashboard");
         } catch (err) {
             console.log(err);
+            toast.error("Incorrect username or password.")
         }
     };
 

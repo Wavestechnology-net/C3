@@ -17,14 +17,18 @@ namespace SoccerClub.Application.Services
         private readonly IGenericRepository<User> _userRepo;
         private readonly IConfiguration _config;
         private readonly IJwtService _jwtService;
+        private readonly IEmailService _emailService;
 
         public AuthService(
             IGenericRepository<User> userRepo,
-            IConfiguration config, IJwtService jwtService)
+            IConfiguration config,
+            IJwtService jwtService,
+            IEmailService emailService)
         {
             _userRepo = userRepo;
             _config = config;
             _jwtService = jwtService;
+            _emailService = emailService;
         }
 
         // REGISTER
@@ -266,7 +270,44 @@ namespace SoccerClub.Application.Services
 
             await _userRepo.SaveChangesAsync();
 
-            // SEND EMAIL HERE
+            var resetLink =
+                $"http://localhost:5173/reset-password?token={token}&email={user.Email}";
+
+                        var body = $@"
+                <h2>Reset Your Password</h2>
+
+                <p>
+                    We received a request to reset your password.
+                </p>
+
+                <p>
+                    Click the button below to reset it:
+                </p>
+
+                <a
+                    href='{resetLink}'
+                    style='
+                        background:#d6226a;
+                        color:white;
+                        padding:12px 20px;
+                        text-decoration:none;
+                        border-radius:6px;
+                        display:inline-block;
+                    '
+                >
+                    Reset Password
+                </a>
+
+                <p>
+                    This link will expire in 1 hour.
+                </p>
+            ";
+
+            await _emailService.SendEmailAsync(
+                user.Email,
+                "Reset Password",
+                body
+            );
         }
 
         public async Task ResetPasswordAsync(ResetPasswordDTO request)
@@ -282,7 +323,10 @@ namespace SoccerClub.Application.Services
                 throw new Exception("Invalid token");
             }
 
-            if (user.PasswordResetTokenExpiry < DateTime.UtcNow)
+            if (
+                    user.PasswordResetTokenExpiry == null ||
+                    user.PasswordResetTokenExpiry < DateTime.UtcNow
+                )
             {
                 throw new Exception("Token expired");
             }

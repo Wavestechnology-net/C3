@@ -5,9 +5,11 @@ import type { ProductDto } from "../../types";
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: baseQueryWithAuth,
+  tagTypes: ["Products"],
   endpoints: (builder) => ({
     getProducts: builder.query<ProductDto[], void>({
       query: () => "/api/products/GetAllProducts",
+      providesTags: ["Products"],
     }),
 
     getProductById: builder.query<ProductDto, number>({
@@ -20,6 +22,7 @@ export const productApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["Products"],
     }),
 
     updateProduct: builder.mutation<any, { id: number; data: ProductDto }>({
@@ -28,6 +31,7 @@ export const productApi = createApi({
         method: "PUT",
         body: data,
       }),
+      invalidatesTags: ["Products"],
     }),
 
     deleteProduct: builder.mutation<any, number>({

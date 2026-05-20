@@ -57,8 +57,10 @@ export interface MediaUploadDto {
 export interface ProductDto {
   productId: number;
   name: string;
+  description: string;
   price: number;
   category: "tshirt" | "shorts" | "shoes";
+  createdAt: Date;
   imageUrl?: string;
 }
 

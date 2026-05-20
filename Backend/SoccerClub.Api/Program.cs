@@ -150,7 +150,7 @@ try
 	using var scope = app.Services.CreateScope();
 	var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 	var userRepository = scope.ServiceProvider.GetRequiredService<IGenericRepository<User>>();
-	var passwordHasher = new PasswordHasher<User>();
+	//var passwordHasher = new PasswordHasher<User>();
 
 	if (!context.Users.Any())
 	{
@@ -159,8 +159,8 @@ try
 			Username = "admin",
 			Email = "admin@soccerclub.com",
 			Role = "Admin",
-			PasswordHash = passwordHasher.HashPassword(null, "Admin@123")
-		};
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Admin@123")
+        };
 		await userRepository.AddAsync(admin);
 	}
 

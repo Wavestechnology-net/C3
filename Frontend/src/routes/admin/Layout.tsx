@@ -8,6 +8,7 @@ import {
   FaFolder,
   FaUser,
   FaSignOutAlt,
+  FaBox,
 } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { loggedUser, logout, selectIsAuthenticated } from "../../services/authSlice";
@@ -23,6 +24,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Dashboard", to: "/admin", icon: FaHome },
   { label: "Pages", to: "/admin/pages", icon: FaFileAlt },
   { label: "Media", to: "/admin/media", icon: FaFolder },
+  { label: "Products", to: "/admin/products", icon: FaBox }
   // { label: "Add Pages", to: "/admin/add-Content", icon: FaBars },
 ];
 
@@ -35,7 +37,7 @@ const Sidebar: React.FC<{ open: boolean; onClose?: () => void }> = ({ open, onCl
       <div className="h-full flex flex-col">
         <div className="flex items-center justify-between px-6 py-4 border-b">
           <Link to="/admin" className="text-lg font-bold text-gray-800">
-            <img src="/logoWhite.png" alt="Logo" className="h-8" />
+            <img src="/C3.png" alt="Logo" className="h-14" />
           </Link>
           <button className="md:hidden p-2 rounded hover:bg-gray-100" onClick={onClose} aria-label="Close sidebar">
             <FaBars />
@@ -77,7 +79,7 @@ const Topbar: React.FC<{ onToggleSidebar: () => void }> = ({ onToggleSidebar }) 
   };
 
   return (
-    <header className="w-full bg-white border-b px-6 py-3 flex items-center justify-between sticky top-0 z-10">
+    <header className="w-full bg-white border-b px-6 py-6 flex items-center justify-between sticky top-0 z-10">
       <div className="flex items-center gap-4">
         <button className="md:hidden p-2 rounded hover:bg-gray-100" onClick={onToggleSidebar} aria-label="Toggle sidebar">
           <FaBars />

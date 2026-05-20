@@ -29,6 +29,9 @@ import { logout } from "./services/authSlice";
 import ForgotPassword from "./routes/ForgotPassword";
 import ResetPassword from "./routes/ResetPassword";
 import { useAppDispatch } from "./hooks/cart";
+import AdminLogin from "./routes/AdminLogin";
+import Products from "./routes/admin/Products";
+import ProductForm from "./routes/admin/ProductForm";
 
 
 const App = () => {
@@ -67,11 +70,16 @@ const App = () => {
           <Route path="/user-dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
         </Route>
 
+        <Route path="/admin/login" element={<AdminLogin />} />
 
         <Route path="/admin" element={<ProtectedAdminRoute />}>
           <Route index element={<AdminDashboard />} />
           <Route path="pages" element={<Page />} />
           <Route path="media" element={<Media />} />
+
+          <Route path="products" element={<Products />} />
+          <Route path="products/new" element={<ProductForm />} />
+          <Route path="products/edit/:id" element={<ProductForm />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

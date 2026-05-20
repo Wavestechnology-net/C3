@@ -1,4 +1,3 @@
-import Layout from "./Layout";
 
 const stats = [
   { label: "Total Pages", value: 24, icon: "📄" },

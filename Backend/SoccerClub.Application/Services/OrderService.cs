@@ -17,6 +17,7 @@ namespace SoccerClub.Application.Services
         private readonly IGenericRepository<Order> _orderRepo;
         private readonly IGenericRepository<OrderItem> _orderItemRepo;
         private readonly IGenericRepository<Core.Entities.Product> _productRepo;
+        private readonly IGenericRepository<User> _userRepo;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
@@ -26,6 +27,7 @@ namespace SoccerClub.Application.Services
             IGenericRepository<Order> orderRepo,
             IGenericRepository<OrderItem> orderItemRepo,
             IGenericRepository<Core.Entities.Product> productRepo,
+            IGenericRepository<User> userRepo,
             IHttpContextAccessor httpContextAccessor,
             IMapper mapper,
             IConfiguration config,
@@ -34,6 +36,7 @@ namespace SoccerClub.Application.Services
             _orderRepo = orderRepo;
             _orderItemRepo = orderItemRepo;
             _productRepo = productRepo;
+            _userRepo = userRepo;
             _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
             _config = config;
@@ -128,7 +131,7 @@ namespace SoccerClub.Application.Services
 
                     IsActive = true,
                     CreatedAt = DateTime.UtcNow,
-                    CreatedBy = userEmail
+                    CreatedBy = userId.ToString()
                 };
 
                 await _orderRepo.AddAsync(order);
@@ -169,14 +172,71 @@ namespace SoccerClub.Application.Services
             }
         }
 
-        // 📦 GET ALL ORDERS
         public async Task<IEnumerable<OrderDTO>> GetAllOrdersAsync()
         {
+            _logger.LogInformation("Fetching all orders");
+
             var orders = await _orderRepo.GetAllAsync();
 
-            return _mapper.Map<IEnumerable<OrderDTO>>(orders);
-        }
+            var result = new List<OrderDTO>();
 
+            foreach (var order in orders.OrderByDescending(x => x.CreatedAt))
+            {
+                // ✅ Fetch user ONCE per order
+                var user = await _userRepo.GetByIdAsync(order.UserId);
+
+                // ✅ Get order items
+                var orderItems = await _orderItemRepo.FindAsync(
+                    x => x.OrderId == order.OrderId
+                );
+
+                var itemDtos = new List<OrderItemDTO>();
+
+                foreach (var item in orderItems)
+                {
+                    // ✅ Get product details
+                    var product = await _productRepo.GetByIdAsync(item.ProductId);
+
+                    itemDtos.Add(new OrderItemDTO
+                    {
+                        OrderItemId = item.OrderItemId,
+
+                        ProductId = item.ProductId,
+
+                        ProductName = product?.Name ?? "Deleted Product",
+
+                        ImageUrl = product?.ImageUrl,
+
+                        Quantity = item.Quantity,
+
+                        Size = item.Size,
+
+                        Price = item.Price
+                    });
+                }
+
+                result.Add(new OrderDTO
+                {
+                    OrderId = order.OrderId,
+
+                    UserEmail = order.UserEmail,
+
+                    Username = user?.Username,
+
+                    TotalAmount = order.TotalAmount,
+
+                    Status = order.Status,
+
+                    CreatedAt = order.CreatedAt,
+
+                    TotalItems = itemDtos.Sum(x => x.Quantity),
+
+                    Items = itemDtos
+                });
+            }
+
+            return result;
+        }
         public async Task<IEnumerable<MyOrderResponseDTO>> GetMyOrdersAsync()
         {
             var userIdClaim = _httpContextAccessor.HttpContext?
@@ -207,6 +267,7 @@ namespace SoccerClub.Application.Services
                     {
                         ProductId = item.ProductId,
                         ProductName = product?.Name ?? "Product",
+                        ImageUrl = product?.ImageUrl,
                         Quantity = item.Quantity,
                         Size = item.Size,
                         Price = item.Price
@@ -227,19 +288,94 @@ namespace SoccerClub.Application.Services
                 .OrderByDescending(x => x.CreatedAt);
         }
 
-        // 📦 GET BY ID
         public async Task<OrderDTO?> GetOrderByIdAsync(int id)
         {
+            _logger.LogInformation("Fetching order {OrderId}", id);
+
             var order = await _orderRepo.GetByIdAsync(id);
 
-            if (order == null) return null;
+            var user = await _userRepo.GetByIdAsync(order.UserId);
 
-            return _mapper.Map<OrderDTO>(order);
+            if (order == null)
+                return null;
+
+            var orderItems = await _orderItemRepo.FindAsync(
+                x => x.OrderId == order.OrderId
+            );
+
+            var itemDtos = new List<OrderItemDTO>();
+
+            foreach (var item in orderItems)
+            {
+                var product = await _productRepo.GetByIdAsync(item.ProductId);
+
+                itemDtos.Add(new OrderItemDTO
+                {
+                    OrderItemId = item.OrderItemId,
+
+                    ProductId = item.ProductId,
+
+                    ProductName = product?.Name ?? "Deleted Product",
+
+                    ImageUrl = product?.ImageUrl,
+
+                    Quantity = item.Quantity,
+
+                    Size = item.Size,
+
+                    Price = item.Price
+                });
+            }
+
+            return new OrderDTO
+            {
+                OrderId = order.OrderId,
+
+                Username = user?.Username,
+
+                UserEmail = order.UserEmail,
+
+                TotalAmount = order.TotalAmount,
+
+                Status = order.Status,
+
+                CreatedAt = order.CreatedAt,
+
+                TotalItems = itemDtos.Sum(x => x.Quantity),
+
+                Items = itemDtos
+            };
         }
 
         // 🔄 UPDATE STATUS
+        //public async Task<object> UpdateOrderStatusAsync(int id, string status)
+        //{
+        //    var order = await _orderRepo.GetByIdAsync(id);
+
+        //    if (order == null)
+        //        throw new Exception("Order not found");
+
+        //    order.Status = status;
+
+        //    await _orderRepo.UpdateAsync(order);
+
+        //    return new
+        //    {
+        //        Success = true,
+        //        Message = "Status updated"
+        //    };
+        //}
         public async Task<object> UpdateOrderStatusAsync(int id, string status)
         {
+            var validStatuses = new[]
+            {
+                "Pending",
+                "Paid"
+            };
+
+            if (!validStatuses.Contains(status))
+                throw new Exception("Invalid order status");
+
             var order = await _orderRepo.GetByIdAsync(id);
 
             if (order == null)
@@ -247,16 +383,18 @@ namespace SoccerClub.Application.Services
 
             order.Status = status;
 
+            order.UpdatedAt = DateTime.UtcNow;
+
             await _orderRepo.UpdateAsync(order);
 
             return new
             {
                 Success = true,
-                Message = "Status updated"
+                Message = "Order status updated"
             };
         }
 
-       public async Task HandleStripeWebhookAsync(string json, string signature)
+        public async Task HandleStripeWebhookAsync(string json, string signature)
         {
             try
             {

@@ -9,6 +9,7 @@ import {
   FaUser,
   FaSignOutAlt,
   FaBox,
+  FaShoppingBag,
 } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { loggedUser, logout, selectIsAuthenticated } from "../../services/authSlice";
@@ -24,18 +25,19 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Dashboard", to: "/admin", icon: FaHome },
   { label: "Pages", to: "/admin/pages", icon: FaFileAlt },
   { label: "Media", to: "/admin/media", icon: FaFolder },
-  { label: "Products", to: "/admin/products", icon: FaBox }
+  { label: "Products", to: "/admin/products", icon: FaBox },
+  { label: "Orders", to: "/admin/orders", icon: FaShoppingBag },
   // { label: "Add Pages", to: "/admin/add-Content", icon: FaBars },
 ];
 
 const Sidebar: React.FC<{ open: boolean; onClose?: () => void }> = ({ open, onClose }) => {
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-40 w-64 bg-white border-r transform transition-transform duration-200 ${open ? "translate-x-0" : "-translate-x-full"
+      className={`fixed inset-y-0 left-0 z-40 w-64 bg-[#ffef99] border-r border-[#e0b100] transform transition-transform duration-200 ${open ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
     >
       <div className="h-full flex flex-col">
-        <div className="flex items-center justify-between px-6 py-4 border-b">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#e0b100]">
           <Link to="/admin" className="text-lg font-bold text-gray-800">
             <img src="/C3.png" alt="Logo" className="h-14" />
           </Link>
@@ -79,12 +81,12 @@ const Topbar: React.FC<{ onToggleSidebar: () => void }> = ({ onToggleSidebar }) 
   };
 
   return (
-    <header className="w-full bg-white border-b px-6 py-6 flex items-center justify-between sticky top-0 z-10">
+    <header className="w-full bg-[#ffef99] border-b px-6 py-6 flex items-center justify-between sticky top-0 z-10">
       <div className="flex items-center gap-4">
         <button className="md:hidden p-2 rounded hover:bg-gray-100" onClick={onToggleSidebar} aria-label="Toggle sidebar">
           <FaBars />
         </button>
-        <h1 className="text-xl font-semibold text-gray-800 mt-2 mb-1">Content Management System</h1>
+        <h1 className="text-xl font-semibold text-gray-800 mt-2 mb-1">Admin Panel, C3FC Soccer</h1>
       </div>
 
       <div className="flex items-center gap-4">
@@ -122,7 +124,7 @@ const Layout: React.FC<{ children: React.ReactNode; title?: string }> = ({ title
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#ffffff]">
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <div className="md:pl-64">

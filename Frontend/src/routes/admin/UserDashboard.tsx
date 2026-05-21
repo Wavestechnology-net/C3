@@ -14,7 +14,7 @@ export default function UserDashboard() {
     isError,
   } = useGetMyOrdersQuery();
 
-  const orders = data?.data || [];
+  const orders = data || [];
 
   return (
     <div className="bg-white min-h-screen overflow-hidden">
@@ -32,7 +32,7 @@ export default function UserDashboard() {
 
         <div className="absolute inset-0 flex items-center px-6 md:px-24">
           <div className="text-white mt-20 max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-extrabold uppercase leading-tight mb-5">
+            <h1 className="text-2xl md:text-4xl font-extrabold uppercase leading-tight mb-5">
               Welcome Back, {user?.username}
             </h1>
 
@@ -48,7 +48,7 @@ export default function UserDashboard() {
       <div className="px-4 md:px-24 py-14 bg-white">
 
         {/* USER CARD */}
-        <div className="bg-gradient-to-r from-[#d6226a] via-pink-600 to-[#b01755] rounded-[32px] p-8 md:p-10 shadow-2xl mb-14 text-white overflow-hidden relative">
+        {/* <div className="bg-gradient-to-r from-[#d6226a] via-pink-600 to-[#b01755] rounded-[32px] p-8 md:p-10 shadow-2xl mb-14 text-white overflow-hidden relative">
 
           <div className="absolute right-[-40px] top-[-40px] w-56 h-56 bg-white/10 rounded-full"></div>
           <div className="absolute bottom-[-60px] left-[-40px] w-72 h-72 bg-white/5 rounded-full"></div>
@@ -92,11 +92,47 @@ export default function UserDashboard() {
               </div>
             </div>
           </div>
+        </div> */}
+        <div className="bg-gradient-to-r from-[#d6226a] to-pink-600 rounded-2xl p-6 shadow-md mb-10 text-white">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+            {/* USER INFO */}
+            <div>
+              <p className="uppercase tracking-widest text-xs text-pink-100 mb-2">
+                Welcome Back
+              </p>
+
+              <h2 className="text-2xl font-bold uppercase">
+                {user?.username}
+              </h2>
+
+              <p className="text-pink-100 text-sm mt-1">
+                {user?.email}
+              </p>
+            </div>
+
+            {/* STATS */}
+            <div className="flex gap-4">
+
+              <div className="bg-white/15 rounded-xl px-4 py-3 min-w-[120px] text-center">
+                <p className="text-xs text-pink-100">Orders</p>
+                <p className="text-2xl font-bold">{orders.length}</p>
+              </div>
+
+              <div className="bg-white/15 rounded-xl px-4 py-3 min-w-[120px] text-center">
+                <p className="text-xs text-pink-100">Role</p>
+                <p className="text-lg font-semibold uppercase">
+                  {user?.role}
+                </p>
+              </div>
+
+            </div>
+          </div>
         </div>
 
         {/* TITLE */}
         <div className="mb-10">
-          <h2 className="text-4xl md:text-5xl font-extrabold uppercase mb-4 leading-tight">
+          <h2 className="text-4xl md:text-4xl font-extrabold uppercase mb-4 leading-tight">
             ORDER HISTORY
           </h2>
 
@@ -158,116 +194,103 @@ export default function UserDashboard() {
         )}
 
         {/* ORDERS */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-          {orders.map((order: any) => (
-            <div
-              key={order.orderId}
-              className="bg-white border border-gray-200 rounded-[32px] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300"
-            >
+        <div className="overflow-x-auto bg-white border rounded-2xl shadow-sm">
 
-              {/* TOP */}
-              <div className="bg-gradient-to-r from-black via-gray-900 to-black p-7 text-white">
+          <table className="w-full text-sm text-left">
 
-                <div className="flex items-start justify-between gap-4 flex-wrap">
+            {/* HEADER */}
+            <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
+              <tr>
+                <th className="px-4 py-3">Order</th>
+                <th className="px-4 py-3">Products</th>
+                {/* <th className="px-4 py-3">User</th> */}
+                <th className="px-4 py-3">Total</th>
+                <th className="px-4 py-3">Date</th>
+                <th className="px-4 py-3">Status</th>
+              </tr>
+            </thead>
 
-                  <div>
-                    <p className="text-gray-400 text-sm uppercase tracking-[2px] mb-2">
-                      Order ID
+            {/* BODY */}
+            <tbody>
+              {orders.map((order: any) => (
+                <tr
+                  key={order.orderId}
+                  className="border-b hover:bg-gray-50 align-top"
+                >
+
+                  {/* ORDER ID */}
+                  <td className="px-4 py-4 font-semibold">
+                    #{order.orderId}
+                  </td>
+
+                  {/* PRODUCTS */}
+                  <td className="px-4 py-4">
+                    <div className="space-y-2">
+
+                      {order.items?.map((item: any, index: number) => (
+                        <div
+                          key={index}
+                          className="flex items-center gap-3"
+                        >
+
+                          <img
+                            src={
+                              item.imageUrl
+                                ? import.meta.env.VITE_BASE_API_URL + item.imageUrl
+                                : "/placeholder.png"
+                            }
+                            className="w-15 h-15 rounded-md object-cover border"
+                          />
+
+                          <div className="leading-tight">
+                            <p className="font-medium text-gray-800">
+                              {item.productName}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              Qty: {item.quantity} | Size: {item.size}
+                            </p>
+                          </div>
+
+                        </div>
+                      ))}
+
+                    </div>
+                  </td>
+
+                  {/* USER */}
+                  {/* <td className="px-4 py-4">
+                    <p className="font-medium text-gray-800">
+                      {order.username || order.userEmail}
                     </p>
+                  </td> */}
 
-                    <h3 className="text-4xl font-extrabold">
-                      #{order.orderId}
-                    </h3>
-                  </div>
+                  {/* TOTAL */}
+                  <td className="px-4 py-4 font-bold text-gray-900">
+                    ${order.totalAmount}
+                  </td>
 
-                  <span
-                    className={`px-5 py-2 rounded-full text-sm font-bold uppercase tracking-wide ${order.status === "Paid"
-                      ? "bg-green-500 text-white"
-                      : order.status === "Pending"
-                        ? "bg-yellow-400 text-black"
-                        : "bg-red-500 text-white"
-                      }`}
-                  >
-                    {order.status}
-                  </span>
-                </div>
-              </div>
+                  {/* DATE */}
+                  <td className="px-4 py-4 text-gray-600">
+                    {new Date(order.createdAt).toLocaleDateString()}
+                  </td>
 
-              {/* BODY */}
-              <div className="p-8 space-y-8">
+                  {/* STATUS */}
+                  <td className="px-4 py-4">
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-semibold ${order.status === "Paid"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-yellow-100 text-yellow-700"
+                        }`}
+                    >
+                      {order.status}
+                    </span>
+                  </td>
 
-                {/* AMOUNT */}
-                <div className="flex items-center gap-5">
+                </tr>
+              ))}
+            </tbody>
 
-                  <div className="w-16 h-16 rounded-2xl bg-pink-100 flex items-center justify-center shrink-0">
-                    <CircleDollarSign
-                      className="text-[#d6226a]"
-                      size={28}
-                    />
-                  </div>
-
-                  <div>
-                    <p className="text-sm uppercase tracking-wide text-gray-500 mb-1">
-                      Total Amount
-                    </p>
-
-                    <h4 className="text-3xl font-extrabold text-gray-900">
-                      ${order.totalAmount}
-                    </h4>
-                  </div>
-                </div>
-
-                {/* PAYMENT */}
-                <div className="flex items-center gap-5">
-
-                  <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center shrink-0">
-                    <CreditCard
-                      className="text-blue-600"
-                      size={28}
-                    />
-                  </div>
-
-                  <div className="overflow-hidden">
-                    <p className="text-sm uppercase tracking-wide text-gray-500 mb-1">
-                      Payment Intent
-                    </p>
-
-                    <h4 className="font-semibold text-gray-800 break-all leading-7">
-                      {order.stripePaymentIntentId ||
-                        "Awaiting Payment Confirmation"}
-                    </h4>
-                  </div>
-                </div>
-
-                {/* DATE */}
-                <div className="flex items-center gap-5">
-
-                  <div className="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center shrink-0">
-                    <Calendar
-                      className="text-green-600"
-                      size={28}
-                    />
-                  </div>
-
-                  <div>
-                    <p className="text-sm uppercase tracking-wide text-gray-500 mb-1">
-                      Order Date
-                    </p>
-
-                    <h4 className="font-semibold text-gray-900 text-lg">
-                      {new Date(
-                        order.createdAt
-                      ).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+          </table>
         </div>
       </div>
 

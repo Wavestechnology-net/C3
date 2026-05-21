@@ -32,6 +32,8 @@ import { useAppDispatch } from "./hooks/cart";
 import AdminLogin from "./routes/AdminLogin";
 import Products from "./routes/admin/Products";
 import ProductForm from "./routes/admin/ProductForm";
+import Orders from "./routes/admin/Orders/Orders";
+import OrderDetails from "./routes/admin/Orders/OrderDetails";
 
 
 const App = () => {
@@ -80,6 +82,9 @@ const App = () => {
           <Route path="products" element={<Products />} />
           <Route path="products/new" element={<ProductForm />} />
           <Route path="products/edit/:id" element={<ProductForm />} />
+
+          <Route path="orders" element={<Orders />} />
+          <Route path="orders/:id" element={<OrderDetails />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

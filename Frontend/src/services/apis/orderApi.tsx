@@ -25,6 +25,11 @@ export const orderApi = createApi({
       }),
     }),
 
+    getOrderById: builder.query<any, number>({
+      query: (id) =>
+        `/api/orders/GetOrderById?id=${id}`,
+    }),
+
   }),
 });
 
@@ -32,4 +37,5 @@ export const {
   useCheckoutMutation,
   useGetOrdersQuery,
   useGetMyOrdersQuery,
+  useGetOrderByIdQuery,
 } = orderApi;

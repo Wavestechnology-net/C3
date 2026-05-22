@@ -18,15 +18,22 @@ interface ImageSelectorProps {
   onSelect: (imageId: string) => void;
 }
 
-export default function ImageSelector({ selectedImageId, onSelect }: ImageSelectorProps){
+export default function ImageSelector({ selectedImageId, onSelect }: ImageSelectorProps) {
   const { data: mediaResponse, isLoading, isError } = useGetAllMediaQuery();
   const media = mediaResponse?.data || [];
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const selectedMedia = media.find(m => m.id === Number(selectedImageId));
+  // const selectedMedia = media.find(m => m.id === Number(selectedImageId));
+  const selectedMedia = media.find(
+    m => String(m.id) === String(selectedImageId)
+  );
 
-  const filteredMedia = media.filter(m => 
+  // const filteredMedia = media.filter(m =>
+  //   m.fileName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //   m.altText?.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
+  const filteredMedia = (media || []).filter(m =>
     m.fileName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
     m.altText?.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -88,8 +95,8 @@ export default function ImageSelector({ selectedImageId, onSelect }: ImageSelect
           <DialogTrigger asChild>
             <Button variant="outline" className="w-full justify-start">
               <ImageIcon className="mr-2 h-4 w-4" />
-              {selectedMedia 
-                ? (selectedMedia?.altText || selectedMedia?.fileName) 
+              {selectedMedia
+                ? (selectedMedia?.altText || selectedMedia?.fileName)
                 : "Select an image..."}
             </Button>
           </DialogTrigger>
@@ -97,7 +104,7 @@ export default function ImageSelector({ selectedImageId, onSelect }: ImageSelect
             <DialogHeader>
               <DialogTitle>Select an Image</DialogTitle>
             </DialogHeader>
-            
+
             {/* Search */}
             <div className="relative">
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
@@ -108,7 +115,7 @@ export default function ImageSelector({ selectedImageId, onSelect }: ImageSelect
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            
+
             {/* Image Grid */}
             <ScrollArea className="flex-grow overflow-y-auto">
               {filteredMedia?.length === 0 ? (
@@ -125,11 +132,10 @@ export default function ImageSelector({ selectedImageId, onSelect }: ImageSelect
                         onSelect(m.id.toString());
                         setIsOpen(false);
                       }}
-                      className={`relative group rounded-lg border-2 overflow-hidden transition-all hover:scale-105 p-0 gap-2 ${
-                        selectedImageId === m.id.toString()
-                          ? "border-primary ring-2 ring-primary/20"
-                          : "border-border hover:border-primary"
-                      }`}
+                      className={`relative group rounded-lg border-2 overflow-hidden transition-all hover:scale-105 p-0 gap-2 ${selectedImageId === m.id.toString()
+                        ? "border-primary ring-2 ring-primary/20"
+                        : "border-border hover:border-primary"
+                        }`}
                     >
                       <CardContent className="p-0">
                         <div className="aspect-square">
@@ -143,12 +149,12 @@ export default function ImageSelector({ selectedImageId, onSelect }: ImageSelect
                       </CardContent>
                       <CardFooter className="px-2 pb-2 flex flex-col items-start gap-1">
                         {/* <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2 opacity-0 group-hover:opacity-100 transition-opacity"> */}
-                          <p className="text-xs text-gray-600">
-                            <span className="font-semibold">Name</span>: {m.fileName} 
-                          </p>
-                          <p className="text-xs text-gray-600">
-                            <span className="font-semibold">AltText</span>: {m.altText}
-                          </p>
+                        <p className="text-xs text-gray-600">
+                          <span className="font-semibold">Name</span>: {m.fileName}
+                        </p>
+                        <p className="text-xs text-gray-600">
+                          <span className="font-semibold">AltText</span>: {m.altText}
+                        </p>
                         {/* </div> */}
                       </CardFooter>
                     </Card>

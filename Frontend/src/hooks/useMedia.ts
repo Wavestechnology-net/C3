@@ -73,4 +73,6 @@ export const useMedia = (): UseMediaReturn => {
     getMedia,
     preloadAllMedia
   };
+
 };
+

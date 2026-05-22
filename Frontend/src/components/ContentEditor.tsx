@@ -4,9 +4,10 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import TextEditor from "./TextEditor";
-import MediaSelector from "./MediaSelector";
 import type { ContentDto } from "../types";
 import CarouselJsonManager from "./CarouselJsonManager";
+import { useGetAllMediaQuery } from "../services/apis/mediaApi";
+import ImageSelector from "./MediaSelector";
 
 interface ContentEditorProps {
   content: ContentDto;
@@ -25,6 +26,13 @@ export default function ContentEditor({ content, sectionId, onChange }: ContentE
   const label = formatLabel(content.contentKey);
   const contentType = content.contentType;
 
+  const { data: mediaResponse } = useGetAllMediaQuery();
+  const media = mediaResponse?.data || [];
+
+  // const selectedMedia = media.find(
+  //   m => String(m.id) === String(selectedImageId)
+  // );
+
   // Get appropriate icon for content type
   const getContentTypeIcon = () => {
     switch (contentType) {
@@ -35,6 +43,24 @@ export default function ContentEditor({ content, sectionId, onChange }: ContentE
       default: return '📄';
     }
   };
+
+  const getMediaUrlById = (id: string) => {
+    const mediaItem = media.find(m => String(m.id) === String(id));
+
+    if (!mediaItem) return "";
+
+    return import.meta.env.VITE_STATIC_FILE_SERVER + mediaItem.mediaUrl;
+  };
+
+  const imageUrl = (() => {
+    const mediaItem = media.find(
+      m => String(m.id) === String(content.value)
+    );
+
+    return mediaItem
+      ? import.meta.env.VITE_STATIC_FILE_SERVER + mediaItem.mediaUrl
+      : "";
+  })();
 
   return (
     <Card className="shadow-sm hover:shadow-md transition-shadow">
@@ -92,12 +118,53 @@ export default function ContentEditor({ content, sectionId, onChange }: ContentE
           </div>
         )}
 
-        {contentType === "image" && (
+        {/* {contentType === "image" && (
           <div className="space-y-2">
             <Label>Image Selection</Label>
             <MediaSelector
               selectedImageId={content.value || ""}
               onSelect={(imageId) => onChange(sectionId, content.id, imageId, "value")}
+            />
+          </div>
+        )} */}
+        {contentType === "image" && (
+          <div className="space-y-3">
+
+            {/* Preview */}
+            {content.value && (
+              // <img
+              //   src={
+              //     import.meta.env.VITE_STATIC_FILE_SERVER +
+              //     content.value
+              //   }
+              //   src={getImageUrl(content.value)}
+              //   className="w-full max-h-64 object-cover rounded-xl border"
+              // />
+              <div className="relative group">
+                {imageUrl && (
+                  <img
+                    src={imageUrl}
+                    className="w-full max-h-64 object-cover rounded-xl border"
+                  />
+                )}
+
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition rounded-xl">
+                  <span className="text-white text-sm font-semibold">
+                    Click below to replace image
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Media Selector */}
+            <ImageSelector
+              selectedImageId={content.value || ""}
+              // onSelect={(imageId) =>
+              //   onChange(sectionId, content.id, imageId)
+              // }
+              onSelect={(imageId) => {
+                onChange(sectionId, content.id, imageId, "value");
+              }}
             />
           </div>
         )}

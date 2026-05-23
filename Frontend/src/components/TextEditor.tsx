@@ -88,7 +88,7 @@ export default function TextEditor({ content, onChange }: TextEditorProps) {
       {/* Editor Content */}
       <EditorContent
         editor={editor}
-        className="max-w-none min-h-[200px] max-h-80 overflow-y-scroll p-4 focus:outline-none"
+        className="max-w-none min-h-[200px] max-h-80 overflow-y-scroll p-4 focus:outline-none bg-[#fff9df]"
       />
     </div>
   );

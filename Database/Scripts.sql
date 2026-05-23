@@ -121,14 +121,15 @@ ADD
     LockoutEnd DATETIME NULL;
 
 
-INSERT INTO Sections
-(PageId, Name, SectionType, SortOrder, BackgroundMediaId, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
-VALUES
-(12, 'Hero Section', 'hero', 1, 13, 1, '2026-04-28 10:28:45.2674253', 14, NULL, NULL),
-(12, 'Whats New Carousel', 'carousel', 2, 14, 1, '2026-04-28 10:28:45.2674253', 14, NULL, NULL),
-(12, 'Youth Experience', 'content-image', 3, 16, 1, '2026-04-28 10:28:45.2674253', 14, NULL, NULL),
-(12, 'Player Development', 'image-content', 4, 17, 1, '2026-04-28 10:28:45.2674253', 14, NULL, NULL),
-(12, 'Partners', 'partner-carousel', 5, 19, 1, '2026-04-28 10:28:45.2674253', 14, NULL, NULL);
+
+UPDATE Content
+SET ContentType = 'image'
+WHERE ContentKey IN (
+    'background-image',
+    'image',
+    'hero-image',
+    'banner-image'
+);
 
 
 -- -- News Table

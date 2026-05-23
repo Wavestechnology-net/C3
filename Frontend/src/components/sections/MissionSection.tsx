@@ -6,18 +6,19 @@ interface MissionSectionProps {
 }
 
 export default function MissionSection({ section }: MissionSectionProps) {
-  const imageContent = section.contents?.find((c: ContentDto) => c.contentKey === 'image');
+  const imageContent = section.contents?.find(
+    (c: ContentDto) =>
+      c.contentType === 'image' ||
+      c.contentKey.toLowerCase().includes('image')
+  );
   const imageMediaId = imageContent?.value ? parseInt(imageContent.value) : null;
   const { getMediaUrl, getMedia } = useMedia();
 
-  const media = imageMediaId ? getMedia(imageMediaId) : {mediaUrl: "/placeholder-image.jpg" } as MediaDto
+  const media = imageMediaId ? getMedia(imageMediaId) : { mediaUrl: "/placeholder-image.jpg" } as MediaDto
 
-//   const imageUrl = imageMediaId 
-//     ? (getMediaUrl(imageMediaId) as string)
-//     : '/placeholder-image.jpg';
-
-  const headline = section.contents?.find((c: ContentDto) => c.contentKey === 'headline');
-  const content = section.contents?.find((c: ContentDto) => 
+  const headline = section.contents?.find((c: ContentDto) => c.contentKey === 'headline' ||
+    c.contentKey === 'section-title');
+  const content = section.contents?.find((c: ContentDto) =>
     c.contentKey.includes('content') || c.contentKey === 'intro-text'
   );
 
@@ -33,8 +34,8 @@ export default function MissionSection({ section }: MissionSectionProps) {
           {content && (
             <div className="text-white text-lg">
               {content.contentType === 'html' ? (
-                <div 
-                  dangerouslySetInnerHTML={{ __html: content.value || '' }} 
+                <div
+                  dangerouslySetInnerHTML={{ __html: content.value || '' }}
                   className="leading-relaxed"
                 />
               ) : (

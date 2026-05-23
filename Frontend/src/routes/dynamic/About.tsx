@@ -3,12 +3,10 @@ import { useGetPageBySlugQuery } from "../../services/apis/publicApi";
 import HeroSection from "../../components/sections/HeroSection";
 import ContentSection from "../../components/sections/ContentSection";
 import ContentImageSection from "../../components/sections/ContentImageSection";
-// import { useGetAllMediaQuery } from "../../services/apis/mediaApi";
 import type { SectionDto } from "../../types";
-// import PageNotFound from "../PageNotFound";
 import PageDataErrorFallback from "../../components/PageDataErrorFallback";
 import MissionSection from "../../components/sections/MissionSection";
-// import WhyJoinSection from "../../components/sections/WhyJoinSection";
+import VisionSection from "../../components/sections/VisionSection";
 
 export default function About() {
   const {
@@ -23,60 +21,10 @@ export default function About() {
     refetchOnFocus: false,
   });
 
-  // const { 
-  //    data: mediaData, 
-  //   isLoading: mediaLoading, 
-  //   isError: mediaError 
-  // } = useGetAllMediaQuery();
-
-  //   const [showFallback, setShowFallback] = useState(false);
-
-  // Create media URL lookup map
-  // const mediaUrls = useMemo(() => {
-  //   if (!mediaData?.data) return {};
-  //   return mediaData.data.reduce((acc, media) => {
-  //     acc[media.id] = media.mediaUrl;
-  //     return acc;
-  //   }, {} as Record<number, string>);
-  // }, [mediaData]);
-
   const sortedSections = useMemo(() => {
     if (!pageData?.sections) return [];
     return [...pageData.sections].sort((a, b) => a.sortOrder - b.sortOrder);
   }, [pageData?.sections]);
-
-  // Check for backend down scenario
-  //   useEffect(() => {
-  //     if ((pageError || mediaError) && !pageData) {
-  //       const isNetworkError = 
-  //         (pageErrorDetails as any)?.error?.includes('Network Error') ||
-  //         (pageErrorDetails as any)?.status === 'FETCH_ERROR';
-
-  //       if (isNetworkError) {
-  //         const timer = setTimeout(() => {
-  //           setShowFallback(true);
-  //         }, 1000);
-
-  //         return () => clearTimeout(timer);
-  //       }
-  //     }
-  //   }, [pageError, mediaError, pageErrorDetails, pageData]);
-
-  // const isLoading = pageLoading || mediaLoading;
-  // const isError = pageError || mediaError;
-
-  // Show fallback when backend is down
-  //   if (showFallback) {
-  //     return (
-  //       <div className="w-full">
-  //         <iframe 
-  //           src="/fallback/about.html" 
-  //           className="w-full h-screen border-0"
-  //           title="Fallback About Page"
-  //         />
-  //       </div>
-  //     );
-  //   }
 
 
   if (isLoading) {
@@ -91,23 +39,30 @@ export default function About() {
     return <PageDataErrorFallback />
   }
 
-  const renderSection = (section: SectionDto) => {
-    const isMissionSection = section.name?.toLowerCase().includes('mission');
+  const getSectionLayout = (section: SectionDto) => {
+    const name = section.name?.toLowerCase();
 
-    switch (section.sectionType) {
-      case 'hero':
+    if (name?.includes("mission")) return "mission";
+    if (name?.includes("vision")) return "vision";
+
+    return section.sectionType;
+  };
+  const renderSection = (section: SectionDto) => {
+    const layout = getSectionLayout(section);
+
+    switch (layout) {
+      case "hero":
         return <HeroSection key={section.id} section={section} />;
-      case 'content':
+
+      case "content":
         return <ContentSection key={section.id} section={section} />;
-      case 'content-image':
-        if (isMissionSection) {
-          return <MissionSection key={section.id} section={section} />
-        }
-        return <ContentImageSection key={section.id} section={section} />;
-      case 'image-content':
-        return <ContentImageSection key={section.id} section={section} reverse={true} />;
-      //   case 'cta':
-      //     return <CtaSection key={section.id} section={section} />;
+
+      case "mission":
+        return <MissionSection key={section.id} section={section} />;
+
+      case "vision":
+        return <VisionSection key={section.id} section={section} />;
+
       default:
         return <ContentSection key={section.id} section={section} />;
     }
@@ -117,7 +72,7 @@ export default function About() {
     <div className="font-sans text-[#1d2033]">
       {sortedSections.map(renderSection)}
 
-      <section className="bg-white py-30">
+      <section className="bg-white pb-20">
         <h2 className="text-4xl font-bold text-center text-black uppercase font-serif">
           RISE WITH US
         </h2>

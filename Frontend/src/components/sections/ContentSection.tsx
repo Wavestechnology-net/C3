@@ -1,6 +1,8 @@
+import { useMedia } from "../../hooks/useMedia";
 import type { ContentDto, SectionDto } from "../../types";
 
-export default function ContentSection({ section }: { section: SectionDto }){
+export default function ContentSection({ section }: { section: SectionDto }) {
+  const { getMedia } = useMedia();
   const getContentByType = (content: ContentDto) => {
     switch (content.contentType) {
       case 'html':
@@ -32,11 +34,38 @@ export default function ContentSection({ section }: { section: SectionDto }){
     }
   };
 
+  const renderImage = (content: ContentDto) => {
+    const mediaId = content.value ? parseInt(content.value) : null;
+    const media = mediaId
+      ? getMedia(mediaId)
+      : null;
+
+    if (!media) return null;
+
+    return (
+      <img
+        src={media.mediaUrl}
+        alt={media.altText || "content image"}
+        className="w-full max-w-md mx-auto rounded shadow"
+        loading="lazy"
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.src = "/placeholder-image.jpg";
+        }}
+      />
+    );
+  };
+
   return (
     <section className={`py-16 px-4 ${section.sortOrder === 3 ? 'bg-[#f3f3f3]' : 'bg-white'}`}>
       <div className="max-w-5xl mx-auto">
         {section.contents?.map((content: ContentDto) => (
           <div key={content.id} className="mb-6">
+            {content.contentKey === 'section-title' && (
+              <h2 className="text-3xl font-bold uppercase mb-4">
+                {content.value}
+              </h2>
+            )}
             {content.contentKey === 'headline' && (
               <h2 className="text-3xl font-bold uppercase mb-4 text-center">
                 {content.value}
@@ -47,26 +76,26 @@ export default function ContentSection({ section }: { section: SectionDto }){
                 {content.value}
               </h3>
             )}
-            {(content.contentKey.includes('text') || 
+            {(content.contentKey.includes('text') ||
               content.contentKey.includes('description') ||
               content.contentKey.includes('content') ||
               content.contentKey === 'intro-text'
-            ) && 
-             content.contentKey !== 'headline' && 
-             content.contentKey !== 'subheading-1' && (
-              <div className="text-lg text-gray-700 mb-4 wysiwyg">
-                {getContentByType(content)}
-              </div>
-            )}
-            {content.contentKey.includes('benefits') || 
-             content.contentKey.includes('reasons') || 
-             content.contentKey.includes('pillars') || 
-             content.contentKey.includes('areas') || 
-             content.contentKey.includes('opportunities') && (
-              <div className="text-lg mb-4">
-                {getContentByType(content)}
-              </div>
-            )}
+            ) &&
+              content.contentKey !== 'headline' &&
+              content.contentKey !== 'subheading-1' && (
+                <div className="text-lg text-gray-700 mb-4 wysiwyg">
+                  {getContentByType(content)}
+                </div>
+              )}
+            {content.contentKey.includes('benefits') ||
+              content.contentKey.includes('reasons') ||
+              content.contentKey.includes('pillars') ||
+              content.contentKey.includes('areas') ||
+              content.contentKey.includes('opportunities') && (
+                <div className="text-lg mb-4">
+                  {getContentByType(content)}
+                </div>
+              )}
           </div>
         ))}
       </div>

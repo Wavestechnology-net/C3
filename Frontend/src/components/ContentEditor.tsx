@@ -64,26 +64,26 @@ export default function ContentEditor({ content, sectionId, onChange }: ContentE
 
   return (
     <Card className="shadow-sm hover:shadow-md transition-shadow">
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-3 ">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg flex items-center gap-2">
-            <Badge variant="secondary" className="font-mono text-xs">
+            {/* <Badge variant="secondary" className="font-mono text-xs">
               {getContentTypeIcon()} {contentType.toUpperCase()}
-            </Badge>
+            </Badge> */}
             <span className="font-medium">{label}</span>
           </CardTitle>
-          <Badge variant="outline" className="text-xs">
+          {/* <Badge variant="outline" className="text-xs">
             ID: {content.id}
-          </Badge>
+          </Badge> */}
         </div>
-        {content.contentKey !== content.contentType && (
+        {/* {content.contentKey !== content.contentType && (
           <p className="text-sm text-muted-foreground mt-1">
             Key: {content.contentKey}
           </p>
-        )}
+        )} */}
       </CardHeader>
 
-      <CardContent className="pt-0">
+      <CardContent className="pt-0 ">
         {contentType === "text" && (
           <div className="space-y-2">
             <Label htmlFor={`text-${content.id}`}>Text Content</Label>
@@ -92,14 +92,14 @@ export default function ContentEditor({ content, sectionId, onChange }: ContentE
               value={content.value || ""}
               onChange={(e) => onChange(sectionId, content.id, e.target.value, "value")}
               placeholder="Enter text content..."
-              className="text-sm"
+              className="text-sm bg-[#fff9df]"
             />
           </div>
         )}
 
         {contentType === "html" && (
           <div className="space-y-2">
-            <Label>HTML Content</Label>
+            {/* <Label>HTML Content</Label> */}
             <TextEditor
               content={content.value || ""}
               onChange={(value) => onChange(sectionId, content.id, value, "value")}
@@ -108,15 +108,25 @@ export default function ContentEditor({ content, sectionId, onChange }: ContentE
         )}
 
 
-        {(contentType === "carousel" || contentType === "partner-carousel") && (
-          <div className="space-y-2">
-            <Label>Carousel Management</Label>
-            <CarouselJsonManager
-              jsonContent={content.value || "[]"}
-              onChange={(newJson) => onChange(sectionId, content.id, newJson, "value")}
-            />
-          </div>
-        )}
+        {(contentType === "carousel" ||
+          contentType === "partner-carousel" ||
+          content.contentKey === "carousel-slides") && (
+            <div className="space-y-2">
+              <Label>Carousel Management</Label>
+
+              <CarouselJsonManager
+                jsonContent={content.value || "[]"}
+                onChange={(newJson) =>
+                  onChange(
+                    sectionId,
+                    content.id,
+                    newJson,
+                    "value"
+                  )
+                }
+              />
+            </div>
+          )}
 
         {/* {contentType === "image" && (
           <div className="space-y-2">
@@ -130,44 +140,22 @@ export default function ContentEditor({ content, sectionId, onChange }: ContentE
         {contentType === "image" && (
           <div className="space-y-3">
 
-            {/* Preview */}
-            {content.value && (
-              // <img
-              //   src={
-              //     import.meta.env.VITE_STATIC_FILE_SERVER +
-              //     content.value
-              //   }
-              //   src={getImageUrl(content.value)}
-              //   className="w-full max-h-64 object-cover rounded-xl border"
-              // />
-              <div className="relative group">
-                {imageUrl && (
-                  <img
-                    src={imageUrl}
-                    className="w-full max-h-64 object-cover rounded-xl border"
-                  />
-                )}
+            <Label>Image Content</Label>
 
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition rounded-xl">
-                  <span className="text-white text-sm font-semibold">
-                    Click below to replace image
-                  </span>
-                </div>
-              </div>
-            )}
-
-            {/* Media Selector */}
             <ImageSelector
               selectedImageId={content.value || ""}
-              // onSelect={(imageId) =>
-              //   onChange(sectionId, content.id, imageId)
-              // }
-              onSelect={(imageId) => {
-                onChange(sectionId, content.id, imageId, "value");
-              }}
+              onSelect={(imageId) =>
+                onChange(
+                  sectionId,
+                  content.id,
+                  imageId,
+                  "value"
+                )
+              }
             />
           </div>
         )}
+
 
         {contentType === "textarea" && (
           <div className="space-y-2">

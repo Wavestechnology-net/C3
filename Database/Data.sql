@@ -132,3 +132,197 @@ VALUES
 ('Training T-Shirt', 'Official training t-shirt for club players. Lightweight and breathable.', 25.00, '/uploads/shirts.jpg', 'T-Shirt', 1, '2026-04-30 14:43:47.907', 1, NULL, NULL),
 ('Match Shorts', 'Comfortable match shorts designed for performance and flexibility.', 20.00, '/uploads/shorts.webp', 'Shorts', 1, '2026-04-30 14:43:47.907', 1, NULL, NULL),
 ('Soccer Cleats', 'Professional soccer cleats for grip and speed on the field.', 75.00, '/uploads/shoes.jpg', 'Shoes', 1, '2026-04-30 14:43:47.907', 1, NULL, NULL);
+
+INSERT INTO Sections
+(PageId, Name, SectionType, SortOrder, BackgroundMediaId, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(12, 'Hero Section', 'hero', 1, 13, 1, '2026-04-28 10:28:45.2674253', 14, NULL, NULL),
+(12, 'Whats New Carousel', 'carousel', 2, 14, 1, '2026-04-28 10:28:45.2674253', 14, NULL, NULL),
+(12, 'Youth Experience', 'content-image', 3, 16, 1, '2026-04-28 10:28:45.2674253', 14, NULL, NULL),
+(12, 'Player Development', 'image-content', 4, 17, 1, '2026-04-28 10:28:45.2674253', 14, NULL, NULL),
+(12, 'Partners', 'partner-carousel', 5, 19, 1, '2026-04-28 10:28:45.2674253', 14, NULL, NULL);
+
+
+-----About Page Content------
+
+INSERT INTO Sections
+(PageId, Name, SectionType, SortOrder, BackgroundMediaId, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(13, 'Hero Section', 'hero', 1, 13, 1, GETDATE(), 14, NULL, NULL);
+
+INSERT INTO Sections
+(PageId, Name, SectionType, SortOrder, BackgroundMediaId, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(13, 'About Section', 'content', 2, NULL, 1, GETDATE(), 14, NULL, NULL);
+
+INSERT INTO Sections
+(PageId, Name, SectionType, SortOrder, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(13, 'Our Vision', 'content', 4, 1, GETDATE(), 14, NULL, NULL);
+
+
+INSERT INTO Sections
+(PageId, Name, SectionType, SortOrder, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(13, 'Our Mission', 'content-image', 3, 1, GETDATE(), 14, NULL, NULL);
+
+
+INSERT INTO Sections
+(PageId, Name, SectionType, SortOrder, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(13, 'Rise With Us', 'content', 5, 1, GETDATE(), 14, NULL, NULL);
+
+
+INSERT INTO Content
+(SectionId, ContentKey, ContentType, Value, Locale, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(16, 'headline', 'text', 'WHO WE ARE', NULL, 1, GETDATE(), 14, NULL, NULL),
+
+(16, 'subhead', 'text',
+'Our mission is to develop youth through soccer. Learn more about our culture and commitment to community.',
+NULL, 1, GETDATE(), 14, NULL, NULL),
+(16, 'cta-text', 'text', 'LEARN MORE', NULL, 1, GETDATE(), 14, NULL, NULL),
+
+(16, 'background-image', 'image', '13', NULL, 1, GETDATE(), 14, NULL, NULL);
+
+
+INSERT INTO Content
+(SectionId, ContentKey, ContentType, Value, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(18, 'section-title', 'text', 'Our Mission', 1, GETDATE(), 14, NULL, NULL),
+
+(18, 'content', 'html',
+'At C3FC Soccer Club, our mission is to develop complete athletes by training the mind, body, and spirit of every player. Through Cognition, Competence, and Character, we prepare young athletes to excel in soccer and thrive in life.',
+1, GETDATE(), 14, NULL, NULL),
+
+(18, 'image', 'image', '14', 1, GETDATE(), 14, NULL, NULL);
+
+INSERT INTO Content
+(SectionId, ContentKey, ContentType, Value, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(19, 'section-title', 'text', 'Our Vision', 1, GETDATE(), 14, NULL, NULL),
+
+(19, 'content', 'html',
+'To create a new standard in youth soccer by developing smart, skilled, and strong-hearted players and to become Houston’s leading soccer club, known for shaping athletes who lead with purpose on and off the field.',
+1, GETDATE(), 14, NULL, NULL);
+
+INSERT INTO Content
+(SectionId, ContentKey, ContentType, Value, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(19, 'image', 'image', '15', 1, GETDATE(), 14, NULL, NULL);
+
+INSERT INTO Content
+(SectionId, ContentKey, ContentType, Value, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(20, 'section-title', 'text', 'Rise With Us', 1, GETDATE(), 14, NULL, NULL),
+
+(20, 'content', 'html',
+'Join C3FC Soccer Club and become part of a movement that builds strong athletes, strong minds, and strong futures. Your journey starts here.',
+1, GETDATE(), 14, NULL, NULL);
+
+
+
+INSERT INTO Content
+(SectionId, ContentKey, ContentType, Value, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(17, 'content', 'html',
+'
+<p>
+C3FC Soccer Club is more than just a soccer team we are a development-focused community committed to shaping well-rounded athletes through the power of sport. At the heart of our philosophy are three core pillars: Cognition, Competence, and Character.
+</p>
+
+<p>
+<strong>Cognition:</strong> We train the mind as much as the body. Our programs emphasize decision-making, game intelligence, and mental agility, helping players think faster, adapt smarter, and elevate their understanding of the game.
+</p>
+
+<p>
+<strong>Competence:</strong> We build strong fundamentals and advanced technical skills through purposeful training. Whether a player is new to the sport or striving for elite levels, our coaching fosters continuous growth in ability and performance.
+</p>
+
+<p>
+<strong>Character:</strong> We believe who you are off the field matters just as much as what you do on it. Through leadership development, teamwork, and sportsmanship, we cultivate values that prepare players for success in soccer and in life.
+</p>
+
+<p>
+At C3, we develop complete players strong in mind, skilled in play, and grounded in values.
+</p>
+
+<p>
+Join us in building the future of the game, one player at a time.
+</p>
+',
+1, GETDATE(), 14, NULL, NULL);
+
+INSERT INTO Content
+(SectionId, ContentKey, ContentType, Value, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(17, 'section-title', 'text', 'About C3FC Soccer Club', 1, GETDATE(), 14, NULL, NULL);
+
+
+---Recreational Page Content-----
+
+INSERT INTO Sections
+(PageId, Name, SectionType, SortOrder, BackgroundMediaId, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(16, 'Intro Section', 'content', 2, NULL, 1, GETDATE(), 14, NULL, NULL),
+(16, 'Play Learn Grow', 'content', 3, NULL, 1, GETDATE(), 14, NULL, NULL),
+(16, 'In-House Matches', 'content', 4, NULL, 1, GETDATE(), 14, NULL, NULL),
+(16, 'Why Join', 'content-image', 5, 16, 1, GETDATE(), 14, NULL, NULL),
+(16, 'Rise With Us', 'content', 6, NULL, 1, GETDATE(), 14, NULL, NULL)
+
+INSERT INTO Content
+(SectionId, ContentKey, ContentType, Value, Locale, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(21, 'section-title', 'text', 'Recreational Soccer Program (Ages 4-12)', NULL, 1, GETDATE(), 14, NULL, NULL),
+
+(21, 'content', 'text',
+'At C3FC Soccer Club, our Recreational Soccer Program is all about having fun, staying active, and enjoying the game no matter your skill level or experience.',
+NULL, 1, GETDATE(), 14, NULL, NULL),
+(22, 'section-title', 'text', 'Play, Learn, and Grow', NULL, 1, GETDATE(), 14, NULL, NULL),
+
+(22, 'content', 'json',
+'{
+  "items": [
+    {
+      "title": "Fun First",
+      "description": "Encouraging a love for the game through engaging drills and friendly play"
+    },
+    {
+      "title": "Health and Fitness",
+      "description": "Helping players stay active and build overall fitness"
+    },
+    {
+      "title": "Skill Development",
+      "description": "Basic fundamentals taught through age-appropriate training, emphasizing teamwork and sportsmanship"
+    }
+  ]
+}',
+NULL, 1, GETDATE(), 14, NULL, NULL),
+(23, 'section-title', 'text', 'In-House Matches', NULL, 1, GETDATE(), 14, NULL, NULL),
+
+(23, 'content', 'text',
+'Our Recreational Program features regular in-house matches where players enjoy low-pressure competitive games in a community-focused environment.',
+NULL, 1, GETDATE(), 14, NULL, NULL),
+
+(23, 'matches-list', 'json',
+'{
+  "items": [
+    "Safe and supportive environment for friendly competition",
+    "Opportunities to make new friends and strengthen team spirit",
+    "Game-day excitement without travel pressure"
+  ]
+}',
+NULL, 1, GETDATE(), 14, NULL, NULL),
+(24, 'section-title', 'text', 'Why Join the C3FC Recreational Program?', NULL, 1, GETDATE(), 14, NULL, NULL),
+(24, 'content', 'json',
+'{
+  "items": [
+    "Welcoming atmosphere for beginners",
+    "Flexible schedules",
+    "Focus on fun, fitness, and growth",
+    "Strong community coaching support"
+  ]
+}',
+NULL, 1, GETDATE(), 14, NULL, NULL),
+(24, 'image', 'image', '15', NULL, 1, GETDATE(), 14, NULL, NULL),
+(25, 'section-title', 'text', 'RISE WITH US', NULL, 1, GETDATE(), 14, NULL, NULL);

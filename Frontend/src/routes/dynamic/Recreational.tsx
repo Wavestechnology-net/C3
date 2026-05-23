@@ -9,11 +9,11 @@ import PageDataErrorFallback from "../../components/PageDataErrorFallback";
 import ContentSection from "../../components/sections/ContentSection";
 import WhyJoinSection from "../../components/sections/WhyJoinSection";
 
-export default function Recreational(){
-  const { 
-     data: pageData,
-     isLoading,
-     isError 
+export default function Recreational() {
+  const {
+    data: pageData,
+    isLoading,
+    isError
   } = useGetPageBySlugQuery('recreational', {
     refetchOnMountOrArgChange: false,
     refetchOnReconnect: false,
@@ -39,17 +39,17 @@ export default function Recreational(){
   }
 
   const renderSection = (section: SectionDto) => {
-    const isWhyJoinSection = section.name?.toLowerCase().includes('why') || 
-                      section.name?.toLowerCase().includes('join');
+    const isWhyJoinSection = section.name?.toLowerCase().includes('why') ||
+      section.name?.toLowerCase().includes('join');
 
-    
+
     switch (section.sectionType) {
       case 'hero':
         return <HeroSection key={section.id} section={section} />;
       case 'carousel':
         return <CarouselSection key={section.id} section={section} />;
       case 'content-image':
-        if(isWhyJoinSection){
+        if (isWhyJoinSection) {
           return <WhyJoinSection key={section.id} section={section} />;
         }
         return <ContentImageSection key={section.id} section={section} />;
@@ -68,7 +68,7 @@ export default function Recreational(){
 
       <section className="bg-white py-30">
         <h2 className="text-4xl font-bold text-center text-black uppercase">
-          RISE with C3FC SOCCER Club
+          RISE with Us
         </h2>
       </section>
     </div>

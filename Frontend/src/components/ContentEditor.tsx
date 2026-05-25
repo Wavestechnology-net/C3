@@ -107,6 +107,58 @@ export default function ContentEditor({ content, sectionId, onChange }: ContentE
           </div>
         )}
 
+        {contentType === "json" && (
+          <div className="space-y-3">
+            <Label>JSON Content</Label>
+
+            <Textarea
+              value={content.value || ""}
+              onChange={(e) =>
+                onChange(sectionId, content.id, e.target.value, "value")
+              }
+              rows={8}
+              className="font-mono text-sm bg-gray-50"
+            />
+
+            {/* 🔥 PREVIEW */}
+            <div className="mt-3 p-3 border rounded bg-white">
+              {(() => {
+                try {
+                  const parsed =
+                    typeof content.value === "string"
+                      ? JSON.parse(content.value)
+                      : content.value;
+
+                  return (
+                    <ul className="space-y-2">
+                      {parsed?.items?.map((item: any, i: number) => (
+                        <li key={i} className="flex items-start">
+                          <span className="text-yellow-500 mr-2">{">"}</span>
+
+                          <span>
+                            {typeof item === "string"
+                              ? item
+                              : (
+                                <>
+                                  <b>{item.title}</b> - {item.description}
+                                </>
+                              )}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  );
+                } catch {
+                  return (
+                    <p className="text-red-500 text-sm">
+                      Invalid JSON format
+                    </p>
+                  );
+                }
+              })()}
+            </div>
+          </div>
+        )}
 
         {(contentType === "carousel" ||
           contentType === "partner-carousel" ||
@@ -128,15 +180,6 @@ export default function ContentEditor({ content, sectionId, onChange }: ContentE
             </div>
           )}
 
-        {/* {contentType === "image" && (
-          <div className="space-y-2">
-            <Label>Image Selection</Label>
-            <MediaSelector
-              selectedImageId={content.value || ""}
-              onSelect={(imageId) => onChange(sectionId, content.id, imageId, "value")}
-            />
-          </div>
-        )} */}
         {contentType === "image" && (
           <div className="space-y-3">
 

@@ -2,7 +2,6 @@ import { useMemo } from "react";
 import { useGetPageBySlugQuery } from "../../services/apis/publicApi";
 import HeroSection from "../../components/sections/HeroSection";
 import ContentSection from "../../components/sections/ContentSection";
-import ContentImageSection from "../../components/sections/ContentImageSection";
 import type { SectionDto } from "../../types";
 import PageDataErrorFallback from "../../components/PageDataErrorFallback";
 import MissionSection from "../../components/sections/MissionSection";

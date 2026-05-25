@@ -17,7 +17,7 @@ export default function ContentSection({ section }: { section: SectionDto }) {
               <ul className="list-inside space-y-2">
                 {jsonData.items.map((item: any, index: number) => (
                   <li key={index} className="flex items-start">
-                    <span className="text-yellow-400 font-bold mr-2 mt-1">{'>'}</span>
+                    <span className="text-yellow-400 font-bold mr-2 mt-1"></span>
                     {item.title && <strong className="mr-2">{item.title}:</strong>}
                     <span>{item.description || item}</span>
                   </li>

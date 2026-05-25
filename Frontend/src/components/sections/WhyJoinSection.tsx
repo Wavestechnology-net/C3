@@ -10,36 +10,25 @@ export default function WhyJoinSection({ section }: WhyJoinSectionProps) {
   const imageMediaId = imageContent?.value ? parseInt(imageContent.value) : null;
   const { getMedia } = useMedia();
 
-  const media = imageMediaId ? getMedia(imageMediaId) : {mediaUrl: "/placeholder-image.jpg"} as MediaDto
+  const media = imageMediaId ? getMedia(imageMediaId) : { mediaUrl: "/placeholder-image.jpg" } as MediaDto
 
-  const headline = section.contents?.find((c: ContentDto) => c.contentKey === 'headline');
-  const content = section.contents?.find((c: ContentDto) => c.contentKey === 'content' || c.contentKey === 'closing-text');
-  const reasons = section.contents?.find((c: ContentDto) => c.contentKey === 'reasons' || c.contentKey.includes('benefits'));
+  // const headline = section.contents?.find((c: ContentDto) => c.contentKey === 'headline');
+  // const content = section.contents?.find((c: ContentDto) => c.contentKey === 'content' || c.contentKey === 'closing-text');
+  // const reasons = section.contents?.find((c: ContentDto) => c.contentKey === 'reasons' || c.contentKey.includes('benefits'));
+  const headline = section.contents?.find(
+    (c: ContentDto) =>
+      c.contentKey === 'headline' ||
+      c.contentKey === 'section-title'
+  );
 
-  // Parse reasons/benefits from JSON or use as array
-  let reasonsList: string[] = [];
-  if (reasons) {
-    if (reasons.contentType === 'json') {
-      try {
-        const jsonData = JSON.parse(reasons.value || '{}');
-        if (jsonData.items && Array.isArray(jsonData.items)) {
-          reasonsList = jsonData.items.map((item: any) => 
-            typeof item === 'string' ? item : item.description || item.title || ''
-          );
-        } else if (Array.isArray(jsonData)) {
-          reasonsList = jsonData;
-        }
-      } catch (e) {
-        console.warn('Error parsing reasons JSON:', e);
-      }
-    } else if (reasons.contentType === 'text') {
-      // If it's just text, split by newlines or use as single item
-      reasonsList = [reasons.value || ''];
-    }
-  }
+  const contentItems = section.contents?.filter(
+    (c: ContentDto) =>
+      c.contentKey === 'content' ||
+      c.contentKey === 'closing-text'
+  );
 
   return (
-    <section className="bg-[#96cfdc] py-20 px-4 relative overflow-visible">
+    <section className="bg-[#96cfdc] py-5 px-4 relative overflow-visible">
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
         <div className="space-y-6">
           {headline && (
@@ -47,35 +36,50 @@ export default function WhyJoinSection({ section }: WhyJoinSectionProps) {
               {headline.value}
             </h2>
           )}
-          
-          {reasonsList.length > 0 && (
-            <ul className="list-inside pl-5 text-lg text-gray-800 space-y-2">
-              {reasonsList.map((reason, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="text-yellow-400 font-bold mr-2 mt-1">
-                    {">"}
-                  </span>
-                  <span>{reason}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-          
-          {content && (
-            <div className="text-gray-800">
-              {content.contentType === 'html' ? (
-                <div 
-                  dangerouslySetInnerHTML={{ __html: content.value || '' }} 
+
+          {contentItems?.map((content, index) => (
+            <div key={index}>
+
+              {content.contentType === 'json' ? (
+                (() => {
+                  try {
+                    const jsonData = JSON.parse(content.value || '{}');
+
+                    return (
+                      <ul className="list-inside pl-5 text-lg text-gray-800 space-y-2">
+                        {jsonData.items?.map((item: string, idx: number) => (
+                          <li key={idx} className="flex items-start">
+                            <span className="text-yellow-400 font-bold mr-5">
+                              {">"}
+                            </span>
+
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    );
+                  } catch (e) {
+                    return null;
+                  }
+                })()
+              ) : content.contentType === 'html' ? (
+                <div
+                  dangerouslySetInnerHTML={{ __html: content.value || '' }}
                   className="wysiwyg leading-relaxed"
                 />
               ) : (
-                <p className="leading-relaxed">{content.value}</p>
+                <div
+                  dangerouslySetInnerHTML={{ __html: content.value || '' }}
+                  className="leading-relaxed"
+                />
               )}
+
             </div>
-          )}
+          ))}
+
         </div>
-        
-        <div className="relative lg:mt-10 md:-mt-1 z-10">
+
+        <div className="relative md:-mt-35 z-10">
           <img
             src={media?.mediaUrl}
             alt={media?.altText || "Why join section image"}

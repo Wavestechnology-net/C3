@@ -268,7 +268,8 @@ VALUES
 (16, 'Play Learn Grow', 'content', 3, NULL, 1, GETDATE(), 14, NULL, NULL),
 (16, 'In-House Matches', 'content', 4, NULL, 1, GETDATE(), 14, NULL, NULL),
 (16, 'Why Join', 'content-image', 5, 16, 1, GETDATE(), 14, NULL, NULL),
-(16, 'Rise With Us', 'content', 6, NULL, 1, GETDATE(), 14, NULL, NULL)
+(16, 'Rise With Us', 'content', 6, NULL, 1, GETDATE(), 14, NULL, NULL),
+(16, 'Hero Section', 'hero', 1, 13, 1, GETDATE(), 14, NULL, NULL);
 
 INSERT INTO Content
 (SectionId, ContentKey, ContentType, Value, Locale, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
@@ -325,4 +326,139 @@ NULL, 1, GETDATE(), 14, NULL, NULL),
 }',
 NULL, 1, GETDATE(), 14, NULL, NULL),
 (24, 'image', 'image', '15', NULL, 1, GETDATE(), 14, NULL, NULL),
-(25, 'section-title', 'text', 'RISE WITH US', NULL, 1, GETDATE(), 14, NULL, NULL);
+(25, 'section-title', 'text', 'RISE WITH US', NULL, 1, GETDATE(), 14, NULL, NULL),
+(26, 'headline', 'text', 'Recreational Soccer Program', NULL, 1, GETDATE(), 14, NULL, NULL),
+(26, 'subhead', 'text', 'Fun, fitness, and development for players ages 4-12.', NULL, 1, GETDATE(), 14, NULL, NULL),
+(26, 'background-image', 'image','13', NULL, 1, GETDATE(), 14, NULL, NULL);
+
+
+INSERT INTO Sections
+(PageId, Name, SectionType, SortOrder, BackgroundMediaId, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(14, 'Hero Section', 'hero', 1, 20, 1, GETDATE(), 14, NULL, NULL),
+(14, 'Youth Academy Intro', 'content', 2, NULL, 1, GETDATE(), 14, NULL, NULL),
+(14, 'Why Join Youth Academy', 'content-image', 4, 14, 1, GETDATE(), 14, NULL, NULL);
+
+INSERT INTO Content
+(SectionId, ContentKey, ContentType, Value, Locale, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+
+(27, 'headline', 'text','Youth Academy', NULL, 1, GETDATE(), 14, NULL, NULL),
+(27, 'subhead', 'text','Developing Tomorrow’s Stars Today', NULL, 1, GETDATE(), 14, NULL, NULL),
+(27, 'background-image', 'image', '20', NULL, 1, GETDATE(), 14, NULL, NULL),
+
+(28, 'section-title', 'text', 'Youth Academy (Ages 6-12)', NULL, 1, GETDATE(), 14, NULL, NULL),
+(28, 'intro-text', 'html', '<p>Welcome to the C3FC Soccer Club Youth Academy — where young players take their first steps toward a lifetime of soccer success.</p>', NULL, 1, GETDATE(), 14, NULL, NULL),
+(28, 'subheading-1', 'text','Developing Tomorrow’s Stars Today', NULL, 1, GETDATE(), 14, NULL, NULL),
+(28, 'content', 'html', '<p>Our Youth Academy is designed specifically for boys and girls ages 6 to 12 who are passionate about learning the game and having fun. We focus on building a strong foundation in:</p>', NULL, 1, GETDATE(), 14, NULL, NULL),
+(28, 'pillars', 'json',
+'{
+  "items": [
+    {
+      "title": "Cognition",
+      "description": "Teaching players how to read the game, make smart decisions, and think ahead on the field."
+    },
+    {
+      "title": "Competence",
+      "description": "Developing essential technical skills like dribbling, passing, shooting, and ball control through fun, age-appropriate drills."
+    },
+    {
+      "title": "Character",
+      "description": "Instilling values of teamwork, respect, discipline, and sportsmanship from the very start."
+    }
+  ]
+}', NULL, 1, GETDATE(), 14, NULL, NULL),
+
+(28, 'subheading-1', 'text', 'Playing Local Competitions', NULL, 1, GETDATE(), 14, NULL, NULL),
+(28, 'content', 'html', '<p>To give players real-game experience and build confidence, our Youth Academy teams participate in local leagues and tournaments around the Houston area. These competitions offer:</p>', NULL, 1, GETDATE(), 14, NULL, NULL),
+(28, 'opportunities', 'json',
+'{
+  "items": [
+    "Friendly but competitive environments to apply skills learned in training",
+    "Opportunities to develop teamwork and communication on the field",
+    "A chance for young players to experience the thrill of representing C3FC Soccer Club"
+  ]
+}',
+NULL, 1, GETDATE(), 14, NULL, NULL),
+
+(29, 'section-title', 'text', 'Why Join the C3FC Youth Academy?', NULL, 1, GETDATE(), 14, NULL, NULL),
+
+(29, 'content', 'json',
+'{
+  "items": [
+    "Expert coaching tailored for young athletes",
+    "A supportive and inclusive club culture",
+    "Focus on holistic player development mind, skill, and character",
+    "Access to local competitions that foster growth and fun"
+  ]
+}', NULL, 1, GETDATE(), 14, NULL, NULL),
+
+(29, 'closing-text', 'html', '<p>Start your child’s soccer journey with C3FC Soccer Club where passion meets purpose.</p>', NULL, 1, GETDATE(), 14, NULL, NULL),
+(29, 'image', 'image', '14', NULL, 1, GETDATE(), 14, NULL, NULL);
+
+
+INSERT INTO Sections
+(PageId, Name, SectionType, SortOrder, BackgroundMediaId, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+(15, 'Hero Section', 'hero', 1, 16, 1, GETDATE(), 14, NULL, NULL),
+(15, 'Competitive Intro', 'content', 2, NULL, 1, GETDATE(), 14, NULL, NULL),
+(15, 'Elevate Your Game', 'content', 3, NULL, 1, GETDATE(), 14, NULL, NULL),
+(15, 'Competitive Opportunities', 'content', 4, NULL, 1, GETDATE(), 14, NULL, NULL),
+(15, 'Why Choose', 'content-image', 5, 13, 1, GETDATE(), 14, NULL, NULL);
+
+
+INSERT INTO Content
+(SectionId, ContentKey, ContentType, Value, Locale, IsActive, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+VALUES
+
+(30, 'headline', 'text', 'Competitive Soccer Program (Ages 12-18)', NULL, 1, GETDATE(), 14, NULL, NULL),
+(30, 'subhead', 'text', 'Take your game to the next level with elite competition and advanced development.', NULL, 1, GETDATE(), 14, NULL, NULL),
+(30, 'background-image', 'image','16', NULL, 1, GETDATE(), 14, NULL, NULL),
+
+(31, 'section-title', 'text', 'Competitive Soccer Program (Ages 12-18)', NULL, 1, GETDATE(), 14, NULL, NULL),
+(31, 'content', 'html', '<p>At C3FC Soccer Club, our Competitive Soccer Program is designed for serious young athletes aged 12 to 18 who are committed to pushing their limits and competing at the highest levels.</p>', NULL, 1, GETDATE(), 14, NULL, NULL),
+
+(32, 'section-title', 'text', 'Elevate Your Game', NULL, 1, GETDATE(), 14, NULL, NULL),
+(32, 'content', 'html', '<p>This program focuses on advanced training that sharpens all three pillars: Cognition, Competence, and Character. Players receive expert coaching to develop:</p>', NULL, 1, GETDATE(), 14, NULL, NULL),
+(32, 'content', 'json',
+'{
+  "items": [
+    {
+      "title": "Cognitive Skills",
+      "description": "Tactical awareness, decision-making speed, and game intelligence to outthink the competition"
+    },
+    {
+      "title": "Technical Ability",
+      "description": "Enhanced ball control, precision passing, shooting, and physical conditioning"
+    },
+    {
+      "title": "Character Development",
+      "description": "Leadership, discipline, resilience, and sportsmanship essential for success on and off the field"
+    }
+  ]
+}', NULL, 1, GETDATE(), 14, NULL, NULL),
+
+
+(33, 'section-title', 'text', 'Competitive Opportunities', NULL, 1, GETDATE(), 14, NULL, NULL),
+(33, 'content', 'html', '<p>Our teams compete in both local leagues and regional tournaments, offering players exposure to a wide range of opponents and styles of play. This level of competition:</p>', NULL, 1, GETDATE(), 14, NULL, NULL),
+(33, 'content', 'json',
+'{
+  "items": [
+    "Challenges players to perform under pressure",
+    "Builds experience and confidence in high-stakes matches",
+    "Creates pathways for college recruitment and elite soccer opportunities"
+  ]
+}', NULL, 1, GETDATE(), 14, NULL, NULL),
+
+(34, 'section-title', 'text', 'Why Choose C3FC Competitive Soccer?', NULL, 1, GETDATE(), 14, NULL, NULL),
+(34, 'content', 'json',
+'{
+  "items": [
+    "Professional coaching tailored for advanced youth athletes",
+    "Comprehensive training schedules balancing skill development and competition",
+    "Access to local and regional events that prepare players for the next level",
+    "A culture that demands hard work, teamwork, and respect"
+  ]
+}', NULL, 1, GETDATE(), 14, NULL, NULL),
+(34, 'closing-text', 'html', '<p>Join C3FC Soccer Club’s Competitive Soccer Program and take your passion for the game to new heights.</p>', NULL, 1, GETDATE(), 14, NULL, NULL),
+(34, 'image', 'image', '13', NULL, 1, GETDATE(), 14, NULL, NULL);

@@ -66,7 +66,7 @@ export default function Recreational() {
     <div className="font-sans text-[#1d2033]">
       {sortedSections.map(renderSection)}
 
-      <section className="bg-white py-30">
+      <section className="bg-white pb-30">
         <h2 className="text-4xl font-bold text-center text-black uppercase">
           RISE with Us
         </h2>
